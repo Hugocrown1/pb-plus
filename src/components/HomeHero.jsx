@@ -23,7 +23,7 @@ const HomeHero = () => {
         autoPlay
         muted
         loop
-        className="absolute -z-10 object-cover h-full w-full"
+        className="absolute -z-10 object-cover h-full w-full bg-black"
       />
     </section>
   );
