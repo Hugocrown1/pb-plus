@@ -1,7 +1,5 @@
 import React from "react";
 
-import PuntaBanda from "../../videos/puntabanda.mp4";
-
 const HomeHero = () => {
   return (
     <section className="relative flex items-center justify-center h-[700px] bg-black/10 w-full ">
@@ -21,7 +19,7 @@ const HomeHero = () => {
       </div>
 
       <video
-        src={PuntaBanda}
+        src={"https://djeib179xst78.cloudfront.net/puntabanda"}
         autoPlay
         muted
         loop
