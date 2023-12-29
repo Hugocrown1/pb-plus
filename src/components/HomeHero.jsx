@@ -18,7 +18,7 @@ const HomeHero = () => {
         </div>
       </div>
       <video
-        src={require("../../public/assets/puntabanda.mp4")}
+        src={require("../../public/assets/punta-banda.mp4")}
         autoPlay
         muted
         loop
