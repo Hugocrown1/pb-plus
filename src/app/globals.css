@@ -2,3 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
+.primary-button {
+    @apply px-6 py-1 rounded-[10px] border-2 font-semibold text-base h-fit w-full min-w-[125px]
+}
