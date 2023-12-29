@@ -26,31 +26,39 @@ const Header = () => {
   ];
   return (
     <header className="bg-[#941B0C]">
-      <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between   px-[15px] mx-auto">
-        <nav className="flex">
-          <ul className="flex flex-row items-center gap-10">
-            {routes.map((route) => (
-              <li>
-                <Link
-                  href={route.route}
-                  className="text-white font-semibold text-base py-1 border-b-4 transition-colors border-transparent hover:border-[#F6AA1C] "
-                >
-                  {route.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="relative flex  w-[250px] h-full">
-          <div className="flex items-center pl-6 z-10 gap-4">
-            <button className="primary-button bg-white text-black">
-              Register
-            </button>
-
-            <button className="primary-button  text-white">Login</button>
+      <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
+        <Link
+          href={"/"}
+          className="text-white font-semibold text-3xl flex items-center"
+        >
+          PB+
+        </Link>
+        <div className="flex gap-2">
+          <nav className="flex">
+            <ul className="flex flex-row items-center">
+              {routes.map((route, index) => (
+                <li key={index} className="h-full">
+                  <Link
+                    href={route.route}
+                    className="font-semibold h-full flex items-center transition-colors text-white  hover:text-[#941B0C] hover:bg-white px-4"
+                  >
+                    {route.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="relative flex  w-[250px] h-full">
+            <div className="flex items-center pl-5 z-10 gap-4">
+              <button className="primary-button  text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]">
+                Sign in
+              </button>
+              <button className="primary-button transition-colors text-white hover:bg-white hover:text-black">
+                Log In
+              </button>
+            </div>
+            <div className="absolute w-[5000px] bg-[#0A100D] h-full z-0 "></div>
           </div>
-          <div className="absolute w-[5000px] bg-[#0A100D] h-full z-0 "></div>
         </div>
       </div>
     </header>
