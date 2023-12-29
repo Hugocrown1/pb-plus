@@ -1,14 +1,13 @@
-import clientPromise from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongodb";
+import Users from "@/models/Users";
+
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db("pbplus");
-
-    const allPosts = await db.collection("users").find({}).toArray();
-
-    return NextResponse.json(allPosts);
+    await connectDB()
+    const users = await Users.find()
+    return NextResponse.json(users);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
