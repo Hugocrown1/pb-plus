@@ -13,7 +13,7 @@ const HomeHero = () => {
             Services
           </button>
           <button className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors text-black border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]">
-            About Us
+            About us
           </button>
         </div>
       </div>

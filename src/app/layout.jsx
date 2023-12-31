@@ -1,8 +1,8 @@
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
 export const metadata = {
   title: "PB+",
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`overflow-hidden bg-[#f5f3f4] ${inter.className}`}>
+      <body className={` bg-[#f5f3f4] ${roboto.className}`}>
         <Header />
         {children}
       </body>
