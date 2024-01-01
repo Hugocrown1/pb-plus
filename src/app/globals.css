@@ -3,5 +3,17 @@
 @tailwind utilities;
 
 .primary-button {
-    @apply px-6 py-1 rounded-[10px] border-2 font-semibold text-base w-full min-w-[125px]
+    @apply px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
+}
+
+h1 {
+    @apply text-[64px] font-bold text-center text-[#0A100D]
+}
+
+h2 {
+    @apply text-[32px] font-medium text-center text-[#0A100D]
+}
+
+.yellow-button {
+    @apply text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]
 }
