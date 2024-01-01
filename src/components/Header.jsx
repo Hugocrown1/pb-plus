@@ -50,10 +50,18 @@ const Header = () => {
           </nav>
           <div className="relative flex  w-[250px] h-full">
             <div className="flex items-center pl-5 z-10 gap-4">
-              <button className="primary-button  yellow-button">Sign in</button>
-              <button className="primary-button transition-colors text-white hover:bg-white hover:text-black">
-                Login
-              </button>
+
+              <Link href="/auth/signin">
+                <button className="primary-button  text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]">
+                  Sign in
+                </button>
+              </Link>
+              <Link href="/auth/login">
+                <button className="primary-button transition-colors text-white hover:bg-white hover:text-black">
+                  Log In
+                </button>
+              </Link>
+
             </div>
             <div className="absolute w-[5000px] bg-[#0A100D] h-full z-0 "></div>
           </div>
