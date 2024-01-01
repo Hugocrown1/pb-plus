@@ -1,12 +1,12 @@
 import { connectDB } from "@/lib/mongodb";
-import Users from "@/models/Users";
+import Users from "@/models/users";
 
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    await connectDB()
-    const users = await Users.find()
+    await connectDB();
+    const users = await Users.find();
     return NextResponse.json(users);
   } catch (error) {
     if (error instanceof Error)
