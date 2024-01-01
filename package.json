@@ -11,8 +11,6 @@
   "dependencies": {
     "mongoose": "^8.0.3",
     "next": "14.0.4",
-    "next-video": "^0.11.1",
-    "next-videos": "^1.4.1",
     "react": "^18",
     "react-dom": "^18"
   },
