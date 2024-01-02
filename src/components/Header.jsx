@@ -52,13 +52,13 @@ const Header = () => {
             <div className="flex items-center pl-5 z-10 gap-4">
               <Link
                 href="/auth/signin"
-                className="primary-button  text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
+                className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]  text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
               >
                 Sign in
               </Link>
               <Link
                 href="/auth/login"
-                className="primary-button transition-colors text-white hover:bg-white hover:text-black text-center"
+                className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px] transition-colors text-white hover:bg-white hover:text-black text-center"
               >
                 Log In
               </Link>

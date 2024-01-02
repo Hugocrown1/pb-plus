@@ -7,7 +7,10 @@ export default function Home() {
     <main className="flex flex-col flex-grow min-h-screen items-center ">
       <HomeHero />
 
-      <section className="flex flex-col justify-center items-center my-4">
+      <section
+        id="departments"
+        className="flex flex-col justify-center items-center my-4"
+      >
         <h1>Meet Our Departments Services</h1>
         <h2>Let's do it right!</h2>
 
@@ -48,7 +51,10 @@ export default function Home() {
           </DepartmentCard>
         </div>
       </section>
-      <section className="flex flex-row items-center w-[1440px] gap-4 mb-8 ">
+      <section
+        id="about"
+        className="flex flex-row items-center w-[1440px] gap-4 mb-8 "
+      >
         <div className="flex flex-col items-center justify-start">
           <h1 className="-mb-4">What Is PB PLUS?</h1>
           <h2>We offer services for the punta banda community</h2>
