@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex flex-col flex-grow min-h-screen items-center ">
+    <main className="relative flex flex-col  min-h-screen items-center ">
       <HomeHero />
 
       <section
@@ -53,9 +53,15 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="flex flex-row items-center w-[1440px] gap-4 mb-8 "
+        className="flex flex-row items-start w-[1440px] gap-4 mb-40 "
       >
-        <div className="flex flex-col items-center justify-start">
+        <Image
+          src={"/assets/handshake.jpg"}
+          alt="About PB Plus image"
+          width={620}
+          height={300}
+        />
+        <div className="flex flex-col items-start ">
           <h1 className="-mb-4">What Is PB PLUS?</h1>
           <h2>We offer services for the punta banda community</h2>
           <hr className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
@@ -69,12 +75,6 @@ export default function Home() {
             alias odit quam architecto consequatur error iusto?
           </p>
         </div>
-        <Image
-          src={"/assets/handshake.jpg"}
-          alt="About PB Plus image"
-          width={620}
-          height={300}
-        />
       </section>
     </main>
   );

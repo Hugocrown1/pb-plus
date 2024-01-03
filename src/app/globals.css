@@ -17,3 +17,21 @@ h2 {
 .yellow-button {
     @apply text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]
 }
+
+.dropdown-menu {
+    position: absolute;
+    top: 3.5rem;
+    left: 1.4rem;
+
+    background-color: #f5f3f4;
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    width: 120px;
+    
+    
+
+
+}

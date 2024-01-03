@@ -1,11 +1,28 @@
 "use client";
 
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+import DropdownMenu from "./DropdownMenu";
 
 const Header = () => {
   const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  let menuRef = useRef();
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!menuRef.current.contains(e.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+    };
+  });
+
   const routes = [
     {
       route: "/",
@@ -29,7 +46,7 @@ const Header = () => {
     },
   ];
   return (
-    <header className="bg-[#941B0C] overflow-hidden">
+    <header className="relative bg-[#941B0C] max-h-[60px] overflow-x-clip">
       <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
         <Link
           href={"/"}
@@ -38,7 +55,7 @@ const Header = () => {
           PB+
         </Link>
         <div className="flex gap-2">
-          <nav className="flex">
+          <nav className="flex z-20">
             <ul className="flex flex-row items-center">
               {routes.map((route, index) => (
                 <li key={index} className="h-full">
@@ -52,11 +69,11 @@ const Header = () => {
               ))}
             </ul>
           </nav>
-          <div className="relative flex  w-[250px] h-full">
-            <div className="flex items-center pl-5 z-10 gap-4">
+          <div className="relative flex  w-[250px] h-full ">
+            <div className="relative flex items-center pl-5 z-10 gap-4">
               {session ? (
-                <Link
-                  href={"/account"}
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
                   className="flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] border-white/40 hover:border-white transition-colors"
                 >
                   <img
@@ -82,7 +99,7 @@ const Header = () => {
                     <path d="M4 12l16 0" />
                     <path d="M4 18l16 0" />
                   </svg>
-                </Link>
+                </button>
               ) : (
                 <>
                   <Link
@@ -99,8 +116,55 @@ const Header = () => {
                   </Link>
                 </>
               )}
+              {/* <DropdownMenu isOpen={isMenuOpen} ref={menuRef}>
+                <li>
+                  <Link
+                    className="flex px-2 py-1 hover:bg-gray-600/15"
+                    href={"/account"}
+                  >
+                    Account
+                  </Link>
+                </li>
+
+                <li>
+                  <button
+                    className="flex w-full px-2 py-1  hover:bg-gray-600/15"
+                    onClick={() => signOut()}
+                  >
+                    Log out
+                  </button>
+                </li>
+              </DropdownMenu> */}
+
+              {isMenuOpen && (
+                <div
+                  ref={menuRef}
+                  className="flex flex-col dropdown-menu shadow-sm"
+                >
+                  <ul className="flex flex-col gap-1">
+                    <li>
+                      <Link
+                        className="flex px-2 py-1 hover:bg-gray-600/15"
+                        href={"/account"}
+                      >
+                        Account
+                      </Link>
+                    </li>
+
+                    <li>
+                      <button
+                        className="flex w-full px-2 py-1  hover:bg-gray-600/15"
+                        onClick={() => signOut()}
+                      >
+                        Log out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
-            <div className="absolute w-[5000px] bg-[#0A100D] h-full z-0 "></div>
+
+            <div className="absolute w-[5000px] bg-[#0A100D] h-full "></div>
           </div>
         </div>
       </div>
