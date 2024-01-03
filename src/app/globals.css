@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .primary-button {
-    @apply px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
+    @apply px-6 py-3 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
 }
 
 h1 {

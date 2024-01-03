@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const HomeHero = () => {
@@ -9,12 +10,18 @@ const HomeHero = () => {
           Services for the Punta Banda community
         </p>
         <div className="flex w-full gap-12 text-xl justify-center items-center font-medium">
-          <button className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors hover:bg-white hover:text-black">
+          <Link
+            href={"#departments"}
+            className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors hover:bg-white hover:text-black"
+          >
             Services
-          </button>
-          <button className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors text-black border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]">
+          </Link>
+          <Link
+            href={"#about"}
+            className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors text-black border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]"
+          >
             About us
-          </button>
+          </Link>
         </div>
       </div>
 
