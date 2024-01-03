@@ -20,7 +20,7 @@ const RegistrationPage = () => {
   return (
     <section className="flex items-center justify-center h-screen bg-black/10 w-full">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-3xl font-bold mb-4">Sign in</h2>
+        <h2 className="text-3xl font-bold mb-4">Sign up</h2>
         <form className="flex flex-col gap-4">
           <label className="text-xl" htmlFor="name">
             Nombre:
@@ -87,7 +87,7 @@ const RegistrationPage = () => {
             onClick={handleRegister}
             className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-full transition-colors bg-[#F6AA1C] text-black hover:bg-[#FFC65A] hover:border-[#F6AA1C]"
           >
-            Sing In
+            Sign up
           </button>
         </form>
         <div className="flex flex-row w-full items-center my-2">
@@ -97,10 +97,8 @@ const RegistrationPage = () => {
         </div>
 
         <button
-          onClick={() =>
-            signIn("google", { redirect: true, callbackUrl: "/account" })
-          }
-          className="flex flex-row items-center justify-center gap-2 primary-button transition-colors hover:bg-gray-500/10 w-full mx-auto"
+          onClick={() => signIn("google", { callbackUrl: "/account" })}
+          className="flex flex-row items-center justify-center gap-2 primary-button transition-colors text-gray-600 hover:bg-gray-500/10 w-full mx-auto"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

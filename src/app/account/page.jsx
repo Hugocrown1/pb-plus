@@ -1,11 +1,10 @@
 "use client";
-
-import Header from "@/components/Header";
 import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const page = () => {
-  const { data: session, status } = useSession({
+  const { data: session } = useSession({
     required: true,
     onUnauthenticated() {
       redirect("/auth/login");

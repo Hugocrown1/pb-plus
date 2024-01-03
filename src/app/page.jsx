@@ -14,7 +14,7 @@ export default function Home() {
         <h1>Meet Our Departments Services</h1>
         <h2>Let's do it right!</h2>
 
-        <div className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2"></div>
+        <hr className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
 
         <div className="relative grid grid-cols-4 w-[1440px] my-12">
           <DepartmentCard
@@ -58,7 +58,7 @@ export default function Home() {
         <div className="flex flex-col items-center justify-start">
           <h1 className="-mb-4">What Is PB PLUS?</h1>
           <h2>We offer services for the punta banda community</h2>
-          <div className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2"></div>
+          <hr className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
           <p className="text-[17px] mt-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
             neque dolore architecto recusandae quas modi corporis explicabo,
