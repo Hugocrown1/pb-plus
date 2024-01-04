@@ -17,3 +17,43 @@ h2 {
 .yellow-button {
     @apply text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]
 }
+
+.menu-trigger {
+    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] border-white/40 hover:border-white transition-colors cursor-pointer
+}
+
+.dropdown-item {
+    @apply flex items-center gap-2 w-full px-4 py-2 transition-colors  hover:bg-gray-600/15
+}
+
+
+
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 3.5rem;
+    left: 1.4rem;
+
+    background-color: #f5f3f4;
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    width: 180px;
+}
+
+.dropdown-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
