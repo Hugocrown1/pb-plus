@@ -12,12 +12,13 @@ const page = () => {
   });
 
   return (
-    <>
-      <main>Signed in as {session?.user?.email}</main>
+    <main className="h-[880px]">
+      <p>Signed in as {session?.user?.email}</p>
+
       <button onClick={() => signOut()} className="primary-button">
         Sign out
       </button>
-    </>
+    </main>
   );
 };
 

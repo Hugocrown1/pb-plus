@@ -4,6 +4,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
+import { IconMenu2, IconPower, IconUser } from "@tabler/icons-react";
 
 const Header = () => {
   const { data: session } = useSession();
@@ -17,7 +18,10 @@ const Header = () => {
       }
     };
 
-    document.addEventListener("mousedown", handler);
+    if (session) {
+      document.addEventListener("mousedown", handler);
+    }
+
     return () => {
       document.removeEventListener("mousedown", handler);
     };
@@ -72,34 +76,43 @@ const Header = () => {
           <div className="relative flex  w-[250px] h-full ">
             <div className="relative flex items-center pl-5 z-10 gap-4">
               {session ? (
-                <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] border-white/40 hover:border-white transition-colors"
-                >
-                  <img
-                    src={session.user?.image}
-                    height={36}
-                    width={36}
-                    className="rounded-full"
-                  />
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-menu-2"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="gray"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                <div className="menu-container" ref={menuRef}>
+                  <div
+                    onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    className="menu-trigger"
                   >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M4 6l16 0" />
-                    <path d="M4 12l16 0" />
-                    <path d="M4 18l16 0" />
-                  </svg>
-                </button>
+                    <img
+                      src={session.user?.image}
+                      height={36}
+                      width={36}
+                      className="rounded-full"
+                    />
+                    <IconMenu2 size={28} color="gray" />
+                  </div>
+
+                  <div
+                    className={`flex flex-col dropdown-menu shadow-sm ${
+                      isMenuOpen ? "active" : "inactive"
+                    }`}
+                  >
+                    <ul className="flex flex-col">
+                      <li onClick={() => setIsMenuOpen(false)}>
+                        <Link className="dropdown-item" href={"/account"}>
+                          <IconUser /> <p>Account</p>
+                        </Link>
+                      </li>
+
+                      <li onClick={() => setIsMenuOpen(false)}>
+                        <button
+                          className="dropdown-item"
+                          onClick={() => signOut()}
+                        >
+                          <IconPower /> <p>Log out</p>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               ) : (
                 <>
                   <Link
@@ -115,52 +128,6 @@ const Header = () => {
                     Log In
                   </Link>
                 </>
-              )}
-              {/* <DropdownMenu isOpen={isMenuOpen} ref={menuRef}>
-                <li>
-                  <Link
-                    className="flex px-2 py-1 hover:bg-gray-600/15"
-                    href={"/account"}
-                  >
-                    Account
-                  </Link>
-                </li>
-
-                <li>
-                  <button
-                    className="flex w-full px-2 py-1  hover:bg-gray-600/15"
-                    onClick={() => signOut()}
-                  >
-                    Log out
-                  </button>
-                </li>
-              </DropdownMenu> */}
-
-              {isMenuOpen && (
-                <div
-                  ref={menuRef}
-                  className="flex flex-col dropdown-menu shadow-sm"
-                >
-                  <ul className="flex flex-col gap-1">
-                    <li>
-                      <Link
-                        className="flex px-2 py-1 hover:bg-gray-600/15"
-                        href={"/account"}
-                      >
-                        Account
-                      </Link>
-                    </li>
-
-                    <li>
-                      <button
-                        className="flex w-full px-2 py-1  hover:bg-gray-600/15"
-                        onClick={() => signOut()}
-                      >
-                        Log out
-                      </button>
-                    </li>
-                  </ul>
-                </div>
               )}
             </div>
 
