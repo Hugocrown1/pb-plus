@@ -23,7 +23,7 @@ export default function Home() {
             href={"/remo"}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
-            ad excepturi ducimus magni
+            ad excepturi ducimus magnii
           </DepartmentCard>
           <DepartmentCard
             title={"PB+ REAL ESTATE"}
