@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/lib/mongoose";
 import Properties from "@/models/properties";
 
 import { NextResponse } from "next/server";

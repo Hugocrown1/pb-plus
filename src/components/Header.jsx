@@ -5,9 +5,10 @@ import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 import DropdownMenu from "./DropdownMenu";
 import { IconMenu2, IconPower, IconUser } from "@tabler/icons-react";
+import Spinner from "./Spinner";
 
 const Header = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   let menuRef = useRef();
 
@@ -49,6 +50,7 @@ const Header = () => {
       name: "EVENTS",
     },
   ];
+
   return (
     <header className="relative bg-[#941B0C] max-h-[60px] overflow-x-clip">
       <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
@@ -74,8 +76,10 @@ const Header = () => {
             </ul>
           </nav>
           <div className="relative flex  w-[250px] h-full ">
-            <div className="relative flex items-center pl-5 z-10 gap-4">
-              {session ? (
+            <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">
+              {status === "loading" ? (
+                <Spinner />
+              ) : session ? (
                 <div className="menu-container" ref={menuRef}>
                   <div
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -114,10 +118,10 @@ const Header = () => {
                   </div>
                 </div>
               ) : (
-                <>
+                <div className="flex items-center gap-3">
                   <Link
                     href="/auth/signup"
-                    className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]  text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
+                    className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]   text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
                   >
                     Sign up
                   </Link>
@@ -127,7 +131,7 @@ const Header = () => {
                   >
                     Log In
                   </Link>
-                </>
+                </div>
               )}
             </div>
 
