@@ -1,11 +1,10 @@
 import mongoose from "mongoose";
 
 const schema = new mongoose.Schema({
-    correo: String,
-    edad: Number,
-    nombre: String,
-    direccion: String,
-    telefono: String
-})
+  nombre: String,
+  email: String,
+  image: String,
+  emailVerified: Boolean,
+});
 
-export default mongoose.model("Users", schema)
+export default mongoose.model("Users", schema);
