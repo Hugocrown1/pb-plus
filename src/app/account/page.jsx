@@ -25,17 +25,40 @@ const page = () => {
 
   return (
     <main className="bg-[#f5f3f4] h-[880px]">
-      <div className="container-xl mt-2">
-        <img
-          src={session?.user?.image}
-          width={50}
-          height={50}
-          className="rounded-full"
-          alt="Imagen de usuario"
-        />
-        <button onClick={() => signOut()} className="primary-button">
-          Sign out
-        </button>
+      <div className="container-xl mt-12 gap-6">
+        <section className="flex flex-row gap-4">
+          <img
+            src={session?.user?.image}
+            width={150}
+            height={150}
+            className="rounded-full aspect-square"
+            alt="Imagen de usuario"
+          />
+          <div className="flex flex-col items-start">
+            <h1>{session?.user?.name}</h1>
+            <button
+              onClick={() => signOut()}
+              className="primary-button hover:bg-gray-500/10 transition-colors"
+            >
+              Sign out
+            </button>
+          </div>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-left">Published properties</h2>
+          <p className="text-left">No properties published yet</p>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-left">Events</h2>
+          <p className="text-left">No events published yet</p>
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <h2 className="font-semibold text-left">Saved posts</h2>
+          <p className="text-left">No saved posts yet</p>
+        </section>
       </div>
     </main>
   );
