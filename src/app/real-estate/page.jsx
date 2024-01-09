@@ -1,4 +1,5 @@
 import CustomPage from "@/components/CustomPage";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -10,7 +11,14 @@ export default function Page() {
         imageUrl="https://i.imgur.com/YG4dndi.jpeg"
       />
       <div className="flex flex-row w-full px-[40px] mx-auto  h-[800px] my-8 gap-4">
-        <section className="min-w-[240px] bg-white"></section>
+        <section className="flex items-start justify-center p-8 min-w-[240px] bg-white">
+          <Link
+            href={"/real-estate/new-property"}
+            className="primary-button red-button"
+          >
+            Create a post
+          </Link>
+        </section>
         <section className="grid grid-cols-4 grid-rows-2 gird w-full gap-4 ">
           <div className="bg-white w-full h-full"></div>
           <div className="bg-white w-full h-full"></div>

@@ -18,6 +18,14 @@ h2 {
     @apply text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]
 }
 
+.red-button {
+    @apply text-white transition-colors border-[#621708] bg-[#941B0C] hover:bg-[#621708] hover:border-[#941B0C]
+}
+
+input {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] 
+}
+
 .menu-trigger {
     @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] border-white/40 hover:border-white transition-colors cursor-pointer
 }
