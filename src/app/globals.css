@@ -10,8 +10,22 @@ h1 {
     @apply text-[64px] font-bold text-center text-[#0A100D]
 }
 
+
+form {
+    @apply w-full
+}
+
+h3 {
+    @apply font-semibold mb-2
+}
+
 h2 {
     @apply text-[32px] font-medium text-center text-[#0A100D]
+}
+
+
+label {
+    @apply text-sm font-semibold text-gray-700
 }
 
 .yellow-button {
@@ -22,8 +36,12 @@ h2 {
     @apply text-white transition-colors border-[#621708] bg-[#941B0C] hover:bg-[#621708] hover:border-[#941B0C]
 }
 
+.alternative-red-button {
+    @apply text-[#621708] transition-colors border-[#621708]  hover:bg-[#621708] hover:border-[#941B0C] hover:text-white
+}
+
 input {
-    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] 
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
 }
 
 .menu-trigger {
