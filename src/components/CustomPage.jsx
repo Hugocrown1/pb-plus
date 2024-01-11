@@ -9,8 +9,8 @@ const CustomPage = ({
 }) => {
   return (
     <section className="flex-grow">
-      <div className="relative flex items-center justify-center h-[700px] bg-black/10 w-full z-20">
-        <div className="flex flex-col gap-4 text-white text-center w-3/4">
+      <div className="relative flex items-center justify-center h-[700px] bg-black/10 w-full ">
+        <div className="flex flex-col gap-4 text-white text-center z-10 w-3/4">
           <p className="text-9xl font-bold">{title}</p>
           <p className="text-2xl">{text}</p>
           <div className="flex w-full gap-12 text-xl justify-center items-start font-medium">
@@ -24,7 +24,7 @@ const CustomPage = ({
         )}
         <img
           src={imageUrl}
-          className="absolute -z-10 object-cover h-full w-full bg-black grayscale"
+          className="absolute  object-cover h-full w-full bg-black grayscale"
           alt="Background"
         />
       </div>

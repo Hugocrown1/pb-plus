@@ -6,6 +6,10 @@
     @apply px-6 py-3 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
 }
 
+.error-message {
+    @apply text-sm text-red-700
+}
+
 h1 {
     @apply text-[64px] font-bold text-center text-[#0A100D]
 }
@@ -37,11 +41,15 @@ label {
 }
 
 .alternative-red-button {
-    @apply text-[#621708] transition-colors border-[#621708]  hover:bg-[#621708] hover:border-[#941B0C] hover:text-white
+    @apply text-[#621708] transition-colors border-[#621708]  hover:bg-gray-500/20 hover:border-[#941B0C]
 }
 
 input {
     @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
+}
+
+textarea {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full resize-none
 }
 
 .menu-trigger {
@@ -60,6 +68,20 @@ input {
     @apply flex items-center
 }
 
+.error-message {
+    display: none;
+
+}
+
+input:invalid[focused='true'] ~ .error-message{
+    display: block;
+}
+
+/* input:invalid[focused='true'] {
+    
+    border-color: red;
+} */
+
 
 .dropdown-menu {
     position: absolute;
@@ -73,6 +95,7 @@ input {
     border-radius: 10px;
     border: 1px solid gray;
     width: 180px;
+    z-index: 50;
 }
 
 .dropdown-menu.active{
