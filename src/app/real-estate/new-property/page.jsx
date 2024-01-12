@@ -1,6 +1,7 @@
 "use client";
 
 import FormInput from "@/components/FormInput";
+import PropertyCard from "@/components/PropertyCard";
 import React, { useState } from "react";
 
 const page = () => {
@@ -39,14 +40,29 @@ const page = () => {
                   value={values.title}
                   onChange={onChange}
                 />
-                <FormInput
+                {/* <FormInput
                   label="Rental or selling"
                   name="type"
                   id="type"
                   placeholder={"Choose a type"}
                   value={values.type}
                   onChange={onChange}
-                />
+                /> */}
+                <div className="form-input">
+                  <label htmlFor="type">Rental or selling</label>
+                  <select
+                    name="type"
+                    id="type"
+                    defaultValue={""}
+                    onChange={onChange}
+                  >
+                    <option disabled value={""}>
+                      Choose a type
+                    </option>
+                    <option value={"Rental"}>Rental</option>
+                    <option value={"Selling"}>Selling</option>
+                  </select>
+                </div>
                 <hr className="stroke-slate-600 my-4" />
                 <h3>Property details</h3>
                 <FormInput
@@ -105,7 +121,7 @@ const page = () => {
                     Cancel
                   </button>
                   <button type="submit" className="primary-button red-button">
-                    Submit
+                    Continue
                   </button>
                 </div>
               </form>
@@ -113,7 +129,7 @@ const page = () => {
           </section>
           <section className="w-[20%] flex flex-col ">
             <h1 className="text-left text-[42px]">Preview</h1>
-            <div className="bg-white">preview</div>
+            <PropertyCard {...values} />
           </section>
         </div>
       </div>

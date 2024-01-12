@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .primary-button {
-    @apply px-6 py-3 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
+    @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px]
 }
 
 .error-message {
@@ -48,6 +48,10 @@ input {
     @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
 }
 
+select {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
+}
+
 textarea {
     @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full resize-none
 }
@@ -66,6 +70,10 @@ textarea {
 
 .menu-container {
     @apply flex items-center
+}
+
+.property-card {
+    @apply flex flex-col bg-white min-w-[248px] min-h-[260px]
 }
 
 .error-message {
@@ -130,6 +138,87 @@ input:invalid[focused='true'] ~ .error-message{
     stroke-linecap: round;
     animation: dash4 1.5s ease-in-out infinite;
    }
+
+   .container {
+    
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-right: 10px;
+    
+    
+    cursor: pointer;
+    user-select: none;
+    
+    color: rgb(0, 0, 0);
+  }
+  
+  #favorite {
+    display: none;
+  }
+  
+  #favorite:checked + .container svg {
+    fill: hsl(0deg 100% 50%);
+    stroke: hsl(0deg 100% 50%);
+    animation: heartButton 1s;
+  }
+  
+  @keyframes heartButton {
+    0% {
+      transform: scale(1);
+    }
+  
+    25% {
+      transform: scale(1.3);
+    }
+  
+    50% {
+      transform: scale(1);
+    }
+  
+    75% {
+      transform: scale(1.3);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  #favorite + .container .action {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+  }
+  
+  #favorite + .container .action span {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    transition: all 0.5s;
+  }
+  
+  #favorite + .container .action span.option-1 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+  
+  #favorite:checked + .container .action span.option-1 {
+    transform: translate(0px, -100%);
+    opacity: 0;
+  }
+  
+  #favorite + .container .action span.option-2 {
+    transform: translate(0px, 100%);
+    opacity: 0;
+  }
+  
+  #favorite:checked + .container .action span.option-2 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+  
    
    @keyframes rotate4 {
     100% {
@@ -152,4 +241,6 @@ input:invalid[focused='true'] ~ .error-message{
      stroke-dashoffset: -125px;
     }
    }
+
+
    
