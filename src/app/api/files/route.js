@@ -33,7 +33,7 @@ export async function POST(request) {
         Key: newFileName,
         Body: fs.readFileSync(file.path()),
         ACL: "public-read",
-        ContentType: mime.lookup(file.path),
+        ContentType: mime.lookup(file.path()),
       })
     );
     const link = `https://${bucketName}.s3.amazonaws.com/${newFileName}`;
