@@ -26,14 +26,15 @@ export async function POST(request) {
     });
     const fileExtension = file.name.split(".").pop();
     const newFileName = Date.now() + "." + fileExtension;
-    console.log({ fileExtension, newFileName });
+    console.log( file.path );
+    const buffer = Buffer.from(await file.arrayBuffer());
     await client.send(
       new PutObjectCommand({
         Bucket: bucketName,
         Key: newFileName,
-        Body: fs.readFileSync(file.path()),
+        Body: buffer,
         ACL: "public-read",
-        ContentType: mime.lookup(file.path()),
+        ContentType: file.type,
       })
     );
     const link = `https://${bucketName}.s3.amazonaws.com/${newFileName}`;
