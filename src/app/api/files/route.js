@@ -1,13 +1,13 @@
 import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
+import fs from "fs";
+import mime from "mime-types";
 
 const bucketName = "pb-plus";
 
 export async function GET() {
   try {
-    await connectDB();
-    const users = await Users.find();
-    return NextResponse.json(users);
+    return NextResponse.json("Consiguiendo archivos...");
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
@@ -25,9 +25,19 @@ export async function POST(request) {
       },
     });
     const fileExtension = file.name.split(".").pop();
-    const newFileName = Date.now() + "-" + "." + fileExtension;
+    const newFileName = Date.now() + "." + fileExtension;
     console.log({ fileExtension, newFileName });
-    await client.send(new PutObjectCommand({}));
+    await client.send(
+      new PutObjectCommand({
+        Bucket: bucketName,
+        Key: newFileName,
+        Body: fs.readFileSync(file.path()),
+        ACL: "public-read",
+        ContentType: mime.lookup(file.path),
+      })
+    );
+    const link = `https://${bucketName}.s3.amazonaws.com/${newFileName}`;
+    return NextResponse.json(link);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
