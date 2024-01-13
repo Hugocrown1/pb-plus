@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .primary-button {
-    @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px]
+    @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] flex items-center justify-center
 }
 
 .error-message {

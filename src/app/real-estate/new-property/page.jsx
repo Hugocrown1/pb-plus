@@ -2,6 +2,8 @@
 
 import FormInput from "@/components/FormInput";
 import PropertyCard from "@/components/PropertyCard";
+import { IconUpload } from "@tabler/icons-react";
+import Link from "next/link";
 import React, { useState } from "react";
 
 const page = () => {
@@ -15,12 +17,33 @@ const page = () => {
     price: "",
   });
 
+  const [images, setImages] = useState("");
+
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const uploadImages = async (e) => {
+    const files = e.target?.files;
+    if (files?.length > 0) {
+      const data = new FormData();
+
+      for (const file of files) {
+        data.append("file", file);
+      }
+
+      const response = await axios.post("/api/files", data);
+
+      setImages((oldImages) => {
+        return [...oldImages, response.data];
+      });
+    }
+
+    console.log(images);
   };
 
   return (
@@ -40,14 +63,21 @@ const page = () => {
                   value={values.title}
                   onChange={onChange}
                 />
-                {/* <FormInput
-                  label="Rental or selling"
-                  name="type"
-                  id="type"
-                  placeholder={"Choose a type"}
-                  value={values.type}
-                  onChange={onChange}
-                /> */}
+                <label htmlFor="photos">Photos</label>
+                <label
+                  htmlFor="photos"
+                  className="flex flex-col items-center m-1 justify-center w-24 h-24 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
+                >
+                  <IconUpload size={22} />
+                  Cargar
+                  <input
+                    id="photos"
+                    type="file"
+                    className="hidden"
+                    onChange={uploadImages}
+                  />
+                </label>
+
                 <div className="form-input">
                   <label htmlFor="type">Rental or selling</label>
                   <select
@@ -117,9 +147,12 @@ const page = () => {
                   onChange={onChange}
                 />
                 <div className="flex w-full justify-between mt-8">
-                  <button className="primary-button alternative-red-button">
+                  <Link
+                    href={"/real-estate"}
+                    className="primary-button alternative-red-button  "
+                  >
                     Cancel
-                  </button>
+                  </Link>
                   <button type="submit" className="primary-button red-button">
                     Continue
                   </button>
