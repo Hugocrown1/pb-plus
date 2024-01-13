@@ -18,7 +18,8 @@ export async function POST(request) {
   try {
     await connectDB();
     const {
-      coverImage,
+      cover,
+      images,
       title,
       rental,
       publishDate,
@@ -28,7 +29,8 @@ export async function POST(request) {
     } = await request.json();
 
     const property = await Properties.create({
-      coverImage,
+      cover,
+      images,
       title,
       rental,
       publishDate,
