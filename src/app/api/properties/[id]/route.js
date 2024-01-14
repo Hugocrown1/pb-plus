@@ -29,13 +29,12 @@ export async function PUT(request, { params: { id } }) {
 export async function DELETE(request, { params: { id } }) {
   try {
     await connectDB();
-    const { coverImage, images } = await Properties.findById(id);
-    const coverImageKey = { Key: coverImage.split("/").pop() };
+    const { images } = await Properties.findById(id);
     const imageKeys = images.map((image) => ({ Key: image.split("/").pop() }));
     await client.send(
       new DeleteObjectsCommand({
         Bucket: bucketName,
-        Delete: { Objects: [coverImageKey, ...imageKeys] },
+        Delete: { Objects: imageKeys },
       })
     );
     const deletedProperty = await Properties.findByIdAndDelete(id);
