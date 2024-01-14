@@ -4,6 +4,7 @@ import FormInput from "@/components/FormInput";
 import PropertyCard from "@/components/PropertyCard";
 import { IconUpload } from "@tabler/icons-react";
 import axios from "axios";
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -66,6 +67,7 @@ const page = () => {
                   placeholder={"Title"}
                   value={values.title}
                   onChange={onChange}
+                  errorMessage="Please provide a title"
                 />
                 <label htmlFor="photos">Photos</label>
                 <div className="flex flex-wrap">
@@ -75,9 +77,11 @@ const page = () => {
                         key={index}
                         className={`flex relative h-24 w-24 rounded-md m-1 shadow-lg justify-center bg-transparent items-center overflow-hidden`}
                       >
-                        <img
+                        <Image
                           src={link}
                           alt="Property photo"
+                          fill={true}
+                          sizes="(min-width: 1120px) 248px"
                           className="h-full w-full object-cover object-center"
                         />
                       </div>
@@ -145,6 +149,7 @@ const page = () => {
                   placeholder={"Property address"}
                   value={values.address}
                   onChange={onChange}
+                  errorMessage="Please provide an address"
                 />
                 <div className="form-input">
                   <label htmlFor="description">Description</label>
@@ -183,7 +188,7 @@ const page = () => {
           </section>
           <section className="w-[20%] flex flex-col ">
             <h1 className="text-left text-[42px]">Preview</h1>
-            <PropertyCard {...values} />
+            <PropertyCard {...values} coverImage={images[0]} />
           </section>
         </div>
       </div>

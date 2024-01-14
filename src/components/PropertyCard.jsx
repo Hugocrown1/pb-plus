@@ -6,29 +6,43 @@ import React, { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const PropertyCard = ({ title, address, price, type }) => {
+const PropertyCard = ({ title, address, price, type, coverImage }) => {
   const [favorited, setFavorited] = useState(false);
+
+  const numberFormatter = (numberString) => {
+    const number = parseInt(numberString);
+    if (isNaN(number)) {
+      return "0.00";
+    }
+
+    const formattedNumber = number.toLocaleString();
+
+    return formattedNumber;
+  };
 
   const handleCheckbox = (e) => {
     setFavorited(!favorited);
   };
   return (
     <article className={`property-card ${inter.className}`}>
-      <div className="relative w-full h-[56%]">
+      <div className="relative w-full h-[56%] bg-gray-300">
         <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
           {type || "Type"}
         </div>
-        <Image
-          alt="property cover image"
-          src={"/assets/real_estate.jpg"}
-          fill={true}
-          sizes="(min-width: 1120px) 248px"
-        />
+        {coverImage && (
+          <Image
+            alt="property cover image"
+            src={coverImage}
+            fill={true}
+            sizes="(min-width: 1120px) 248px"
+            className="object-cover object-center"
+          />
+        )}
       </div>
       <div className="flex flex-col px-3 py-2">
         <div className="flex justify-between">
-          <p className="text-left text-2xl font-bold text-[#621708]">
-            ${price || "0.00"}
+          <p className="text-left text-2xl font-bold text-[#621708] max-w-[193pxs] overflow-hidden overflow-ellipsis">
+            ${numberFormatter(price)}
           </p>
           <input
             value="favorite-button"
@@ -55,10 +69,14 @@ const PropertyCard = ({ title, address, price, type }) => {
             </svg>
           </label>
         </div>
-        <p className="text-left text-xl font-bold ">{title || "Title"}</p>
-        <div className="flex flex-row items-center text-[#707070] ">
-          <IconMapPin size={22} />{" "}
-          <p className="mt-[4px]">{address || "Address"}</p>
+        <p className="text-left text-xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
+          {title || "Title"}
+        </p>
+        <div className="flex flex-row items-center text-[#707070] text-nowrap ">
+          <IconMapPin min={22} />
+          <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
+            {address || "Address"}
+          </p>
         </div>
       </div>
     </article>
