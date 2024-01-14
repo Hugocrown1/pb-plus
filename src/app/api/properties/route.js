@@ -1,11 +1,15 @@
 import { connectDB } from "@/lib/mongoose";
 import Properties from "@/models/properties";
+import { getServerSession } from "next-auth";
 
 import { NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/route";
+import Users from "@/models/users";
 
 export async function GET() {
   try {
     await connectDB();
+
     const properties = await Properties.find();
     return NextResponse.json(properties);
   } catch (error) {
@@ -17,26 +21,32 @@ export async function GET() {
 export async function POST(request) {
   try {
     await connectDB();
+    const session = await getServerSession(authOptions);
     const {
-      cover,
       images,
+      bedrooms,
+      bathrooms,
+      type,
       title,
-      rental,
-      publishDate,
+      price,
       address,
-      userID,
       description,
     } = await request.json();
 
+    const user = await Users.findOne({ email: session.user.email });
+
     const property = await Properties.create({
-      cover,
       images,
+      bedrooms: parseFloat(bedrooms),
+      bathrooms: parseFloat(bathrooms),
+      type,
       title,
-      rental,
-      publishDate,
+      price: parseFloat(price),
       address,
-      userID,
       description,
+      publishDate: new Date(),
+      coverImage: images[0],
+      user: user._id,
     });
 
     return NextResponse.json(property);

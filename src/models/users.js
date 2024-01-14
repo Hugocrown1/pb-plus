@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { models } from "mongoose";
 
 const schema = new mongoose.Schema({
   nombre: String,
@@ -7,4 +7,4 @@ const schema = new mongoose.Schema({
   emailVerified: Boolean,
 });
 
-export default mongoose.model("Users", schema);
+export default models?.Users || mongoose.model("Users", schema);

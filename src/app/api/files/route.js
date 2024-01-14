@@ -16,7 +16,8 @@ export async function GET() {
 
 export async function POST(request) {
   try {
-    const file = await request.formData().then((data) => data.get("file"));
+    const formData = await request.formData();
+    const file = formData.get("file");
     const client = new S3Client({
       region: "us-west-1",
       credentials: {
@@ -26,7 +27,7 @@ export async function POST(request) {
     });
     const fileExtension = file.name.split(".").pop();
     const newFileName = Date.now() + "." + fileExtension;
-    console.log( file.path );
+
     const buffer = Buffer.from(await file.arrayBuffer());
     await client.send(
       new PutObjectCommand({
