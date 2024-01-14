@@ -15,7 +15,7 @@ const page = () => {
 
   if (!session) {
     return (
-      <main className="bg-[#f5f3f4] flex items-center justify-center ">
+      <main className="bg-[#f5f3f4] flex items-center justify-center min-h-[800px] ">
         <div className="w-[400px] flex justify-center items-center my-12 h-[400px]">
           <Spinner />
         </div>
@@ -24,7 +24,7 @@ const page = () => {
   }
 
   return (
-    <main className="bg-[#f5f3f4] ">
+    <main className="bg-[#f5f3f4] min-h-[800px] ">
       <div className="container-xl my-12 gap-6">
         <section className="flex flex-row gap-4">
           <img
