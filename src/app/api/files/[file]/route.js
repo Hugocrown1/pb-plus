@@ -1,4 +1,4 @@
-import { bucketName } from "@/lib/aws";
+import { bucketName, client } from "@/lib/aws";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
 

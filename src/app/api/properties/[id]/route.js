@@ -1,7 +1,9 @@
 import { bucketName, client } from "@/lib/aws";
+import { connectDB } from "@/lib/mongoose";
 import Properties from "@/models/properties";
 import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
+
 
 export async function GET(request, { params: { id } }) {
   try {
