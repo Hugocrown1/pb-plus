@@ -9,17 +9,28 @@ export async function GET(request, { params: { id } }) {
   try {
     await connectDB();
     const property = await Properties.findById(id);
-    return NextResponse.json(property);
+    if(!property)
+      return NextResponse.json(
+        { message: "No se encontro la propiedad" },
+        { status: 404 }
+      );
+      return NextResponse.json(property);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
   }
+  
 }
 
 export async function PUT(request, { params: { id } }) {
   try {
     const data = await request.json();
     await connectDB();
+    if(!property)
+      return NextResponse.json(
+        { message: "No se encontro la propiedad" },
+        { status: 404 }
+      );
     const newProperty = await Properties.findByIdAndUpdate(id, { ...data });
     return NextResponse.json(newProperty);
   } catch (error) {
@@ -31,8 +42,13 @@ export async function PUT(request, { params: { id } }) {
 export async function DELETE(request, { params: { id } }) {
   try {
     await connectDB();
-    const { images } = await Properties.findById(id);
-    const imageKeys = images.map((image) => ({ Key: image.split("/").pop() }));
+    const property = await Properties.findById(id);
+    if(!property)
+      return NextResponse.json(
+        { message: "No se encontro la propiedad" },
+        { status: 404 }
+      );
+    const imageKeys = property.images.map((image) => ({ Key: image.split("/").pop() }));
     await client.send(
       new DeleteObjectsCommand({
         Bucket: bucketName,
