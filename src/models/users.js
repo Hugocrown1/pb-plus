@@ -1,7 +1,7 @@
 import mongoose, { models } from "mongoose";
 
 const schema = new mongoose.Schema({
-  nombre: String,
+  name: String,
   email: String,
   image: String,
   emailVerified: Boolean,
