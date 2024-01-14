@@ -45,7 +45,7 @@ label {
 }
 
 input {
-    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full transition-colors
 }
 
 select {
@@ -73,7 +73,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white min-w-[248px] min-h-[260px]
+    @apply flex flex-col bg-white min-w-[256px] min-h-[260px] w-full
 }
 
 .error-message {
@@ -85,10 +85,10 @@ input:invalid[focused='true'] ~ .error-message{
     display: block;
 }
 
-/* input:invalid[focused='true'] {
-    
+input:invalid[focused='true'] {
+    border-width: 2px;
     border-color: red;
-} */
+}
 
 
 .dropdown-menu {

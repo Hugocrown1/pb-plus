@@ -52,7 +52,7 @@ const Header = () => {
   ];
 
   return (
-    <header className="relative bg-[#941B0C] max-h-[60px] overflow-x-clip">
+    <header className="relative bg-[#941B0C] max-h-[60px] overflow-x-clip z-20">
       <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
         <Link
           href={"/"}
@@ -95,7 +95,7 @@ const Header = () => {
                   </div>
 
                   <div
-                    className={`flex flex-col dropdown-menu shadow-sm ${
+                    className={`flex flex-col dropdown-menu shadow-sm z-50 ${
                       isMenuOpen ? "active" : "inactive"
                     }`}
                   >
