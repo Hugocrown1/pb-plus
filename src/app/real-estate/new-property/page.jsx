@@ -3,7 +3,9 @@
 import FormInput from "@/components/FormInput";
 import PropertyCard from "@/components/PropertyCard";
 import { IconUpload } from "@tabler/icons-react";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const page = () => {
@@ -17,14 +19,18 @@ const page = () => {
     price: "",
   });
 
+  const router = useRouter();
+
   const [images, setImages] = useState("");
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const saveProperty = async (e) => {
     e.preventDefault();
+    await axios.post("/api/properties", { ...values, images });
+    router.push("/real-estate");
   };
 
   const uploadImages = async (e) => {
@@ -42,8 +48,6 @@ const page = () => {
         return [...oldImages, response.data];
       });
     }
-
-    console.log(images);
   };
 
   return (
@@ -53,7 +57,7 @@ const page = () => {
           <section className="w-[80%] flex flex-col ">
             <h1 className="text-left text-[42px]">New property</h1>
             <div className="bg-white w-full flex p-4 shadow-md">
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={saveProperty}>
                 <h3>Basic information</h3>
                 <FormInput
                   label="Property title"
@@ -64,19 +68,35 @@ const page = () => {
                   onChange={onChange}
                 />
                 <label htmlFor="photos">Photos</label>
-                <label
-                  htmlFor="photos"
-                  className="flex flex-col items-center m-1 justify-center w-24 h-24 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Cargar
-                  <input
-                    id="photos"
-                    type="file"
-                    className="hidden"
-                    onChange={uploadImages}
-                  />
-                </label>
+                <div className="flex flex-wrap">
+                  {!!images?.length &&
+                    images.map((link, index) => (
+                      <div
+                        key={index}
+                        className={`flex relative h-24 w-24 rounded-md m-1 shadow-lg justify-center bg-transparent items-center overflow-hidden`}
+                      >
+                        <img
+                          src={link}
+                          alt="Property photo"
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>
+                    ))}
+                  <label
+                    htmlFor="photos"
+                    className="flex flex-col items-center m-1 justify-center w-24 h-24 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
+                  >
+                    <IconUpload size={22} />
+                    Cargar
+                    <input
+                      id="photos"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      className="hidden"
+                      onChange={uploadImages}
+                    />
+                  </label>
+                </div>
 
                 <div className="form-input">
                   <label htmlFor="type">Rental or selling</label>
@@ -85,6 +105,7 @@ const page = () => {
                     id="type"
                     defaultValue={""}
                     onChange={onChange}
+                    required
                   >
                     <option disabled value={""}>
                       Choose a type
