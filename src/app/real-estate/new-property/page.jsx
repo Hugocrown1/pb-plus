@@ -22,7 +22,9 @@ const page = () => {
 
   const router = useRouter();
 
-  const [images, setImages] = useState("");
+  const [images, setImages] = useState([]);
+  const [previewImages, setPreviewImages] = useState([]);
+  const [formData, setFormData] = useState(new FormData());
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -30,8 +32,34 @@ const page = () => {
 
   const saveProperty = async (e) => {
     e.preventDefault();
-    await axios.post("/api/properties", { ...values, images });
-    router.push("/real-estate");
+
+    try {
+      const responseFiles = await axios.post("/api/files", formData);
+
+      setImages((prevImages) => [...prevImages, ...responseFiles.data]);
+
+      const responseProperties = await axios.post("/api/properties", {
+        ...values,
+        images: responseFiles.data,
+      });
+
+      router.push("/real-estate");
+    } catch (error) {
+      console.error("Error al guardar la propiedad:", error);
+    }
+  };
+
+  const uploadPreviewImages = (e) => {
+    const files = e.target?.files;
+
+    if (files?.length > 0) {
+      for (const file of files) {
+        formData.append("file", file);
+      }
+
+      const urls = Array.from(files).map((file) => URL.createObjectURL(file));
+      setPreviewImages(previewImages.concat(urls));
+    }
   };
 
   const uploadImages = async (e) => {
@@ -42,12 +70,13 @@ const page = () => {
       for (const file of files) {
         data.append("file", file);
       }
+      console.log(data.get("file"));
 
-      const response = await axios.post("/api/files", data);
+      // const response = await axios.post("/api/files", data);
 
-      setImages((oldImages) => {
-        return [...oldImages, response.data];
-      });
+      // setImages((oldImages) => {
+      //   return [...oldImages, response.data];
+      // });
     }
   };
 
@@ -71,8 +100,8 @@ const page = () => {
                 />
                 <label htmlFor="photos">Photos</label>
                 <div className="flex flex-wrap">
-                  {!!images?.length &&
-                    images.map((link, index) => (
+                  {!!previewImages?.length &&
+                    previewImages.map((link, index) => (
                       <div
                         key={index}
                         className={`flex relative h-24 w-24 rounded-md m-1 shadow-lg justify-center bg-transparent items-center overflow-hidden`}
@@ -86,6 +115,22 @@ const page = () => {
                         />
                       </div>
                     ))}
+
+                  {/* {!!images?.length &&
+                    images.map((link, index) => (
+                      <div
+                        key={index}
+                        className={`flex relative h-24 w-24 rounded-md m-1 shadow-lg justify-center bg-transparent items-center overflow-hidden`}
+                      >
+                        <Image
+                          src={link}
+                          alt="Property photo"
+                          fill={true}
+                          sizes="(min-width: 1120px) 248px"
+                          className="h-full w-full object-cover object-center"
+                        />
+                      </div>
+                    ))} */}
                   <label
                     htmlFor="photos"
                     className="flex flex-col items-center m-1 justify-center w-24 h-24 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
@@ -97,7 +142,7 @@ const page = () => {
                       type="file"
                       accept="image/png, image/jpeg"
                       className="hidden"
-                      onChange={uploadImages}
+                      onChange={uploadPreviewImages}
                     />
                   </label>
                 </div>
@@ -188,7 +233,7 @@ const page = () => {
           </section>
           <section className="w-[20%] flex flex-col ">
             <h1 className="text-left text-[42px]">Preview</h1>
-            <PropertyCard {...values} coverImage={images[0]} />
+            <PropertyCard {...values} coverImage={previewImages[0]} />
           </section>
         </div>
       </div>

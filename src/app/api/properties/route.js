@@ -49,6 +49,10 @@ export async function POST(request) {
       user: user._id,
     });
 
+    user.properties = user.properties.concat(property._id);
+
+    await user.save();
+
     return NextResponse.json(property);
   } catch (error) {
     if (error instanceof Error)
