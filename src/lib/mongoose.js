@@ -1,3 +1,4 @@
+import properties from "@/models/properties";
 import { connect, connection } from "mongoose";
 
 export async function connectDB() {
@@ -6,6 +7,7 @@ export async function connectDB() {
 
 connection.on("connected", () => {
   console.log("mongoose is connected");
+  const Properties = properties;
 });
 
 connection.on("error", (err) => {

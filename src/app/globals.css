@@ -73,7 +73,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white min-w-[256px] min-h-[260px] w-full
+    @apply flex flex-col bg-white w-[256px] h-[260px] shadow-md
 }
 
 .error-message {

@@ -1,3 +1,5 @@
+"use client";
+
 import { IconHeart, IconMapPin } from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 
