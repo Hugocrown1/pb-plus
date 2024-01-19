@@ -1,33 +1,10 @@
-"use client";
-
-import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
-import DropdownMenu from "./DropdownMenu";
-import { IconMenu2, IconPower, IconUser } from "@tabler/icons-react";
-import Spinner from "./Spinner";
+import React from "react";
+
+import { useSessionStore } from "@/app/store";
+import UserMenu from "./UserMenu";
 
 const Header = () => {
-  const { data: session, status } = useSession();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  let menuRef = useRef();
-
-  useEffect(() => {
-    let handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    if (session) {
-      document.addEventListener("mousedown", handler);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handler);
-    };
-  });
-
   const routes = [
     {
       route: "/",
@@ -76,64 +53,7 @@ const Header = () => {
             </ul>
           </nav>
           <div className="relative flex  w-[250px] h-full ">
-            <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">
-              {status === "loading" ? (
-                <Spinner />
-              ) : session ? (
-                <div className="menu-container" ref={menuRef}>
-                  <div
-                    onClick={() => setIsMenuOpen(!isMenuOpen)}
-                    className="menu-trigger"
-                  >
-                    <img
-                      src={session.user?.image}
-                      height={36}
-                      width={36}
-                      className="rounded-full"
-                    />
-                    <IconMenu2 size={28} color="gray" />
-                  </div>
-
-                  <div
-                    className={`flex flex-col dropdown-menu shadow-sm z-50 ${
-                      isMenuOpen ? "active" : "inactive"
-                    }`}
-                  >
-                    <ul className="flex flex-col">
-                      <li onClick={() => setIsMenuOpen(false)}>
-                        <Link className="dropdown-item" href={"/account"}>
-                          <IconUser /> <p>Account</p>
-                        </Link>
-                      </li>
-
-                      <li onClick={() => setIsMenuOpen(false)}>
-                        <button
-                          className="dropdown-item"
-                          onClick={() => signOut()}
-                        >
-                          <IconPower /> <p>Log out</p>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              ) : (
-                <div className="flex items-center gap-3">
-                  <Link
-                    href="/auth/signup"
-                    className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]   text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
-                  >
-                    Sign up
-                  </Link>
-                  <Link
-                    href="/auth/login"
-                    className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px] transition-colors text-white hover:bg-white hover:text-black text-center"
-                  >
-                    Log In
-                  </Link>
-                </div>
-              )}
-            </div>
+            <UserMenu />
 
             <div className="absolute w-[5000px] bg-[#0A100D] h-full "></div>
           </div>

@@ -1,33 +1,34 @@
+"use client";
+
 import React from "react";
 
 import UserProperties from "@/components/UserProperties";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import SignOutButton from "./SignOutButton";
+import { useSessionStore } from "../store";
 
-const page = async () => {
-  const session = await getServerSession(authOptions);
+const page = () => {
+  const userSession = useSessionStore((state) => state.userSession);
 
   return (
     <main className="bg-[#f5f3f4] min-h-[800px] ">
       <div className="container-xl my-12 gap-6">
         <section className="flex flex-row gap-4">
           <img
-            src={session?.user?.image}
+            src={userSession?.image}
             width={150}
             height={150}
             className="rounded-full aspect-square"
             alt="Imagen de usuario"
           />
           <div className="flex flex-col items-start">
-            <h1>{session?.user?.name}</h1>
+            <h1>{userSession?.name}</h1>
             <SignOutButton />
           </div>
         </section>
 
         <section className="flex flex-col gap-4">
           <h2 className="font-semibold text-left">Published properties</h2>
-          <UserProperties user={session?.user} />
+          {/* <UserProperties user={userSession} /> */}
         </section>
 
         <section className="flex flex-col gap-4">
