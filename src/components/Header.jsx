@@ -1,7 +1,6 @@
 import Link from "next/link";
 import React from "react";
 
-import { useSessionStore } from "@/app/store";
 import UserMenu from "./UserMenu";
 
 const Header = () => {

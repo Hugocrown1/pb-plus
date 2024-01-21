@@ -5,11 +5,11 @@ import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
 import { IconMenu2, IconPower, IconUser } from "@tabler/icons-react";
 import Spinner from "./Spinner";
-import { useSessionStore } from "@/app/store";
+// import { useSessionStore } from "@/app/store";
 
 const UserMenu = () => {
-  const setSession = useSessionStore((state) => state.setUserSession);
-  const userSession = useSessionStore((state) => state.userSession);
+  // const setSession = useSessionStore((state) => state.setUserSession);
+  // const userSession = useSessionStore((state) => state.userSession);
   const { data: session, status } = useSession();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,12 +31,12 @@ const UserMenu = () => {
     };
   });
 
-  useEffect(() => {
-    if (session && userSession !== session.user) {
-      setSession(session.user);
-      console.log("session update");
-    }
-  }, [session]);
+  // useEffect(() => {
+  //   if (session && userSession !== session.user) {
+  //     setSession(session.user);
+  //     console.log("session update");
+  //   }
+  // }, [session]);
 
   return (
     <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">

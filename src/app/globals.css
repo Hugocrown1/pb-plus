@@ -73,7 +73,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white w-[256px] h-[260px] shadow-md
+    @apply flex flex-col bg-white w-[256px] h-[275px] shadow-md
 }
 
 .error-message {
@@ -155,6 +155,7 @@ input:invalid[focused='true'] {
   
   #favorite {
     display: none;
+    fill: transparent;
   }
   
   #favorite:checked + .container svg {
