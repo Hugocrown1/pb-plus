@@ -24,17 +24,16 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
   };
 
   const handleCheckbox = (e) => {
-    console.log("me puchaste");
     e.preventDefault();
     e.stopPropagation();
 
-    setFavorited(!favorited);
+    setFavorited((prevFavorited) => !prevFavorited);
   };
   return (
     <article className={` ${inter.className}`}>
       {_id ? (
         <Link href={`/real-estate/property/${_id}`} className="property-card">
-          <div className="relative w-full h-[56%] bg-gray-300">
+          <div className="relative w-full h-[60%] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
               {type || "Type"}
             </div>
@@ -54,9 +53,10 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
                 ${numberFormatter(price)}
               </p>
               <input
+                className="favorite"
                 value="favorite-button"
                 name="favorite-checkbox"
-                id="favorite"
+                id={`favorite-${_id}`}
                 checked={favorited}
                 type="checkbox"
                 onClick={(e) => e.stopPropagation()}
@@ -66,7 +66,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
               <label
                 onClick={(e) => e.stopPropagation()}
                 className="container"
-                htmlFor="favorite"
+                htmlFor={`favorite-${_id}`}
               >
                 <svg
                   onClick={(e) => e.stopPropagation()}
@@ -98,7 +98,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
         </Link>
       ) : (
         <div className="property-card">
-          <div className="relative w-full h-[56%] bg-gray-300">
+          <div className="relative w-full h-[60%] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
               {type || "Type"}
             </div>
@@ -118,6 +118,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
                 ${numberFormatter(price)}
               </p>
               <input
+                className="favorite"
                 value="favorite-button"
                 name="favorite-checkbox"
                 id="favorite"

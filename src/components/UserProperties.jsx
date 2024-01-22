@@ -7,7 +7,7 @@ const UserProperties = async ({ user }) => {
   return (
     <div className="flex flex-wrap gap-4">
       {properties.map((property) => (
-        <PropertyCard {...property} />
+        <PropertyCard key={property._id} {...property} />
       ))}
     </div>
   );

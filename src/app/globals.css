@@ -65,7 +65,7 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px] mx-auto
+    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto
 }
 
 .menu-container {
@@ -73,7 +73,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white w-[256px] h-[275px] shadow-md
+    @apply flex flex-col bg-white w-[314px] h-[340px] shadow-md
 }
 
 .error-message {
@@ -153,12 +153,12 @@ input:invalid[focused='true'] {
     color: rgb(0, 0, 0);
   }
   
-  #favorite {
+  .favorite {
     display: none;
     fill: transparent;
   }
   
-  #favorite:checked + .container svg {
+  .favorite:checked + .container svg {
     fill: hsl(0deg 100% 50%);
     stroke: hsl(0deg 100% 50%);
     animation: heartButton 1s;
@@ -186,13 +186,13 @@ input:invalid[focused='true'] {
     }
   }
   
-  #favorite + .container .action {
+  .favorite + .container .action {
     position: relative;
     overflow: hidden;
     display: grid;
   }
   
-  #favorite + .container .action span {
+  .favorite + .container .action span {
     grid-column-start: 1;
     grid-column-end: 1;
     grid-row-start: 1;
@@ -200,22 +200,22 @@ input:invalid[focused='true'] {
     transition: all 0.5s;
   }
   
-  #favorite + .container .action span.option-1 {
+  .favorite + .container .action span.option-1 {
     transform: translate(0px, 0%);
     opacity: 1;
   }
   
-  #favorite:checked + .container .action span.option-1 {
+  .favorite:checked + .container .action span.option-1 {
     transform: translate(0px, -100%);
     opacity: 0;
   }
   
-  #favorite + .container .action span.option-2 {
+  .favorite + .container .action span.option-2 {
     transform: translate(0px, 100%);
     opacity: 0;
   }
   
-  #favorite:checked + .container .action span.option-2 {
+  .favorite:checked + .container .action span.option-2 {
     transform: translate(0px, 0%);
     opacity: 1;
   }
