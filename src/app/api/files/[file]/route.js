@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function DELETE(request, { params: { file } }) {
   try {
+    console.log(file);
     const response = await client.send(
       new DeleteObjectCommand({
         Bucket: bucketName,

@@ -2,6 +2,7 @@
 import Spinner from "@/components/Spinner";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -83,8 +84,17 @@ const page = () => {
           </div>
         </div>
 
-        <div className="flex flex-col bg-white min-h-[300px] my-6">
-          <h2>Description</h2>
+        <div className="flex flex-col bg-white min-h-[300px] my-6 p-4">
+          <Link
+            href={`/real-estate/edit-property/${propertyInfo._id}`}
+            className="primary-button"
+          >
+            Edit
+          </Link>
+          <h2 className="font-bold text-[42px] text-left">Details</h2>
+          <p>{propertyInfo.description}</p>
+          <h2 className="font-bold text-[42px] text-left">Description</h2>
+          <p>{propertyInfo.description}</p>
         </div>
       </section>
     </main>
