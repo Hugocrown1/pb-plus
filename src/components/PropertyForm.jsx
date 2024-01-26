@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { deleteImage } from "@/lib/deleteImage";
+import { ReactSortable } from "react-sortablejs";
 
 const PropertyForm = ({
   title: existingTitle,
@@ -48,7 +49,6 @@ const PropertyForm = ({
       for (const imageLink of deletedImages) {
         try {
           if (imageLink.includes("pb-plus.s3")) {
-            console.log("eliminando de s3");
             await deleteImage(imageLink);
           }
         } catch (error) {
@@ -94,13 +94,6 @@ const PropertyForm = ({
       for (const file of files) {
         data.append("file", file);
       }
-      console.log(data.get("file"));
-
-      // const response = await axios.post("/api/files", data);
-
-      // setImages((oldImages) => {
-      //   return [...oldImages, response.data];
-      // });
     }
   };
 
@@ -114,6 +107,11 @@ const PropertyForm = ({
     setPreviewImages((prevImages) =>
       prevImages.filter((image) => image !== imageUrl)
     );
+  };
+
+  const updatePreviewImagesOrder = (images) => {
+    console.log(images);
+    setPreviewImages(images);
   };
 
   return (
@@ -136,28 +134,32 @@ const PropertyForm = ({
             />
             <label htmlFor="photos">Photos</label>
             <div className="flex flex-wrap">
-              {!!previewImages?.length &&
-                previewImages.map((link, index) => (
-                  <div
-                    key={index}
-                    className={`flex p-1 relative h-32 w-32 rounded-md m-1 shadow-lg justify-end bg-transparent items-start overflow-hidden`}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => handleRemoveImage(link)}
-                      className="absolute p-1 rounded-full bg-black/80 hover:bg-black transition-colors text-white z-10"
+              <ReactSortable
+                list={previewImages}
+                className="flex flex-wrap"
+                setList={updatePreviewImagesOrder}
+              >
+                {!!previewImages?.length &&
+                  previewImages.map((link) => (
+                    <div
+                      key={link}
+                      className={`flex relative h-32 w-32 rounded-md m-1 shadow-lg justify-end bg-transparent items-start overflow-hidden`}
                     >
-                      <IconX size={20} />
-                    </button>
-                    <Image
-                      src={link}
-                      alt="Property photo"
-                      fill={true}
-                      sizes="(min-width: 1120px) 248px"
-                      className="h-full w-full object-cover object-center"
-                    />
-                  </div>
-                ))}
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(link)}
+                        className="absolute p-1 rounded-full bg-black/80 hover:bg-black transition-colors text-white z-10 translate-y-1 -translate-x-1"
+                      >
+                        <IconX size={20} />
+                      </button>
+                      <img
+                        src={link}
+                        alt="Property photo"
+                        className="h-full w-full object-cover object-center"
+                      />
+                    </div>
+                  ))}
+              </ReactSortable>
               <label
                 htmlFor="photos"
                 className="flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"

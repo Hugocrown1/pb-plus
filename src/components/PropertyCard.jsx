@@ -38,12 +38,10 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
               {type || "Type"}
             </div>
             {coverImage && (
-              <Image
+              <img
                 alt="property cover image"
                 src={coverImage}
-                fill={true}
-                sizes="(min-width: 1120px) 248px"
-                className="object-cover object-center"
+                className="w-full h-full object-cover object-center"
               />
             )}
           </div>
@@ -103,12 +101,10 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
               {type || "Type"}
             </div>
             {coverImage && (
-              <Image
+              <img
                 alt="property cover image"
                 src={coverImage}
-                fill={true}
-                sizes="(min-width: 1120px) 248px"
-                className="object-cover object-center"
+                className="w-full h-full object-cover object-center"
               />
             )}
           </div>
