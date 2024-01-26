@@ -60,7 +60,7 @@ const PropertyForm = ({
             await deleteImage(imageLink);
           }
         } catch (error) {
-          console.error(`Error al eliminar la imagen ${imageLink}:`, error);
+          console.error(`error deleting image ${imageLink}:`, error);
         }
       }
     }
