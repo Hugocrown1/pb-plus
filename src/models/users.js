@@ -4,6 +4,12 @@ const schema = new mongoose.Schema({
   name: String,
   email: String,
   image: String,
+  properties: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Properties",
+    },
+  ],
   emailVerified: Boolean,
 });
 

@@ -1,3 +1,5 @@
+import properties from "@/models/properties";
+import users from "@/models/users";
 import { connect, connection } from "mongoose";
 
 export async function connectDB() {
@@ -6,6 +8,8 @@ export async function connectDB() {
 
 connection.on("connected", () => {
   console.log("mongoose is connected");
+  const Properties = properties;
+  const Users = users;
 });
 
 connection.on("error", (err) => {

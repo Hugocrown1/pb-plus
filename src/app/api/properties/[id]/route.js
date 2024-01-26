@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params: { id } }) {
   try {
     await connectDB();
-    const property = await Properties.findById(id);
+    const property = await Properties.findById(id).populate("user");
     if (!property)
       return NextResponse.json(
         { message: "No se encontro la propiedad" },
