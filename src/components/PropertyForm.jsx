@@ -4,7 +4,6 @@ import FormInput from "@/components/FormInput";
 import PropertyCard from "@/components/PropertyCard";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -34,7 +33,6 @@ const PropertyForm = ({
 
   const router = useRouter();
 
-  const [images, setImages] = useState(existingImages || []);
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
@@ -45,6 +43,16 @@ const PropertyForm = ({
   const saveProperty = async (e) => {
     e.preventDefault();
     const responseFiles = await axios.post("/api/files", formData);
+    let propertyImages = previewImages;
+
+    for (const imageObject of responseFiles.data) {
+      const imageIndex = propertyImages.findIndex(
+        (imageUrl) => imageUrl.toString() === imageObject.originalUrl
+      );
+
+      propertyImages[imageIndex] = imageObject.linkAws;
+    }
+
     if (deletedImages.length > 0) {
       for (const imageLink of deletedImages) {
         try {
@@ -60,14 +68,16 @@ const PropertyForm = ({
     if (!_id) {
       await axios.post("/api/properties", {
         ...values,
-        images: responseFiles.data,
+
+        images: propertyImages,
       });
 
       router.push("/real-estate");
     } else {
       await axios.put("/api/properties/" + _id, {
         ...values,
-        images: images.concat(responseFiles.data),
+        coverImage: propertyImages[0],
+        images: propertyImages,
       });
       router.push("/real-estate/property/" + _id);
     }
@@ -86,16 +96,16 @@ const PropertyForm = ({
     }
   };
 
-  const uploadImages = async (e) => {
-    const files = e.target?.files;
-    if (files?.length > 0) {
-      const data = new FormData();
+  // const uploadImages = async (e) => {
+  //   const files = e.target?.files;
+  //   if (files?.length > 0) {
+  //     const data = new FormData();
 
-      for (const file of files) {
-        data.append("file", file);
-      }
-    }
-  };
+  //     for (const file of files) {
+  //       data.append("file", file);
+  //     }
+  //   }
+  // };
 
   const handleRemoveImage = (imageUrl) => {
     if (imageUrl.includes("blob")) {
@@ -103,14 +113,13 @@ const PropertyForm = ({
     }
 
     setDeletedImages(deletedImages.concat(imageUrl));
-    setImages((prevImages) => prevImages.filter((image) => image !== imageUrl));
+    // setImages((prevImages) => prevImages.filter((image) => image !== imageUrl));
     setPreviewImages((prevImages) =>
       prevImages.filter((image) => image !== imageUrl)
     );
   };
 
   const updatePreviewImagesOrder = (images) => {
-    console.log(images);
     setPreviewImages(images);
   };
 
@@ -248,7 +257,7 @@ const PropertyForm = ({
             />
             <div className="flex w-full justify-between mt-8">
               <Link
-                href={"/real-estate"}
+                href={_id ? "/real-estate/property/" + _id : "/real-estate"}
                 className="primary-button alternative-red-button  "
               >
                 Cancel

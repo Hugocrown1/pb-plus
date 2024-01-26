@@ -35,7 +35,8 @@ export async function POST(request) {
       );
 
       const link = `https://${bucketName}.s3.amazonaws.com/${newFileName}`;
-      imageUrls.push(link);
+      const imageObject = { originalUrl: key, linkAws: link };
+      imageUrls.push(imageObject);
     }
 
     return NextResponse.json(imageUrls);
