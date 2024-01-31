@@ -7,8 +7,8 @@ import { auth } from "../api/auth/[...nextauth]/route";
 const page = async () => {
   const session = await auth();
   return (
-    <main className="bg-[#f5f3f4] min-h-[800px] ">
-      <div className="container-xl my-12 gap-6">
+    <main className="relative bg-[#f5f3f4] pt-[90px] min-h-[800px] ">
+      <div className="container-xl mb-12 gap-6">
         <section className="flex flex-row gap-4">
           <img
             src={session?.user?.image}

@@ -54,7 +54,7 @@ const UserMenu = () => {
               width={36}
               className="rounded-full"
             />
-            <IconMenu2 size={28} color="gray" />
+            <IconMenu2 size={28} />
           </div>
 
           <div

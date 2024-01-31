@@ -124,7 +124,7 @@ const PropertyForm = ({
   };
 
   return (
-    <div className="flex flex-row w-full h-full gap-10 mt-4 mb-12">
+    <div className="flex flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
       <section className="w-[80%] flex flex-col ">
         <h1 className="text-left text-[42px]">
           {_id ? "Edit property" : "New property"}
