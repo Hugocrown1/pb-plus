@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import UserMenu from "./UserMenu";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const routes = [
@@ -28,28 +29,42 @@ const Header = () => {
     },
   ];
 
-  const [fix, setFix] = useState(false);
+  const pathname = usePathname();
 
-  const setFixed = () => {
-    if (window.scrollY >= 69) {
-      setFix(true);
+  // const [fix, setFix] = useState(false);
+  const [headerTheme, setHeaderTheme] = useState("");
+
+  const setHeaderStyle = (path) => {
+    if (path.includes("real-estate")) {
+      return "theme-real-estate";
     } else {
-      setFix(false);
+      return "";
     }
   };
 
-  window.addEventListener("scroll", setFixed);
+  useEffect(() => {
+    setHeaderTheme(setHeaderStyle(pathname));
+  }, [pathname]);
+
+  // const setFixed = () => {
+  //   if (window.scrollY >= 69) {
+  //     setFix(true);
+  //   } else {
+  //     setFix(false);
+  //   }
+  // };
+
+  // window.addEventListener("scroll", setFixed);
+
   return (
-    <header>
+    <header className={headerTheme}>
       <div
-        className={`${
-          fix ? "navbar fixed" : "navbar fixed"
-        } max-h-[60px] overflow-x-clip z-20`}
+        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full`}
       >
         <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
           <Link
             href={"/"}
-            className="text-white font-semibold text-3xl flex items-center"
+            className="text-[var(--color-text-primary)] font-semibold text-3xl flex items-center"
           >
             PB+
           </Link>
@@ -60,7 +75,7 @@ const Header = () => {
                   <li key={index} className="h-full">
                     <Link
                       href={route.route}
-                      className="font-semibold h-full flex items-center transition-colors text-white  hover:text-[#941B0C] hover:bg-white px-4"
+                      className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4"
                     >
                       {route.name}
                     </Link>
@@ -72,7 +87,7 @@ const Header = () => {
               <UserMenu />
               <div
                 className={`absolute w-[5000px] 
-                  bg-[#0A100D]
+                  bg-[var(--color-secondary)]
                  transition-colors h-full`}
               ></div>
             </div>

@@ -1,31 +1,60 @@
 import CustomPage from "@/components/CustomPage";
 import Link from "next/link";
+import { Roboto } from "next/font/google";
+import Image from "next/image";
+
+const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export default function Page() {
   return (
-    <main className="bg-[#f5f3f4]">
-      <CustomPage
-        title="PB+ REAL ESTATE"
-        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in."
-        buttonText="Take a look"
-        imageUrl="https://i.imgur.com/YG4dndi.jpeg"
-      />
-      <div className="flex flex-row w-full px-[40px] mx-auto  h-[800px] my-8 gap-4">
-        <section className="flex items-start justify-center p-8 min-w-[240px] bg-white">
+    <main className={`bg-[#f5f3f4] pt-[50px] ${roboto.className}`}>
+      <section className="flex flex-row w-full p-12 ">
+        <div className="flex flex-col text-left w-[45%]">
+          <h1 className="text-[#0A100D] text-left text-[100px] leading-tight">
+            PB+ REAL ESTATE
+          </h1>
+          <p className="text-[#5e5e5e] font-medium text-xl">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
+            voluptate sequi asperiores nemo possimus quod et quis, rerum
+            reiciendis veritatis cum tempora
+          </p>
           <Link
-            href={"/real-estate/new-property"}
-            className="primary-button red-button"
+            href={"/real-estate"}
+            className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#30725C] hover:bg-[#1f493b]  text-center"
           >
-            Create a post
+            Take a look
           </Link>
-        </section>
-        <section className="grid grid-cols-4 grid-rows-2 gird w-full gap-4 ">
-          <div className="bg-white w-full h-full"></div>
-          <div className="bg-white w-full h-full"></div>
-          <div className="bg-white w-full h-full"></div>
-          <div className="bg-white w-full h-full"></div>
-        </section>
-      </div>
+        </div>
+        <div className="relative grid grid-cols-4 grid-rows-3 gap-4 w-[55%] h-[500px]">
+          <div className="relative col-span-2 row-span-3 rounded-3xl overflow-hidden">
+            <Image
+              src={"/assets/house.jpg"}
+              alt="real estate photo"
+              fill={true}
+              sizes="(min-width: 1120px) 1000px"
+              className="object-cover object-center"
+            />
+          </div>
+          <div className="relative  row-span-3 rounded-3xl overflow-hidden">
+            <Image
+              src={"/assets/house2.webp"}
+              alt="real estate photo"
+              fill={true}
+              sizes="(min-width: 1120px) 1000px"
+              className="object-cover object-left"
+            />
+          </div>
+          <div className="relative  row-span-3 rounded-3xl overflow-hidden">
+            <Image
+              src={"/assets/house3.jpg"}
+              alt="real estate photo"
+              fill={true}
+              sizes="(min-width: 1120px) 1000px"
+              className="object-cover object-center"
+            />
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

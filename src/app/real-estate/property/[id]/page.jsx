@@ -61,7 +61,7 @@ const page = () => {
                   src={image}
                   alt="property photo"
                   fill={true}
-                  sizes="(min-width: 1120px) 248px"
+                  sizes="(min-width: 1120px) 1000px"
                   className="object-cover object-center"
                 />
               </div>
