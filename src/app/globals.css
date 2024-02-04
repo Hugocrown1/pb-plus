@@ -17,15 +17,15 @@
   }
 
   .theme-real-estate {
-    --color-primary: #FFFF;
-    --color-primary-accent: #30725C;
-    --color-secondary: #FFFF;
-    --color-accent: #30725C;
-    --color-accent-hover: #1f493b;
-    --color-text-primary: #040F0F;
+    --color-primary: #30725C;
+    --color-primary-accent: #184E77;
+    --color-secondary: #0A100D;
+    --color-accent: #184E77;
+    --color-accent-hover: #113753;
+    --color-text-primary: #FAFAFA;
     --color-text-secondary: #FAFAFA;
-    --color-border: #c7c7c79a;
-    --color-border-hover: #c7c7c79a;
+    --color-border: #FAFAFA;
+    --color-border-hover: #aaaaaa49;
     
   }
 }
