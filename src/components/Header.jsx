@@ -25,7 +25,7 @@ const Header = () => {
     },
     {
       route: "/events",
-      name: "EVENTS",
+      name: "COMMUNITY",
     },
   ];
 
