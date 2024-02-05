@@ -81,13 +81,13 @@ const UserMenu = () => {
         <div className="flex items-center gap-3">
           <Link
             href="/auth/signup"
-            className="px-6 py-2 rounded-[10px] font-semibold text-base min-w-[125px]   text-[var(--color-text-secondary)] transition-colors  bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)]  text-center"
+            className="px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[125px]   text-[var(--color-text-secondary)] transition-colors border-[var(--color-accent)]  bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)]  text-center"
           >
             Sign up
           </Link>
           <Link
             href="/auth/login"
-            className="px-6 py-2 rounded-[10px] border-[2px] font-semibold text-base min-w-[125px] transition-colors border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-hover)]  text-center"
+            className="px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[125px] transition-colors border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-hover)]  text-center"
           >
             Log In
           </Link>

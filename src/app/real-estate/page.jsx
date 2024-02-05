@@ -2,8 +2,16 @@ import CustomPage from "@/components/CustomPage";
 import Link from "next/link";
 import { Roboto } from "next/font/google";
 import Image from "next/image";
-import { IconHome } from "@tabler/icons-react";
+import {
+  IconGraph,
+  IconHome,
+  IconHomeCog,
+  IconHomeDollar,
+  IconHomeEco,
+  IconSparkles,
+} from "@tabler/icons-react";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
+import ServiceCard from "@/components/ServiceCard";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
@@ -70,97 +78,44 @@ export default function Page() {
           Our services
         </div>
         <div className="grid grid-cols-4 grid-rows-2 gap-3 w-[1100px] h-[550px] ">
-          <article className="group bg-[#FCFFFC] overflow-hidden col-span-2 row-span-2 text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Link href={"/"}>
-              <div className="relative flex w-full h-full items-center justify-center text-2xl">
-                <div className="flex flex-col z-10 px-10 items-center justify-center">
-                  <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-                    <IconHome size={120} color="#30725C" />
-                  </div>
-                  <p className="font-semibold group-hover:text-white">
-                    Houses & properties
-                  </p>
-                  <p className="text-base font-light text-[#5e5e5e] group-hover:text-white">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Laboriosam, labore illo nam libero ratione, natus ipsum
-                  </p>
-                </div>
-                <div className="absolute inset-y-[50%] inset-x-[15%]  bg-[#FCFFFC] w-[90%] h-[90%] transition-all group-hover:-rotate-45 group-hover:bg-[#2f6655]"></div>
-              </div>
-            </Link>
-          </article>
-          <article className="group bg-[#FCFFFC] overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Link href={"/"}>
-              <div className="relative flex w-full h-full items-center justify-center text-2xl">
-                <div className="flex flex-col z-10 px-4 items-center justify-center">
-                  <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-                    <IconHome size={60} color="#30725C" />
-                  </div>
-                  <p className="font-semibold group-hover:text-white">
-                    Houses & properties
-                  </p>
-                  <p className="text-base font-light text-[#5e5e5e] group-hover:text-white">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-                <div className="absolute inset-y-[50%] inset-x-[15%]  bg-[#FCFFFC] w-[90%] h-[90%] transition-all group-hover:-rotate-45 group-hover:bg-[#2f6655]"></div>
-              </div>
-            </Link>
-          </article>
-          <article className="group bg-[#FCFFFC] overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Link href={"/"}>
-              <div className="relative flex w-full h-full items-center justify-center text-2xl">
-                <div className="flex flex-col z-10 px-4 items-center justify-center">
-                  <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-                    <IconHome size={60} color="#30725C" />
-                  </div>
-                  <p className="font-semibold group-hover:text-white">
-                    Houses & properties
-                  </p>
-                  <p className="text-base font-light text-[#5e5e5e] group-hover:text-white">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-                <div className="absolute inset-y-[50%] inset-x-[15%]  bg-[#FCFFFC] w-[90%] h-[90%] transition-all group-hover:-rotate-45 group-hover:bg-[#2f6655]"></div>
-              </div>
-            </Link>
-          </article>
-          <article className="group bg-[#FCFFFC] overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Link href={"/"}>
-              <div className="relative flex w-full h-full items-center justify-center text-2xl">
-                <div className="flex flex-col z-10 px-4 items-center justify-center">
-                  <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-                    <IconHome size={60} color="#30725C" />
-                  </div>
-                  <p className="font-semibold group-hover:text-white">
-                    Houses & properties
-                  </p>
-                  <p className="text-base font-light text-[#5e5e5e] group-hover:text-white">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-                <div className="absolute inset-y-[50%] inset-x-[15%]  bg-[#FCFFFC] w-[90%] h-[90%] transition-all group-hover:-rotate-45 group-hover:bg-[#2f6655]"></div>
-              </div>
-            </Link>
-          </article>
-          <article className="group bg-[#FCFFFC] overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all">
-            <Link href={"/"}>
-              <div className="relative flex w-full h-full items-center justify-center text-2xl">
-                <div className="flex flex-col z-10 px-4 items-center justify-center">
-                  <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-                    <IconHome size={60} color="#30725C" />
-                  </div>
-                  <p className="font-semibold group-hover:text-white">
-                    Houses & properties
-                  </p>
-                  <p className="text-base font-light text-[#5e5e5e] group-hover:text-white">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  </p>
-                </div>
-                <div className="absolute inset-y-[50%] inset-x-[15%]  bg-[#FCFFFC] w-[90%] h-[90%] transition-all group-hover:-rotate-45 group-hover:bg-[#2f6655]"></div>
-              </div>
-            </Link>
-          </article>
+          <ServiceCard
+            href={"/"}
+            title={"Houses & Properties"}
+            icon={<IconHomeDollar size={70} color="#30725C" />}
+            style={"col-span-2 row-span-2"}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
+            ducimus tempore quia sequi!
+          </ServiceCard>
+
+          <ServiceCard
+            href={"/"}
+            title={"Housekeeping"}
+            icon={<IconSparkles size={70} color="#30725C" />}
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elite
+          </ServiceCard>
+          <ServiceCard
+            href={"/"}
+            title={"House Sitting"}
+            icon={<IconHomeEco size={70} color="#30725C" />}
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elite
+          </ServiceCard>
+          <ServiceCard
+            href={"/"}
+            title={"Assesment Services"}
+            icon={<IconGraph size={70} color="#30725C" />}
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elite
+          </ServiceCard>
+          <ServiceCard
+            href={"/"}
+            title={"Home Management"}
+            icon={<IconHomeCog size={70} color="#30725C" />}
+          >
+            Lorem ipsum dolor, sit amet consectetur adipisicing elite
+          </ServiceCard>
         </div>
       </section>
     </main>
