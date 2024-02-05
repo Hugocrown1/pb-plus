@@ -54,7 +54,7 @@ const UserMenu = () => {
               width={36}
               className="rounded-full"
             />
-            <IconMenu2 size={28} color="gray" />
+            <IconMenu2 size={28} />
           </div>
 
           <div
@@ -81,13 +81,13 @@ const UserMenu = () => {
         <div className="flex items-center gap-3">
           <Link
             href="/auth/signup"
-            className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]   text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] text-center"
+            className="px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[125px]   text-[var(--color-text-secondary)] transition-colors border-[var(--color-accent)]  bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)]  text-center"
           >
             Sign up
           </Link>
           <Link
             href="/auth/login"
-            className="px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px] transition-colors text-white hover:bg-white hover:text-black text-center"
+            className="px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[125px] transition-colors border-[var(--color-border)] text-[var(--color-text-primary)] hover:bg-[var(--color-border-hover)]  text-center"
           >
             Log In
           </Link>

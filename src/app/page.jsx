@@ -42,7 +42,7 @@ export default function Home() {
             ad excepturi ducimus magni
           </DepartmentCard>
           <DepartmentCard
-            title={"PB+ EVENTS"}
+            title={"PB+ COMMUNITY"}
             src={"/assets/events.jpg"}
             href={"/events"}
           >

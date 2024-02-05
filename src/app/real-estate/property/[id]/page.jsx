@@ -47,7 +47,7 @@ const page = () => {
   }
 
   return (
-    <main className="container-xl">
+    <main className="container-xl pt-[60px]">
       <section className="flex flex-col">
         <h1 className="text-left">{propertyInfo?.title}</h1>
         <div className="relative grid grid-cols-4 grid-rows-2 w-full h-[515px] gap-1">
@@ -61,7 +61,7 @@ const page = () => {
                   src={image}
                   alt="property photo"
                   fill={true}
-                  sizes="(min-width: 1120px) 248px"
+                  sizes="(min-width: 1120px) 1000px"
                   className="object-cover object-center"
                 />
               </div>
