@@ -46,7 +46,7 @@ const Page = () => {
             </div>
           </div>
           <img
-            src="https://i.imgur.com/99mteXf.jpeg"
+            src="/assets/legalbanner.jpeg"
             className="absolute  object-cover h-full w-full bg-black grayscale"
             alt="Background"
           />
