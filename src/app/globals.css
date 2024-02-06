@@ -2,18 +2,304 @@
 @tailwind components;
 @tailwind utilities;
 
-.primary-button {
-    @apply px-6 py-1 rounded-[10px] border-2 font-semibold text-base min-w-[125px]
+@layer base {
+  :root {
+    --color-primary: #941B0C;
+    --color-primary-accent: #941B0C;
+    --color-secondary: #0A100D;
+    --color-accent: #F6AA1C;
+    --color-accent-hover: #f5c262;
+    --color-text-primary: #ffff;
+    --color-text-secondary: #0A100D;
+    --color-border: #ffffff;
+    --color-border-hover: #aaaaaa49;
+    
+  }
+
+  .theme-real-estate {
+    --color-primary: #30725C;
+    --color-primary-accent: #184E77;
+    --color-secondary: #0A100D;
+    --color-accent: #184E77;
+    --color-accent-hover: #113753;
+    --color-text-primary: #FAFAFA;
+    --color-text-secondary: #FAFAFA;
+    --color-border: #FAFAFA;
+    --color-border-hover: #aaaaaa49;
+    
+  }
+
+  .theme-legal {
+    --color-primary: #3B475C;
+    --color-primary-accent: #184E77;
+    --color-secondary: #0A100D;
+    --color-accent: #184E77;
+    --color-accent-hover: #113753;
+    --color-text-primary: #FAFAFA;
+    --color-text-secondary: #FAFAFA;
+    --color-border: #FAFAFA;
+    --color-border-hover: #aaaaaa49;
+    
+  }
 }
+
+.primary-button {
+    @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] flex items-center justify-center
+}
+
+.error-message {
+    @apply text-sm text-[#941B0C] 
+}
+
+/* .navbar{
+  @apply transition-all w-full
+} */
+
+.navbar.absolute{
+  @apply bg-[#941B0C] 
+}
+
+.navbar-real-estate {
+  @apply bg-green-700
+}
+
+.navbar {
+  @apply bg-[#941B0C]  
+}
+
 
 h1 {
     @apply text-[64px] font-bold text-center text-[#0A100D]
+}
+
+
+form {
+    @apply w-full
+}
+
+h3 {
+    @apply font-semibold mb-2
 }
 
 h2 {
     @apply text-[32px] font-medium text-center text-[#0A100D]
 }
 
+
+label {
+    @apply text-sm font-semibold text-gray-700
+}
+
 .yellow-button {
     @apply text-[#0A100D] transition-colors border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C]
 }
+
+.red-button {
+    @apply text-white transition-colors border-[#621708] bg-[#941B0C] hover:bg-[#621708] hover:border-[#941B0C]
+}
+
+.alternative-red-button {
+    @apply text-[#621708] transition-colors border-[#621708]  hover:bg-gray-500/20 hover:border-[#941B0C]
+}
+
+input {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full transition-colors
+}
+
+select {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full 
+}
+
+textarea {
+    @apply block border border-gray-500/40 shadow-sm rounded-md p-[4px] w-full resize-none
+}
+
+.menu-trigger {
+    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] text-gray-300 border-gray-500/40 hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer
+}
+
+.dropdown-item {
+    @apply flex items-center gap-2 w-full px-4 py-2 transition-colors  hover:bg-gray-600/15
+}
+
+.container-xl {
+    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto
+}
+
+.menu-container {
+    @apply flex items-center
+}
+
+.property-card {
+    @apply flex flex-col bg-white w-[314px] h-[340px] shadow-md
+}
+
+.error-message {
+    display: none;
+
+}
+
+input:invalid[focused='true'] ~ .error-message{
+    display: block;
+}
+
+input:invalid[focused='true'] {
+    border-width: 2px;
+    border-color: red;
+}
+
+
+.dropdown-menu {
+    position: absolute;
+    top: 3.5rem;
+    left: 1.4rem;
+
+    background-color: #f5f3f4;
+    
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    width: 180px;
+    z-index: 50;
+}
+
+.dropdown-menu.active{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: var(--speed) ease;
+  }
+  
+  .dropdown-menu.inactive{
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: var(--speed) ease;
+  }
+
+
+  .spinner {
+    width: 3.25em;
+    transform-origin: center;
+    
+    animation: rotate4 2s linear infinite;
+   }
+   
+   circle {
+    fill: none;
+    stroke: hsl(214, 6%, 55%);
+    
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+   }
+
+   .container {
+    
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    margin-right: 10px;
+    
+    
+    cursor: pointer;
+    user-select: none;
+    
+    color: rgb(0, 0, 0);
+  }
+  
+  .favorite {
+    display: none;
+    fill: transparent;
+  }
+  
+  .favorite:checked + .container svg {
+    fill: hsl(0deg 100% 50%);
+    stroke: hsl(0deg 100% 50%);
+    animation: heartButton 1s;
+  }
+  
+  @keyframes heartButton {
+    0% {
+      transform: scale(1);
+    }
+  
+    25% {
+      transform: scale(1.3);
+    }
+  
+    50% {
+      transform: scale(1);
+    }
+  
+    75% {
+      transform: scale(1.3);
+    }
+  
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .favorite + .container .action {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+  }
+  
+  .favorite + .container .action span {
+    grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    transition: all 0.5s;
+  }
+  
+  .favorite + .container .action span.option-1 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+  
+  .favorite:checked + .container .action span.option-1 {
+    transform: translate(0px, -100%);
+    opacity: 0;
+  }
+  
+  .favorite + .container .action span.option-2 {
+    transform: translate(0px, 100%);
+    opacity: 0;
+  }
+  
+  .favorite:checked + .container .action span.option-2 {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+  
+   
+   @keyframes rotate4 {
+    100% {
+     transform: rotate(360deg);
+    }
+   }
+   
+   @keyframes dash4 {
+    0% {
+     stroke-dasharray: 1, 200;
+     stroke-dashoffset: 0;
+    }
+   
+    50% {
+     stroke-dasharray: 90, 200;
+     stroke-dashoffset: -35px;
+    }
+   
+    100% {
+     stroke-dashoffset: -125px;
+    }
+   }
+
+
+   
