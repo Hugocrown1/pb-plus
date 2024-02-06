@@ -28,6 +28,19 @@
     --color-border-hover: #aaaaaa49;
     
   }
+
+  .theme-legal {
+    --color-primary: #3B475C;
+    --color-primary-accent: #184E77;
+    --color-secondary: #0A100D;
+    --color-accent: #184E77;
+    --color-accent-hover: #113753;
+    --color-text-primary: #FAFAFA;
+    --color-text-secondary: #FAFAFA;
+    --color-border: #FAFAFA;
+    --color-border-hover: #aaaaaa49;
+    
+  }
 }
 
 .primary-button {

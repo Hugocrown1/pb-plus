@@ -37,6 +37,8 @@ const Header = () => {
   const setHeaderStyle = (path) => {
     if (path.includes("real-estate")) {
       return "theme-real-estate";
+    } else if (path.includes("legal")) {
+      return "theme-legal";
     } else {
       return "";
     }
