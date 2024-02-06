@@ -12,8 +12,8 @@ const DepartmentCard = ({ children, src, title, href }) => {
         alt="Department image"
         className="mb-4"
       />
-      <p className="text-[#0A100D] font-semibold text-[32px]">{title}</p>
-      <div className="h-[7px] w-[121px] bg-[#941B0C] rounded-[8px] mt-1"></div>
+      <p className="text-[#0A100D] font-bold text-[32px]">{title}</p>
+      <hr className="h-[7px] w-[121px] bg-[#941B0C] rounded-[8px] mt-1" />
 
       <div className="flex flex-col items-center px-3 justify-evenly mt-6 gap-4 ">
         <p className="text-center justify-center text-[#0A100D] font-light text-[20px] h-[150px] ">

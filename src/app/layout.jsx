@@ -1,6 +1,8 @@
 import { Inter, Roboto } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
+import { Providers } from "./providers";
+import Footer from "@/components/Footer";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
@@ -11,10 +13,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html className="scroll-smooth " lang="en">
       <body className={` bg-[#f5f3f4] ${roboto.className}`}>
-        <Header />
-        {children}
+        <Providers>
+          <Header />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
