@@ -36,7 +36,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
           href={`/real-estate/houses-&-properties/${_id}`}
           className="property-card"
         >
-          <div className="relative w-full h-[60%] bg-gray-300">
+          <div className="relative w-full h-[58%] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
               {type || "Type"}
             </div>
@@ -50,7 +50,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
           </div>
           <div className="flex flex-col px-3 py-2">
             <div className="flex justify-between">
-              <p className="text-left text-2xl font-bold text-[#621708] max-w-[193pxs] overflow-hidden overflow-ellipsis">
+              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis">
                 ${numberFormatter(price)}
               </p>
               <input
@@ -99,7 +99,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
         </Link>
       ) : (
         <div className="property-card">
-          <div className="relative w-full h-[60%] bg-gray-300">
+          <div className="relative w-full h-[58%] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
               {type || "Type"}
             </div>
@@ -113,7 +113,7 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
           </div>
           <div className="flex flex-col px-3 py-2">
             <div className="flex justify-between">
-              <p className="text-left text-2xl font-bold text-[#621708] max-w-[193pxs] overflow-hidden overflow-ellipsis">
+              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis">
                 ${numberFormatter(price)}
               </p>
               <input

@@ -72,7 +72,7 @@ const Header = () => {
             <nav className="flex z-20">
               <ul className="flex flex-row items-center">
                 {routes.map((route, index) => (
-                  <li key={index} className="h-full">
+                  <li key={index} className="h-[90%]">
                     <Link
                       href={route.route}
                       className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4"

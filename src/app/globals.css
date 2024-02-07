@@ -12,7 +12,7 @@
     --color-accent-hover: #f5c262;
     --color-text-primary: #ffff;
     --color-text-secondary: #0A100D;
-    --color-border: #0a100d5b;
+    --color-border: #ffffffe3;
     --color-border-hover: #aaaaaa49;
     --color-header-border: transparent;
     
@@ -122,7 +122,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white w-[314px] h-[340px] shadow-md
+    @apply flex flex-col bg-white max-w-[395px] mx-auto h-[430px] shadow-md rounded-lg overflow-hidden
 }
 
 .error-message {
@@ -139,11 +139,47 @@ input:invalid[focused='true'] {
     border-color: red;
 }
 
+.property-zone-radio {
+  @apply flex flex-row items-center justify-evenly mb-2
+}
+
+.property-zone-radio span {
+  @apply text-xl text-gray-500 font-medium 
+}
+
+.property-zone-radio input[type="radio"] {
+  @apply hidden
+}
+
+.property-zone-radio label {
+  @apply cursor-pointer
+}
+
+.property-zone-radio div {
+  @apply h-[3px] w-[70%] rounded-md bg-transparent mx-auto my-1
+}
+
+.property-zone-radio input[type="radio"]:checked + span{
+  @apply text-[#30725C]
+}
+
+.property-zone-radio input[type="radio"]:checked + span + div{
+  @apply bg-[#30725C]
+}
+
+
+
+
+
+
 
 .dropdown-menu {
     position: absolute;
     top: 3.5rem;
     left: 1.4rem;
+    
+    
+    
 
     background-color: #f5f3f4;
     

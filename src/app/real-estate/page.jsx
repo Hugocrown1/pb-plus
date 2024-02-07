@@ -17,8 +17,8 @@ const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4] pt-[50px] ${roboto.className}`}>
-      <section className="flex flex-row w-full p-12 ">
+    <main className={`bg-[#f5f3f4] container-xl pt-[50px] ${roboto.className}`}>
+      <section className="flex flex-row w-full py-12 gap-8 ">
         <div className="flex flex-col text-left w-[45%]">
           <h1 className="text-[#0A100D] text-left text-[90px] leading-tight">
             PB+ REAL ESTATE

@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 import Link from "next/link";
 import Image from "next/image";
+import PropertiesDisplay from "@/components/PropertiesDisplay";
 
 const page = () => {
   return (
@@ -68,6 +69,15 @@ const page = () => {
             </div>
           </div>
         </div>
+      </section>
+      <section className="flex flex-col items-center text-center">
+        <h1>We Help You Make Better Deals</h1>
+        <p className="text-[#5e5e5e] text-center font-medium text-lg w-[900px] mb-8">
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
+          voluptate sequi asperiores nemo possimus quod et quis, rerum
+          reiciendis veritatis cum tempora
+        </p>
+        <PropertiesDisplay />
       </section>
     </main>
   );
