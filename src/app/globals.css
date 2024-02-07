@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    --color-logo: #ffff;
     --color-primary: #941B0C;
     --color-primary-accent: #941B0C;
     --color-secondary: #0A100D;
@@ -11,21 +12,24 @@
     --color-accent-hover: #f5c262;
     --color-text-primary: #ffff;
     --color-text-secondary: #0A100D;
-    --color-border: #ffffff;
+    --color-border: #0a100d5b;
     --color-border-hover: #aaaaaa49;
+    --color-header-border: transparent;
     
   }
 
   .theme-real-estate {
-    --color-primary: #30725C;
-    --color-primary-accent: #184E77;
-    --color-secondary: #0A100D;
-    --color-accent: #184E77;
-    --color-accent-hover: #113753;
-    --color-text-primary: #FAFAFA;
+    --color-logo: #30725C;
+    --color-primary: #f5f3f4;
+    --color-primary-accent: #30725C;
+    --color-secondary: #f5f3f4;
+    --color-accent: #30725C;
+    --color-accent-hover: #245545;
+    --color-text-primary: #0A100D;
     --color-text-secondary: #FAFAFA;
-    --color-border: #FAFAFA;
+    --color-border: #0b0c0cc7;
     --color-border-hover: #aaaaaa49;
+    --color-header-border: #aaaaaa49;
     
   }
 }

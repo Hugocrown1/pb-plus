@@ -16,22 +16,21 @@ import ServiceCard from "@/components/ServiceCard";
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export default function Page() {
-  //TODO: Hacer componente de boton de servicio
   return (
     <main className={`bg-[#f5f3f4] pt-[50px] ${roboto.className}`}>
       <section className="flex flex-row w-full p-12 ">
         <div className="flex flex-col text-left w-[45%]">
-          <h1 className="text-[#0A100D] text-left text-[100px] leading-tight">
+          <h1 className="text-[#0A100D] text-left text-[90px] leading-tight">
             PB+ REAL ESTATE
           </h1>
-          <p className="text-[#5e5e5e] font-medium text-xl">
+          <p className="text-[#5e5e5e] font-medium text-lg">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
             voluptate sequi asperiores nemo possimus quod et quis, rerum
             reiciendis veritatis cum tempora
           </p>
           <Link
             href={"/real-estate"}
-            className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#184E77] hover:bg-[#113753]  text-center"
+            className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#30725C] hover:bg-[#214d3e]  text-center"
           >
             Take a look
           </Link>
@@ -42,7 +41,7 @@ export default function Page() {
               src={"/assets/house.jpg"}
               alt="real estate photo"
               fill={true}
-              sizes="(min-width: 1120px) 1000px"
+              sizes="(min-width: 1120px) 800px"
               className="object-cover object-center"
             />
           </div>
@@ -51,7 +50,7 @@ export default function Page() {
               src={"/assets/house2.webp"}
               alt="real estate photo"
               fill={true}
-              sizes="(min-width: 1120px) 1000px"
+              sizes="(min-width: 1120px) 800px"
               className="object-cover object-left"
             />
           </div>
@@ -60,7 +59,7 @@ export default function Page() {
               src={"/assets/house3.jpg"}
               alt="real estate photo"
               fill={true}
-              sizes="(min-width: 1120px) 1000px"
+              sizes="(min-width: 1120px) 800px"
               className="object-cover object-center"
             />
           </div>
@@ -74,12 +73,12 @@ export default function Page() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad
           minim veniam,
         </p>
-        <div className="bg-[#184E77] px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
+        <div className="bg-[#30725C] px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
           Our services
         </div>
         <div className="grid grid-cols-4 grid-rows-2 gap-3 w-[1100px] h-[550px] ">
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/houses-&-properties"}
             title={"Houses & Properties"}
             icon={<IconHomeDollar size={70} color="#30725C" />}
             style={"col-span-2 row-span-2"}

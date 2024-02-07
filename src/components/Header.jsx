@@ -57,14 +57,14 @@ const Header = () => {
   // window.addEventListener("scroll", setFixed);
 
   return (
-    <header className={headerTheme}>
+    <header className={`${headerTheme}`}>
       <div
-        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full`}
+        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
       >
         <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
           <Link
             href={"/"}
-            className="text-[var(--color-text-primary)] font-semibold text-3xl flex items-center"
+            className="text-[var(--color-logo)] font-semibold text-3xl flex items-center"
           >
             PB+
           </Link>
@@ -86,7 +86,7 @@ const Header = () => {
             <div className="relative flex  w-[250px] h-full ">
               <UserMenu />
               <div
-                className={`absolute w-[5000px] 
+                className={`absolute w-[5000px] border-b-2 border-[var(--color-header-border)]
                   bg-[var(--color-secondary)]
                  transition-colors h-full`}
               ></div>

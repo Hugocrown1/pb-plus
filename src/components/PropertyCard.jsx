@@ -32,7 +32,10 @@ const PropertyCard = ({ _id, title, address, price, type, coverImage }) => {
   return (
     <article className={` ${inter.className}`}>
       {_id ? (
-        <Link href={`/real-estate/property/${_id}`} className="property-card">
+        <Link
+          href={`/real-estate/houses-&-properties/${_id}`}
+          className="property-card"
+        >
           <div className="relative w-full h-[60%] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
               {type || "Type"}
