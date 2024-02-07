@@ -13,18 +13,14 @@ export const authOptions = {
     Credentials({
       async authorize(credentials) {
         await connectDB();
-        // Add logic here to look up the user from the credentials supplied
         const { email, password } = credentials;
         const user = await Users.find({ email });
         if (user) {
-          // Any object returned will be saved in `user` property of the JWT
-          const passwordMatch = bcrypt.compare(password, user.password);
+          const passwordMatch = await bcrypt.compare(password, user.password);
           if (passwordMatch) return user;
           return null;
         } else {
-          // If you return null then an error will be displayed advising the user to check their details.
           return null;
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
       },
     }),
