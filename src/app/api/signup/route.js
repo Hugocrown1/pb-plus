@@ -7,8 +7,9 @@ import { NextResponse } from "next/server";
 export async function POST(request) {
   try {
     await connectDB();
-    const { email, password, name, phone } = request.body;
-    const user = await Users.find({ email });
+    const { email, password, name, phone } = await request.json();
+    console.log(password)
+    const user = await Users.findOne({ email });
     if (!user) {
       const hashedPassword = await bcrypt.hash(password, 10);
       const newUser = await Users.create({
