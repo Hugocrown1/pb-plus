@@ -122,7 +122,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white max-w-[395px] mx-auto h-[430px] shadow-md rounded-lg overflow-hidden
+    @apply flex flex-col bg-white max-w-[395px] min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
 }
 
 .error-message {
@@ -144,7 +144,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio span {
-  @apply text-xl text-gray-500 font-medium 
+  @apply text-xl text-gray-500 font-medium transition-colors
 }
 
 .property-zone-radio input[type="radio"] {
@@ -156,7 +156,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio div {
-  @apply h-[3px] w-[70%] rounded-md bg-transparent mx-auto my-1
+  @apply h-[3px] w-[0px] rounded-md bg-[#30725C] mx-auto my-1 transition-all
 }
 
 .property-zone-radio input[type="radio"]:checked + span{
@@ -164,7 +164,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio input[type="radio"]:checked + span + div{
-  @apply bg-[#30725C]
+  @apply  w-[70%]
 }
 
 
