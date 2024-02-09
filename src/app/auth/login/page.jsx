@@ -1,13 +1,17 @@
 "use client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const LoginPage = () => {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    await signIn("credentials", { email, password, redirect: false });
+    router.push("/");
   };
 
   return (

@@ -1,20 +1,24 @@
 "use client";
+import axios from "axios";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 const RegistrationPage = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const router = useRouter();
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    phone: "",
+  });
 
-  const handleRegister = () => {
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Age:", age);
-    console.log("Address:", address);
-    console.log("Phone:", phone);
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const newUser = await axios.post("/api/signup", {
+      ...data,
+    });
+    router.push("/auth/login");
   };
 
   return (
@@ -28,8 +32,10 @@ const RegistrationPage = () => {
           <input
             type="text"
             id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={data.name}
+            onChange={(e) =>
+              setData((prevData) => ({ ...prevData, name: e.target.value }))
+            }
             className="px-4 py-2 border rounded-md"
             required
           />
@@ -40,44 +46,38 @@ const RegistrationPage = () => {
           <input
             type="email"
             id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={data.email}
+            onChange={(e) =>
+              setData((prevData) => ({ ...prevData, email: e.target.value }))
+            }
             className="px-4 py-2 border rounded-md"
             required
           />
 
           <label className="text-xl" htmlFor="age">
-            Edad:
+            Teléfono:
           </label>
           <input
             type="number"
-            id="age"
-            value={age}
-            onChange={(e) => setAge(e.target.value)}
+            id="phone"
+            value={data.phone}
+            onChange={(e) =>
+              setData((prevData) => ({ ...prevData, phone: e.target.value }))
+            }
             className="px-4 py-2 border rounded-md"
             required
           />
 
           <label className="text-xl" htmlFor="address">
-            Dirección:
+            Contraseña:
           </label>
           <input
-            type="text"
-            id="address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="px-4 py-2 border rounded-md"
-            required
-          />
-
-          <label className="text-xl" htmlFor="phone">
-            Teléfono:
-          </label>
-          <input
-            type="text"
-            id="phone"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            type="password"
+            id="password"
+            value={data.password}
+            onChange={(e) =>
+              setData((prevData) => ({ ...prevData, password: e.target.value }))
+            }
             className="px-4 py-2 border rounded-md"
             required
           />
