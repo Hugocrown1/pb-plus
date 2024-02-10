@@ -1,4 +1,3 @@
-
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -38,6 +37,8 @@ const Header = () => {
   const setHeaderStyle = (path) => {
     if (path.includes("real-estate")) {
       return "theme-real-estate";
+    } else if (path.includes("legal")) {
+      return "theme-legal";
     } else {
       return "";
     }
@@ -100,4 +101,3 @@ const Header = () => {
 };
 
 export default Header;
-
