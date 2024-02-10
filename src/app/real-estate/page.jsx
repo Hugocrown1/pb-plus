@@ -18,7 +18,7 @@ const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 export default function Page() {
   return (
     <main className={`bg-[#f5f3f4] container-xl pt-[50px] ${roboto.className}`}>
-      <section className="flex flex-row w-full py-12 gap-8 ">
+      <section className="flex flex-row w-full pt-12 gap-8 ">
         <div className="flex flex-col text-left w-[45%]">
           <h1 className="text-[#0A100D] text-left text-[90px] leading-tight">
             PB+ REAL ESTATE
@@ -29,7 +29,7 @@ export default function Page() {
             reiciendis veritatis cum tempora
           </p>
           <Link
-            href={"/real-estate"}
+            href={"#services"}
             className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#30725C] hover:bg-[#214d3e]  text-center"
           >
             Take a look
@@ -66,7 +66,10 @@ export default function Page() {
         </div>
       </section>
 
-      <section className="flex flex-col w-full my-8 items-center">
+      <section
+        id="services"
+        className="flex flex-col w-full pt-[60px] mb-8 items-center"
+      >
         <h1>We provide A Lot of Services</h1>
         <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

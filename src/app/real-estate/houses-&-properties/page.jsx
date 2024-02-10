@@ -8,7 +8,7 @@ import PropertiesDisplay from "@/components/PropertiesDisplay";
 const page = () => {
   return (
     <main className={`bg-[#f5f3f4] container-xl pt-[50px] ${roboto.className}`}>
-      <section className="flex flex-col py-12 items-center">
+      <section className="flex flex-col pt-12 items-center">
         <h1 className="text-[#0A100D] text-center text-[90px] leading-tight">
           The Best Houses & Properties Just For You
         </h1>
@@ -18,7 +18,7 @@ const page = () => {
           reiciendis veritatis cum tempora
         </p>
         <Link
-          href={"/real-estate"}
+          href={"#properties"}
           className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#30725C] hover:bg-[#214d3e]  text-center"
         >
           Pricing
@@ -70,7 +70,10 @@ const page = () => {
           </div>
         </div>
       </section>
-      <section className="flex flex-col items-center text-center">
+      <section
+        id="properties"
+        className="flex flex-col items-center pt-12 mb-8 text-center"
+      >
         <h1>We Help You Make Better Deals</h1>
         <p className="text-[#5e5e5e] text-center font-medium text-lg w-[900px] mb-8">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
