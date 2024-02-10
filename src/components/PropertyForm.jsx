@@ -79,7 +79,7 @@ const PropertyForm = ({
         coverImage: propertyImages[0],
         images: propertyImages,
       });
-      router.push("/real-estate/property/" + _id);
+      router.push("/real-estate/houses-&-properties/" + _id);
     }
   };
 
@@ -257,7 +257,11 @@ const PropertyForm = ({
             />
             <div className="flex w-full justify-between mt-8">
               <Link
-                href={_id ? "/real-estate/property/" + _id : "/real-estate"}
+                href={
+                  _id
+                    ? "/real-estate/houses-&-properties/" + _id
+                    : "/real-estate"
+                }
                 className="primary-button alternative-red-button  "
               >
                 Cancel
@@ -269,7 +273,7 @@ const PropertyForm = ({
           </form>
         </div>
       </section>
-      <section className="w-[20%] flex flex-col ">
+      <section className="w-[30%] flex flex-col ">
         <h1 className="text-left text-[42px]">Preview</h1>
         <PropertyCard {...values} coverImage={previewImages[0]} />
       </section>

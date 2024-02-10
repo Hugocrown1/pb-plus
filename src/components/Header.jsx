@@ -1,3 +1,4 @@
+
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -37,8 +38,6 @@ const Header = () => {
   const setHeaderStyle = (path) => {
     if (path.includes("real-estate")) {
       return "theme-real-estate";
-    } else if (path.includes("legal")) {
-      return "theme-legal";
     } else {
       return "";
     }
@@ -59,14 +58,14 @@ const Header = () => {
   // window.addEventListener("scroll", setFixed);
 
   return (
-    <header className={headerTheme}>
+    <header className={`${headerTheme}`}>
       <div
-        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full`}
+        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
       >
         <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
           <Link
             href={"/"}
-            className="text-[var(--color-text-primary)] font-semibold text-3xl flex items-center"
+            className="text-[var(--color-logo)] font-semibold text-3xl flex items-center"
           >
             PB+
           </Link>
@@ -74,7 +73,7 @@ const Header = () => {
             <nav className="flex z-20">
               <ul className="flex flex-row items-center">
                 {routes.map((route, index) => (
-                  <li key={index} className="h-full">
+                  <li key={index} className="h-[90%]">
                     <Link
                       href={route.route}
                       className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4"
@@ -88,7 +87,7 @@ const Header = () => {
             <div className="relative flex  w-[250px] h-full ">
               <UserMenu />
               <div
-                className={`absolute w-[5000px] 
+                className={`absolute w-[5000px] border-b-2 border-[var(--color-header-border)]
                   bg-[var(--color-secondary)]
                  transition-colors h-full`}
               ></div>
@@ -101,3 +100,4 @@ const Header = () => {
 };
 
 export default Header;
+
