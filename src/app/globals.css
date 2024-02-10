@@ -43,6 +43,7 @@
     --color-text-secondary: #FAFAFA;
     --color-border: #FAFAFA;
     --color-border-hover: #aaaaaa49;
+    --color-header-border: transparent;
     
   }
 }
