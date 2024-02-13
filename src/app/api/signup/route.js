@@ -8,7 +8,7 @@ export async function POST(request) {
   try {
     await connectDB();
     const { email, password, name, phone } = await request.json();
-    console.log(password)
+    console.log(password);
     const user = await Users.findOne({ email });
     if (!user) {
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -16,11 +16,11 @@ export async function POST(request) {
         email,
         password: hashedPassword,
         name,
-        phone, 
+        phone,
       });
       return NextResponse.json(newUser);
     }
-    return NextResponse.json("Correo electrónico ya utilizado", {
+    return NextResponse.json("Correo electrónico ya utilizado.", {
       status: 500,
     });
   } catch (error) {

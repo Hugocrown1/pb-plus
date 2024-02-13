@@ -28,10 +28,8 @@ export const authOptions = {
           if (passwordMatch) {
             return user;
           }
-          return null;
-        } else {
-          return null;
         }
+        throw new Error("Correo o contraseña incorrectos.");
       },
     }),
     GoogleProvider({

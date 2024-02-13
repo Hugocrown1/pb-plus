@@ -12,22 +12,28 @@ const RegistrationPage = () => {
     password: "",
     phone: "",
   });
+  const [error, setError] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    const newUser = await axios.post("/api/signup", {
-      ...data,
-    });
-    router.push("/auth/login");
+    try {
+      const response = await axios.post("/api/signup", {
+        ...data,
+      });
+      router.push("/auth/login");
+    } catch (error) {
+      setError(error.response.data);
+    }
   };
 
   return (
     <section className="flex items-center justify-center h-screen bg-black/10 w-full">
       <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-3xl font-bold mb-4">Sign up</h2>
-        <form className="flex flex-col gap-4">
+        {error && <h3 className="bg-red-400 px-4 py-2 rounded-md">{error}</h3>}
+        <form className="flex flex-col gap-4" onSubmit={handleRegister}>
           <label className="text-xl" htmlFor="name">
-            Nombre:
+            Name:
           </label>
           <input
             type="text"
@@ -41,7 +47,7 @@ const RegistrationPage = () => {
           />
 
           <label className="text-xl" htmlFor="email">
-            Correo Electrónico:
+            Email:
           </label>
           <input
             type="email"
@@ -55,7 +61,7 @@ const RegistrationPage = () => {
           />
 
           <label className="text-xl" htmlFor="age">
-            Teléfono:
+            Phone:
           </label>
           <input
             type="number"
@@ -69,7 +75,7 @@ const RegistrationPage = () => {
           />
 
           <label className="text-xl" htmlFor="address">
-            Contraseña:
+            Password:
           </label>
           <input
             type="password"
@@ -81,14 +87,11 @@ const RegistrationPage = () => {
             className="px-4 py-2 border rounded-md"
             required
           />
-
-          <button
-            type="button"
-            onClick={handleRegister}
+          <input
+            type="submit"
+            value={"Sign up"}
             className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-full transition-colors bg-[#F6AA1C] text-black hover:bg-[#FFC65A] hover:border-[#F6AA1C]"
-          >
-            Sign up
-          </button>
+          ></input>
         </form>
         <div className="flex flex-row w-full items-center my-2">
           <hr className="w-full h-0.5 border-t-0 bg-slate-600/70 opacity-100 dark:opacity-50" />
