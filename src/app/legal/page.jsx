@@ -1,18 +1,7 @@
 import { Roboto } from "next/font/google";
 import Link from "next/link";
-import {
-  IconGavel,
-  IconHeartHandshake,
-  IconHomeCog,
-  IconTie,
-  IconGrave2,
-  IconFiles,
-  IconQuestionMark,
-  IconPlus,
-  IconBriefcase,
-  IconUsersGroup,
-  
-} from "@tabler/icons-react";
+import Image from "next/image";
+import { IconGavel, IconHeartHandshake, IconTie } from "@tabler/icons-react";
 import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
 
@@ -20,26 +9,26 @@ const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
   return (
-    <main className={`bg-[#f5f3f4] ${roboto.className}`}>
+    <main className={`bg-white ${roboto.className}`}>
       <section className="flex w-full">
-        <div className="relative flex items-center justify-center h-[700px] bg-black/10 w-full ">
+        <div className="relative flex items-center justify-center h-[770px] bg-black/10 w-full ">
           <div className="flex flex-col gap-4 text-white text-left z-10 w-3/4">
             <p className="text-[#ffffff] text-[100px] leading-tight">
               PB+ LEGAL
             </p>
             <p className="text-2xl">
-            The first foundation of justice is not to hurt anyone
+              The first foundation of justice is not to hurt anyone
             </p>
             <div className="flex w-full gap-12 text-xl justify-start items-start font-medium">
               <Link
                 href={"#contactus"}
-                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#D3AC2B] hover:bg-[#d3ac2bbe]  text-center"
+                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
               >
                 Contact Us
               </Link>
               <Link
                 href={"#learnmore"}
-                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#D3AC2B] hover:bg-[#d3ac2bbe]  text-center"
+                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
               >
                 Learn More
               </Link>
@@ -52,121 +41,169 @@ const Page = () => {
           />
         </div>
       </section>
-      <section 
-      id="learnmore"
-      className="flex flex-col w-full my-8 items-center">
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
-          WHY CHOOSE US
-        </p>
-        <h1>Why Choose Us To Handle Your Case</h1>
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
-        PB+ Law Group is a Punta Banda, Baja California Employment Law Firm
-        </p>
-        <div className="grid grid-cols-3 grid-rows-1 gap-3 w-[1100px] h-[275px]">
-          <LegalCard
-            href={"/"}
-            title={"Experience"}
-            icon={<IconTie size={70} color="#D3AC2B" />}
+
+      <section className="w-[1100px] h-[600px] mx-auto my-16 flex justify-center pt-16">
+        <div className="w-[60%] text-start">
+          <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
+          <p className="text-3xl pb-8">About Us</p>
+          <p className="text-xl pb-8">PB+ Legal Law Firm</p>
+          <p className="text-[#5e5e5e] font-medium text-lg mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum.
+          </p>
+
+          <Link
+            href={"#contactus"}
+            className="px-4 py-2 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
           >
-            Our decades of experience, honed our legal process so that we are best prepared for any and all case developments.
-          </LegalCard>
-          <LegalCard
-            href={"/"}
-            title={"Commitment"}
-            icon={<IconHeartHandshake size={70} color="#D3AC2B" />}
-          >
-            Our firm’s commitment to professionalism, civility, and open and honest communication allows us to provide our clients with the highest level of professional service.
-          </LegalCard>
-          <LegalCard
-            href={"/"}
-            title={"Results"}
-            icon={<IconGavel size={70} color="#D3AC2B" />}
-          >
-            Our law office will persistently yet speedily handle your case. While we can't control the speed of the court's agenda, we will work to move your case fast
-          </LegalCard>
-          
+            📧 FREE CONSULTATION
+          </Link>
         </div>
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center mt-16">
-          SERVICES
-        </p>
-        <h1>Our Areas of Practice</h1>
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
-        Experienced, Knowledgeable, Dedicated and Accessible
-        </p>
-        <div className="grid grid-cols-4 grid-rows-2 gap-3 w-[1100px] h-[550px] ">
-        <ServiceLegalCard
+        <div className="w-[40%] relative col-span-2 row-span-3 rounded-3xl overflow-hidden">
+          <Image
+            src="/assets/legalservices.jpg"
+            alt="photo"
+            layout="fill"
+            objectFit="cover"
+          />
+        </div>
+      </section>
+
+      <section className="bg-gray-200 w-full h-[300px] flex justify-center items-center">
+        <div className="flex w-[1100px] my-16">
+          <div className="mx-3">
+            <LegalCard
+              title={"Experience"}
+              icon={<IconTie size={70} color="#D3AC2B" />}
+            >
+              Our decades of experience, honed our legal process so that we are
+              best prepared for any and all case developments.
+            </LegalCard>
+          </div>
+          <div className="mx-3">
+            <LegalCard
+              title={"Commitment"}
+              icon={<IconHeartHandshake size={70} color="#D3AC2B" />}
+            >
+              Our firm’s commitment to professionalism, civility, and open and
+              honest communication allows us to provide our clients with the
+              highest level of professional service.
+            </LegalCard>
+          </div>
+          <div className="mx-3">
+            <LegalCard
+              title={"Results"}
+              icon={<IconGavel size={70} color="#D3AC2B" />}
+            >
+              Our law office will persistently yet speedily handle your case.
+              While we can't control the speed of the court's agenda, we will
+              work to move your case fast.
+            </LegalCard>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="learnmore"
+        className="w-[1100px] h-[600px] mx-auto my-16 flex justify-center pt-16"
+      >
+        <div className="w-[40%] text-start ">
+          <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
+          <p className="text-3xl pb-8">Our Practice Areas</p>
+
+          <p className="text-[#5e5e5e] font-medium text-lg mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <Image
+            src="/assets/lawyers.jpg"
+            width={400}
+            height={400}
+            alt="services photo"
+            className="rounded-md"
+          />
+        </div>
+
+        <div className="w-[60%] grid grid-cols-2 grid-rows-4 gap-3  h-[550px] ">
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Inmigration Services"}
-            icon={<IconFiles size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Property Regularization"}
-            icon={<IconHomeCog size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Property Acquisition"}
-            icon={<IconHomeCog size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Court Representation"}
-            icon={<IconBriefcase size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
-            href={"/legal/services"}
-            title={"Legal Consulting"}
-            icon={<IconQuestionMark size={70} color="#D3AC2B" />}
-          >
-            
-          </ServiceLegalCard><ServiceLegalCard
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard href={"/legal/services"} title={"Legal Consulting"}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Formation Of Companies"}
-            icon={<IconUsersGroup size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
             href={"/legal/services"}
             title={"Funeral Arrangements"}
-            icon={<IconGrave2 size={70} color="#D3AC2B" />}
           >
-            
-          </ServiceLegalCard><ServiceLegalCard
-           href={"/legal/services"}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
+          </ServiceLegalCard>
+          <ServiceLegalCard
+            href={"/legal/services"}
             title={"Other Legal Services"}
-            icon={<IconPlus size={70} color="#D3AC2B" />}
           >
-            
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
+            tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
         </div>
+      </section>
 
-        <p id="contactus" className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center mt-16">
-        GET YOUR FREE CONSULTATION TODAY
-        </p>
+      <section id="contactus" className="bg-gray-200 w-full h-[700px] mt-32">
+        <div className="w-[1100px] h-[550px] mx-auto  flex justify-center bg-gray-200 my-32 pt-32">
+          <div className="w-[30%] text-start">
+            <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
+            <p className="text-3xl pb-8">Contact Us</p>
 
-        <div className="flex bg-[#30373F] w-[1100px] rounded-md">
-          <img
-            src="/assets/legal-consultation.jpg"
-            alt=""
-            className="w-[50%] rounded-md "
-          />
-
-          <div className="w-[50%]">
-            <p className="text-white font-medium text-3xl text-center mt-16">
-              Need Legal Advice?
+            <p className="text-[#5e5e5e] font-medium text-lg mb-4">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
+          </div>
+          <div className="w-[70%]">
             <form
-              
               action="/enviar-consulta"
               method="post"
-              className=" mx-auto bg-[#30373F] p-6 rounded-md shadow-md"
+              className="mx-auto  p-6 rounded-md "
             >
-              <label htmlFor="nombre" className="block text-white  mb-2">
+              <label htmlFor="nombre" className="block text-gray-800   mb-2">
                 Nombre:
               </label>
               <input
@@ -177,7 +214,10 @@ const Page = () => {
                 className="w-full p-2 border rounded-md"
               />
 
-              <label htmlFor="correo" className="block text-white  mt-4 mb-2">
+              <label
+                htmlFor="correo"
+                className="block text-gray-800  mt-4 mb-2"
+              >
                 Correo electrónico:
               </label>
               <input
@@ -188,7 +228,10 @@ const Page = () => {
                 className="w-full p-2 border rounded-md"
               />
 
-              <label htmlFor="telefono" className="block text-white  mt-4 mb-2">
+              <label
+                htmlFor="telefono"
+                className="block text-gray-800   mt-4 mb-2"
+              >
                 Teléfono:
               </label>
               <input
@@ -198,7 +241,10 @@ const Page = () => {
                 className="w-full p-2 border rounded-md"
               />
 
-              <label htmlFor="mensaje" className="block text-white  mt-4 mb-2">
+              <label
+                htmlFor="mensaje"
+                className="block text-gray-800   mt-4 mb-2"
+              >
                 Mensaje:
               </label>
               <textarea
@@ -211,7 +257,7 @@ const Page = () => {
 
               <button
                 type="submit"
-                className="mt-4 bg-[#D3AC2B] text-white p-2 rounded-md hover:bg-[#d3ac2bbe]"
+                className="my-1 px-4 py-2 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
               >
                 Enviar Consulta
               </button>
