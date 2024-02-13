@@ -25,7 +25,7 @@ const LoginPage = () => {
 
   return (
     <section className="flex items-center justify-center h-screen bg-black/10 w-full">
-      <div className="flex flex-col gap-4 bg-white p-8 rounded-lg shadow-lg">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
         <h2 className="text-3xl font-bold mb-4">Login</h2>
         {error && <h3 className="bg-red-400 px-4 py-2 rounded-md">{error}</h3>}
         <form className="flex flex-col gap-4" onSubmit={handleLogin}>
@@ -56,7 +56,7 @@ const LoginPage = () => {
           <input
             type="submit"
             value={"Login"}
-            className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors bg-[#F6AA1C] text-black hover:bg-[#FFC65A] hover:border-[#F6AA1C] self-center"
+            className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-full transition-colors bg-[#F6AA1C] text-black hover:bg-[#FFC65A] hover:border-[#F6AA1C]"
           ></input>
         </form>
       </div>

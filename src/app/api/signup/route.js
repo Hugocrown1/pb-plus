@@ -8,7 +8,6 @@ export async function POST(request) {
   try {
     await connectDB();
     const { email, password, name, phone } = await request.json();
-    console.log(password);
     const user = await Users.findOne({ email });
     if (!user) {
       const hashedPassword = await bcrypt.hash(password, 10);
