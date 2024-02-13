@@ -19,6 +19,7 @@
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "react": "^18",
+    "react-content-loader": "^6.2.1",
     "react-dom": "^18",
     "react-sortablejs": "^6.1.4",
     "sortablejs": "^1.15.2",
