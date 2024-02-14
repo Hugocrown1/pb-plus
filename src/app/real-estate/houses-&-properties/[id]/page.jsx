@@ -55,7 +55,9 @@ const page = () => {
             return (
               <div
                 key={index}
-                className={`relative ${index === 0 && "col-span-2 row-span-2"}`}
+                className={`relative ${
+                  index === 0 && "col-span-4 row-span-2"
+                } rounded-lg overflow-hidden`}
               >
                 <Image
                   src={image}
@@ -85,14 +87,14 @@ const page = () => {
               <div className="flex flex-wrap items-center gap-2">
                 <Link
                   href={`/real-estate/edit-property/${propertyInfo._id}`}
-                  className="primary-button red-button flex-wrap"
+                  className="real-estate-button"
                 >
                   <IconPencil />
                   <p>Edit</p>
                 </Link>
                 <button
                   onClick={deleteProperty}
-                  className="primary-button alternative-red-button  flex-wrap"
+                  className="real-estate-button-outline"
                 >
                   <IconTrash />
                   <p>Delete</p>
@@ -100,19 +102,19 @@ const page = () => {
               </div>
             )}
           </div>
-          <p className="text-left text-[38px] text-[#621708] font-semibold -mt-3">
+          <p className="text-left text-[38px] text-[#30725c] font-semibold -mt-3">
             ${propertyInfo.price.toLocaleString()}
           </p>
           <div className="flex flex-wrap gap-2">
             <div className="flex flex-wrap items-center gap-1">
-              <IconBathFilled />
+              <IconBathFilled color="#30725c" />
               <p className="font-semibold ">
                 {propertyInfo.bathrooms} bathrooms
               </p>
             </div>
             <p className="text-lg">·</p>
             <div className="flex flex-wrap items-center gap-1">
-              <IconBedFilled />
+              <IconBedFilled color="#30725c" />
               <p className="font-semibold ">{propertyInfo.bedrooms} bedrooms</p>
             </div>
           </div>

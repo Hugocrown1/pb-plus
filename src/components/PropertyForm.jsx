@@ -129,7 +129,7 @@ const PropertyForm = ({
         <h1 className="text-left text-[42px]">
           {_id ? "Edit property" : "New property"}
         </h1>
-        <div className="bg-white w-full flex p-4 shadow-md">
+        <div className="bg-white w-full flex p-4 shadow-md rounded-xl">
           <form onSubmit={saveProperty}>
             <h3>Basic information</h3>
             <FormInput
@@ -255,18 +255,21 @@ const PropertyForm = ({
               value={values.price}
               onChange={onChange}
             />
-            <div className="flex w-full justify-between mt-8">
+            <div className="flex w-full justify-between items-end mt-2">
               <Link
                 href={
                   _id
                     ? "/real-estate/houses-&-properties/" + _id
                     : "/real-estate"
                 }
-                className="primary-button alternative-red-button  "
+                className="real-estate-button-outline"
               >
                 Cancel
               </Link>
-              <button type="submit" className="primary-button red-button">
+              <button
+                type="submit"
+                className="px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#40896f] hover:bg-[#30725c]  text-center"
+              >
                 Continue
               </button>
             </div>

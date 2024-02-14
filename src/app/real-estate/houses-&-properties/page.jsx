@@ -31,7 +31,7 @@ const page = () => {
                 alt="real estate photo"
                 fill={true}
                 sizes="(min-width: 1120px) 500px"
-                className="object-cover object-left"
+                className="object-cover object-left "
               />
             </div>
           </div>

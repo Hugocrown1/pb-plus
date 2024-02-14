@@ -91,7 +91,7 @@ export default function Page() {
           </ServiceCard>
 
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/housekeeping"}
             title={"Housekeeping"}
             icon={<IconSparkles size={70} color="#30725C" />}
           >
