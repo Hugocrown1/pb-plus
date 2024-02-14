@@ -113,11 +113,11 @@ form {
 }
 
 h3 {
-    @apply font-semibold mb-2
+    @apply font-medium mb-2
 }
 
 h2 {
-    @apply text-[32px] font-medium text-center text-[#0A100D]
+    @apply text-[32px] text-center text-[#0A100D]
 }
 
 
