@@ -45,8 +45,8 @@ const PropertyCard = ({
           href={`/real-estate/houses-&-properties/${_id}`}
           className="flex flex-col h-full"
         >
-          <div className="relative w-full h-[58%] bg-gray-300">
-            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
+          <div className="relative w-full h-[60%] bg-gray-300">
+            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
               {type || "Type"}
             </div>
             {coverImage && (
@@ -57,9 +57,9 @@ const PropertyCard = ({
               />
             )}
           </div>
-          <div className="flex flex-col  px-4 my-auto">
+          <div className="flex flex-col px-4 py-1 my-auto">
             <div className="flex flex-row items-center gap-1">
-              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis">
+              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
                 ${numberFormatter(price)}
               </p>
               {type === "Rental" && <p className="text-[#707070]">/month</p>}
@@ -78,7 +78,7 @@ const PropertyCard = ({
               <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
                 <IconBath /> <p>{bathrooms} Baths</p>
               </div>
-              <div className="flex flex-row gap-1 items-center  bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
                 <IconBed /> <p>{bedrooms} Beds</p>
               </div>
             </div>
@@ -86,8 +86,8 @@ const PropertyCard = ({
         </Link>
       ) : (
         <>
-          <div className="relative w-full h-[58%] bg-gray-300">
-            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[12%] translate-y-[20%]">
+          <div className="relative w-full h-[60%] bg-gray-300">
+            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
               {type || "Type"}
             </div>
             {coverImage && (
@@ -98,9 +98,9 @@ const PropertyCard = ({
               />
             )}
           </div>
-          <div className="flex flex-col px-4 my-auto">
+          <div className="flex flex-col px-4 py-1 my-auto">
             <div className="flex flex-row items-center gap-1">
-              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis">
+              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
                 ${numberFormatter(price)}
               </p>
               {type === "Rental" && <p className="text-[#707070]">/month</p>}

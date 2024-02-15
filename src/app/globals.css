@@ -47,6 +47,36 @@
   }
 }
 
+
+/* .fade-in {
+  animation: fadeInDown ease 2s;
+ 
+  
+
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInDown {
+  0% {
+     opacity: 0;
+     transform: translateY(-40px);
+  }
+  100% {
+     opacity: 1;
+     transform: translateY(0);
+  }
+}  */
+
+.real-estate-button {
+  @apply px-4 py-3 flex justify-center items-center rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors h-[52px] bg-[#40896f] hover:bg-[#30725c]  text-center
+}
+
+
+.real-estate-button-outline {
+  @apply px-4 py-3 flex justify-center items-center rounded-lg font-semibold text-lg w-[190px] h-[52px] border-2 border-[#255748]   text-[#255748] transition-colors  bg-transparent hover:bg-[#f1f8f5]  text-center
+}
+
 .primary-button {
     @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] flex items-center justify-center
 }
@@ -86,11 +116,11 @@ form {
 }
 
 h3 {
-    @apply font-semibold mb-2
+    @apply font-medium mb-2
 }
 
 h2 {
-    @apply text-[32px] font-medium text-center text-[#0A100D]
+    @apply text-[32px] text-center text-[#0A100D]
 }
 
 
@@ -131,7 +161,11 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto
+    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto px-2
+}
+
+.container-2xl {
+  @apply flex flex-col max-w-[1520px] min-h-[800px] mx-auto px-2
 }
 
 .menu-container {

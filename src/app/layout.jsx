@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import { Providers } from "./providers";
 import Footer from "@/components/Footer";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "400" });
+const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export const metadata = {
   title: "PB+",
