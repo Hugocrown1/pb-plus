@@ -1,53 +1,21 @@
-"use client";
-import Spinner from "@/components/Spinner";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
 import {
   IconBath,
-  IconBathFilled,
   IconBed,
-  IconBedFilled,
   IconPencil,
   IconPhoneFilled,
-  IconTrash,
 } from "@tabler/icons-react";
-import axios from "axios";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { getProperty } from "@/lib/properties";
+import DeleteButton from "./DeleteButton";
 
-const page = () => {
-  const params = useParams();
-  const id = params.id;
-  const { data: session } = useSession();
-  const router = useRouter();
+const page = async ({ params }) => {
+  const { id } = params;
 
-  const [propertyInfo, setPropertyInfo] = useState(null);
-
-  useEffect(() => {
-    if (!id) {
-      return;
-    }
-
-    axios.get("/api/properties/" + id).then((res) => {
-      setPropertyInfo(res.data);
-    });
-  }, [id]);
-
-  const deleteProperty = async () => {
-    await axios.delete("/api/properties/" + propertyInfo._id);
-    router.push("/real-estate");
-  };
-
-  if (!propertyInfo) {
-    return (
-      <main className="bg-[#f5f3f4] min-h-[800px] flex items-center justify-center ">
-        <div className="w-[400px] my-12 h-[400px]">
-          <Spinner />
-        </div>
-      </main>
-    );
-  }
+  const session = await auth();
+  const propertyInfo = await getProperty(id);
 
   return (
     <main className="container-2xl pt-[60px]">
@@ -87,13 +55,7 @@ const page = () => {
                     <IconPencil />
                     <p>Edit</p>
                   </Link>
-                  <button
-                    onClick={deleteProperty}
-                    className="real-estate-button-outline"
-                  >
-                    <IconTrash />
-                    <p>Delete</p>
-                  </button>
+                  <DeleteButton id={id} />
                 </div>
               )}
             </div>
