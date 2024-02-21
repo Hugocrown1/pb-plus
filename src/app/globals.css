@@ -35,15 +35,16 @@
 
   .theme-legal {
     --color-logo: #cba557;
-    --color-primary: transparent;
+    --color-primary: #202225;
     --color-primary-accent: #cba557;
-    --color-secondary: transparent;
+    --color-secondary: #202225;
     --color-accent: #cba557;
     --color-accent-hover: #c29029;
     --color-text-primary: #FAFAFA;
     --color-text-secondary: #FAFAFA;
     --color-border: #FAFAFA;
-    
+    --color-border-hover: #aaaaaa49;
+    --color-header-border: #aaaaaa49;
   }
 }
 
