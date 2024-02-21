@@ -1,82 +1,96 @@
 import { Roboto } from "next/font/google";
 import Link from "next/link";
+import { Noto_Serif } from "next/font/google";
 import Image from "next/image";
 import { IconGavel, IconHeartHandshake, IconTie } from "@tabler/icons-react";
+import ContactForm from "@/components/ContactForm";
 import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
+import Slider from "@/components/Slider/SliderLegal";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
   return (
     <main className={`bg-white ${roboto.className}`}>
-      <section className="flex w-full">
-        <div className="relative flex items-center justify-center h-[770px] bg-black/10 w-full ">
-          <div className="flex flex-col gap-4 text-white text-left z-10 w-3/4">
-            <p className="text-[#ffffff] text-[100px] leading-tight">
-              PB+ LEGAL
-            </p>
-            <p className="text-2xl">
-              The first foundation of justice is not to hurt anyone
-            </p>
-            <div className="flex w-full gap-12 text-xl justify-start items-start font-medium">
-              <Link
-                href={"#contactus"}
-                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
-              >
-                Contact Us
-              </Link>
-              <Link
-                href={"#learnmore"}
-                className="px-6 py-4 mt-4 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
-              >
-                Learn More
-              </Link>
-            </div>
-          </div>
-          <img
-            src="/assets/legalbanner.jpeg"
-            className="absolute  object-cover h-full w-full bg-black grayscale"
-            alt="Background"
-          />
-        </div>
-      </section>
+      
+      <Slider/>
 
-      <section className="w-[1100px] h-[600px] mx-auto my-16 flex justify-center pt-16">
-        <div className="w-[60%] text-start">
+      <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
+        <div className="w-full text-start xl:w-[60%]">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-          <p className="text-3xl pb-8">About Us</p>
-          <p className="text-xl pb-8">PB+ Legal Law Firm</p>
-          <p className="text-[#5e5e5e] font-medium text-lg mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <p className="text-xl xl:text-3xl pb-8 font-semibold">About Us</p>
+          <p className="text-lg xl:text-xl pb-8">PB+ Legal Law Firm</p>
+          <p className="text-[#5e5e5e] font-medium text-sm xl:text-lg mb-4 mr-8 text-justify">
+            PB Plus is born with the intention of re-establishing the order and
+            legality within a community with diverse needs. Our primary aim is
+            to achieve this through the proper implementation of Mexican law
+            while steadfastly adhering to our principles: <br></br> "Procure
+            justice and deliver it to everyone as a natural right."
           </p>
 
           <Link
             href={"#contactus"}
-            className="px-4 py-2 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
+            className="px-4 py-2 rounded-[10px] font-medium text-sm xl:text-lg   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
           >
-            📧 FREE CONSULTATION
+            📧 SCHELUDE A CONSULTATION
           </Link>
         </div>
-        <div className="w-[40%] relative col-span-2 row-span-3 rounded-3xl overflow-hidden">
-          <Image
-            src="/assets/legalservices.jpg"
-            alt="photo"
-            layout="fill"
-            objectFit="cover"
-          />
+        <div className="xl:w-[40%] my-8 grid grid-cols-2 grid-rows-2 gap-4">
+          <div className="relative rounded-sm shadow-md  overflow-hidden">
+            <Image
+              src="/assets/lawyer1.webp"
+              alt="photo"
+              layout="fill"
+              objectFit="cover"
+            />
+            <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
+              <p className="text-white text-center text-sm p-2">
+                Lic. Jeff Bezos
+              </p>
+            </div>
+          </div>
+          <div className="relative rounded-sm shadow-md  overflow-hidden">
+            <Image
+              src="/assets/lawyer2.jpg"
+              alt="photo"
+              layout="fill"
+              objectFit="cover"
+            />
+            <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
+              <p className="text-white text-center text-sm p-2">
+                Lic. Saul Goodman
+              </p>
+            </div>
+          </div>
+          <div className="relative rounded-sm shadow-md  overflow-hidden">
+            <Image
+              src="/assets/lawyer3.jpeg"
+              alt="photo"
+              layout="fill"
+              objectFit="cover"
+            />
+            <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
+              <p className="text-white text-center text-sm p-2">Lic. Lincoln</p>
+            </div>
+          </div>
+          <div className="relative rounded-sm shadow-md overflow-hidden">
+            <Image
+              src="/assets/logojusticia.jpg"
+              alt="photo"
+              width={250}
+              height={300}
+              layout="fixed"
+              objectFit="cover"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="bg-gray-200 w-full h-[300px] flex justify-center items-center">
-        <div className="flex w-[1100px] my-16">
-          <div className="mx-3">
+      <section className="bg-gray-200 w-full flex flex-row justify-center p-4 ">
+        <div className="flex xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-8">
+          <div className="mx-1 w-1/3">
             <LegalCard
               title={"Experience"}
               icon={<IconTie size={70} color="#D3AC2B" />}
@@ -85,7 +99,7 @@ const Page = () => {
               best prepared for any and all case developments.
             </LegalCard>
           </div>
-          <div className="mx-3">
+          <div className="mx-1 w-1/3">
             <LegalCard
               title={"Commitment"}
               icon={<IconHeartHandshake size={70} color="#D3AC2B" />}
@@ -95,7 +109,7 @@ const Page = () => {
               highest level of professional service.
             </LegalCard>
           </div>
-          <div className="mx-3">
+          <div className="mx-1 w-1/3">
             <LegalCard
               title={"Results"}
               icon={<IconGavel size={70} color="#D3AC2B" />}
@@ -107,77 +121,76 @@ const Page = () => {
           </div>
         </div>
       </section>
-
-      <section
-        id="learnmore"
-        className="w-[1100px] h-[600px] mx-auto my-16 flex justify-center pt-16"
-      >
-        <div className="w-[40%] text-start ">
+      <div id="learnmore"></div>
+      <section className="w-full flex flex-col justify-center p-4 xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
+        <div className="w-full xl:w-[40%] text-start">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-          <p className="text-3xl pb-8">Our Practice Areas</p>
+          <p className="text-xl pb-8 xl:text-3xl font-semibold">Our Practice Areas</p>
 
-          <p className="text-[#5e5e5e] font-medium text-lg mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          <p className="text-[#5e5e5e] text-sm xl:text-lg mb-4 ">
+            Explore our extensive range of legal services tailored to meet your
+            specific needs.
           </p>
-          <Image
-            src="/assets/lawyers.jpg"
-            width={400}
-            height={400}
-            alt="services photo"
-            className="rounded-md"
-          />
+          <div className="flex justify-center">
+            <Image
+              src="/assets/lawyers.jpg"
+              width={400}
+              height={400}
+              alt="services photo"
+              className="rounded-md"
+            />
+          </div>
         </div>
 
-        <div className="w-[60%] grid grid-cols-2 grid-rows-4 gap-3  h-[550px] ">
+        <div className="w-full xl:w-[60%] grid grid-cols-2 grid-rows-2 gap-2 h-full">
           <ServiceLegalCard
-            href={"/legal/services"}
-            title={"Inmigration Services"}
+            href={"/legal/immigration-services"}
+            title={"Immigration Services"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/property-regularization"}
             title={"Property Regularization"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/property-acquisition"}
             title={"Property Acquisition"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/court-representation"}
             title={"Court Representation"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
-          <ServiceLegalCard href={"/legal/services"} title={"Legal Consulting"}>
+          <ServiceLegalCard href={"/legal/legal-consulting"} title={"Legal Consulting"}>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/formation-of-companies"}
             title={"Formation Of Companies"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/funeral-arrangements"}
             title={"Funeral Arrangements"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
           <ServiceLegalCard
-            href={"/legal/services"}
+            href={"/legal/other-services"}
             title={"Other Legal Services"}
           >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
@@ -186,85 +199,7 @@ const Page = () => {
         </div>
       </section>
 
-      <section id="contactus" className="bg-gray-200 w-full h-[700px] mt-32">
-        <div className="w-[1100px] h-[550px] mx-auto  flex justify-center bg-gray-200 my-32 pt-32">
-          <div className="w-[30%] text-start">
-            <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-            <p className="text-3xl pb-8">Contact Us</p>
-
-            <p className="text-[#5e5e5e] font-medium text-lg mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-          </div>
-          <div className="w-[70%]">
-            <form
-              action="/enviar-consulta"
-              method="post"
-              className="mx-auto  p-6 rounded-md "
-            >
-              <label htmlFor="nombre" className="block text-gray-800   mb-2">
-                Nombre:
-              </label>
-              <input
-                type="text"
-                id="nombre"
-                name="nombre"
-                required
-                className="w-full p-2 border rounded-md"
-              />
-
-              <label
-                htmlFor="correo"
-                className="block text-gray-800  mt-4 mb-2"
-              >
-                Correo electrónico:
-              </label>
-              <input
-                type="email"
-                id="correo"
-                name="correo"
-                required
-                className="w-full p-2 border rounded-md"
-              />
-
-              <label
-                htmlFor="telefono"
-                className="block text-gray-800   mt-4 mb-2"
-              >
-                Teléfono:
-              </label>
-              <input
-                type="tel"
-                id="telefono"
-                name="telefono"
-                className="w-full p-2 border rounded-md"
-              />
-
-              <label
-                htmlFor="mensaje"
-                className="block text-gray-800   mt-4 mb-2"
-              >
-                Mensaje:
-              </label>
-              <textarea
-                id="mensaje"
-                name="mensaje"
-                rows="4"
-                required
-                className="w-full p-2 border rounded-md"
-              ></textarea>
-
-              <button
-                type="submit"
-                className="my-1 px-4 py-2 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
-              >
-                Enviar Consulta
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
+      <ContactForm />
     </main>
   );
 };
