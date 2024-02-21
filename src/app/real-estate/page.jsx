@@ -10,15 +10,16 @@ import {
   IconHomeEco,
   IconSparkles,
 } from "@tabler/icons-react";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
 import ServiceCard from "@/components/ServiceCard";
+import Slider from "@/components/Slider/Slider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4] container-xl pt-[50px] ${roboto.className}`}>
-      <section className="flex flex-row w-full pt-12 gap-8 ">
+    <main className={`bg-[#f5f3f4]  pt-[50px] ${roboto.className}`}>
+      <Slider />
+      {/* <section className="flex flex-row w-full pt-12 gap-8 ">
         <div className="flex flex-col text-left w-[45%]">
           <h1 className="text-[#0A100D] text-left text-[90px] leading-tight">
             PB+ REAL ESTATE
@@ -64,7 +65,7 @@ export default function Page() {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section
         id="services"
