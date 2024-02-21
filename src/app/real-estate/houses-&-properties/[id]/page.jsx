@@ -12,6 +12,7 @@ import { getProperty } from "@/lib/properties";
 import DeleteButton from "./DeleteButton";
 
 const page = async ({ params }) => {
+  //TODO: Manejo de propiedad no encontrada
   const { id } = params;
 
   const session = await auth();
