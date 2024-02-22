@@ -70,8 +70,8 @@ const Page = () => {
 
   return (
     <main>
-      <main className="bg-[#f5f3f4] py-12">
-        <div className="flex w-full py-4 pl-60 bg-[#323d51]">
+      <main className="bg-[#f5f3f4] ">
+        <div className="flex w-full pt-12 pl-60 bg-[#323d51]">
           <Link
             href={"/"}
             className="px-6  pt-3 rounded-[10px] font-medium text-lg w-[110px]   text-[#FCFFFC] transition-colors   hover:text-[#D3AC2B]   text-center"

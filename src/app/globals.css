@@ -34,17 +34,17 @@
   }
 
   .theme-legal {
-    --color-primary: #3B475C;
-    --color-primary-accent: #184E77;
-    --color-secondary: #0A100D;
-    --color-accent: #184E77;
-    --color-accent-hover: #113753;
+    --color-logo: #cba557;
+    --color-primary: #202225;
+    --color-primary-accent: #cba557;
+    --color-secondary: #202225;
+    --color-accent: #cba557;
+    --color-accent-hover: #c29029;
     --color-text-primary: #FAFAFA;
     --color-text-secondary: #FAFAFA;
     --color-border: #FAFAFA;
     --color-border-hover: #aaaaaa49;
-    --color-header-border: transparent;
-    
+    --color-header-border: #aaaaaa49;
   }
 }
 
@@ -95,6 +95,10 @@
 }
 
 .navbar-real-estate {
+  @apply bg-green-700
+}
+
+.navbar-legal {
   @apply bg-green-700
 }
 

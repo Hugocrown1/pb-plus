@@ -1,32 +1,28 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Link from "next/link";
 
-const ServiceCard = ({ href, title, icon, style }) => {
-  const [isHovered, setIsHovered] = useState(false);
+const ServiceCard = ({ children, href, title }) => {
 
   return (
-    <article
-      className={`group bg-[#FCFFFC] ${style} overflow-hidden text-center shadow-lg hover:bg-[#3B475C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+    <div
+      className={`group bg-[#FCFFFC]  text-center hover:bg-[#cba557] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-md rounded-md`}
+      
     >
       <Link href={href}>
-        <div className="relative flex w-full h-full items-center justify-center text-2xl">
-          <div className="flex flex-col z-10 px-4 items-center justify-center">
-            <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
-              {icon}
-            </div>
-            <p className="font-semibold group-hover:text-white py-4">{title}</p>
+        <div className="relative flex items-center justify-start text-xs">
+          <div className="flex flex-col z-10 px-4 items-start justify-center">
+            <p className="text-sm xl:text-lg group-hover:text-white py-4 text-gray-800">
+              {title}
+            </p>
+            <p className="text-xs xl:text-sm text-start  text-[#5e5e5e]  group-hover:text-white">
+              {children}
+            </p>
           </div>
-          {isHovered && (
-            <div className="absolute inset-y-0 inset-x-0 flex items-end justify-end pr-4 pb-4">
-              <span className="text-white text-xl">&#62;</span>
-            </div>
-          )}
-           </div>
+          
+        </div>
       </Link>
-    </article>
+    </div>
   );
 };
 

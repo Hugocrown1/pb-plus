@@ -7,11 +7,10 @@ export async function connectDB() {
 }
 
 connection.on("connected", () => {
-  console.log("mongoose is connected");
   const Properties = properties;
   const Users = users;
 });
 
 connection.on("error", (err) => {
-  console.log("mongoose is connection error", err);
+  console.log("mongoose connection error", err);
 });
