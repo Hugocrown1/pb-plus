@@ -5,56 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { IconArrowNarrowRight } from "@tabler/icons-react";
 
-const Slider = () => {
-  const dataSlider = [
-    {
-      id: 1,
-      title: "PB+ REAL ESTATE",
-      subtitle:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-
-      source: "/assets/house.jpg",
-      linkTitle: "Take a look",
-      href: "#",
-    },
-    {
-      id: 2,
-      title: "Houses & Properties",
-      subtitle:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-      source: "/assets/house2.webp",
-      linkTitle: "Take a look",
-      href: "#",
-    },
-    {
-      id: 3,
-      title: "House Stitting",
-      subtitle:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-      source: "/assets/house3.jpg",
-      linkTitle: "Take a look",
-      href: "#",
-    },
-    {
-      id: 4,
-      title: "Assesment Services",
-      subtitle:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-      source: "/assets/house4.png",
-      linkTitle: "Take a look",
-      href: "#",
-    },
-    {
-      id: 5,
-      title: "House Keeping",
-      subtitle:
-        " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-      source: "/assets/housekeeping.jpg",
-      linkTitle: "Take a look",
-      href: "#",
-    },
-  ];
-
+const Slider = ({ dataSlider }) => {
   const [slideIndex, setSlideIndex] = useState(1);
 
   const nextSlide = () => {

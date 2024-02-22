@@ -1,5 +1,5 @@
 .container-slider {
-    @apply relative flex items-end justify-center w-full h-[650px] overflow-hidden shadow-md
+    @apply relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md
 }
 
 .slide {
