@@ -6,15 +6,99 @@ import { IconGavel, IconHeartHandshake, IconTie } from "@tabler/icons-react";
 import ContactForm from "@/components/ContactForm";
 import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
-import Slider from "@/components/Slider/SliderLegal";
+import Slider from "@/components/Slider/Slider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
+  const dataSlider = [
+    {
+      id: 1,
+      title: "PB+ LEGAL",
+      subtitle:
+        "The first foundation of justice is not to hurt anyone.  PB Plus is born with the intention of re-establishing the order and legality within a community with diverse needs.",
+
+      source: "/assets/legalbanner.jpeg",
+      linkTitle: "Take a look",
+      href: "#learnmore",
+    },
+    {
+      id: 2,
+      title: "Immigration Services",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/immigrationservices.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/immigration-services",
+    },
+    {
+      id: 3,
+      title: "Property Regularization",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/propertyregularization.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/property-regularization",
+    },
+    {
+      id: 4,
+      title: "Property Acquisition",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/propertyadquisition.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/property-acquisition",
+    },
+    {
+      id: 5,
+      title: "Court Representation",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/courtrepresentation.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/court-representation",
+    },
+    {
+      id: 6,
+      title: "Legal Consulting",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/legalconsulting.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/legal-consulting",
+    },
+    {
+      id: 7,
+      title: "Formation of Companies",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/formationofcompanies.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/formation-of-companies",
+    },
+    {
+      id: 8,
+      title: "Funeral Arrangements",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/funeralarrangements.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/funeral-arrangements",
+    },
+    {
+      id: 9,
+      title: "Other Legal Services",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/otherlegalservices.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/other-services",
+    },
+  ];
   return (
-    <main className={`bg-white ${roboto.className}`}>
-      <Slider />
+    <main className={`bg-white xl:pt-[50px] ${roboto.className}`}>
+      <Slider dataSlider={dataSlider} />
 
       <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
         <div className="w-full text-start xl:w-[60%]">
