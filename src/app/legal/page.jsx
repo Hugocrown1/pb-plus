@@ -14,20 +14,21 @@ const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 const Page = () => {
   return (
     <main className={`bg-white ${roboto.className}`}>
-      
-      <Slider/>
+      <Slider />
 
       <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
         <div className="w-full text-start xl:w-[60%]">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">About Us</p>
           <p className="text-lg xl:text-xl pb-8">PB+ Legal Law Firm</p>
-          <p className="text-[#5e5e5e] font-medium text-sm xl:text-lg mb-4 mr-8 text-justify">
+          <p className="text-[#5e5e5e] text-sm xl:text-lg mb-4 mr-8 text-justify">
             PB Plus is born with the intention of re-establishing the order and
             legality within a community with diverse needs. Our primary aim is
             to achieve this through the proper implementation of Mexican law
-            while steadfastly adhering to our principles: <br></br> "Procure
-            justice and deliver it to everyone as a natural right."
+            while steadfastly adhering to our principles: <br />
+            <span className="font-semibold">
+              "Procure justice and deliver it to everyone as a natural right."
+            </span>
           </p>
 
           <Link
@@ -125,7 +126,9 @@ const Page = () => {
       <section className="w-full flex flex-col justify-center p-4 xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
         <div className="w-full xl:w-[40%] text-start">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-          <p className="text-xl pb-8 xl:text-3xl font-semibold">Our Practice Areas</p>
+          <p className="text-xl pb-8 xl:text-3xl font-semibold">
+            Our Practice Areas
+          </p>
 
           <p className="text-[#5e5e5e] text-sm xl:text-lg mb-4 ">
             Explore our extensive range of legal services tailored to meet your
@@ -171,7 +174,10 @@ const Page = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
-          <ServiceLegalCard href={"/legal/legal-consulting"} title={"Legal Consulting"}>
+          <ServiceLegalCard
+            href={"/legal/legal-consulting"}
+            title={"Legal Consulting"}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
