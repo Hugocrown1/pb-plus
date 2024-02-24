@@ -6,6 +6,7 @@ import PropertyLoader from "./PropertyLoader";
 import { IconError404, IconFileSad, IconSearchOff } from "@tabler/icons-react";
 
 const PropertiesDisplay = () => {
+  // TODO: Refactorizar a server component
   const items = [
     { value: "recentlyAdded", label: "Recently Added" },
     { value: "Rental", label: "The Ejido" },

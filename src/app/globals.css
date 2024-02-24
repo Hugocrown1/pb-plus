@@ -11,7 +11,7 @@
     --color-accent: #F6AA1C;
     --color-accent-hover: #f5c262;
     --color-text-primary: #ffff;
-    --color-text-secondary: #0A100D;
+    --color-text-secondary: #040F0F;
     --color-border: #ffffffe3;
     --color-border-hover: #aaaaaa49;
     --color-header-border: transparent;
@@ -19,17 +19,17 @@
   }
 
   .theme-real-estate {
-    --color-logo: #30725C;
-    --color-primary: #f5f3f4;
-    --color-primary-accent: #30725C;
-    --color-secondary: #f5f3f4;
-    --color-accent: #30725C;
-    --color-accent-hover: #245545;
-    --color-text-primary: #0A100D;
-    --color-text-secondary: #FAFAFA;
-    --color-border: #0b0c0cc7;
-    --color-border-hover: #aaaaaa49;
-    --color-header-border: #aaaaaa49;
+    --color-logo: #f5f3f4;
+    --color-primary: #30725C;
+    --color-primary-accent: #0e0e0e;
+    --color-secondary: #30725C;
+    --color-accent: #FAFAFA;
+    --color-accent-hover: #dddddd;
+    --color-text-primary: #f5f3f4;
+    --color-text-secondary: #040F0F;
+    --color-border: #ffffffc7;
+    --color-border-hover: #fcfcfc41;
+    --color-header-border: #30725c00;
     
   }
 
@@ -154,7 +154,7 @@ textarea {
 }
 
 .menu-trigger {
-    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] text-gray-300 border-gray-500/40 hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer
+    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] text-gray-300 border-white/40 hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer
 }
 
 .dropdown-item {
@@ -229,11 +229,8 @@ input:invalid[focused='true'] {
     position: absolute;
     top: 3.5rem;
     left: 1.4rem;
-    
-    
-    
 
-    background-color: #f5f3f4;
+    background-color: #f5f4f4;
     
     padding-top: 8px;
     padding-bottom: 8px;
@@ -244,6 +241,8 @@ input:invalid[focused='true'] {
 }
 
 .dropdown-menu.active{
+  background-color: #f5f4f4;
+
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
