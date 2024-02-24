@@ -50,7 +50,7 @@ const Header = () => {
                     </Link>
                   </li>
                 ))}
-                <div className="xl:hidden  flex justify-center" onClick={toggleMenu}>
+                <div className="xl:hidden  flex justify-center">
                   <UserMenu />
                 </div>
               </ul>
