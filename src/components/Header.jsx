@@ -32,25 +32,25 @@ const Header = () => {
 
   return (
     <header className={headerTheme}>
-      <div className="bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]">
+      <div className="bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-screen border-b-2 border-[var(--color-header-border)]">
         <div className="relative flex h-[60px] xl:w-[1200px] justify-between px-[15px] mx-auto">
           <Link href={"/"} className="text-[var(--color-logo)] font-semibold text-3xl flex items-center">
             PB+
           </Link>
           <div className="flex gap-2">
-            <div onClick={toggleMenu} className="text-3xl absolute right-8 top-5 cursor-pointer md:hidden">
+            <div onClick={toggleMenu} className="text-3xl absolute right-8 top-5 cursor-pointer xl:hidden">
               {open ? <IconX className="text-white" /> : <IconMenu2 className="text-white" />}
             </div>
             <nav className="flex z-20">
-              <ul className={`md:flex md:items-center bg-[var(--color-primary)] border-b-2 border-[var(--color-header-border)] md:pb-0 absolute md:static md:z-auto left-0 w-full md:w-auto md:pl-0 px-8 ${open ? "top-16" : "top-[-490px]"} `}>
+              <ul className={`xl:flex xl:items-center bg-[var(--color-primary)] border-b-2 border-[var(--color-header-border)] xl:pb-0 absolute xl:static xl:z-auto left-0 w-full xl:w-auto xl:pl-0 px-8 ${open ? "top-16" : "top-[-490px]"} `}>
                 {routes.map((route, index) => (
                   <li key={index} className="h-[90%]">
-                    <Link onClick={toggleMenu} href={route.route} className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4 md:my-0 my-4">
+                    <Link onClick={toggleMenu} href={route.route} className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4 xl:my-0 my-4">
                       {route.name}
                     </Link>
                   </li>
                 ))}
-                <div className="xl:hidden md:hidden flex justify-center" onClick={toggleMenu}>
+                <div className="xl:hidden  flex justify-center" onClick={toggleMenu}>
                   <UserMenu />
                 </div>
               </ul>
