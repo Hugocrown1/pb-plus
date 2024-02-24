@@ -1,97 +1,63 @@
 "use client";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
-
+import { IconX, IconMenu2 } from "@tabler/icons-react";
 import UserMenu from "./UserMenu";
 import { usePathname } from "next/navigation";
 
 const Header = () => {
-  const routes = [
-    {
-      route: "/",
-      name: "HOME",
-    },
-    {
-      route: "/remo",
-      name: "REMO",
-    },
-    {
-      route: "/real-estate",
-      name: "REAL ESTATE",
-    },
-    {
-      route: "/legal",
-      name: "LEGAL",
-    },
-    {
-      route: "/events",
-      name: "COMMUNITY",
-    },
-  ];
-
+  const [open, setOpen] = useState(false);
   const pathname = usePathname();
-
-  // const [fix, setFix] = useState(false);
   const [headerTheme, setHeaderTheme] = useState("");
-
-  const setHeaderStyle = (path) => {
-    if (path.includes("real-estate")) {
-      return "theme-real-estate";
-    } else if (path.includes("legal")) {
-      return "theme-legal";
-    } else {
-      return "";
-    }
-  };
 
   useEffect(() => {
     setHeaderTheme(setHeaderStyle(pathname));
   }, [pathname]);
 
-  // const setFixed = () => {
-  //   if (window.scrollY >= 69) {
-  //     setFix(true);
-  //   } else {
-  //     setFix(false);
-  //   }
-  // };
+  const setHeaderStyle = (path) => (
+    path.includes("real-estate") ? "theme-real-estate" :
+    path.includes("legal") ? "theme-legal" :
+    ""
+  );
 
-  // window.addEventListener("scroll", setFixed);
+  const routes = [
+    { route: "/", name: "HOME" },
+    { route: "/remo", name: "REMO" },
+    { route: "/real-estate", name: "REAL ESTATE" },
+    { route: "/legal", name: "LEGAL" },
+    { route: "/events", name: "COMMUNITY" },
+  ];
+
+  const toggleMenu = () => setOpen(!open);
 
   return (
-    <header className={`${headerTheme}`}>
-      <div
-        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
-      >
-        <div className="relative flex h-[60px] min-w-[1200px] w-[1200px] justify-between px-[15px] mx-auto">
-          <Link
-            href={"/"}
-            className="text-[var(--color-logo)] font-semibold text-3xl flex items-center"
-          >
+    <header className={headerTheme}>
+      <div className="bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]">
+        <div className="relative flex h-[60px] xl:w-[1200px] justify-between px-[15px] mx-auto">
+          <Link href={"/"} className="text-[var(--color-logo)] font-semibold text-3xl flex items-center">
             PB+
           </Link>
           <div className="flex gap-2">
+            <div onClick={toggleMenu} className="text-3xl absolute right-8 top-5 cursor-pointer md:hidden">
+              {open ? <IconX className="text-white" /> : <IconMenu2 className="text-white" />}
+            </div>
             <nav className="flex z-20">
-              <ul className="flex flex-row items-center">
+              <ul className={`md:flex md:items-center bg-[var(--color-primary)] border-b-2 border-[var(--color-header-border)] md:pb-0 absolute md:static md:z-auto left-0 w-full md:w-auto md:pl-0 px-8 ${open ? "top-16" : "top-[-490px]"} `}>
                 {routes.map((route, index) => (
                   <li key={index} className="h-[90%]">
-                    <Link
-                      href={route.route}
-                      className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4"
-                    >
+                    <Link onClick={toggleMenu} href={route.route} className="font-semibold h-full flex items-center transition-colors text-[var(--color-text-primary)] hover:text-[var(--color-primary-accent)] hover:bg-white px-4 md:my-0 my-4">
                       {route.name}
                     </Link>
                   </li>
                 ))}
+                <div className="xl:hidden md:hidden flex justify-center" onClick={toggleMenu}>
+                  <UserMenu />
+                </div>
               </ul>
             </nav>
-            <div className="relative flex  w-[250px] h-full ">
+            <div className="relative xl:flex w-[250px] h-full hidden">
               <UserMenu />
-              <div
-                className={`absolute w-[5000px] border-b-2 border-[var(--color-header-border)]
-                  bg-[var(--color-secondary)]
-                 transition-colors h-full`}
-              ></div>
+              <div className="absolute w-[5000px] border-b-2 border-[var(--color-header-border)] bg-[var(--color-secondary)] transition-colors h-full"></div>
             </div>
           </div>
         </div>
@@ -101,3 +67,4 @@ const Header = () => {
 };
 
 export default Header;
+
