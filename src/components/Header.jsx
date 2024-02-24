@@ -32,7 +32,7 @@ const Header = () => {
 
   return (
     <header className={headerTheme}>
-      <div className="bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]">
+      <div className="bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-screen border-b-2 border-[var(--color-header-border)]">
         <div className="relative flex h-[60px] xl:w-[1200px] justify-between px-[15px] mx-auto">
           <Link href={"/"} className="text-[var(--color-logo)] font-semibold text-3xl flex items-center">
             PB+
