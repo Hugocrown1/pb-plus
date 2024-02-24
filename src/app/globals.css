@@ -83,7 +83,7 @@
 }
 
 .error-message {
-    @apply text-sm text-[#941B0C] 
+    @apply text-sm text-red-700
 }
 
 /* .navbar{
@@ -162,11 +162,11 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto px-2
+    @apply flex flex-col max-w-[1280px]  mx-auto px-2
 }
 
 .container-2xl {
-  @apply flex flex-col max-w-[1520px] min-h-[800px] mx-auto px-2
+  @apply flex flex-col max-w-[1520px]  mx-auto px-2
 }
 
 .menu-container {
