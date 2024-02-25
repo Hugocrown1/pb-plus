@@ -9,10 +9,10 @@ const PropertiesDisplay = () => {
   // TODO: Refactorizar a server component
   const items = [
     { value: "recentlyAdded", label: "Recently Added" },
-    { value: "Rental", label: "The Ejido" },
-    { value: "Selling", label: "The Bufadora" },
-    { value: "theSpit", label: "The Spit" },
-    { value: "maneadero", label: "Maneadero" },
+    { value: "The Ejido", label: "The Ejido" },
+    { value: "Bufadora", label: "Bufadora" },
+    { value: "The Spit", label: "The Spit" },
+    { value: "Maneadero", label: "Maneadero" },
   ];
 
   const [value, setValue] = useState("recentlyAdded");
@@ -26,7 +26,7 @@ const PropertiesDisplay = () => {
       filteredProperties = propertiesList;
     } else {
       filteredProperties = propertiesList?.filter((property) =>
-        property.type.includes(filterValue)
+        property.zone.includes(filterValue)
       );
     }
     return filteredProperties;

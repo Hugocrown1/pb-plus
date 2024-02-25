@@ -29,6 +29,7 @@ export async function POST(request) {
       type,
       title,
       price,
+      zone,
       address,
       description,
     } = await request.json();
@@ -42,6 +43,7 @@ export async function POST(request) {
       type,
       title,
       price: parseFloat(price),
+      zone,
       address,
       description,
       publishDate: new Date(),
