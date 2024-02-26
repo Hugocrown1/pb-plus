@@ -13,20 +13,21 @@ const page = async () => {
         <section className="flex flex-row gap-4 ">
           <img
             src={session?.user?.image}
-            width={220}
-            height={220}
+            width={225}
+            height={225}
             className="rounded-md aspect-square"
             alt="Imagen de usuario"
           />
           <div className="flex flex-col self-center">
-            <h2 className="text">{session?.user.name}</h2>
-            <div className="flex gap-1">
-          <EditButton />
-          <SignOutButton />
-        </div>
+            <h2 className="text-2xl text-left">{session?.user.name}</h2>
+            <div className="flex gap-1"></div>
           </div>
+          
         </section>
-        
+        <div className="flex  sm:justify-start justify-evenly">
+        <EditButton></EditButton>
+        <SignOutButton></SignOutButton>
+        </div>
         <h2 className="text-left text-2xl">Published properties</h2>
         <section className="flex flex-col bg-[#f5f3f4] rounded-md mx-auto">
           <UserProperties user={session?.user} />
