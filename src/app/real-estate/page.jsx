@@ -66,15 +66,17 @@ const dataSlider = [
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4]  pt-[50px] ${roboto.className}`}>
+    <main className={`bg-[#f5f3f4]  xl:pt-[50px] ${roboto.className}`}>
       <Slider dataSlider={dataSlider} />
 
       <section
         id="services"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"
       >
-        <h1>We provide A Lot of Services</h1>
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
+        <h1 className="xl:text-[64px] text-[42px]">
+          We provide A Lot of Services
+        </h1>
+        <p className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad
           minim veniam,
@@ -82,7 +84,10 @@ export default function Page() {
         <div className="bg-[#30725C] px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
           Our services
         </div>
-        <div className="grid grid-cols-4 grid-rows-2 gap-3 w-[1100px] h-[550px] ">
+
+        
+
+        <div className="grid xl:grid-cols-4 xl:grid-rows-2 grid-cols-2 grid-rows-4 gap-3 xl:w-[1100px] xl:h-[550px] w-full h-full px-4 xl:px-0">
           <ServiceCard
             href={"/real-estate/houses-&-properties"}
             title={"Houses & Properties"}
@@ -97,25 +102,26 @@ export default function Page() {
             href={"/real-estate/housekeeping"}
             title={"Housekeeping"}
             icon={<IconSparkles size={70} color="#30725C" />}
+            
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/house-sitting"}
             title={"House Sitting"}
             icon={<IconHomeEco size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
-            title={"Assesment Services"}
+            href={"/real-estate/assessment-services"}
+            title={"Assessment Services"}
             icon={<IconGraph size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/home-management"}
             title={"Home Management"}
             icon={<IconHomeCog size={70} color="#30725C" />}
           >
