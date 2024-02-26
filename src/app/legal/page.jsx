@@ -6,28 +6,113 @@ import { IconGavel, IconHeartHandshake, IconTie } from "@tabler/icons-react";
 import ContactForm from "@/components/ContactForm";
 import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
-import Slider from "@/components/Slider/SliderLegal";
+import Slider from "@/components/Slider/Slider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
+  const dataSlider = [
+    {
+      id: 1,
+      title: "PB+ LEGAL",
+      subtitle:
+        "The first foundation of justice is not to hurt anyone.  PB Plus is born with the intention of re-establishing the order and legality within a community with diverse needs.",
+
+      source: "/assets/legalbanner.jpeg",
+      linkTitle: "Take a look",
+      href: "#learnmore",
+    },
+    {
+      id: 2,
+      title: "Immigration Services",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/immigrationservices.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/immigration-services",
+    },
+    {
+      id: 3,
+      title: "Property Regularization",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/propertyregularization.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/property-regularization",
+    },
+    {
+      id: 4,
+      title: "Property Acquisition",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/propertyadquisition.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/property-acquisition",
+    },
+    {
+      id: 5,
+      title: "Court Representation",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/courtrepresentation.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/court-representation",
+    },
+    {
+      id: 6,
+      title: "Legal Consulting",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/legalconsulting.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/legal-consulting",
+    },
+    {
+      id: 7,
+      title: "Formation of Companies",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/formationofcompanies.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/formation-of-companies",
+    },
+    {
+      id: 8,
+      title: "Funeral Arrangements",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/funeralarrangements.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/funeral-arrangements",
+    },
+    {
+      id: 9,
+      title: "Other Legal Services",
+      subtitle:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      source: "/assets/otherlegalservices.jpg",
+      linkTitle: "Take a look",
+      href: "/legal/other-services",
+    },
+  ];
   return (
-    <main className={`bg-white ${roboto.className}`}>
-      
-      <Slider/>
+    <main className={`bg-white xl:pt-[50px] ${roboto.className}`}>
+      <Slider dataSlider={dataSlider} />
 
       <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
         <div className="w-full text-start xl:w-[60%]">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">About Us</p>
           <p className="text-lg xl:text-xl pb-8">PB+ Legal Law Firm</p>
-          <p className="text-[#5e5e5e] font-medium text-sm xl:text-lg mb-4 mr-8 text-justify">
+          <p className="text-[#5e5e5e] text-sm xl:text-lg mb-4 mr-8 text-justify">
             PB Plus is born with the intention of re-establishing the order and
             legality within a community with diverse needs. Our primary aim is
             to achieve this through the proper implementation of Mexican law
-            while steadfastly adhering to our principles: <br></br> "Procure
-            justice and deliver it to everyone as a natural right."
+            while steadfastly adhering to our principles: <br />
+            <span className="font-semibold">
+              "Procure justice and deliver it to everyone as a natural right."
+            </span>
           </p>
 
           <Link
@@ -125,7 +210,9 @@ const Page = () => {
       <section className="w-full flex flex-col justify-center p-4 xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
         <div className="w-full xl:w-[40%] text-start">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-          <p className="text-xl pb-8 xl:text-3xl font-semibold">Our Practice Areas</p>
+          <p className="text-xl pb-8 xl:text-3xl font-semibold">
+            Our Practice Areas
+          </p>
 
           <p className="text-[#5e5e5e] text-sm xl:text-lg mb-4 ">
             Explore our extensive range of legal services tailored to meet your
@@ -171,7 +258,10 @@ const Page = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
-          <ServiceLegalCard href={"/legal/legal-consulting"} title={"Legal Consulting"}>
+          <ServiceLegalCard
+            href={"/legal/legal-consulting"}
+            title={"Legal Consulting"}
+          >
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis.
           </ServiceLegalCard>
