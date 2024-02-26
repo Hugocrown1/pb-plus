@@ -286,7 +286,7 @@ const PropertyForm = ({
       </section>
       <section className="xl:w-[30%] w-full flex flex-col">
         <h1 className="text-left text-[42px]">Preview</h1>
-        <div className="h-full w-1/2 xl:w-full self-center">
+        <div className=" xl:h-full w-1/2 xl:w-full xl:self-center">
         <PropertyCard {...values} coverImage={previewImages[0]} />
         </div>
       </section>
