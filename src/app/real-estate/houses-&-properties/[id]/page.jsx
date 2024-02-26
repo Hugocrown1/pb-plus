@@ -34,7 +34,7 @@ const page = async ({ params }) => {
         </section>
 
         <div className="flex flex-col md:flex-row h-fit gap-2">
-          <section className="flex flex-col bg-white items-start px-4 py-2 shadow-lg h-[125px] md:w-[480px] rounded-sm md:hidden">
+          <section className="flex flex-col bg-white items-start px-4 py-2 shadow-lg h-full md:w-[480px] rounded-sm md:hidden">
             <p className="text-[#656b69] text-base">Seller info</p>
 
             <div className="flex flex-row items-center gap-6 w-full my-auto">
