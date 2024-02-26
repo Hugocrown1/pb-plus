@@ -101,21 +101,21 @@ export default function Page() {
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/house-sitting"}
             title={"House Sitting"}
             icon={<IconHomeEco size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
-            title={"Assesment Services"}
+            href={"/real-estate/assessment-services"}
+            title={"Assessment Services"}
             icon={<IconGraph size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/home-management"}
             title={"Home Management"}
             icon={<IconHomeCog size={70} color="#30725C" />}
           >

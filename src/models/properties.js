@@ -9,6 +9,7 @@ const schema = new mongoose.Schema({
   bathrooms: Number,
   bedrooms: Number,
   publishDate: Date,
+  zone: String,
   address: String,
   user: {
     type: mongoose.Schema.Types.ObjectId,

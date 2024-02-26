@@ -15,6 +15,7 @@ const PropertyForm = ({
   type: existingType,
   bedrooms: existingBedrooms,
   bathrooms: existingBathrooms,
+  zone: existingZone,
   address: existingAddress,
   description: existingDescription,
   price: existingPrice,
@@ -26,6 +27,7 @@ const PropertyForm = ({
     type: existingType || "",
     bedrooms: existingBedrooms || "",
     bathrooms: existingBathrooms || "",
+    zone: existingZone || "",
     address: existingAddress || "",
     description: existingDescription || "",
     price: existingPrice || "",
@@ -96,24 +98,12 @@ const PropertyForm = ({
     }
   };
 
-  // const uploadImages = async (e) => {
-  //   const files = e.target?.files;
-  //   if (files?.length > 0) {
-  //     const data = new FormData();
-
-  //     for (const file of files) {
-  //       data.append("file", file);
-  //     }
-  //   }
-  // };
-
   const handleRemoveImage = (imageUrl) => {
     if (imageUrl.includes("blob")) {
       formData.delete(imageUrl);
     }
 
     setDeletedImages(deletedImages.concat(imageUrl));
-    // setImages((prevImages) => prevImages.filter((image) => image !== imageUrl));
     setPreviewImages((prevImages) =>
       prevImages.filter((image) => image !== imageUrl)
     );
@@ -225,6 +215,24 @@ const PropertyForm = ({
               value={values.bathrooms}
               onChange={onChange}
             />
+            <div className="form-input">
+              <label htmlFor="zone">Zone</label>
+              <select
+                name="zone"
+                id="zone"
+                defaultValue={existingZone || ""}
+                onChange={onChange}
+                required
+              >
+                <option disabled value={""}>
+                  Choose the zone of the property
+                </option>
+                <option value={"The Ejido"}>The Ejido</option>
+                <option value={"Bufadora"}>Bufadora</option>
+                <option value={"The Spit"}>The Spit</option>
+                <option value={"Maneadero"}>Maneadero</option>
+              </select>
+            </div>
             <FormInput
               label="Address"
               name="address"
