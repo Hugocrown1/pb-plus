@@ -21,7 +21,7 @@ const page = async ({ params }) => {
   return (
     <main className="container-2xl pt-[60px]">
       <div className="flex flex-col">
-        <section className="relative  w-full h-[515px] my-4">
+        <section className="relative  w-full md:h-[515px] h-[350px] my-4">
           <div className={`relative w-full h-full rounded-lg overflow-hidden`}>
             <Image
               src={propertyInfo.coverImage}
@@ -33,22 +33,45 @@ const page = async ({ params }) => {
           </div>
         </section>
 
-        <div className="flex flex-row h-fit gap-2">
-          <section className="flex flex-col w-[75%] px-2">
-            <div className="flex flex-row justify-between w-full items-end">
-              {propertyInfo.type === "Selling" && (
-                <div className="text-center text-lg text-white font-medium bg-[#40896f] px-4 py-1 rounded-bl-none rounded-2xl w-fit h-fit">
+        <div className="flex flex-col md:flex-row h-fit gap-2">
+          <section className="flex flex-col bg-white items-start px-4 py-2 shadow-lg h-[125px] md:w-[480px] rounded-sm md:hidden">
+            <p className="text-[#656b69] text-base">Seller info</p>
+
+            <div className="flex flex-row items-center gap-6 w-full my-auto">
+              <img
+                src={propertyInfo.user.image}
+                alt="seller photo"
+                className="object-cover object-center w-[70px] aspect-square rounded-full"
+              />
+
+              <div className="flex flex-col w-full text-left">
+                <p className="text-xl font-semibold">
+                  {propertyInfo.user.name}
+                </p>
+                <p className="text-base text-[#656b69]">Member</p>
+                <div className="flex flex-row items-center justify-center gap-1 w-full border-[1px] border-[#255748] text-[#255748] hover:bg-[#ddeee5] rounded-xl px-4 py-1">
+                  <IconPhoneFilled /> <p>000 000 0000</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className="flex flex-col w-full md:w-[75%] px-2">
+            <div className="flex md:flex-row flex-col justify-between">
+             <div className="my-2">
+             {propertyInfo.type === "Selling" && (
+                <div className="text-center text-lg text-white font-medium bg-[#40896f] px-4 py-1 md:py-1 rounded-bl-none rounded-2xl md:w-fit md:h-fit">
                   FOR SALE
                 </div>
               )}
               {propertyInfo.type === "Rental" && (
-                <div className="text-center text-lg text-white font-medium bg-[#40896f] px-4 py-1 rounded-bl-none rounded-2xl w-fit h-fit">
+                <div className="text-center text-lg text-white font-medium bg-[#40896f] px-4 py-1 md:py-1 rounded-bl-none rounded-2xl md:w-fit md:h-fit">
                   FOR RENT
                 </div>
               )}
-
-              {session?.user.id === propertyInfo.user._id && (
-                <div className="flex flex-wrap items-center gap-2">
+             </div>
+             <div>
+             {session?.user.id === propertyInfo.user._id && (
+                <div className="flex md:flex-wrap items-center gap-2 justify-between">
                   <Link
                     href={`/real-estate/edit-property/${propertyInfo._id}`}
                     className="real-estate-button"
@@ -59,10 +82,14 @@ const page = async ({ params }) => {
                   <DeleteButton id={id} />
                 </div>
               )}
+             </div>
             </div>
-            <h1 className="text-left -my-1">{propertyInfo?.title}</h1>
+            
+            <h1 className="text-left md:-my-1 md:text-[64px] text-[32px]">
+              {propertyInfo?.title}
+            </h1>
 
-            <p className="text-left text-[38px] text-[#30725c] font-semibold -mt-3">
+            <p className="text-left md:text-[38px] text-[32px] text-[#30725c] font-semibold md:-mt-3">
               ${propertyInfo.price.toLocaleString()}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -76,10 +103,10 @@ const page = async ({ params }) => {
             </div>
             <hr className="w-[90%] mt-2" />
 
-            <h3 className="text-[32px]">Description</h3>
+            <h3 className="md:text-[32px] text-2xl">Description</h3>
             <p>{propertyInfo.description}</p>
           </section>
-          <section className="flex flex-col bg-white items-start px-4 py-2 shadow-lg h-[175px] w-[480px] rounded-sm">
+          <section className="md:flex flex-col bg-white items-start px-4 py-2 shadow-lg h-[175px] md:w-[480px] rounded-sm hidden">
             <p className="text-[#656b69] text-lg">Seller info</p>
 
             <div className="flex flex-row items-center gap-6 w-full my-auto">
@@ -102,7 +129,7 @@ const page = async ({ params }) => {
           </section>
         </div>
         <section className="flex flex-col w-full px-2 my-4">
-          <h2 className="text-left">Gallery</h2>
+          <h3 className="text-left md:text-[32px] text-2xl">Gallery</h3>
           <div className="w-full grid grid-cols-2 gap-2 mt-2">
             {propertyInfo.images.map((image, index) => (
               <img
