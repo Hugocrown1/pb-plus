@@ -83,7 +83,7 @@
 }
 
 .error-message {
-    @apply text-sm text-[#941B0C] 
+    @apply text-sm text-red-700
 }
 
 /* .navbar{
@@ -162,11 +162,11 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto px-2
+    @apply flex flex-col max-w-[1280px]  mx-auto px-2
 }
 
 .container-2xl {
-  @apply flex flex-col max-w-[1520px] min-h-[800px] mx-auto px-2
+  @apply flex flex-col max-w-[1520px]  mx-auto px-2
 }
 
 .menu-container {
@@ -174,7 +174,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white max-w-[395px] min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
+    @apply flex flex-col bg-white min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
 }
 
 .error-message {
@@ -219,11 +219,11 @@ input:invalid[focused='true'] {
   @apply  w-[70%]
 }
 
-
-
-
-
-
+@media screen and (max-width: 767px) {
+  .property-zone-radio span {
+    @apply text-base;
+  }
+}
 
 .dropdown-menu {
     position: absolute;
