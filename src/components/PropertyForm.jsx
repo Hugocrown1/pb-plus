@@ -114,8 +114,8 @@ const PropertyForm = ({
   };
 
   return (
-    <div className="flex flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
-      <section className="w-[80%] flex flex-col ">
+    <div className="flex flex-col xl:flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
+      <section className="xl:w-[80%] flex flex-col ">
         <h1 className="text-left text-[42px]">
           {_id ? "Edit property" : "New property"}
         </h1>
@@ -284,9 +284,11 @@ const PropertyForm = ({
           </form>
         </div>
       </section>
-      <section className="w-[30%] flex flex-col ">
+      <section className="xl:w-[30%] w-full flex flex-col">
         <h1 className="text-left text-[42px]">Preview</h1>
+        <div className=" xl:h-full w-1/2 xl:w-full xl:self-center">
         <PropertyCard {...values} coverImage={previewImages[0]} />
+        </div>
       </section>
     </div>
   );

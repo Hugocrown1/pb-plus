@@ -174,7 +174,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white max-w-[395px] min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
+    @apply flex flex-col bg-white min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
 }
 
 .error-message {
@@ -219,11 +219,11 @@ input:invalid[focused='true'] {
   @apply  w-[70%]
 }
 
-
-
-
-
-
+@media screen and (max-width: 767px) {
+  .property-zone-radio span {
+    @apply text-base;
+  }
+}
 
 .dropdown-menu {
     position: absolute;
