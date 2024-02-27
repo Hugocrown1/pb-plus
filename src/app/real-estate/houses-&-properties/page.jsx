@@ -23,9 +23,9 @@ const page = () => {
         >
           Pricing
         </Link>
-        <div className="grid grid-cols-4 w-full h-[350px] my-5">
-          <div className="flex items-end mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-4 gap-1 min-[1149px]:gap-4 w-full aspect-[90/25] my-5">
+          <div className="flex items-end w-full ">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house.jpg"}
                 alt="real estate photo"
@@ -35,8 +35,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-start mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-start w-full ">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house2.webp"}
                 alt="real estate photo"
@@ -46,8 +46,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-end mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-end w-full">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house3.jpg"}
                 alt="real estate photo"
@@ -57,8 +57,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-start mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-start w-full">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house4.png"}
                 alt="real estate photo"
@@ -72,12 +72,12 @@ const page = () => {
       </section>
       <section id="pricing" className=" bg-gray-200  ">
         <div className="flex flex-col xl:flex-row py-[50px] justify-between xl:max-w-[1280px]  mx-auto px-2">
-          <div className="flex flex-col  text-left xl:w-[482px] xl:mx-0 mx-2">
+          <div className="flex flex-col items-center  text-center xl:w-[482px] xl:mx-0 mx-2">
             <h2 className="font-bold xl:text-[48px] text-[35px] xl:text-left">
               Want To Sale Your House?
             </h2>
             <div className="bg-[#30725C] w-[100px] h-1 rounded-xl mb-3"></div>
-            <p className="xl:text-lg text-base text-justify mx-6 xl:mx-0">
+            <p className="xl:text-lg text-base mx-6 xl:mx-0">
               Leave it to us! We offer a dedicated space on our platform where
               potential buyers can discover and explore your home. By showcasing
               your property through our platform, we provide a convenient avenue
@@ -129,7 +129,9 @@ const page = () => {
         id="properties"
         className="flex flex-col items-center pt-12 mb-8 text-center container-xl"
       >
-        <h1 className="xl:text-[64px] text-[35px]">We Help You Make Better Deals</h1>
+        <h1 className="xl:text-[64px] text-[35px]">
+          We Help You Make Better Deals
+        </h1>
         <p className="text-[#5e5e5e] text-center font-medium  text-base xl:text-lg xl:w-[900px] mb-8">
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
           voluptate sequi asperiores nemo possimus quod et quis, rerum
