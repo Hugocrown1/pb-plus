@@ -81,7 +81,7 @@ const Menu = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <aside
-          className={`absolute px-4  py-2 flex flex-col w-[320px] bg-[#f5f3f4] h-full rounded-l-xl overflow-auto  shadow-xl ease-out transition-all ${
+          className={`absolute p-4 flex flex-col w-[250px] min-[320px]:w-[320px] bg-[#f5f3f4] h-full rounded-l-xl overflow-auto  shadow-xl ease-out transition-all ${
             !isMenuOpen && "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}

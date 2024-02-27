@@ -162,7 +162,7 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px]  mx-auto px-2
+    @apply flex flex-col max-w-[1280px]  mx-auto min-[503px]:px-2
 }
 
 .container-2xl {
@@ -174,7 +174,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
+    @apply flex flex-col bg-white w-full mx-auto  shadow-md rounded-lg overflow-hidden max-h-[414px] min-[305px]:aspect-[79/86]
 }
 
 .error-message {
@@ -192,7 +192,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio {
-  @apply flex flex-row items-center justify-evenly mb-2
+  @apply flex flex-wrap min-[456px]:flex-row items-center justify-center min-[456px]:justify-evenly mb-2
 }
 
 .property-zone-radio span {
@@ -204,7 +204,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio label {
-  @apply cursor-pointer
+  @apply cursor-pointer mx-2
 }
 
 .property-zone-radio div {

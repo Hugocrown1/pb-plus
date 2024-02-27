@@ -284,10 +284,10 @@ const PropertyForm = ({
           </form>
         </div>
       </section>
-      <section className="xl:w-[30%] w-full flex flex-col">
-        <h1 className="text-left text-[42px]">Preview</h1>
-        <div className=" xl:h-full w-1/2 xl:w-full xl:self-center">
-        <PropertyCard {...values} coverImage={previewImages[0]} />
+      <section className="xl:w-[30%] w-full flex flex-col items-center xl:items-start ">
+        <h1 className=" text-center xl:text-left text-[42px]">Preview</h1>
+        <div className=" xl:h-full xl:w-full xl:self-center mx-auto  ">
+          <PropertyCard {...values} coverImage={previewImages[0]} />
         </div>
       </section>
     </div>

@@ -18,12 +18,12 @@ const page = () => {
             className="object-cover object-center"
           />
         </div>
-        <div className="flex flex-row  w-full gap-12 mt-2">
-          <h1 className="text-[#0A100D] text-left text-[70px] leading-tight w-[50%]  ">
+        <div className="flex flex-col items-center min-[1130px]:flex-row  w-full min-[1130px]:gap-12 mt-2">
+          <h1 className="text-[#0A100D] text-center min-[1130px]:text-left text-[40px] min-[480px]:text-[70px] leading-tight w-full min-[1130px]:w-[50%]  ">
             Home Management
           </h1>
-          <div className="flex flex-col ">
-            <p className="text-[#5e5e5e] text-left font-medium text-lg ">
+          <div className="flex flex-col items-center min-[1130px]:items-start ">
+            <p className="text-[#5e5e5e] text-center min-[1130px]:text-left font-medium text-lg ">
               Don't stress about water, your tank, power bills, internet, or
               anything else. Simply show us how you want your home to run, and
               leave the rest to us. We'll take care of everything else.
@@ -38,9 +38,9 @@ const page = () => {
         </div>
       </section>
       <section id="pricing" className=" bg-gray-200 ">
-        <div className="flex flex-row py-[50px] justify-between max-w-[1280px]  mx-auto px-2">
-          <div className="flex flex-col  text-left w-[482px]">
-            <h2 className="font-bold text-[48px] text-left">
+        <div className="flex flex-col min-[1130px]:flex-row py-[50px] items-center gap-4 justify-center min-[1130px]:justify-between max-w-[1280px]  mx-auto px-2">
+          <div className="flex flex-col items-center min-[1130px]:items-start text-center min-[1130px]:text-left w-[100%] min-[1130px]:w-[482px]">
+            <h2 className="font-bold text-[32px] min-[1130px]:text-[48px] text-center min-[1130px]:text-left">
               Teach Us How To Run Your Home
             </h2>
             <div className="bg-[#30725C] w-[100px] h-1 rounded-xl mb-3"></div>
@@ -55,7 +55,7 @@ const page = () => {
               enjoy peace of mind and focus on what truly matters to you.
             </p>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2  w-[600px] h-[500px] gap-2">
+          <div className="grid grid-cols-2 grid-rows-2 w-[90%]  aspect-square min-[1130px]:w-[600px] min-[1130px]:h-[500px] gap-2">
             <div className="row-span-2 relative rounded-xl overflow-hidden shadow-md">
               <Image
                 src={"/assets/homemanagement3.jpg"}
