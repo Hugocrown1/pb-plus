@@ -71,9 +71,9 @@ const page = () => {
         </div>
       </section>
       <section id="pricing" className=" bg-gray-200  ">
-        <div className="flex flex-col xl:flex-row py-[50px] justify-between xl:max-w-[1280px]  mx-auto px-2">
-          <div className="flex flex-col items-center  text-center xl:w-[482px] xl:mx-0 mx-2">
-            <h2 className="font-bold xl:text-[48px] text-[35px] xl:text-left">
+        <div className="flex flex-col min-[1130px]:flex-row py-[50px] items-center gap-4 justify-center min-[1130px]:justify-between max-w-[1280px]  mx-auto px-2">
+          <div className="flex flex-col items-center min-[1130px]:items-start text-center min-[1130px]:text-left w-[100%] min-[1130px]:w-[482px]">
+            <h2 className="font-bold text-[32px] min-[1130px]:text-[48px] text-center min-[1130px]:text-left">
               Want To Sale Your House?
             </h2>
             <div className="bg-[#30725C] w-[100px] h-1 rounded-xl mb-3"></div>
@@ -94,7 +94,7 @@ const page = () => {
               Advertise your property
             </Link>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2  xl:w-[600px] xl:h-[500px] h-[400px] gap-2 my-2">
+          <div className="grid grid-cols-2 grid-rows-2 w-[90%]  aspect-square min-[1130px]:w-[600px] min-[1130px]:h-[500px] gap-2">
             <div className="row-span-2 relative rounded-xl overflow-hidden shadow-md">
               <Image
                 src={"/assets/house.jpg"}
