@@ -108,7 +108,7 @@
 
 
 h1 {
-    @apply text-[64px] font-bold text-center text-[#0A100D]
+    @apply text-[40px] min-[652px]:text-[64px] font-bold text-center text-[#0A100D]
 }
 
 
@@ -121,7 +121,7 @@ h3 {
 }
 
 h2 {
-    @apply text-[32px] text-center text-[#0A100D]
+    @apply text-[20px] min-[652px]:text-[32px] text-center text-[#0A100D]
 }
 
 

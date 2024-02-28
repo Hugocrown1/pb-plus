@@ -81,18 +81,16 @@ export default function Page() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad
           minim veniam,
         </p>
-        <div className="bg-[#30725C] px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
+        <div className="bg-[#30725C] px-1 min-[400px]:px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
           Our services
         </div>
 
-        
-
-        <div className="grid xl:grid-cols-4 xl:grid-rows-2 grid-cols-2 grid-rows-4 gap-3 xl:w-[1100px] xl:h-[550px] w-full h-full px-4 xl:px-0">
+        <div className="grid grid-cols-1 xl:grid-cols-4 xl:grid-rows-2 min-[400px]:grid-cols-2 min-[400px]:grid-rows-4 gap-3 xl:w-[1100px] xl:h-[550px] w-full h-full min-[400px]:px-4 xl:px-0">
           <ServiceCard
             href={"/real-estate/houses-&-properties"}
             title={"Houses & Properties"}
             icon={<IconHomeDollar size={70} color="#30725C" />}
-            style={"col-span-2 row-span-2"}
+            style={"min-[400px]:col-span-2 min-[400px]:row-span-2"}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
             ducimus tempore quia sequi!
@@ -102,7 +100,6 @@ export default function Page() {
             href={"/real-estate/housekeeping"}
             title={"Housekeeping"}
             icon={<IconSparkles size={70} color="#30725C" />}
-            
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>

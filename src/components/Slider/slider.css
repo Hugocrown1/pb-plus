@@ -22,11 +22,11 @@
 
 
 .p-title{
-    @apply text-[70px] -translate-x-8 font-bold opacity-0  transition-all text-white  z-10 duration-1000 leading-tight
+    @apply text-[45px] min-[1000px]:text-[70px] -translate-x-8 font-bold opacity-0  transition-all text-white  z-10 duration-1000 leading-tight
 }
 
 .p-subtitle{
-    @apply text-lg font-light translate-x-8 opacity-0  transition-all text-[#ffffffc9]  z-10 duration-1000 my-4
+    @apply text-base min-[1000px]:text-lg font-light translate-x-8 opacity-0  transition-all text-[#ffffffc9]  z-10 duration-1000 my-4
 }
 
 .p-active {
