@@ -23,7 +23,7 @@ const Slider = ({ dataSlider }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       nextSlide();
-    }, 10000);
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, [slideIndex]);
@@ -40,8 +40,8 @@ const Slider = ({ dataSlider }) => {
             src={object.source}
             fill={true}
             sizes="(min-width: 1120px) 1500px"
-            className={`object-cover object-center duration-[10000ms] ${
-              slideIndex === index + 1 ? "scale-125" : "scale-100"
+            className={`object-cover object-center duration-[8000ms] ${
+              slideIndex === index + 1 ? "scale-110" : "scale-100"
             }`}
           />
           <div className="absolute bg-black opacity-50 w-full h-full"></div>
