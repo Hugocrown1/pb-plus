@@ -71,7 +71,7 @@ export default function Home() {
           <h2 className="text-center min-[1400px]:text-left w-full">
             We offer services for the punta banda community
           </h2>
-          <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2 mx-auto max-w-[1400px]:mx-0"></div>
+          <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2 mx-auto min-[1400px]:mx-0"></div>
           <p className="text-[17px] mt-6 w-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
             neque dolore architecto recusandae quas modi corporis explicabo,
