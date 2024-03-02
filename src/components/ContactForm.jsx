@@ -1,65 +1,81 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const ContactForm = ({ onSubmit }) => {
-  // Estados para almacenar los valores de los campos del formulario
-  const [nombre, setNombre] = useState('');
-  const [email, setEmail] = useState('');
-  const [mensaje, setMensaje] = useState('');
-
-  // Función para manejar el envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Llama a la función onSubmit pasada como prop con los datos del formulario
-    onSubmit({ nombre, email, mensaje });
-  };
-
   return (
-    <section className="container-xl bg-white flex flex-row w-full h-full gap-10 mt-4 mb-12 p-8 rounded-lg shadow-md">
-      <p className="font-bold text-2xl mb-2">Formulario de Contacto</p>
-      <form onSubmit={handleSubmit} className="flex flex-col">
-        <label htmlFor="nombre" className="mb-2">
-          Nombre:
-          <input
-            type="text"
-            id="nombre"
-            value={nombre}
-            onChange={(e) => setNombre(e.target.value)}
-            className="p-2 border border-gray-300 rounded"
-            required
-          />
-        </label>
+    <section
+      id="contactus"
+      className="w-full flex flex-col justify-center p-4 bg-gray-200 "
+    >
+      <div className="w-full  flex flex-col justify-center xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
+        <div className="w-full text-start">
+          <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
+          <p className="text-xl xl:text-3xl pb-8 font-semibold">Contact Us</p>
 
-        <label htmlFor="email" className="mb-2">
-          Correo Electrónico:
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="p-2 border border-gray-300 rounded"
-            required
-          />
-        </label>
+          <p className="text-[#5e5e5e]  text-sm xl:text-lg  mb-4">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div className="w-full">
+          <form action="/enviar-consulta" method="post" className="rounded-md">
+            <label htmlFor="nombre" className="block text-gray-800   mb-2">
+              Nombre:
+            </label>
+            <input
+              type="text"
+              id="nombre"
+              name="nombre"
+              required
+              className="w-full p-2 border rounded-md"
+            />
 
-        <label htmlFor="mensaje" className="mb-4">
-          Mensaje:
-          <textarea
-            id="mensaje"
-            value={mensaje}
-            onChange={(e) => setMensaje(e.target.value)}
-            className="p-2 border border-gray-300 rounded"
-            rows="4"
-            required
-          ></textarea>
-        </label>
+            <label htmlFor="correo" className="block text-gray-800  mt-4 mb-2">
+              Correo electrónico:
+            </label>
+            <input
+              type="email"
+              id="correo"
+              name="correo"
+              required
+              className="w-full p-2 border rounded-md"
+            />
 
-        <button
-          type="submit"
-          className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-[200px] transition-colors text-black border-[#FFC65A] bg-[#F6AA1C] hover:bg-[#FFC65A] hover:border-[#F6AA1C] self-center"
-        >
-          Enviar
-        </button>
-      </form>
+            <label
+              htmlFor="telefono"
+              className="block text-gray-800   mt-4 mb-2"
+            >
+              Teléfono:
+            </label>
+            <input
+              type="tel"
+              id="telefono"
+              name="telefono"
+              className="w-full p-2 border rounded-md"
+            />
+
+            <label
+              htmlFor="mensaje"
+              className="block text-gray-800   mt-4 mb-2"
+            >
+              Mensaje:
+            </label>
+            <textarea
+              id="mensaje"
+              name="mensaje"
+              rows="4"
+              required
+              className="w-full p-2 border rounded-md"
+            ></textarea>
+
+            <button
+              type="submit"
+              className="my-1 px-4 py-2 rounded-[10px] font-medium text-lg w-[220px]   text-[#FCFFFC] transition-colors  bg-[#cba557] hover:bg-[#c29029]  text-center"
+            >
+              Enviar Consulta
+            </button>
+          </form>
+        </div>
+      </div>
     </section>
   );
 };

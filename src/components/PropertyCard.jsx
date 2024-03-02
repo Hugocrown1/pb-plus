@@ -45,7 +45,7 @@ const PropertyCard = ({
           href={`/real-estate/houses-&-properties/${_id}`}
           className="flex flex-col h-full"
         >
-          <div className="relative w-full h-[60%] bg-gray-300">
+          <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
               {type || "Type"}
             </div>
@@ -57,7 +57,7 @@ const PropertyCard = ({
               />
             )}
           </div>
-          <div className="flex flex-col px-4 py-1 my-auto">
+          <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
             <div className="flex flex-row items-center gap-1">
               <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
                 ${numberFormatter(price)}
@@ -74,7 +74,7 @@ const PropertyCard = ({
               </p>
             </div>
             <hr className="w-full mx-auto my-2" />
-            <div className="flex flex-row gap-2">
+            <div className="flex flex-wrap gap-2">
               <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
                 <IconBath /> <p>{bathrooms} Baths</p>
               </div>
@@ -86,7 +86,7 @@ const PropertyCard = ({
         </Link>
       ) : (
         <>
-          <div className="relative w-full h-[60%] bg-gray-300">
+          <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
               {type || "Type"}
             </div>
@@ -98,7 +98,7 @@ const PropertyCard = ({
               />
             )}
           </div>
-          <div className="flex flex-col px-4 py-1 my-auto">
+          <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
             <div className="flex flex-row items-center gap-1">
               <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
                 ${numberFormatter(price)}

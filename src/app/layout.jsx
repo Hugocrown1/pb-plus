@@ -14,7 +14,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html className="scroll-smooth " lang="en">
-      <body className={` bg-[#f5f3f4] ${roboto.className}`}>
+      <body className={`bg-[#f5f3f4] ${roboto.className}`}>
         <Providers>
           <Header />
           {children}

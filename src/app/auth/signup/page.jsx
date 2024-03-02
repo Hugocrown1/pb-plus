@@ -3,8 +3,11 @@ import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import Link from "next/link";
 
 const RegistrationPage = () => {
+  const [loading, setLoading] = useState(false);
+
   const router = useRouter();
   const [data, setData] = useState({
     name: "",
@@ -16,10 +19,12 @@ const RegistrationPage = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const response = await axios.post("/api/users", {
         ...data,
       });
+      setLoading(false);
       router.push("/auth/login");
     } catch (error) {
       setError(error.response.data);
@@ -27,107 +32,131 @@ const RegistrationPage = () => {
   };
 
   return (
-    <section className="flex items-center justify-center h-screen bg-black/10 w-full">
-      <div className="bg-white p-8 rounded-lg shadow-lg w-96">
-        <h2 className="text-3xl font-bold mb-4">Sign up</h2>
-        {error && <h3 className="bg-red-400 px-4 py-2 rounded-md">{error}</h3>}
-        <form className="flex flex-col gap-4" onSubmit={handleRegister}>
-          <label className="text-xl" htmlFor="name">
-            Name:
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={data.name}
-            onChange={(e) =>
-              setData((prevData) => ({ ...prevData, name: e.target.value }))
-            }
-            className="px-4 py-2 border rounded-md"
-            required
-          />
-
-          <label className="text-xl" htmlFor="email">
-            Email:
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={data.email}
-            onChange={(e) =>
-              setData((prevData) => ({ ...prevData, email: e.target.value }))
-            }
-            className="px-4 py-2 border rounded-md"
-            required
-          />
-
-          <label className="text-xl" htmlFor="age">
-            Phone:
-          </label>
-          <input
-            type="number"
-            id="phone"
-            value={data.phone}
-            onChange={(e) =>
-              setData((prevData) => ({ ...prevData, phone: e.target.value }))
-            }
-            className="px-4 py-2 border rounded-md"
-            required
-          />
-
-          <label className="text-xl" htmlFor="address">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={data.password}
-            onChange={(e) =>
-              setData((prevData) => ({ ...prevData, password: e.target.value }))
-            }
-            className="px-4 py-2 border rounded-md"
-            required
-          />
-          <input
-            type="submit"
-            value={"Sign up"}
-            className="px-8 py-3 rounded-[10px] border-2 font-semibold text-base w-full transition-colors bg-[#F6AA1C] text-black hover:bg-[#FFC65A] hover:border-[#F6AA1C]"
-          ></input>
-        </form>
-        <div className="flex flex-row w-full items-center my-2">
-          <hr className="w-full h-0.5 border-t-0 bg-slate-600/70 opacity-100 dark:opacity-50" />
-          <p className="text-lg mx-4">or</p>
-          <hr className="w-full h-0.5 border-t-0 bg-slate-600/70 opacity-100 dark:opacity-50" />
-        </div>
-
-        <button
-          onClick={() => signIn("google", { callbackUrl: "/account" })}
-          className="flex flex-row items-center justify-center gap-2 primary-button transition-colors text-gray-600 hover:bg-gray-500/10 w-full mx-auto"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 48 48"
-            width="24px"
-            height="24px"
+    <section className="flex items-center justify-center h-screen xl:bg-black/10 bg-white w-full">
+      <div className="w-full max-w-md p-4 rounded-md xl:shadow sm:p-8 bg-white ">
+        <h2 className="mb-3 text-3xl font-semibold text-center">
+          Create your account
+        </h2>
+        <p className="text-sm text-center text-gray-400">
+          Do you have an account?
+          <Link
+            href={"/auth/login"}
+            className="focus:underline hover:underline text-blue-500 font-semibold"
           >
-            <path
-              fill="#FFC107"
-              d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"
-            />
-            <path
-              fill="#FF3D00"
-              d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"
-            />
-            <path
-              fill="#4CAF50"
-              d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"
-            />
-            <path
-              fill="#1976D2"
-              d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
-            />
-          </svg>
-          <p>Continue with Google</p>
-        </button>
+            Sign in here
+          </Link>
+        </p>
+        <div className="my-6 space-y-4">
+          <button
+            type="button"
+            onClick={() => signIn("google", { callbackUrl: "/account" })}
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md  border-gray-400 hover:bg-gray-100 "
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 32 32"
+              className="w-5 h-5 fill-current"
+            >
+              <path d="M16.318 13.714v5.484h9.078c-0.37 2.354-2.745 6.901-9.078 6.901-5.458 0-9.917-4.521-9.917-10.099s4.458-10.099 9.917-10.099c3.109 0 5.193 1.318 6.38 2.464l4.339-4.182c-2.786-2.599-6.396-4.182-10.719-4.182-8.844 0-16 7.151-16 16s7.156 16 16 16c9.234 0 15.365-6.49 15.365-15.635 0-1.052-0.115-1.854-0.255-2.651z"></path>
+            </svg>
+            <p clsa>Register with Google</p>
+          </button>
+        </div>
+        <div className="flex items-center w-full my-4">
+          <hr className="w-full text-gray-400" />
+          <p className="px-3 text-gray-400">OR</p>
+          <hr className="w-full text-gray-400" />
+        </div>
+        {error && <h3 className="bg-red-400 px-4 py-2 rounded-md">{error}</h3>}
+        <form onSubmit={handleRegister} className="space-y-8">
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="block text-sm">
+                Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={data.name}
+                onChange={(e) =>
+                  setData((prevData) => ({ ...prevData, name: e.target.value }))
+                }
+                required
+                placeholder="Name"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900 "
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="block text-sm">
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={data.email}
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    email: e.target.value,
+                  }))
+                }
+                required
+                placeholder="user@gmail.com"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900 "
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="phone" className="block text-sm">
+                Phone
+              </label>
+              <input
+                type="number"
+                id="phone"
+                value={data.phone}
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    phone: e.target.value,
+                  }))
+                }
+                required
+                placeholder="646 123 4567"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900 "
+              />
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between">
+                <label htmlFor="password" className="text-sm">
+                  Password
+                </label>
+              </div>
+              <input
+                type="password"
+                id="password"
+                value={data.password}
+                onChange={(e) =>
+                  setData((prevData) => ({
+                    ...prevData,
+                    password: e.target.value,
+                  }))
+                }
+                required
+                placeholder="*****"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-100 text-gray-900 "
+              />
+            </div>
+          </div>
+          <button
+            type="submit"
+            className="w-full px-8 py-3 font-semibold rounded-md bg-[#cba557] text-white border hover:bg-[#a58546]"
+          >
+            {loading ? (
+              <div className="inline-block h-4 w-4 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"></div>
+            ) : (
+              "Sign up"
+            )}
+          </button>
+        </form>
       </div>
     </section>
   );

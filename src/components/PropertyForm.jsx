@@ -15,6 +15,7 @@ const PropertyForm = ({
   type: existingType,
   bedrooms: existingBedrooms,
   bathrooms: existingBathrooms,
+  zone: existingZone,
   address: existingAddress,
   description: existingDescription,
   price: existingPrice,
@@ -26,6 +27,7 @@ const PropertyForm = ({
     type: existingType || "",
     bedrooms: existingBedrooms || "",
     bathrooms: existingBathrooms || "",
+    zone: existingZone || "",
     address: existingAddress || "",
     description: existingDescription || "",
     price: existingPrice || "",
@@ -96,24 +98,12 @@ const PropertyForm = ({
     }
   };
 
-  // const uploadImages = async (e) => {
-  //   const files = e.target?.files;
-  //   if (files?.length > 0) {
-  //     const data = new FormData();
-
-  //     for (const file of files) {
-  //       data.append("file", file);
-  //     }
-  //   }
-  // };
-
   const handleRemoveImage = (imageUrl) => {
     if (imageUrl.includes("blob")) {
       formData.delete(imageUrl);
     }
 
     setDeletedImages(deletedImages.concat(imageUrl));
-    // setImages((prevImages) => prevImages.filter((image) => image !== imageUrl));
     setPreviewImages((prevImages) =>
       prevImages.filter((image) => image !== imageUrl)
     );
@@ -124,8 +114,8 @@ const PropertyForm = ({
   };
 
   return (
-    <div className="flex flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
-      <section className="w-[80%] flex flex-col ">
+    <div className="flex flex-col xl:flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
+      <section className="xl:w-[80%] flex flex-col ">
         <h1 className="text-left text-[42px]">
           {_id ? "Edit property" : "New property"}
         </h1>
@@ -225,6 +215,24 @@ const PropertyForm = ({
               value={values.bathrooms}
               onChange={onChange}
             />
+            <div className="form-input">
+              <label htmlFor="zone">Zone</label>
+              <select
+                name="zone"
+                id="zone"
+                defaultValue={existingZone || ""}
+                onChange={onChange}
+                required
+              >
+                <option disabled value={""}>
+                  Choose the zone of the property
+                </option>
+                <option value={"The Ejido"}>The Ejido</option>
+                <option value={"Bufadora"}>Bufadora</option>
+                <option value={"The Spit"}>The Spit</option>
+                <option value={"Maneadero"}>Maneadero</option>
+              </select>
+            </div>
             <FormInput
               label="Address"
               name="address"
@@ -276,9 +284,11 @@ const PropertyForm = ({
           </form>
         </div>
       </section>
-      <section className="w-[30%] flex flex-col ">
-        <h1 className="text-left text-[42px]">Preview</h1>
-        <PropertyCard {...values} coverImage={previewImages[0]} />
+      <section className="xl:w-[30%] w-full flex flex-col items-center xl:items-start ">
+        <h1 className=" text-center xl:text-left text-[42px]">Preview</h1>
+        <div className=" xl:h-full xl:w-full xl:self-center mx-auto  ">
+          <PropertyCard {...values} coverImage={previewImages[0]} />
+        </div>
       </section>
     </div>
   );

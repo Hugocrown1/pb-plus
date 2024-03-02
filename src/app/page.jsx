@@ -11,12 +11,12 @@ export default function Home() {
         id="departments"
         className="flex flex-col justify-center items-center my-4"
       >
-        <h1>Meet Our Departments Services</h1>
+        <h1 className="">Meet Our Departments Services</h1>
         <h2>Let's do it right!</h2>
 
-        <hr className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
+        <hr className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
 
-        <div className="relative grid grid-cols-4 w-[1440px] my-12">
+        <div className="relative grid grid-cols-1 min-[726px]:grid-cols-2 min-[1450px]:grid-cols-4 max-w-[1440px] my-12">
           <DepartmentCard
             title={"PB+ REMO"}
             src={"/assets/remo.jpg"}
@@ -53,19 +53,26 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="flex flex-row items-start w-[1440px] gap-4 mb-40 "
+        className="flex flex-col items-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 "
       >
-        <Image
-          src={"/assets/handshake.jpg"}
-          alt="About PB Plus image"
-          width={620}
-          height={300}
-        />
-        <div className="flex flex-col items-start ">
-          <h1 className="-mb-4">What Is PB PLUS?</h1>
-          <h2>We offer services for the punta banda community</h2>
-          <hr className="h-[7px] w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
-          <p className="text-[17px] mt-6">
+        <div className="relative h-[368px] w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] overflow-hidden rounded-xl">
+          <Image
+            src={"/assets/handshake.jpg"}
+            alt="About PB Plus image"
+            fill={true}
+            sizes="(min-width: 1120px) 1200px"
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="flex flex-col items-start justify-center w-full min-[1400px]:w-[50%]">
+          <h1 className="-mb-4 text-center min-[1400px]:text-left w-full">
+            What Is PB PLUS?
+          </h1>
+          <h2 className="text-center min-[1400px]:text-left w-full">
+            We offer services for the punta banda community
+          </h2>
+          <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2 mx-auto min-[1400px]:mx-0"></div>
+          <p className="text-[17px] mt-6 w-full">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum,
             neque dolore architecto recusandae quas modi corporis explicabo,
             aperiam minus, soluta adipisci corrupti assumenda quos alias vitae.

@@ -4,14 +4,16 @@ import Link from "next/link";
 
 const DepartmentCard = ({ children, src, title, href }) => {
   return (
-    <article className="flex flex-col items-center bg-white w-[360px] h-[618px] border border-black/10 shadow-sm transition-all hover:-translate-y-4 hover:shadow-lg">
-      <Image
-        src={src}
-        width={"360"}
-        height={"264"}
-        alt="Department image"
-        className="mb-4"
-      />
+    <article className="flex flex-col items-center bg-white max-w-[360px] h-[618px] border border-black/10 shadow-sm transition-all hover:-translate-y-4 hover:shadow-lg">
+      <div className="relative h-[264px] w-full mb-4">
+        <Image
+          src={src}
+          fill={true}
+          alt="Department image"
+          sizes="(min-width: 1120px) 1200px"
+          className="object-cover object-center"
+        />
+      </div>
       <p className="text-[#0A100D] font-bold text-[32px]">{title}</p>
       <hr className="h-[7px] w-[121px] bg-[#941B0C] rounded-[8px] mt-1" />
 

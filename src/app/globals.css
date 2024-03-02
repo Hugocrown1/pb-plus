@@ -11,7 +11,7 @@
     --color-accent: #F6AA1C;
     --color-accent-hover: #f5c262;
     --color-text-primary: #ffff;
-    --color-text-secondary: #0A100D;
+    --color-text-secondary: #040F0F;
     --color-border: #ffffffe3;
     --color-border-hover: #aaaaaa49;
     --color-header-border: transparent;
@@ -19,31 +19,32 @@
   }
 
   .theme-real-estate {
-    --color-logo: #30725C;
-    --color-primary: #f5f3f4;
-    --color-primary-accent: #30725C;
-    --color-secondary: #f5f3f4;
-    --color-accent: #30725C;
-    --color-accent-hover: #245545;
-    --color-text-primary: #0A100D;
-    --color-text-secondary: #FAFAFA;
-    --color-border: #0b0c0cc7;
-    --color-border-hover: #aaaaaa49;
-    --color-header-border: #aaaaaa49;
+    --color-logo: #f5f3f4;
+    --color-primary: #30725C;
+    --color-primary-accent: #0e0e0e;
+    --color-secondary: #30725C;
+    --color-accent: #FAFAFA;
+    --color-accent-hover: #dddddd;
+    --color-text-primary: #f5f3f4;
+    --color-text-secondary: #040F0F;
+    --color-border: #ffffffc7;
+    --color-border-hover: #fcfcfc41;
+    --color-header-border: #30725c00;
     
   }
 
   .theme-legal {
     --color-logo: #cba557;
-    --color-primary: transparent;
+    --color-primary: #202225;
     --color-primary-accent: #cba557;
-    --color-secondary: transparent;
+    --color-secondary: #202225;
     --color-accent: #cba557;
     --color-accent-hover: #c29029;
     --color-text-primary: #FAFAFA;
     --color-text-secondary: #FAFAFA;
     --color-border: #FAFAFA;
-    
+    --color-border-hover: #aaaaaa49;
+    --color-header-border: #aaaaaa49;
   }
 }
 
@@ -82,7 +83,7 @@
 }
 
 .error-message {
-    @apply text-sm text-[#941B0C] 
+    @apply text-sm text-red-700
 }
 
 /* .navbar{
@@ -107,7 +108,7 @@
 
 
 h1 {
-    @apply text-[64px] font-bold text-center text-[#0A100D]
+    @apply text-[40px] min-[652px]:text-[64px] font-bold text-center text-[#0A100D]
 }
 
 
@@ -120,7 +121,7 @@ h3 {
 }
 
 h2 {
-    @apply text-[32px] text-center text-[#0A100D]
+    @apply text-[20px] min-[652px]:text-[32px] text-center text-[#0A100D]
 }
 
 
@@ -153,7 +154,7 @@ textarea {
 }
 
 .menu-trigger {
-    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] text-gray-300 border-gray-500/40 hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer
+    @apply flex flex-row items-center gap-2  rounded-full overflow-hidden h-[48px] p-2 border-[1px] text-gray-300 border-white/40 hover:border-[var(--color-text-primary)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer
 }
 
 .dropdown-item {
@@ -161,11 +162,11 @@ textarea {
 }
 
 .container-xl {
-    @apply flex flex-col max-w-[1280px] min-h-[800px] mx-auto px-2
+    @apply flex flex-col max-w-[1280px]  mx-auto min-[503px]:px-2
 }
 
 .container-2xl {
-  @apply flex flex-col max-w-[1520px] min-h-[800px] mx-auto px-2
+  @apply flex flex-col max-w-[1520px]  mx-auto px-2
 }
 
 .menu-container {
@@ -173,7 +174,7 @@ textarea {
 }
 
 .property-card {
-    @apply flex flex-col bg-white max-w-[395px] min-h-[322px] mx-auto  shadow-md rounded-lg overflow-hidden aspect-[79/86]
+    @apply flex flex-col bg-white w-full mx-auto  shadow-md rounded-lg overflow-hidden max-h-[414px] min-[305px]:aspect-[79/86]
 }
 
 .error-message {
@@ -191,7 +192,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio {
-  @apply flex flex-row items-center justify-evenly mb-2
+  @apply flex flex-wrap min-[456px]:flex-row items-center justify-center min-[456px]:justify-evenly mb-2
 }
 
 .property-zone-radio span {
@@ -203,7 +204,7 @@ input:invalid[focused='true'] {
 }
 
 .property-zone-radio label {
-  @apply cursor-pointer
+  @apply cursor-pointer mx-2
 }
 
 .property-zone-radio div {
@@ -218,21 +219,18 @@ input:invalid[focused='true'] {
   @apply  w-[70%]
 }
 
-
-
-
-
-
+@media screen and (max-width: 767px) {
+  .property-zone-radio span {
+    @apply text-base;
+  }
+}
 
 .dropdown-menu {
     position: absolute;
     top: 3.5rem;
     left: 1.4rem;
-    
-    
-    
 
-    background-color: #f5f3f4;
+    background-color: #f5f4f4;
     
     padding-top: 8px;
     padding-bottom: 8px;
@@ -243,6 +241,8 @@ input:invalid[focused='true'] {
 }
 
 .dropdown-menu.active{
+  background-color: #f5f4f4;
+
     opacity: 1;
     visibility: visible;
     transform: translateY(0);

@@ -10,81 +10,87 @@ import {
   IconHomeEco,
   IconSparkles,
 } from "@tabler/icons-react";
-import { IconArrowNarrowRight } from "@tabler/icons-react";
 import ServiceCard from "@/components/ServiceCard";
+import Slider from "@/components/Slider/Slider";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
+const dataSlider = [
+  {
+    id: 1,
+    title: "PB+ REAL ESTATE",
+    subtitle:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+
+    source: "/assets/house.jpg",
+    linkTitle: "Take a look",
+    href: "#",
+  },
+  {
+    id: 2,
+    title: "Houses & Properties",
+    subtitle:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+    source: "/assets/house2.webp",
+    linkTitle: "Take a look",
+    href: "#",
+  },
+  {
+    id: 3,
+    title: "House Stitting",
+    subtitle:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+    source: "/assets/house3.jpg",
+    linkTitle: "Take a look",
+    href: "#",
+  },
+  {
+    id: 4,
+    title: "Assesment Services",
+    subtitle:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+    source: "/assets/house4.png",
+    linkTitle: "Take a look",
+    href: "#",
+  },
+  {
+    id: 5,
+    title: "House Keeping",
+    subtitle:
+      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+    source: "/assets/housekeeping.jpg",
+    linkTitle: "Take a look",
+    href: "#",
+  },
+];
+
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4] container-xl pt-[50px] ${roboto.className}`}>
-      <section className="flex flex-row w-full pt-12 gap-8 ">
-        <div className="flex flex-col text-left w-[45%]">
-          <h1 className="text-[#0A100D] text-left text-[90px] leading-tight">
-            PB+ REAL ESTATE
-          </h1>
-          <p className="text-[#5e5e5e] font-medium text-lg">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-            voluptate sequi asperiores nemo possimus quod et quis, rerum
-            reiciendis veritatis cum tempora
-          </p>
-          <Link
-            href={"#services"}
-            className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#30725C] hover:bg-[#214d3e]  text-center"
-          >
-            Take a look
-          </Link>
-        </div>
-        <div className="relative grid grid-cols-4 grid-rows-3 gap-4 w-[55%] h-[500px]">
-          <div className="relative col-span-2 row-span-3 rounded-3xl overflow-hidden">
-            <Image
-              src={"/assets/house.jpg"}
-              alt="real estate photo"
-              fill={true}
-              sizes="(min-width: 1120px) 800px"
-              className="object-cover object-center"
-            />
-          </div>
-          <div className="relative  row-span-3 rounded-3xl overflow-hidden">
-            <Image
-              src={"/assets/house2.webp"}
-              alt="real estate photo"
-              fill={true}
-              sizes="(min-width: 1120px) 800px"
-              className="object-cover object-left"
-            />
-          </div>
-          <div className="relative  row-span-3 rounded-3xl overflow-hidden">
-            <Image
-              src={"/assets/house3.jpg"}
-              alt="real estate photo"
-              fill={true}
-              sizes="(min-width: 1120px) 800px"
-              className="object-cover object-center"
-            />
-          </div>
-        </div>
-      </section>
+    <main className={`bg-[#f5f3f4]  xl:pt-[50px] ${roboto.className}`}>
+      <Slider dataSlider={dataSlider} />
 
       <section
         id="services"
-        className="flex flex-col w-full pt-[60px] mb-8 items-center"
+        className="flex flex-col w-full pt-[25px] mb-8 items-center"
       >
-        <h1>We provide A Lot of Services</h1>
-        <p className="text-[#5e5e5e] font-medium text-lg w-[820px] text-center">
+        <h1 className="xl:text-[64px] text-[42px]">
+          We provide A Lot of Services
+        </h1>
+        <p className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad
           minim veniam,
         </p>
-        <div className="bg-[#30725C] px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
+        <div className="bg-[#30725C] px-1 min-[400px]:px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
           Our services
         </div>
-        <div className="grid grid-cols-4 grid-rows-2 gap-3 w-[1100px] h-[550px] ">
+
+        <div className="grid grid-cols-1 xl:grid-cols-4 xl:grid-rows-2 min-[400px]:grid-cols-2 min-[400px]:grid-rows-4 gap-3 xl:w-[1100px] xl:h-[550px] w-full h-full min-[400px]:px-4 xl:px-0">
           <ServiceCard
             href={"/real-estate/houses-&-properties"}
             title={"Houses & Properties"}
             icon={<IconHomeDollar size={70} color="#30725C" />}
-            style={"col-span-2 row-span-2"}
+            style={"min-[400px]:col-span-2 min-[400px]:row-span-2"}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
             ducimus tempore quia sequi!
@@ -98,21 +104,21 @@ export default function Page() {
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/house-sitting"}
             title={"House Sitting"}
             icon={<IconHomeEco size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
-            title={"Assesment Services"}
+            href={"/real-estate/assessment-services"}
+            title={"Assessment Services"}
             icon={<IconGraph size={70} color="#30725C" />}
           >
             Lorem ipsum dolor, sit amet consectetur adipisicing elite
           </ServiceCard>
           <ServiceCard
-            href={"/"}
+            href={"/real-estate/home-management"}
             title={"Home Management"}
             icon={<IconHomeCog size={70} color="#30725C" />}
           >

@@ -4,10 +4,10 @@ import Link from "next/link";
 const ServiceCard = ({ children, href, title, icon, style }) => {
   return (
     <article
-      className={`group bg-[#FCFFFC] ${style} overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}
+      className={`group bg-[#FCFFFC] ${style} h-full xl:py-0 py-2 overflow-hidden text-center shadow-lg hover:bg-[#30725C] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all`}
     >
       <Link href={href}>
-        <div className="relative flex w-full h-full items-center justify-center text-2xl">
+        <div className="relative flex w-full h-full items-center justify-center text-xl xl:text-2xl">
           <div className="flex flex-col z-10 px-4 items-center justify-center">
             <div className="p-4 rounded-full bg-gray-100 group-hover:bg-white">
               {icon}

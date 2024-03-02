@@ -6,12 +6,13 @@ import PropertyLoader from "./PropertyLoader";
 import { IconError404, IconFileSad, IconSearchOff } from "@tabler/icons-react";
 
 const PropertiesDisplay = () => {
+  // TODO: Refactorizar a server component
   const items = [
     { value: "recentlyAdded", label: "Recently Added" },
-    { value: "Rental", label: "The Ejido" },
-    { value: "Selling", label: "The Bufadora" },
-    { value: "theSpit", label: "The Spit" },
-    { value: "maneadero", label: "Maneadero" },
+    { value: "The Ejido", label: "The Ejido" },
+    { value: "Bufadora", label: "Bufadora" },
+    { value: "The Spit", label: "The Spit" },
+    { value: "Maneadero", label: "Maneadero" },
   ];
 
   const [value, setValue] = useState("recentlyAdded");
@@ -25,7 +26,7 @@ const PropertiesDisplay = () => {
       filteredProperties = propertiesList;
     } else {
       filteredProperties = propertiesList?.filter((property) =>
-        property.type.includes(filterValue)
+        property.zone.includes(filterValue)
       );
     }
     return filteredProperties;
@@ -68,9 +69,9 @@ const PropertiesDisplay = () => {
           </label>
         ))}
       </div>
-      <div className=" w-full border-2 border-gray-300 rounded-lg p-4">
+      <div className=" w-full border-2 border-gray-300 rounded-lg min-[503px]:px-4 py-4">
         {isLoading && (
-          <div className="grid grid-cols-3 items-center gap-4">
+          <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-4">
             <PropertyLoader uniqueKey="1" />
             <PropertyLoader uniqueKey="2" />
             <PropertyLoader uniqueKey="3" />
@@ -80,7 +81,7 @@ const PropertiesDisplay = () => {
           </div>
         )}
         {filteredProperties?.length ? (
-          <div className="grid grid-cols-3 items-center gap-4">
+          <div className="grid lg:grid-cols-3 min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2">
             {filteredProperties?.map((property) => (
               <PropertyCard key={property._id} {...property} />
             ))}

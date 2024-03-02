@@ -5,7 +5,7 @@ const UserProperties = async ({ user }) => {
   const { properties } = await users.getUser(user.id);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-2 self-start">
       {properties.map((property) => (
         <PropertyCard key={property._id} {...property} />
       ))}
