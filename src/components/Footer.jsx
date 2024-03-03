@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import React from "react";
 import { usePathname } from "next/navigation";
+import { Baskervville } from "next/font/google";
 import Link from "next/link";
 
 const Footer = () => {
@@ -11,7 +12,8 @@ const Footer = () => {
     let logo,
       title,
       subtitle,
-      banner = "";
+      banner,
+      department = "";
 
     if (path.includes("real-estate")) {
       logo = "/assets/logorealestate.png";
@@ -19,35 +21,54 @@ const Footer = () => {
       subtitle =
         "The fundamental cornerstone of the real estate market is to ensure that no one is harmed.";
       banner = "/assets/bannerrealestate.jpg";
+      department = "Real Estate Department";
     } else if (path.includes("legal")) {
       logo = "/assets/logolegal.png";
       title = "PB+ LEGAL";
       subtitle = "The fist foundation of justice is not to hurt any one.";
       banner = "/assets/bannerlegal.jpg";
+      department = "Legal Department";
     } else {
       logo = "/assets/logomain.png";
       title = "PB+";
       subtitle = "Your same life but better!";
       banner = "/assets/bannermain.jpg";
+      department = "Home Page";
     }
 
-    return { logo, title, subtitle, banner };
+    return { logo, title, subtitle, banner,department };
   };
 
-  const { logo, title, subtitle, banner } = getFooterInfo(pathname);
+  const { logo, title, subtitle, banner,department } = getFooterInfo(pathname);
 
   const [footerLogo, setFooterLogo] = useState(logo);
   const [footerTitle, setFooterTitle] = useState(title);
   const [footerSubtitle, setFooterSubtitle] = useState(subtitle);
   const [footerBanner, setFooterBanner] = useState(banner);
+  const [footerDepartment, setFooterDepartment] = useState(department);
 
   useEffect(() => {
-    const { logo, title, subtitle, banner } = getFooterInfo(pathname);
+    const { logo, title, subtitle, banner,department } = getFooterInfo(pathname);
     setFooterLogo(logo);
     setFooterTitle(title);
     setFooterSubtitle(subtitle);
     setFooterBanner(banner);
+    setFooterDepartment(department);
   }, [pathname]);
+
+  const [copiedText, setCopiedText] = useState(null);
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        setCopiedText(text);
+        setTimeout(() => {
+          setCopiedText(null);
+        }, 3000);
+      })
+      .catch((err) => console.error("Failed to copy:", err));
+  };
 
   return (
     <footer className=" divide-y xl:divide-y-0 bg-[#202225] text-gray-100">
@@ -83,7 +104,7 @@ const Footer = () => {
             href="#"
             className="flex justify-center space-x-3 xl:justify-end w-[45%] self-center"
           >
-            <img src={footerLogo} alt="" className="w-32 h-32" />
+            <img src={footerLogo} alt="" className="h-32" />
           </a>
           <div className="flex flex-col w-[55%] justify-center">
             <span className="text-2xl xl:text-4xl font-semibold">
@@ -131,24 +152,24 @@ const Footer = () => {
             </h3>
             <ul className="space-y-1">
               <li>
-                <Link href="#">
+                <Link href="/remo">
                   <p className="hover:text-[#cba557]">Home Remodelation</p>
                 </Link>
               </li>
               <li>
-                <Link href="#">
+                <Link href="/community">
                   <p className="hover:text-[#cba557]">Community Advertising</p>
                 </Link>
               </li>
               <li>
-                <Link href="#">
+                <Link href="/real-estate/houses-&-properties">
                   <p className="hover:text-[#cba557]">
                     Real Estate Sale & Renting
                   </p>
                 </Link>
               </li>
               <li>
-                <Link href="#">
+                <Link href="/legal#learnmore">
                   <p className="hover:text-[#cba557]">
                     Legal Counseling & Representation
                   </p>
@@ -163,20 +184,42 @@ const Footer = () => {
             <div className="flex flex-col">
               <span className="text-sm text-start">
                 Email:
-                <p className="text-[#cba557]">info@pbplus.com.mx</p>
+                <p
+                  className="text-[#cba557] cursor-pointer"
+                  onClick={() => copyToClipboard("info@pbplus.com.mx")}
+                >
+                  info@pbplus.com.mx
+                </p>
               </span>
               <span className="text-sm text-start">
                 Number:
-                <p className="text-[#cba557]">+52(646) 123 4567</p>
-              </span>{" "}
+                <p
+                  className="text-[#cba557] cursor-pointer"
+                  onClick={() => copyToClipboard("+52(646) 123 4567")}
+                >
+                  +52(646) 123 4567
+                </p>
+              </span>
               <span className="text-sm text-start">
                 Address:
-                <p className="text-[#cba557]">
+                <p
+                  className="text-[#cba557] cursor-pointer"
+                  onClick={() =>
+                    copyToClipboard(
+                      "Km 10.5 Carretera La Bufadora Coronel Esteban Cantú, 22794 Ensenada, B.C."
+                    )
+                  }
+                >
                   Km 10.5 Carretera La Bufadora Coronel Esteban Cantú, 22794
                   Ensenada, B.C.
                 </p>
               </span>
             </div>
+            {copiedText && (
+              <p className="text-green-500">
+                Copied {copiedText} to clipboard!
+              </p>
+            )}
           </div>
           <div className="space-y-3">
             <div className="uppercase dark:text-gray-50 font-bold text-lg">
@@ -213,6 +256,30 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="h-2 bg-gradient-to-r from-yellow-300 to-orange-500"></div>
+      <div className="bg-black flex justify-between py-4 px-2 xl:px-4">
+        <p className="xl:p-4 py-4 text-sm xl:text-base">
+          Ensenada Baja California <br />
+          La Bufadora Road Ejido Esteban Cantu KM 10.5 <br />
+          P.O. 22794 Space #5 <br />
+          info@pbplus.com.mx +52(646) 148 4412
+        </p>
+        <div className="flex flex-col xl:flex-row">
+          <img
+            src="/assets/footerlogo.png"
+            alt=""
+            className="h-14 xl:h-32"
+          />
+          <div className="flex flex-col pl-2">
+            <p className="text-white text-[40px] xl:text-[70px] font-bold font-serif -mb-4">
+              PB+
+            </p>
+            <p className="font-semibold text-[10px] xl:text-[20px] font-serif text-ju">
+              {footerDepartment}
+            </p>
           </div>
         </div>
       </div>
