@@ -1,6 +1,6 @@
 "use client";
 import { IconX } from "@tabler/icons-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const items = [
   { value: "recentlyAdded", label: "Recently Added" },
@@ -10,23 +10,66 @@ const items = [
   { value: "Maneadero", label: "Maneadero" },
 ];
 
+// const data = [
+//   {
+//     question: "Home voltage",
+//     options: ["120", "240", "Both"],
+//     moreInfo: true,
+//   },
+//   {
+//     question: "How many do you need",
+//     options: ["1", "2/3", "4/5", "More"],
+//     moreInfo: true,
+//   },
+// ];
+
 const data = [
   {
-    question: "Home voltage",
-    options: ["120", "240", "Both"],
-    moreInfo: true,
+    service: "DISTRIBUTION BOX INSTALATION",
+    questions: [
+      {
+        question: "Home voltage",
+        options: ["120", "240", "Both"],
+        moreInfo: true,
+      },
+      {
+        question: "How many do you need",
+        options: ["1", "2/3", "4/5", "More"],
+        moreInfo: true,
+      },
+    ],
   },
+
   {
-    question: "How many do you need",
-    options: ["1", "2/3", "4/5", "More"],
-    moreInfo: true,
+    service: "NEW HOME HIRING",
+    questions: [
+      {
+        question: "Home voltage",
+        options: ["120", "240", "Both"],
+        moreInfo: true,
+      },
+      {
+        question: "Construction Ft²/m²",
+        options: [
+          "300-500 Ft² / 90-150 m²",
+          "500-700 Ft² / 150-210 m²",
+          "700-900 Ft² / 210-280m²",
+          "OTHER",
+        ],
+        moreInfo: true,
+      },
+    ],
   },
 ];
 
 const Quotation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [index, setIndex] = useState(0);
-  const [question, setQuestion] = useState(data[index]);
+  const [selectedService, setSelectedService] = useState("");
+  const [serviceQuestions, setServiceQuestions] = useState(
+    data.length === 1 ? data[0] : []
+  );
+  const [question, setQuestion] = useState(serviceQuestions[index]);
   const [quoteAnswers, setQuoteAnswers] = useState([]);
   const [answer, setAnswer] = useState("");
 
@@ -41,17 +84,20 @@ const Quotation = () => {
 
     setQuoteAnswers(updatedQuoteAnswers);
 
-    if (index + 1 < data.length) {
+    if (index + 1 < serviceQuestions.length) {
       setIndex(index + 1);
-      setQuestion(data[index + 1]);
-      setAnswer(quoteAnswers[index + 1].answer);
+      setQuestion(serviceQuestions[index + 1]);
+      setAnswer(quoteAnswers[index + 1]?.answer);
     }
   };
 
   const handlePrevQuestion = () => {
-    if (index > 0) {
+    if (index === 0) {
+      setServiceQuestions([]);
+      setAnswer("");
+    } else if (index > 0) {
       setIndex(index - 1);
-      setQuestion(data[index - 1]);
+      setQuestion(serviceQuestions[index - 1]);
       setAnswer(quoteAnswers[index - 1].answer);
     }
   };
@@ -59,10 +105,22 @@ const Quotation = () => {
   const cancelQuote = () => {
     setIsMenuOpen(false),
       setIndex(0),
-      setQuestion(data[0]),
+      setQuestion(serviceQuestions[0]),
       setQuoteAnswers([]);
     setAnswer("");
+    setServiceQuestions([]);
+    setSelectedService("");
   };
+
+  const handleServiceChoice = () => {
+    const serviceIndex = data.findIndex(
+      (object) => object.service === selectedService
+    );
+    setServiceQuestions(data[serviceIndex].questions);
+    setQuestion(data[serviceIndex].questions[0]);
+  };
+
+  console.log(selectedService, quoteAnswers);
 
   return (
     <>
@@ -85,52 +143,94 @@ const Quotation = () => {
               </button>
             </div>
             <h2 className="text-2xl text-center px-2 font-semibold">
-              {question.question}
+              {serviceQuestions.length === 0
+                ? "What service do you need?"
+                : question?.question}
             </h2>
           </header>
           <form className="px-2">
-            <ul>
-              {question.options.map((item) => (
-                <li key={item} className="mb-1">
-                  <label
-                    className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
-                    htmlFor={item}
+            {serviceQuestions.length === 0 ? (
+              <>
+                <ul>
+                  {data.map((object) => (
+                    <li key={object.service} className="mb-1">
+                      <label
+                        className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+                        htmlFor={object.service}
+                      >
+                        <input
+                          className="w-fit shadow-none"
+                          type="radio"
+                          id={object.service}
+                          name="test"
+                          checked={selectedService === object.service}
+                          onChange={(e) => setSelectedService(e.target.value)}
+                          value={object.service}
+                        />
+                        <span className="text-lg text-black font-normal">
+                          {object.service}
+                        </span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+                <div className="w-full flex mt-[40px]">
+                  <button
+                    type="button"
+                    className="px-4 py-3 mx-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                    disabled={selectedService === ""}
+                    onClick={handleServiceChoice}
                   >
-                    <input
-                      className="w-fit shadow-none"
-                      type="radio"
-                      id={item}
-                      name="test"
-                      checked={answer === item}
-                      onChange={(e) => setAnswer(e.target.value)}
-                      value={item}
-                    />
-                    <span className="text-lg text-black font-normal">
-                      {item}
-                    </span>
-                  </label>
-                </li>
-              ))}
-            </ul>
-            <div className="flex w-full justify-evenly mt-[40px]">
-              {index > 0 && (
-                <button
-                  type="button"
-                  className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                  onClick={handlePrevQuestion}
-                >
-                  Previous
-                </button>
-              )}
-              <button
-                type="button"
-                className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
-                disabled={answer === ""}
-                onClick={handleNextQuestion}
-              >
-                Next
-              </button>
-            </div>
+                    Next
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <ul>
+                  {question?.options?.map((item) => (
+                    <li key={item} className="mb-1">
+                      <label
+                        className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+                        htmlFor={item}
+                      >
+                        <input
+                          className="w-fit shadow-none"
+                          type="radio"
+                          id={item}
+                          name="test"
+                          checked={answer === item}
+                          onChange={(e) => setAnswer(e.target.value)}
+                          value={item}
+                        />
+                        <span className="text-lg text-black font-normal">
+                          {item}
+                        </span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex w-full justify-evenly mt-[40px]">
+                  {index > -1 && (
+                    <button
+                      type="button"
+                      className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                      onClick={handlePrevQuestion}
+                    >
+                      Previous
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                    disabled={answer === ""}
+                    onClick={handleNextQuestion}
+                  >
+                    Next
+                  </button>
+                </div>
+              </>
+            )}
           </form>
         </dialog>
       </div>
