@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Quotation from "@/components/Quotation";
 
 const page = () => {
   return (
@@ -25,9 +26,7 @@ const page = () => {
         <div className="w-[360px] h-500px ">
           <section className="flex flex-col items-center w-full h-[300px] bg-white px-1 py-4">
             <h2 className="text-2xl font-medium">Do You Need a Quote?</h2>
-            <button className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center">
-              Free Quote
-            </button>
+            <Quotation />
           </section>
         </div>
       </div>
