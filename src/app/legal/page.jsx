@@ -19,7 +19,7 @@ const Page = () => {
       subtitle:
         "The first foundation of justice is not to hurt anyone.  PB Plus is born with the intention of re-establishing the order and legality within a community with diverse needs.",
 
-      source: "/assets/legalbanner.jpeg",
+      source: "/assets/legar.jpeg",
       linkTitle: "Take a look",
       href: "#learnmore",
     },

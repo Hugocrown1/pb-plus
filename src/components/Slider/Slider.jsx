@@ -39,8 +39,8 @@ const Slider = ({ dataSlider }) => {
             alt={object.title}
             src={object.source}
             fill={true}
-            sizes="(min-width: 1120px) 1500px"
-            className={`object-cover object-center duration-[8000ms] ${
+            sizes="(min-width: 1120px) 1920px"
+            className={`object-cover object-center duration-[10000ms] ${
               slideIndex === index + 1 ? "scale-110" : "scale-100"
             }`}
           />
