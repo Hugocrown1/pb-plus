@@ -1,4 +1,5 @@
 import { connectDB } from "@/lib/mongoose";
+import { isAdmin } from "@/lib/userAuth";
 import Users from "@/models/users";
 import bcrypt from "bcrypt";
 
@@ -7,8 +8,14 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     await connectDB();
-    const users = await Users.find();
-    return NextResponse.json(users);
+    if (isAdmin()) {
+      const users = await Users.find();
+      return NextResponse.json(users);
+    }
+    return NextResponse.json(
+      { message: "Usuario no autorizado" },
+      { status: 401 }
+    );
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
