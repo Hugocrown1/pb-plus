@@ -10,19 +10,6 @@ const items = [
   { value: "Maneadero", label: "Maneadero" },
 ];
 
-// const data = [
-//   {
-//     question: "Home voltage",
-//     options: ["120", "240", "Both"],
-//     moreInfo: true,
-//   },
-//   {
-//     question: "How many do you need",
-//     options: ["1", "2/3", "4/5", "More"],
-//     moreInfo: true,
-//   },
-// ];
-
 const data = [
   {
     service: "DISTRIBUTION BOX INSTALATION",
@@ -30,12 +17,10 @@ const data = [
       {
         question: "Home voltage",
         options: ["120", "240", "Both"],
-        moreInfo: true,
       },
       {
         question: "How many do you need",
         options: ["1", "2/3", "4/5", "More"],
-        moreInfo: true,
       },
     ],
   },
@@ -63,6 +48,7 @@ const data = [
 ];
 
 const Quotation = () => {
+  const [currentView, setCurrentView] = useState("serviceQuestions");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [index, setIndex] = useState(0);
   const [selectedService, setSelectedService] = useState("");
@@ -84,7 +70,7 @@ const Quotation = () => {
 
     setQuoteAnswers(updatedQuoteAnswers);
 
-    if (index + 1 < serviceQuestions.length) {
+    if (index + 1 < serviceQuestions.length + 2) {
       setIndex(index + 1);
       setQuestion(serviceQuestions[index + 1]);
       setAnswer(quoteAnswers[index + 1]?.answer);
@@ -98,7 +84,7 @@ const Quotation = () => {
     } else if (index > 0) {
       setIndex(index - 1);
       setQuestion(serviceQuestions[index - 1]);
-      setAnswer(quoteAnswers[index - 1].answer);
+      setAnswer(quoteAnswers[index - 1]?.answer);
     }
   };
 
@@ -119,8 +105,6 @@ const Quotation = () => {
     setServiceQuestions(data[serviceIndex].questions);
     setQuestion(data[serviceIndex].questions[0]);
   };
-
-  console.log(selectedService, quoteAnswers);
 
   return (
     <>
@@ -145,6 +129,8 @@ const Quotation = () => {
             <h2 className="text-2xl text-center px-2 font-semibold">
               {serviceQuestions.length === 0
                 ? "What service do you need?"
+                : index + 1 > serviceQuestions.length
+                ? "Would you like to provide more information?"
                 : question?.question}
             </h2>
           </header>
@@ -186,50 +172,54 @@ const Quotation = () => {
                 </div>
               </>
             ) : (
-              <>
-                <ul>
-                  {question?.options?.map((item) => (
-                    <li key={item} className="mb-1">
-                      <label
-                        className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
-                        htmlFor={item}
+              (currentView === "serviceQuestions" && (
+                <>
+                  <ul>
+                    {question?.options?.map((item) => (
+                      <li key={item} className="mb-1">
+                        <label
+                          className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+                          htmlFor={item}
+                        >
+                          <input
+                            className="w-fit shadow-none"
+                            type="radio"
+                            id={item}
+                            name="test"
+                            checked={answer === item}
+                            onChange={(e) => setAnswer(e.target.value)}
+                            value={item}
+                          />
+                          <span className="text-lg text-black font-normal">
+                            {item}
+                          </span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex w-full justify-evenly mt-[40px]">
+                    {index > -1 && (
+                      <button
+                        type="button"
+                        className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                        onClick={handlePrevQuestion}
                       >
-                        <input
-                          className="w-fit shadow-none"
-                          type="radio"
-                          id={item}
-                          name="test"
-                          checked={answer === item}
-                          onChange={(e) => setAnswer(e.target.value)}
-                          value={item}
-                        />
-                        <span className="text-lg text-black font-normal">
-                          {item}
-                        </span>
-                      </label>
-                    </li>
-                  ))}
-                </ul>
-                <div className="flex w-full justify-evenly mt-[40px]">
-                  {index > -1 && (
+                        Previous
+                      </button>
+                    )}
                     <button
                       type="button"
-                      className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                      onClick={handlePrevQuestion}
+                      className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                      disabled={answer === ""}
+                      onClick={handleNextQuestion}
                     >
-                      Previous
+                      Next
                     </button>
-                  )}
-                  <button
-                    type="button"
-                    className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
-                    disabled={answer === ""}
-                    onClick={handleNextQuestion}
-                  >
-                    Next
-                  </button>
-                </div>
-              </>
+                  </div>
+                </>
+              ),
+              currentView === "extraInfo" && <div>hola</div>)
             )}
           </form>
         </dialog>
