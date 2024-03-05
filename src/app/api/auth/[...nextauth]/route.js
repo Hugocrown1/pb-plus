@@ -41,6 +41,7 @@ export const authOptions = {
     async session({ session, token }) {
       session.user.id = token.id;
       session.user.role = token.role;
+      session.user.phone = token.phone;
       return session;
     },
     async jwt({ token, account, user }) {
@@ -48,6 +49,7 @@ export const authOptions = {
         token.accessToken = account.access_token;
         token.id = user.id;
         token.role = user.role;
+        token.phone = user.phone;
       }
       return token;
     },
