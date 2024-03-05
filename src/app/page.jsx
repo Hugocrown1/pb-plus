@@ -14,7 +14,7 @@ export default function Home() {
         <h1 className="">Meet Our Departments Services</h1>
         <h2>Let's do it right!</h2>
 
-        <hr className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2" />
+        <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2"></div>
 
         <div className="relative grid grid-cols-1 min-[726px]:grid-cols-2 min-[1450px]:grid-cols-4 max-w-[1440px] my-12">
           <DepartmentCard

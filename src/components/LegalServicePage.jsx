@@ -2,10 +2,25 @@
 import { Roboto } from "next/font/google";
 import Link from "next/link";
 import ContactForm from "./ContactForm";
+import { usePathname } from "next/navigation";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 
 const Page = ({ service }) => {
+  const pathname = usePathname();
+  const links = [
+    { href: "/legal/immigration-services", label: "Immigration Services" },
+    {
+      href: "/legal/property-regularization",
+      label: "Property Regularization",
+    },
+    { href: "/legal/property-acquisition", label: "Property Acquisition" },
+    { href: "/legal/court-representation", label: "Court Representation" },
+    { href: "/legal/legal-consulting", label: "Legal Consulting" },
+    { href: "/legal/formation-of-companies", label: "Formation Of Companies" },
+    { href: "/legal/funeral-arrangements", label: "Funeral Arrangements" },
+    { href: "/legal/other-services", label: "Other Legal Services" },
+  ];
   return (
     <main className={`bg-[#f5f3f4]`}>
       <div className="xl:mx-56 ">
@@ -44,29 +59,46 @@ const Page = ({ service }) => {
         </section>
         <section id="learnmore" className="flex my-8 flex-col xl:flex-row">
           <div className="xl:w-[25%] xl:mr-4">
-            <ul className="bg-white rounded-md mt-8 py-2 shadow-md text-xl">
-              <li key={service.id} className="mx-8">
-                <div className="w-[50px] h-1 bg-[#cba557] my-8"></div>
-                <a
-                  href={`#${service.id}`}
-                  className="cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-blue-300 p-1 rounded-md"
-                >
+            <div className="bg-white rounded-md mt-8 py-2 shadow-md text-xl">
+              <ul>
+                <li key={service.id} className="mx-8">
+                  <div className="w-[50px] h-1 bg-[#cba557] mt-8"></div>
+                  
+                  <h3 className=" my-4">
                   {service.title}
-                </a>
-                <ul className="mx-8 text-gray-700 ">
-                  {service.subtitles.map((subtitle) => (
-                    <li key={subtitle.id}>
-                      <a
-                        href={`#${subtitle.id}`}
-                        className="cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md"
-                      >
-                        {subtitle.title}
-                      </a>
+              </h3>
+                  <ul className=" text-gray-700 ">
+                    {service.subtitles.map((subtitle) => (
+                      <li key={subtitle.id}>
+                        
+                        <Link href={`#${subtitle.id}`}>
+                        <p className="cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">{subtitle.title}</p>
+                      </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-white rounded-md mt-8 py-2 shadow-md text-xl">
+              <div className="w-[50px] h-1 bg-[#cba557] mt-8 mx-8"></div>
+              <h3 className="mx-8 my-4">
+              Our Practice Areas
+              </h3>
+              <ul className="list-none mx-8 ">
+                
+                {links.map(
+                  ({ href, label }) =>
+                    pathname.includes(href)?null :(
+                      <li key={href} className="mb-2">
+                      <Link href={href}>
+                        <p className="text-gray-700 cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">{label}</p>
+                      </Link>
                     </li>
-                  ))}
-                </ul>
-              </li>
-            </ul>
+                    )
+                )}
+              </ul>
+            </div>
           </div>
           <div className="xl:w-[75%]" id="learnmore">
             <div
