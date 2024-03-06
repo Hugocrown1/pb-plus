@@ -38,11 +38,35 @@ const data = [
     questions: [
       {
         question: "Home voltage",
-        options: ["120", "240", "Both"],
+        options: [
+          { option: "120", custom: false },
+          { option: "240", custom: false },
+          { option: "Both", custom: false },
+        ],
+        type: "Radio",
       },
       {
         question: "How many do you need",
-        options: ["1", "2/3", "4/5", "More"],
+        options: [
+          { option: "1", custom: false },
+          { option: "2/3", custom: false },
+          { option: "4/5", custom: false },
+          { option: "More", custom: false },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "Do you have a tool?",
+        options: [
+          { option: "Yes", custom: true },
+          { option: "No", custom: false },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "How are you?",
+
+        type: "Open",
       },
     ],
   },
@@ -52,19 +76,27 @@ const data = [
     questions: [
       {
         question: "Home voltage",
-        options: ["120", "240", "Both"],
-        moreInfo: true,
+        options: [
+          { option: "120", custom: false },
+          { option: "240", custom: false },
+          { option: "Both", custom: false },
+        ],
+        type: "Radio",
       },
       {
         question: "Construction Ft²/m²",
         options: [
-          "300-500 Ft² / 90-150 m²",
-          "500-700 Ft² / 150-210 m²",
-          "700-900 Ft² / 210-280m²",
-          "OTHER",
+          { option: "300-500 Ft² / 90-150 m²", custom: false },
+          { option: "500-700 Ft² / 150-210 m²", custom: false },
+          { option: "700-900 Ft² / 210-280m²", custom: false },
+          { option: "OTHER", custom: false },
         ],
-        moreInfo: true,
+        type: "Radio",
       },
+      // {
+      //   question: "Where are you located?",
+      //   type: "Open",
+      // },
     ],
   },
 ];
@@ -81,6 +113,10 @@ const MultistepQuotation = () => {
     phone: session?.user.phone || "",
   });
   const [quoteFinished, setQuoteFinished] = useState(false);
+
+  useEffect(() => {
+    setAnswers([]);
+  }, [service]);
 
   useEffect(() => {
     if (session) {

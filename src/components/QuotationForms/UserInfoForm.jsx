@@ -28,9 +28,11 @@ const UserInfoForm = ({ userData, changeUserData }) => {
           name="phone"
           id="phone"
           type="tel"
+          maxLength={15}
+          minLength={10}
           value={userData.phone}
           onChange={(e) => changeUserData(e)}
-          errorMessage="Please provide your phone number"
+          errorMessage="Please a valid phone number"
         />
       </div>
     </FormWrapper>
