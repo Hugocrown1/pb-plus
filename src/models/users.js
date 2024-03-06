@@ -6,6 +6,7 @@ const schema = new mongoose.Schema({
   password: String,
   phone: String,
   image: String,
+  role: String,
   properties: [
     {
       type: mongoose.Schema.Types.ObjectId,

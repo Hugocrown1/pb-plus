@@ -9,7 +9,6 @@ import Users from "@/models/users";
 export async function GET() {
   try {
     await connectDB();
-
     const properties = await Properties.find();
     return NextResponse.json(properties);
   } catch (error) {
@@ -35,6 +34,11 @@ export async function POST(request) {
     } = await request.json();
 
     const user = await Users.findOne({ email: session.user.email });
+    if (!user)
+      return NextResponse.json(
+        { message: "No se encontro el usuario" },
+        { status: 404 }
+      );
 
     const property = await Properties.create({
       images,

@@ -21,7 +21,7 @@ const RegistrationPage = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post("/api/signup", {
+      const response = await axios.post("/api/users", {
         ...data,
       });
       setLoading(false);
