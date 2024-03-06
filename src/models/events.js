@@ -5,8 +5,10 @@ const schema = new mongoose.Schema({
   images: [String],
   date: Date,
   title: String,
+  category: String,
   address: String,
   description: String,
+  interestedUsers: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",

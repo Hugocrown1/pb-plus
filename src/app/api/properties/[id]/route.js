@@ -30,12 +30,18 @@ export async function PUT(request, { params: { id } }) {
         { message: "No se encontro la propiedad" },
         { status: 404 }
       );
-    const newProperty = await Properties.findByIdAndUpdate(
-      id,
-      { ...data },
-      { new: true }
+    if (verifyUser(property.user)) {
+      const newProperty = await Properties.findByIdAndUpdate(
+        id,
+        { ...data },
+        { new: true }
+      );
+      return NextResponse.json(newProperty);
+    }
+    return NextResponse.json(
+      { message: "Usuario no autorizado" },
+      { status: 401 }
     );
-    return NextResponse.json(newProperty);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
@@ -51,17 +57,23 @@ export async function DELETE(request, { params: { id } }) {
         { message: "No se encontro la propiedad" },
         { status: 404 }
       );
-    const imageKeys = property.images.map((image) => ({
-      Key: image.split("/").pop(),
-    }));
-    await client.send(
-      new DeleteObjectsCommand({
-        Bucket: bucketName,
-        Delete: { Objects: imageKeys },
-      })
+    if (verifyUser(property.user)) {
+      const imageKeys = property.images.map((image) => ({
+        Key: image.split("/").pop(),
+      }));
+      await client.send(
+        new DeleteObjectsCommand({
+          Bucket: bucketName,
+          Delete: { Objects: imageKeys },
+        })
+      );
+      const deletedProperty = await Properties.findByIdAndDelete(id);
+      return NextResponse.json(deletedProperty);
+    }
+    return NextResponse.json(
+      { message: "Usuario no autorizado" },
+      { status: 401 }
     );
-    const deletedProperty = await Properties.findByIdAndDelete(id);
-    return NextResponse.json(deletedProperty);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
