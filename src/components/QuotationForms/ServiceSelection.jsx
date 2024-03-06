@@ -19,6 +19,7 @@ const ServiceSelection = ({ data, service, updateService }) => {
                 checked={service === object.service}
                 onChange={(e) => updateService(e.target.value)}
                 value={object.service}
+                required
               />
               <span className="text-lg text-black font-normal">
                 {object.service}

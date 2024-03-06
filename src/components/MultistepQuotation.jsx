@@ -4,6 +4,8 @@ import { IconX } from "@tabler/icons-react";
 import React, { useState } from "react";
 import ServiceForm from "./QuotationForms/ServiceForm";
 import ServiceSelection from "./QuotationForms/ServiceSelection";
+import ExtraInfoForm from "./QuotationForms/ExtraInfoForm";
+import UserInfoForm from "./QuotationForms/UserInfoForm";
 
 const question = {
   question: "Home voltage",
@@ -67,7 +69,18 @@ const data = [
 
 const MultistepQuotation = () => {
   const [service, setService] = useState("");
-  const [answer, setAnswer] = useState("");
+  const [extraInfo, setExtraInfo] = useState("");
+  const [answers, setAnswers] = useState([]);
+  const [userData, setUserData] = useState({ name: "", email: "", phone: "" });
+
+  const handleUpdateAnswer = (index, answer) => {
+    const updatedAnswers = [...answers];
+    updatedAnswers[index] = {
+      question: serviceQuestions[index].question,
+      answer,
+    };
+    setAnswers(updatedAnswers);
+  };
 
   const serviceQuestions =
     service === ""
@@ -78,22 +91,28 @@ const MultistepQuotation = () => {
     <ServiceForm
       key={index}
       question={question}
-      answer={answer}
-      updateAnswer={setAnswer}
+      answer={answers[index] ? answers[index].answer : ""}
+      updateAnswer={(answer) => handleUpdateAnswer(index, answer)}
     />
   ));
 
-  const { steps, step, back, next, isFirstStep, isLastStep } = useMultistepForm(
-    [
+  const { steps, step, back, next, isFirstStep, isLastStep, closeForm } =
+    useMultistepForm([
       <ServiceSelection
         data={data}
         service={service}
         updateService={setService}
       />,
       ...serviceForms,
-    ]
-  );
+      <ExtraInfoForm extraInfo={extraInfo} setExtraInfo={setExtraInfo} />,
+      <UserInfoForm />,
+    ]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const handleFormClose = () => {
+    closeForm();
+    setIsMenuOpen(false);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -115,10 +134,7 @@ const MultistepQuotation = () => {
         <dialog className="flex flex-col w-[800px] min-h-[400px] bg-white rounded-lg pb-[40px]">
           <header className="w-full flex flex-col">
             <div className="w-full flex justify-end items-end p-2">
-              <button
-                className="text-gray"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <button className="text-gray" onClick={handleFormClose}>
                 <IconX />
               </button>
             </div>
@@ -140,7 +156,7 @@ const MultistepQuotation = () => {
                 type="submit"
                 className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
               >
-                {isLastStep ? "Submit" : "Next"}
+                {isLastStep && !isFirstStep ? "Submit" : "Next"}
               </button>
             </div>
           </form>

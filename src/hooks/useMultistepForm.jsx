@@ -20,6 +20,10 @@ const useMultistepForm = (steps) => {
   const goTo = (index) => {
     setCurrentStepIndex(index);
   };
+
+  const closeForm = () => {
+    setCurrentStepIndex(0);
+  };
   return {
     currentStepIndex,
     step: steps[currentStepIndex],
@@ -29,6 +33,7 @@ const useMultistepForm = (steps) => {
     next,
     goTo,
     back,
+    closeForm,
   };
 };
 
