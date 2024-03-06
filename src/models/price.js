@@ -2,7 +2,12 @@ import mongoose, { models } from "mongoose";
 
 const schema = new mongoose.Schema({
   serviceName: String,
-  responses: [[String, String]],
+  responses: [
+    {
+      question: String,
+      answer: String,
+    },
+  ],
   userName: String,
   userPhone: String,
   userEmail: String,

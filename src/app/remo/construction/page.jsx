@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import Quotation from "@/components/Quotation";
+import MultistepQuotation from "@/components/MultistepQuotation";
 
 const page = () => {
   return (
@@ -26,7 +27,8 @@ const page = () => {
         <div className="w-[360px] h-500px ">
           <section className="flex flex-col items-center w-full h-[300px] bg-white px-1 py-4">
             <h2 className="text-2xl font-medium">Do You Need a Quote?</h2>
-            <Quotation />
+            {/* <Quotation /> */}
+            <MultistepQuotation />
           </section>
         </div>
       </div>
