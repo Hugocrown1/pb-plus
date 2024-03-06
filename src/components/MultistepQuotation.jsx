@@ -1,11 +1,13 @@
 "use client";
 import useMultistepForm from "@/hooks/useMultistepForm";
-import { IconX } from "@tabler/icons-react";
-import React, { useState } from "react";
+import { IconCheck, IconX } from "@tabler/icons-react";
+import React, { useEffect, useState } from "react";
 import ServiceForm from "./QuotationForms/ServiceForm";
 import ServiceSelection from "./QuotationForms/ServiceSelection";
 import ExtraInfoForm from "./QuotationForms/ExtraInfoForm";
 import UserInfoForm from "./QuotationForms/UserInfoForm";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 const question = {
   question: "Home voltage",
@@ -68,10 +70,33 @@ const data = [
 ];
 
 const MultistepQuotation = () => {
+  const { data: session } = useSession();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [service, setService] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
   const [answers, setAnswers] = useState([]);
-  const [userData, setUserData] = useState({ name: "", email: "", phone: "" });
+  const [userData, setUserData] = useState({
+    name: session?.user.name || "",
+    email: session?.user.email || "",
+    phone: session?.user.phone || "",
+  });
+  const [quoteFinished, setQuoteFinished] = useState(false);
+
+  useEffect(() => {
+    if (session) {
+      setUserData({
+        name: session.user.name || "",
+        email: session.user.email || "",
+        phone: session.user.phone || "",
+      });
+    }
+  }, [session]);
+
+  const changeUserData = (e) => {
+    setUserData((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
 
   const handleUpdateAnswer = (index, answer) => {
     const updatedAnswers = [...answers];
@@ -105,18 +130,41 @@ const MultistepQuotation = () => {
       />,
       ...serviceForms,
       <ExtraInfoForm extraInfo={extraInfo} setExtraInfo={setExtraInfo} />,
-      <UserInfoForm />,
+      <UserInfoForm userData={userData} changeUserData={changeUserData} />,
     ]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleFormClose = () => {
     closeForm();
     setIsMenuOpen(false);
+    setQuoteFinished(false);
+    setUserData({
+      name: session?.user.name || "",
+      email: session?.user.email || "",
+      phone: session?.user.phone || "",
+    });
+    setExtraInfo("");
+    setAnswers([]);
+    setService("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     next();
+
+    if (isLastStep) {
+      const { name, email, phone } = userData;
+      const quotation = {
+        userName: name,
+        userEmail: email,
+        userPhone: phone,
+        serviceName: service,
+        extraInfo: extraInfo,
+        responses: answers,
+      };
+
+      await axios.post("/api/prices", quotation);
+      setQuoteFinished(true);
+    }
   };
   return (
     <>
@@ -139,27 +187,41 @@ const MultistepQuotation = () => {
               </button>
             </div>
           </header>
-          <form onSubmit={handleSubmit}>
-            {step}
-            <div className="flex w-full justify-evenly mt-[40px]">
-              {!isFirstStep && (
-                <button
-                  type="button"
-                  className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                  onClick={back}
-                >
-                  Previous
-                </button>
-              )}
-
+          {quoteFinished ? (
+            <div className="flex flex-col items-center h-full justify-stretch px-2 mt-[40px]">
+              <IconCheck size={90} />
+              <h2>Thanks for your time</h2>
+              <p>We will contact as soon as posible!</p>
               <button
-                type="submit"
-                className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                className="px-4 py-3 mt-4 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                onClick={handleFormClose}
               >
-                {isLastStep && !isFirstStep ? "Submit" : "Next"}
+                Dismiss
               </button>
             </div>
-          </form>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              {step}
+              <div className="flex w-full justify-evenly mt-[40px]">
+                {!isFirstStep && (
+                  <button
+                    type="button"
+                    className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                    onClick={back}
+                  >
+                    Previous
+                  </button>
+                )}
+
+                <button
+                  type="submit"
+                  className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                >
+                  {isLastStep && !isFirstStep ? "Submit" : "Next"}
+                </button>
+              </div>
+            </form>
+          )}
         </dialog>
       </div>
     </>

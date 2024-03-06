@@ -2,7 +2,7 @@ import React from "react";
 import FormWrapper from "./FormWrapper";
 import FormInput from "../FormInput";
 
-const UserInfoForm = ({ userInfo, setUserInfo }) => {
+const UserInfoForm = ({ userData, changeUserData }) => {
   return (
     <FormWrapper title={"Please provide us your contact information"}>
       <div className="form-input">
@@ -10,8 +10,8 @@ const UserInfoForm = ({ userInfo, setUserInfo }) => {
           label="Name"
           name="name"
           id="name"
-          //   value={values.title}
-          //   onChange={onChange}
+          value={userData.name}
+          onChange={(e) => changeUserData(e)}
           errorMessage="Please provide your name"
         />
         <FormInput
@@ -19,8 +19,8 @@ const UserInfoForm = ({ userInfo, setUserInfo }) => {
           name="email"
           id="email"
           type="email"
-          //   value={values.title}
-          //   onChange={onChange}
+          value={userData.email}
+          onChange={(e) => changeUserData(e)}
           errorMessage="Please provide your email"
         />
         <FormInput
@@ -28,8 +28,8 @@ const UserInfoForm = ({ userInfo, setUserInfo }) => {
           name="phone"
           id="phone"
           type="tel"
-          //   value={values.title}
-          //   onChange={onChange}
+          value={userData.phone}
+          onChange={(e) => changeUserData(e)}
           errorMessage="Please provide your phone number"
         />
       </div>
