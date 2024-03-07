@@ -23,7 +23,7 @@ const ServiceForm = ({ question, answer, updateAnswer }) => {
               return (
                 <li key={item.option} className="mb-1">
                   <label
-                    className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+                    className="w-full gap-2 p-3 flex flex-row border-[1px] cursor-pointer rounded-md"
                     htmlFor={item.option}
                   >
                     <input
@@ -48,7 +48,7 @@ const ServiceForm = ({ question, answer, updateAnswer }) => {
               return (
                 <li key={item.option} className="mb-1">
                   <label
-                    className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+                    className="items-center w-full gap-2 px-4 py-2 flex flex-row border-[1px] cursor-pointer rounded-md"
                     htmlFor={item.option}
                   >
                     <input
@@ -65,8 +65,9 @@ const ServiceForm = ({ question, answer, updateAnswer }) => {
                     </span>
 
                     <input
+                      className="font-medium text-lg"
                       type="text"
-                      placeholder="Enter custom value"
+                      placeholder="Provide more info..."
                       disabled={!checked}
                       required
                       value={value}
@@ -82,11 +83,12 @@ const ServiceForm = ({ question, answer, updateAnswer }) => {
       {question.type === "Open" && (
         <div className="form-input">
           <textarea
-            className="h-[150px]"
+            className="h-[150px] font-medium"
             maxLength={200}
             id="information"
             name="information"
             placeholder="Write your answer"
+            required
             value={answer}
             onChange={(e) => {
               updateAnswer(e.target.value);

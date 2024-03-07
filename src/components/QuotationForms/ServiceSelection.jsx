@@ -8,7 +8,7 @@ const ServiceSelection = ({ data, service, updateService }) => {
         {data.map((object, index) => (
           <li key={object.service} className="mb-1">
             <label
-              className="w-full gap-2 p-4 flex flex-row border-2 cursor-pointer rounded-md"
+              className="w-full gap-2 p-4 flex flex-row border-[1px] cursor-pointer rounded-md"
               htmlFor={object.service}
             >
               <input

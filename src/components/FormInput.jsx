@@ -11,8 +11,11 @@ const FormInput = (props) => {
   };
   return (
     <div className="form-input">
-      <label htmlFor={inputProps.id}>{label}</label>
+      <label className="text-base" htmlFor={inputProps.id}>
+        {label}
+      </label>
       <input
+        className="text-lg"
         {...inputProps}
         onChange={onChange}
         required
