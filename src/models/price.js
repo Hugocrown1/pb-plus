@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
   userPhone: String,
   userEmail: String,
   date: Date,
+  pdfFile: String,
 });
 
 export default models?.Prices || mongoose.model("Prices", schema);
