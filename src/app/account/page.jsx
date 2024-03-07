@@ -10,8 +10,7 @@ const page = async () => {
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px] ">
-      test
-      {/* <div className="container-xl mb-12 gap-6 bg-white p-8">
+      <div className="container-xl mb-12 gap-6 bg-white p-8">
         <section className="flex flex-row gap-4 ">
           <img
             src={session?.user?.image}
@@ -43,7 +42,7 @@ const page = async () => {
           <h2 className="font-semibold text-left">Saved posts</h2>
           <p className="text-left text-gray-700">No saved posts yet</p>
         </section>
-      </div> */}
+      </div>
     </main>
   );
 };
