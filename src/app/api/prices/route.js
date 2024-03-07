@@ -5,6 +5,7 @@ import { bucketName, client } from "@/lib/aws";
 import fs from "fs";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
+import nodemailer from "nodemailer";
 
 export async function GET() {
   try {
@@ -70,12 +71,14 @@ export async function POST(request) {
         : "0" + date.getDate().toString();
     const month =
       date.getMonth() + 1 >= 10
-        ? date.getMonth().toString()
-        : "0" + date.getMonth().toString();
+        ? (date.getMonth() + 1).toString()
+        : "0" + (date.getMonth() + 1).toString();
 
     const year = date.getFullYear();
 
-    page.drawText(`${day}-${month}-${year}`, {
+    const stringDate = `${day}-${month}-${year}`;
+
+    page.drawText(stringDate, {
       x: width - 106,
       y: height - 58,
       size: 12,
@@ -192,6 +195,28 @@ export async function POST(request) {
 
     price.pdfFile = pdfFile;
     await price.save();
+
+    let transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USERNAME,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+
+    transporter.sendMail({
+      from: process.env.GMAIL_USERNAME,
+      to: "PlaceEmailHere", // TODO: add email to receive all price PDFs
+      subject: `Nueva cotización de ${userName}`,
+      text: `Cotización hecha el día ${stringDate}. ID de la cotización: ${price._id}`,
+      attachments: [
+        {
+          filename: pdfFileName,
+          content: pdfBytes,
+          contentType: "application/pdf",
+        },
+      ],
+    });
 
     return NextResponse.json(price);
   } catch (error) {
