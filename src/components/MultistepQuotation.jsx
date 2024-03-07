@@ -223,7 +223,7 @@ const MultistepQuotation = () => {
     next,
     isFirstStep,
     isLastStep,
-    closeForm,
+    goToStart,
   } = useMultistepForm([
     <ServiceSelection
       data={data}
@@ -236,7 +236,7 @@ const MultistepQuotation = () => {
   ]);
 
   const handleFormClose = () => {
-    closeForm();
+    goToStart();
     setIsMenuOpen(false);
     setQuoteFinished(false);
     setUserData({
@@ -269,9 +269,6 @@ const MultistepQuotation = () => {
     }
   };
 
-  console.log(
-    "w-[" + ((currentStepIndex / (steps.length - 1)) * 100).toFixed() + "%]"
-  );
   return (
     <>
       <button
@@ -319,6 +316,14 @@ const MultistepQuotation = () => {
                   className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full transition-all`}
                 ></div>
               </div>
+              {currentStepIndex !== 0 && (
+                <p
+                  onClick={goToStart}
+                  className="text-center text-lg mx-auto w-fit text-blue-600 hover:text-blue-500 transition-colors mb-2 cursor-pointer"
+                >
+                  Return to services
+                </p>
+              )}
 
               {step}
               <div className="flex w-full justify-evenly mt-[30px]">
