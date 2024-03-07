@@ -17,8 +17,14 @@ export async function GET() {
 export async function POST(request) {
   try {
     await connectDB();
-    const { serviceName, responses, userName, userPhone, userEmail } =
-      await request.json();
+    const {
+      serviceName,
+      responses,
+      userName,
+      userPhone,
+      userEmail,
+      extraInfo,
+    } = await request.json();
 
     const price = await Prices.create({
       serviceName,
@@ -26,6 +32,8 @@ export async function POST(request) {
       userName,
       userPhone,
       userEmail,
+      extraInfo,
+      date: new Date(),
     });
 
     return NextResponse.json(price);

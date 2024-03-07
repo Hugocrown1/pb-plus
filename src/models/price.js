@@ -8,9 +8,11 @@ const schema = new mongoose.Schema({
       answer: String,
     },
   ],
+  extraInfo: String,
   userName: String,
   userPhone: String,
   userEmail: String,
+  date: Date,
 });
 
 export default models?.Prices || mongoose.model("Prices", schema);

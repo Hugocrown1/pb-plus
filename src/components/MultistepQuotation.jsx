@@ -9,29 +9,6 @@ import UserInfoForm from "./QuotationForms/UserInfoForm";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 
-const question = {
-  question: "Home voltage",
-  options: ["120", "240", "Both"],
-};
-
-const question2 = {
-  question: "Home Height",
-  options: ["121", "242", "Both"],
-};
-
-// [
-//   <ServiceForm
-//     question={question}
-//     answer={answer}
-//     updateAnswer={setAnswer}
-//   />,
-//   <ServiceForm
-//     question={question2}
-//     answer={answer}
-//     updateAnswer={setAnswer}
-//   />,
-// ]
-
 const data = [
   {
     service: "DISTRIBUTION BOX INSTALATION",
@@ -39,8 +16,8 @@ const data = [
       {
         question: "Home voltage",
         options: [
-          { option: "120", custom: false },
-          { option: "240", custom: false },
+          { option: "120V", custom: false },
+          { option: "240v", custom: false },
           { option: "Both", custom: false },
         ],
         type: "Radio",
@@ -56,29 +33,32 @@ const data = [
         type: "Radio",
       },
       {
-        question: "Do you have a tool?",
+        question: "Is it any wiring pending in your home?",
         options: [
-          { option: "Yes", custom: true },
+          { option: "Yes", custom: false },
           { option: "No", custom: false },
         ],
         type: "Radio",
       },
       {
-        question: "How are you?",
-
-        type: "Open",
+        question: "Do you need any breakers?",
+        options: [
+          { option: "Yes", custom: false },
+          { option: "No", custom: false },
+        ],
+        type: "Radio",
       },
     ],
   },
 
   {
-    service: "NEW HOME HIRING",
+    service: "NEW HOME WIRING",
     questions: [
       {
         question: "Home voltage",
         options: [
-          { option: "120", custom: false },
-          { option: "240", custom: false },
+          { option: "120V", custom: false },
+          { option: "240V", custom: false },
           { option: "Both", custom: false },
         ],
         type: "Radio",
@@ -89,14 +69,82 @@ const data = [
           { option: "300-500 Ft² / 90-150 m²", custom: false },
           { option: "500-700 Ft² / 150-210 m²", custom: false },
           { option: "700-900 Ft² / 210-280m²", custom: false },
-          { option: "OTHER", custom: false },
+          { option: "OTHER", custom: true },
         ],
         type: "Radio",
       },
-      // {
-      //   question: "Where are you located?",
-      //   type: "Open",
-      // },
+
+      {
+        question: "Construction type?",
+        options: [
+          { option: "Concrete", custom: false },
+          { option: "Wood", custom: false },
+          { option: "Metal", custom: false },
+          { option: "OTHER", custom: true },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "Construction location?",
+        type: "Open",
+      },
+    ],
+  },
+
+  {
+    service: "HOME IMPROVEMENT WIRING",
+    questions: [
+      {
+        question: "Home voltage",
+        options: [
+          { option: "120V", custom: false },
+          { option: "240V", custom: false },
+          { option: "Both", custom: false },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "Construction Ft²/m²",
+        options: [
+          { option: "300-500 Ft² / 90-150 m²", custom: false },
+          { option: "500-700 Ft² / 150-210 m²", custom: false },
+          { option: "700-900 Ft² / 210-280m²", custom: false },
+          { option: "OTHER", custom: true },
+        ],
+        type: "Radio",
+      },
+
+      {
+        question: "Does the area have electrical outlets?",
+        options: [
+          { option: "Yes", custom: false },
+          { option: "No", custom: false },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "Do you require distribution box?",
+        options: [
+          { option: "Yes", custom: false },
+          { option: "No", custom: false },
+        ],
+        type: "Radio",
+      },
+      {
+        question: "Construction type?",
+        options: [
+          { option: "Concrete", custom: false },
+          { option: "Wood", custom: false },
+          { option: "Metal", custom: false },
+          { option: "OTHER", custom: true },
+        ],
+        type: "Radio",
+      },
+
+      {
+        question: "Construction location?",
+        type: "Open",
+      },
     ],
   },
 ];
@@ -129,9 +177,19 @@ const MultistepQuotation = () => {
   }, [session]);
 
   const changeUserData = (e) => {
-    setUserData((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
+    const { name, value } = e.target;
+
+    if (name === "phone") {
+      if (value === "" || /^[\d\+\-\(\)]+$/.test(value)) {
+        setUserData((prev) => {
+          return { ...prev, [name]: value };
+        });
+      }
+    } else {
+      setUserData((prev) => {
+        return { ...prev, [name]: value };
+      });
+    }
   };
 
   const handleUpdateAnswer = (index, answer) => {
@@ -157,17 +215,25 @@ const MultistepQuotation = () => {
     />
   ));
 
-  const { steps, step, back, next, isFirstStep, isLastStep, closeForm } =
-    useMultistepForm([
-      <ServiceSelection
-        data={data}
-        service={service}
-        updateService={setService}
-      />,
-      ...serviceForms,
-      <ExtraInfoForm extraInfo={extraInfo} setExtraInfo={setExtraInfo} />,
-      <UserInfoForm userData={userData} changeUserData={changeUserData} />,
-    ]);
+  const {
+    steps,
+    step,
+    currentStepIndex,
+    back,
+    next,
+    isFirstStep,
+    isLastStep,
+    closeForm,
+  } = useMultistepForm([
+    <ServiceSelection
+      data={data}
+      service={service}
+      updateService={setService}
+    />,
+    ...serviceForms,
+    <ExtraInfoForm extraInfo={extraInfo} setExtraInfo={setExtraInfo} />,
+    <UserInfoForm userData={userData} changeUserData={changeUserData} />,
+  ]);
 
   const handleFormClose = () => {
     closeForm();
@@ -202,6 +268,10 @@ const MultistepQuotation = () => {
       setQuoteFinished(true);
     }
   };
+
+  console.log(
+    "w-[" + ((currentStepIndex / (steps.length - 1)) * 100).toFixed() + "%]"
+  );
   return (
     <>
       <button
@@ -237,8 +307,21 @@ const MultistepQuotation = () => {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
+              <div className="flex  items-start w-[40%] mx-auto h-[15px] mb-4 rounded-full bg-gray-200">
+                <div
+                  style={{
+                    width:
+                      (
+                        (currentStepIndex / (steps.length - 1)) *
+                        100
+                      ).toFixed() + "%",
+                  }}
+                  className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full transition-all`}
+                ></div>
+              </div>
+
               {step}
-              <div className="flex w-full justify-evenly mt-[40px]">
+              <div className="flex w-full justify-evenly mt-[30px]">
                 {!isFirstStep && (
                   <button
                     type="button"

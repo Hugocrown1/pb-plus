@@ -5,12 +5,15 @@ import FormInput from "../FormInput";
 const UserInfoForm = ({ userData, changeUserData }) => {
   return (
     <FormWrapper title={"Please provide us your contact information"}>
-      <div className="form-input">
+      <div className="flex flex-col gap-2 form-input">
         <FormInput
           label="Name"
           name="name"
           id="name"
           value={userData.name}
+          required
+          minLength={3}
+          maxLength={100}
           onChange={(e) => changeUserData(e)}
           errorMessage="Please provide your name"
         />
@@ -19,6 +22,8 @@ const UserInfoForm = ({ userData, changeUserData }) => {
           name="email"
           id="email"
           type="email"
+          required
+          maxLength={100}
           value={userData.email}
           onChange={(e) => changeUserData(e)}
           errorMessage="Please provide your email"
@@ -28,8 +33,9 @@ const UserInfoForm = ({ userData, changeUserData }) => {
           name="phone"
           id="phone"
           type="tel"
-          maxLength={15}
+          maxLength={20}
           minLength={10}
+          required
           value={userData.phone}
           onChange={(e) => changeUserData(e)}
           errorMessage="Please a valid phone number"

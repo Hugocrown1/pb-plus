@@ -68,9 +68,11 @@ const UserMenu = () => {
                   <IconUser /> <p>Account</p>
                 </Link>
               </li>
-
               <li onClick={() => setIsMenuOpen(false)}>
-                <button className="dropdown-item" onClick={() => signOut()}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                >
                   <IconPower /> <p>Log out</p>
                 </button>
               </li>
