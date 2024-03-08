@@ -1,10 +1,10 @@
 "use client";
-import { Roboto } from "next/font/google";
+import { Libre_Baskerville, Roboto } from "next/font/google";
 import Link from "next/link";
 import ContactForm from "./ContactForm";
 import { usePathname } from "next/navigation";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
 const Page = ({ service }) => {
   const pathname = usePathname();
@@ -63,17 +63,16 @@ const Page = ({ service }) => {
               <ul>
                 <li key={service.id} className="mx-8">
                   <div className="w-[50px] h-1 bg-[#cba557] mt-8"></div>
-                  
-                  <h3 className=" my-4">
-                  {service.title}
-              </h3>
+
+                  <h3 className=" my-4">{service.title}</h3>
                   <ul className=" text-gray-700 ">
                     {service.subtitles.map((subtitle) => (
                       <li key={subtitle.id}>
-                        
                         <Link href={`#${subtitle.id}`}>
-                        <p className="cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">{subtitle.title}</p>
-                      </Link>
+                          <p className="cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">
+                            {subtitle.title}
+                          </p>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -82,20 +81,18 @@ const Page = ({ service }) => {
             </div>
             <div className="bg-white rounded-md mt-8 py-2 shadow-md text-xl">
               <div className="w-[50px] h-1 bg-[#cba557] mt-8 mx-8"></div>
-              <h3 className="mx-8 my-4">
-              Our Practice Areas
-              </h3>
+              <h3 className="mx-8 my-4">Our Practice Areas</h3>
               <ul className="list-none mx-8 ">
-                
-                {links.map(
-                  ({ href, label }) =>
-                    pathname.includes(href)?null :(
-                      <li key={href} className="mb-2">
+                {links.map(({ href, label }) =>
+                  pathname.includes(href) ? null : (
+                    <li key={href} className="mb-2">
                       <Link href={href}>
-                        <p className="text-gray-700 cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">{label}</p>
+                        <p className="text-gray-700 cursor-pointer transition duration-300 transform hover:scale-105 hover:bg-[#cba557] hover:text-white p-1 rounded-md">
+                          {label}
+                        </p>
                       </Link>
                     </li>
-                    )
+                  )
                 )}
               </ul>
             </div>

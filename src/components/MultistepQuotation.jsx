@@ -272,7 +272,7 @@ const MultistepQuotation = () => {
   return (
     <>
       <button
-        className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center"
+        className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center"
         onClick={() => setIsMenuOpen(true)}
       >
         Free Quote

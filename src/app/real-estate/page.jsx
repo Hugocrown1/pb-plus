@@ -1,6 +1,6 @@
 import CustomPage from "@/components/CustomPage";
 import Link from "next/link";
-import { Roboto } from "next/font/google";
+import { Libre_Baskerville, Roboto } from "next/font/google";
 import Image from "next/image";
 import {
   IconGraph,
@@ -13,7 +13,7 @@ import {
 import ServiceCard from "@/components/ServiceCard";
 import Slider from "@/components/Slider/Slider";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
 const dataSlider = [
   {

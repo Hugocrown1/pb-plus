@@ -1,6 +1,6 @@
 import React from "react";
-import { Roboto } from "next/font/google";
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+import { Libre_Baskerville, Roboto } from "next/font/google";
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 import Link from "next/link";
 import Image from "next/image";
 
