@@ -42,7 +42,7 @@ const routes = [
     icon: <IconScale />,
   },
   {
-    route: "/events",
+    route: "/community",
     name: "Community",
     icon: <IconSocial />,
   },
@@ -176,6 +176,8 @@ const Header = () => {
       return "theme-real-estate";
     } else if (path.includes("legal")) {
       return "theme-legal";
+    } else if (path.includes("community")) {
+      return "theme-community";
     } else {
       return "";
     }

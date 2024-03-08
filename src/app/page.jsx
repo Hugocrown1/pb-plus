@@ -44,7 +44,7 @@ export default function Home() {
           <DepartmentCard
             title={"PB+ COMMUNITY"}
             src={"/assets/events.jpg"}
-            href={"/events"}
+            href={"/community"}
           >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium
             ad excepturi ducimus magni
