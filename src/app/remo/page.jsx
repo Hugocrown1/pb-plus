@@ -122,7 +122,7 @@ export default function Page() {
             Lorem ipsum dolor, sit amet consectetur adipisicing elit.
           </ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/electrical"}
             title={"Electrical"}
             icon={<IconBolt color="#941B0C" size={70} />}
           >

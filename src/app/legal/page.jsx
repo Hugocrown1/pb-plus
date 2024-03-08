@@ -9,7 +9,6 @@ import ServiceLegalCard from "@/components/ServiceLegalCard";
 import Slider from "@/components/Slider/Slider";
 
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
-const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
   const dataSlider = [
