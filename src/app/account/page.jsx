@@ -29,7 +29,7 @@ const page = async () => {
           <SignOutButton></SignOutButton>
         </div>
         <h2 className="text-left text-2xl">Published properties</h2>
-        <section className="flex flex-col bg-[#f5f3f4] rounded-md mx-auto">
+        <section className="flex flex-col rounded-md mx-auto">
           <UserProperties user={session?.user} />
         </section>
 
