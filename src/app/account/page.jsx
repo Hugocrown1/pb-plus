@@ -29,9 +29,9 @@ const page = async () => {
           <SignOutButton></SignOutButton>
         </div>
         <h2 className="text-left text-2xl">Published properties</h2>
-        {/* <section className="flex flex-col bg-[#f5f3f4] rounded-md mx-auto">
+        <section className="flex flex-col bg-[#f5f3f4] rounded-md mx-auto">
           <UserProperties user={session?.user} />
-        </section> */}
+        </section>
 
         <section className="flex flex-col gap-4">
           <h2 className="font-semibold text-left">Events</h2>
