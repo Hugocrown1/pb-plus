@@ -1,4 +1,4 @@
-import { Roboto } from "next/font/google";
+import { Libre_Baskerville, Roboto } from "next/font/google";
 import Link from "next/link";
 import { Noto_Serif } from "next/font/google";
 import Image from "next/image";
@@ -8,7 +8,7 @@ import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
 import Slider from "@/components/Slider/Slider";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 const noto_serif = Noto_Serif({ subsets: ["latin"], weight: "500" });
 
 const Page = () => {
