@@ -65,7 +65,7 @@ const dataSlider = [
 export default function Page() {
   return (
     <main className={`bg-[#f5f3f4]  xl:pt-[50px] ${roboto.className}`}>
-      <Slider dataSlider={dataSlider} />
+      {/* <Slider dataSlider={dataSlider} /> */}
       <section
         id="services"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"

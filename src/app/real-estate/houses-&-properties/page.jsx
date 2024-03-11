@@ -13,9 +13,9 @@ const page = () => {
           The Best Houses & Properties Just For You
         </h1>
         <p className="text-[#5e5e5e] text-center font-medium text-base xl:text-lg xl:w-[900px]">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-          voluptate sequi asperiores nemo possimus quod et quis, rerum
-          reiciendis veritatis cum tempora
+          Houses & Properties Service is your premier destination for finding
+          the perfect home, investment property, or commercial space tailored to
+          your unique needs and aspirations.
         </p>
         <Link
           href={"#properties"}
@@ -133,9 +133,9 @@ const page = () => {
           We Help You Make Better Deals
         </h1>
         <p className="text-[#5e5e5e] text-center font-medium  text-base xl:text-lg xl:w-[900px] mb-8">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-          voluptate sequi asperiores nemo possimus quod et quis, rerum
-          reiciendis veritatis cum tempora
+          Whether you're buying, selling, leasing, or investing, trust PB+ Real
+          Estate Houses & Properties Service to be your trusted partner every
+          step of the way. Welcome home to PB+.
         </p>
         <PropertiesDisplay />
       </section>

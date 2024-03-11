@@ -26,7 +26,7 @@ const Page = () => {
       id: 2,
       title: "Immigration Services",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "Obtaining the Multiple Migratory Forms or Tourist Cards from Mexico is an essential legal obligation for individuals who are not Mexican citizens and intend to enter the country temporarily. ",
       source: "/assets/immigrationservices.jpg",
       linkTitle: "Take a look",
       href: "/legal/immigration-services",
@@ -35,7 +35,7 @@ const Page = () => {
       id: 3,
       title: "Property Regularization",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "The process of property regularization involves navigating through various legal requirements and administrative procedures to ensure that your property is recognized and documented appropriately under the law.",
       source: "/assets/propertyregularization.jpg",
       linkTitle: "Take a look",
       href: "/legal/property-regularization",
@@ -44,7 +44,7 @@ const Page = () => {
       id: 4,
       title: "Property Acquisition",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "Ensuring the right procedure is followed when acquiring property, whether you're a Mexican national or a foreigner, is paramount for a smooth and legally sound transaction. ",
       source: "/assets/propertyadquisition.jpg",
       linkTitle: "Take a look",
       href: "/legal/property-acquisition",
@@ -53,7 +53,7 @@ const Page = () => {
       id: 5,
       title: "Court Representation",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        " Our experienced team of attorneys specializes in providing comprehensive representation across a wide range of legal matters.",
       source: "/assets/courtrepresentation.jpg",
       linkTitle: "Take a look",
       href: "/legal/court-representation",
@@ -62,7 +62,7 @@ const Page = () => {
       id: 6,
       title: "Legal Consulting",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "PB+ Legal offers comprehensive consulting services to address a wide range of legal needs and challenges.",
       source: "/assets/legalconsulting.jpg",
       linkTitle: "Take a look",
       href: "/legal/legal-consulting",
@@ -71,7 +71,7 @@ const Page = () => {
       id: 7,
       title: "Formation of Companies",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "PB+ Legal offers a comprehensive service for the formation of companies, providing expert guidance and support to entrepreneurs, startups, and businesses of all sizes.",
       source: "/assets/formationofcompanies.jpg",
       linkTitle: "Take a look",
       href: "/legal/formation-of-companies",
@@ -80,7 +80,7 @@ const Page = () => {
       id: 8,
       title: "Funeral Arrangements",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "Our service is designed to provide comprehensive support and guidance in documenting your final wishes, including instructions for funeral arrangements, distribution of assets, appointment of guardianship for minors, and any other important considerations you may have.",
       source: "/assets/funeralarrangements.jpg",
       linkTitle: "Take a look",
       href: "/legal/funeral-arrangements",
@@ -89,7 +89,7 @@ const Page = () => {
       id: 9,
       title: "Other Legal Services",
       subtitle:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+        "In PB+ Legal, we understand the importance of finding the right solutions to your legal challenges. Whether you're facing complex business transactions, navigating personal legal matters, or seeking guidance on compliance and regulatory issues, we are here to help.",
       source: "/assets/otherlegalservices.jpg",
       linkTitle: "Take a look",
       href: "/legal/other-services",
@@ -232,59 +232,35 @@ const Page = () => {
           <ServiceLegalCard
             href={"/legal/immigration-services"}
             title={"Immigration Services"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/property-regularization"}
             title={"Property Regularization"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/property-acquisition"}
             title={"Property Acquisition"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/court-representation"}
             title={"Court Representation"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/legal-consulting"}
             title={"Legal Consulting"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/formation-of-companies"}
             title={"Formation Of Companies"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/funeral-arrangements"}
             title={"Funeral Arrangements"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
           <ServiceLegalCard
             href={"/legal/other-services"}
             title={"Other Legal Services"}
-          >
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </ServiceLegalCard>
+          ></ServiceLegalCard>
         </div>
       </section>
 

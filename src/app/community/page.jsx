@@ -17,7 +17,7 @@ const dataSlider = [
     id: 1,
     title: "PB+ COMMUNITY",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "The PB+ Community initiative embodies our commitment to social responsibility, collaboration, and meaningful engagement. ",
 
     source: "/assets/house.jpg",
     linkTitle: "Take a look",
@@ -25,37 +25,10 @@ const dataSlider = [
   },
   {
     id: 2,
-    title: "Houses & Properties",
+    title: "Advertise Your Event",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "PB+ Community Event Advertising offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
     source: "/assets/house2.webp",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 3,
-    title: "House Stitting",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/house3.jpg",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 4,
-    title: "Assesment Services",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/house4.png",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 5,
-    title: "House Keeping",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/housekeeping.jpg",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -83,19 +56,14 @@ export default function Page() {
             title={"Events"}
             icon={<IconCalendarStats size={70} color="#0077b6" />}
             style={"min-[400px]:col-span-2 min-[400px]:row-span-2"}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            ducimus tempore quia sequi!
-          </ServiceCommunityCard>
+          ></ServiceCommunityCard>
 
           <ServiceCommunityCard
             href={"/community/advertising"}
             title={"Advertising"}
             icon={<IconToolsKitchen size={70} color="#0077b6" />}
             style={"min-[400px]:col-span-2 min-[400px]:row-span-2"}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elite
-          </ServiceCommunityCard>
+          ></ServiceCommunityCard>
         </div>
       </section>
     </main>

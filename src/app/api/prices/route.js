@@ -206,7 +206,7 @@ export async function POST(request) {
 
     transporter.sendMail({
       from: process.env.GMAIL_USERNAME,
-      to: "al19760723@ite.edu.mx", // TODO: add email to receive all price PDFs
+      to: "al19760611@ite.edu.mx", // TODO: add email to receive all price PDFs
       subject: `Nueva cotización de ${userName}`,
       text: `Cotización hecha el día ${stringDate}. ID de la cotización: ${price._id}`,
       attachments: [
