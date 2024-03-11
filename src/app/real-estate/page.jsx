@@ -20,7 +20,7 @@ const dataSlider = [
     id: 1,
     title: "PB+ REAL ESTATE",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "PB+ Real Estate Department is your gateway to unparalleled property solutions tailored to your needs and aspirations.",
 
     source: "/assets/house.jpg",
     linkTitle: "Take a look",
@@ -30,7 +30,7 @@ const dataSlider = [
     id: 2,
     title: "Houses & Properties",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "Houses & Properties Service is your premier destination for finding the perfect home, investment property, or commercial space tailored to your unique needs and aspirations.",
     source: "/assets/house2.webp",
     linkTitle: "Take a look",
     href: "#",
@@ -39,7 +39,7 @@ const dataSlider = [
     id: 3,
     title: "House Stitting",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "House Sitting Service offers you the peace of mind and assurance that your home is in good hands, whether you're away for a short trip or an extended vacation.",
     source: "/assets/house3.jpg",
     linkTitle: "Take a look",
     href: "#",
@@ -48,7 +48,7 @@ const dataSlider = [
     id: 4,
     title: "Assesment Services",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "Understanding the value appreciation of your property after improvements or over time is crucial for making informed decisions, especially if you're considering selling your land or house. ",
     source: "/assets/house4.png",
     linkTitle: "Take a look",
     href: "#",
@@ -57,7 +57,7 @@ const dataSlider = [
     id: 5,
     title: "House Keeping",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "PB+ offers a reliable service for homeowners who seek trusted employees to clean their homes on a schedule that suits their needs.",
     source: "/assets/housekeeping.jpg",
     linkTitle: "Take a look",
     href: "#",
@@ -77,9 +77,9 @@ export default function Page() {
           We provide A Lot of Services
         </h1>
         <p className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad
-          minim veniam,
+          At PB+ Real Estate, we recognize that each client is unique, and we
+          tailor our services to accommodate individual preferences and
+          objectives.
         </p>
         <div className="bg-[#30725C] px-1 min-[400px]:px-4 py-2 text-[#FCFFFC] rounded-bl-none rounded-2xl text-lg my-4">
           Our services
@@ -91,39 +91,28 @@ export default function Page() {
             title={"Houses & Properties"}
             icon={<IconHomeDollar size={70} color="#30725C" />}
             style={"min-[400px]:col-span-2 min-[400px]:row-span-2"}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime
-            ducimus tempore quia sequi!
-          </ServiceCard>
+          ></ServiceCard>
 
           <ServiceCard
             href={"/real-estate/housekeeping"}
             title={"Housekeeping"}
             icon={<IconSparkles size={70} color="#30725C" />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elite
-          </ServiceCard>
+          ></ServiceCard>
           <ServiceCard
             href={"/real-estate/house-sitting"}
             title={"House Sitting"}
             icon={<IconHomeEco size={70} color="#30725C" />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elite
-          </ServiceCard>
+          ></ServiceCard>
           <ServiceCard
             href={"/real-estate/assessment-services"}
             title={"Assessment Services"}
             icon={<IconGraph size={70} color="#30725C" />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elite
-          </ServiceCard>
+          ></ServiceCard>
           <ServiceCard
             href={"/real-estate/home-management"}
             title={"Home Management"}
             icon={<IconHomeCog size={70} color="#30725C" />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elite
-          </ServiceCard>
+          ></ServiceCard>
         </div>
       </section>
     </main>

@@ -91,7 +91,7 @@ const page = () => {
               <li className="w-full">
                 <Link
                   href={"#cfe"}
-                  className="hover:text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   CFE
                 </Link>
@@ -99,7 +99,7 @@ const page = () => {
               <li className="w-full">
                 <Link
                   href={"#wiring"}
-                  className="hover:text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   Wiring
                 </Link>
@@ -107,7 +107,7 @@ const page = () => {
               <li className="w-full">
                 <Link
                   href={"#generator"}
-                  className="hover:text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   Generator
                 </Link>

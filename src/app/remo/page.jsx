@@ -18,8 +18,7 @@ const dataSlider = [
     id: 1,
     title: "PB+ REMO",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-
+      "PB+ Remo Department specializes in overseeing and executing construction projects with precision and expertise.",
     source: "/assets/remo.jpg",
     linkTitle: "Take a look",
     href: "#",
@@ -28,7 +27,7 @@ const dataSlider = [
     id: 2,
     title: "Remodelation Services Just For You",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "From the inception phase to the final delivery, our dedicated team ensures seamless coordination, timely execution, and adherence to the highest industry standards.",
     source: "/assets/bannerrealestate.jpg",
     linkTitle: "Take a look",
     href: "#",
@@ -37,7 +36,7 @@ const dataSlider = [
     id: 3,
     title: "Let Us Take Care Of It",
     subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
+      "We handle a diverse range of projects, from commercial buildings to residential complexes, with a commitment to excellence in every detail.",
     source: "/assets/house3.jpg",
     linkTitle: "Take a look",
     href: "#",
@@ -90,13 +89,15 @@ export default function Page() {
             PB Plus Home Remodeling
           </h2>
           <p className="text-left">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis
-            eum, optio voluptatum voluptate illum molestiae veniam, saepe ipsa
-            repellendus rem perspiciatis id! Fugit deleniti natus, tempore dolor
-            sit perspiciatis alias? Lorem ipsum dolor sit amet consectetur
-            adipisicing elit. Dignissimos corporis aspernatur, facilis a eveniet
-            itaque iste debitis nisi voluptatem at odio accusamus aut eum illum
-            necessitatibus laborum possimus ipsum sunt!
+            Our comprehensive approach integrates effective project planning,
+            budget management, resource allocation, and quality control,
+            ensuring that each endeavor is completed efficiently and to the
+            client's utmost satisfaction. With a focus on innovation and
+            sustainability, we strive to deliver outstanding results that exceed
+            expectations while maintaining a steadfast dedication to safety and
+            environmental responsibility. Trust us to bring your vision to life
+            and transform ideas into reality with professionalism, integrity,
+            and unparalleled expertise.
           </p>
         </div>
       </section>
@@ -111,58 +112,42 @@ export default function Page() {
             href={"/remo/construction"}
             title={"Construction"}
             icon={<IconBackhoe color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"Remodeling"}
             icon={<IconPaint color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/electrical"}
             title={"Electrical"}
             icon={<IconBolt color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"Plumbing"}
             icon={<IconTool color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"Project Management"}
             icon={<IconClipboard color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"Patio"}
             icon={<IconLeaf color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"Concrete"}
             icon={<IconGardenCart color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
           <ServiceRemoCard
             href={"#"}
             title={"A/C"}
             icon={<IconWind color="#941B0C" size={70} />}
-          >
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-          </ServiceRemoCard>
+          ></ServiceRemoCard>
         </div>
       </section>
     </main>
