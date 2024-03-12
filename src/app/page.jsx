@@ -55,7 +55,7 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="flex flex-col items-center min-[1400px]:items-start justify-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 "
+        className="flex flex-col items-center min-[1400px]:items-start justify-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 min-[1449px]:px-0 "
       >
         <div className="relative w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] ">
           <GridGallery />
