@@ -6,7 +6,7 @@ import Link from "next/link";
 
 const page = () => {
   return (
-    <main className="bg-[#f5f3f4]  xl:pt-[50px] mb-8 ">
+    <main className="bg-[#f5f3f4]  pt-[50px] mb-8 ">
       <div className="flex items-center justify-center w-full py-4 bg-white mt-2 mb-6">
         <h1 className="text-4xl">Electrical Services</h1>
       </div>

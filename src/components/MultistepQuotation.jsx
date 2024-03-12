@@ -9,7 +9,6 @@ import UserInfoForm from "./QuotationForms/UserInfoForm";
 import { useSession } from "next-auth/react";
 import axios from "axios";
 import SpinnerSmall from "./SpinnerSmall";
-import Spinner from "./Spinner";
 
 const data = [
   {
@@ -255,10 +254,11 @@ const MultistepQuotation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+
     next();
 
     if (isLastStep) {
+      setIsLoading(true);
       const { name, email, phone } = userData;
       const quotation = {
         userName: name,
@@ -288,7 +288,7 @@ const MultistepQuotation = () => {
           !isMenuOpen && "invisible"
         } `}
       >
-        <dialog className="flex flex-col w-[800px] min-h-[400px] bg-white rounded-lg pb-[40px]">
+        <dialog className="flex flex-col w-full min-[817px]:w-[800px] min-h-[400px] bg-white rounded-lg pb-[40px]">
           <header className="w-full flex flex-col">
             <div className="w-full flex justify-end items-end p-2">
               <button className="text-gray" onClick={handleFormClose}>
