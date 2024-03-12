@@ -1,4 +1,5 @@
 import DepartmentCard from "@/components/DepartmentCard";
+import GridGallery from "@/components/GridGallery";
 import HomeHero from "@/components/HomeHero";
 import Image from "next/image";
 
@@ -54,18 +55,12 @@ export default function Home() {
       </section>
       <section
         id="about"
-        className="flex flex-col items-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 "
+        className="flex flex-col items-center min-[1400px]:items-start justify-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 "
       >
-        <div className="relative h-[368px] w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] overflow-hidden rounded-xl">
-          <Image
-            src={"/assets/handshake.jpg"}
-            alt="About PB Plus image"
-            fill={true}
-            sizes="(min-width: 1120px) 1200px"
-            className="object-cover object-center"
-          />
+        <div className="relative w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] ">
+          <GridGallery />
         </div>
-        <div className="flex flex-col items-start justify-center w-full min-[1400px]:w-[50%]">
+        <div className="flex flex-col w-full min-[1400px]:w-[50%]">
           <h1 className="-mb-4 text-center min-[1400px]:text-left w-full">
             What Is PB PLUS?
           </h1>
@@ -73,7 +68,7 @@ export default function Home() {
             We offer services for the punta banda community
           </h2>
           <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2 mx-auto min-[1400px]:mx-0"></div>
-          <p className="text-[17px] mt-6 w-full">
+          <p className="text-[17px] mt-6">
             Punta Banda Plus is a company that was born in Ensenada Baja
             California, at the Punta Banda area to provide multi services to the
             community. PB+ is a company that wants to improve the local

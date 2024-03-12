@@ -8,6 +8,8 @@ import ExtraInfoForm from "./QuotationForms/ExtraInfoForm";
 import UserInfoForm from "./QuotationForms/UserInfoForm";
 import { useSession } from "next-auth/react";
 import axios from "axios";
+import SpinnerSmall from "./SpinnerSmall";
+import Spinner from "./Spinner";
 
 const data = [
   {
@@ -150,6 +152,7 @@ const data = [
 ];
 
 const MultistepQuotation = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [service, setService] = useState("");
@@ -237,6 +240,7 @@ const MultistepQuotation = () => {
 
   const handleFormClose = () => {
     goToStart();
+    setIsLoading(false);
     setIsMenuOpen(false);
     setQuoteFinished(false);
     setUserData({
@@ -251,6 +255,7 @@ const MultistepQuotation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     next();
 
     if (isLastStep) {
@@ -266,6 +271,7 @@ const MultistepQuotation = () => {
 
       await axios.post("/api/prices", quotation);
       setQuoteFinished(true);
+      setIsLoading(false);
     }
   };
 
@@ -339,9 +345,15 @@ const MultistepQuotation = () => {
 
                 <button
                   type="submit"
-                  className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                  className="flex items-center justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
                 >
-                  {isLastStep && !isFirstStep ? "Submit" : "Next"}
+                  {isLoading ? (
+                    <SpinnerSmall />
+                  ) : isLastStep && !isFirstStep ? (
+                    "Submit"
+                  ) : (
+                    "Next"
+                  )}
                 </button>
               </div>
             </form>
