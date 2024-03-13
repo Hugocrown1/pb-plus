@@ -150,10 +150,10 @@ const data = [
   },
 ];
 
-const MultistepQuotation = () => {
+const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [service, setService] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
   const [answers, setAnswers] = useState([]);
@@ -276,91 +276,94 @@ const MultistepQuotation = () => {
   };
 
   return (
-    <>
-      <button
-        className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center"
-        onClick={() => setIsMenuOpen(true)}
-      >
-        Free Quote
-      </button>
-      <div
-        className={`fixed flex items-center inset-0  bg-zinc-950/30 transition-transform z-40 w-full ${
-          !isMenuOpen && "invisible"
-        } `}
-      >
-        <dialog className="flex flex-col w-full min-[817px]:w-[800px] min-h-[400px] bg-white rounded-lg pb-[40px]">
-          <header className="w-full flex flex-col">
-            <div className="w-full flex justify-end items-end p-2">
-              <button className="text-gray" onClick={handleFormClose}>
-                <IconX />
-              </button>
+    <div
+      className={`fixed flex items-center inset-0  bg-zinc-950/30 transition-transform z-40 w-full ${
+        !isMenuOpen && "invisible"
+      } `}
+    >
+      <dialog className="flex flex-col w-full min-[817px]:w-[800px] h-full items-center min-[1276px]:h-fit min-h-[400px] bg-white rounded-lg pb-[40px]">
+        <header className="w-full flex flex-col">
+          <div className="w-full flex justify-end items-end py-2 px-3">
+            <button className="text-gray" onClick={handleFormClose}>
+              <IconX />
+            </button>
+          </div>
+        </header>
+        {quoteFinished ? (
+          <div className="flex flex-col items-center h-full justify-stretch px-2 mt-[40px]">
+            <IconCheck size={90} />
+            <h2>Thanks for your time</h2>
+            <p>We will contact as soon as posible!</p>
+            <button
+              className="px-4 py-3 mt-4 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+              onClick={handleFormClose}
+            >
+              Dismiss
+            </button>
+          </div>
+        ) : (
+          <form onSubmit={handleSubmit}>
+            <div className="flex  items-start w-[40%] mx-auto h-[15px] mb-4 rounded-full bg-gray-200">
+              <div
+                style={{
+                  width:
+                    ((currentStepIndex / (steps.length - 1)) * 100).toFixed() +
+                    "%",
+                }}
+                className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full transition-all`}
+              ></div>
             </div>
-          </header>
-          {quoteFinished ? (
-            <div className="flex flex-col items-center h-full justify-stretch px-2 mt-[40px]">
-              <IconCheck size={90} />
-              <h2>Thanks for your time</h2>
-              <p>We will contact as soon as posible!</p>
-              <button
-                className="px-4 py-3 mt-4 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
-                onClick={handleFormClose}
+            {currentStepIndex !== 0 && (
+              <p
+                onClick={goToStart}
+                className="text-center text-lg mx-auto w-fit text-blue-600 hover:text-blue-500 transition-colors mb-2 cursor-pointer"
               >
-                Dismiss
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit}>
-              <div className="flex  items-start w-[40%] mx-auto h-[15px] mb-4 rounded-full bg-gray-200">
-                <div
-                  style={{
-                    width:
-                      (
-                        (currentStepIndex / (steps.length - 1)) *
-                        100
-                      ).toFixed() + "%",
-                  }}
-                  className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full transition-all`}
-                ></div>
-              </div>
-              {currentStepIndex !== 0 && (
-                <p
-                  onClick={goToStart}
-                  className="text-center text-lg mx-auto w-fit text-blue-600 hover:text-blue-500 transition-colors mb-2 cursor-pointer"
+                Return to services
+              </p>
+            )}
+
+            {step}
+            <div className="flex flex-col min-[1276px]:flex-row w-full justify-evenly mt-[30px] px-6">
+              {!isFirstStep && (
+                <button
+                  disabled={isLoading}
+                  type="button"
+                  className="hidden min-[1276px]:flex justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                  onClick={back}
                 >
-                  Return to services
-                </p>
+                  Previous
+                </button>
               )}
 
-              {step}
-              <div className="flex w-full justify-evenly mt-[30px]">
-                {!isFirstStep && (
-                  <button
-                    type="button"
-                    className="px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                    onClick={back}
-                  >
-                    Previous
-                  </button>
+              <button
+                disabled={isLoading}
+                type="submit"
+                className="flex items-center justify-center px-4 py-3 my-2 rounded-2xl font-medium text-lg  w-full min-[1276px]:w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+              >
+                {isLoading ? (
+                  <SpinnerSmall />
+                ) : isLastStep && !isFirstStep ? (
+                  "Submit"
+                ) : (
+                  "Next"
                 )}
+              </button>
 
+              {!isFirstStep && (
                 <button
-                  type="submit"
-                  className="flex items-center justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                  disabled={isLoading}
+                  type="button"
+                  className="flex min-[1276px]:hidden justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                  onClick={back}
                 >
-                  {isLoading ? (
-                    <SpinnerSmall />
-                  ) : isLastStep && !isFirstStep ? (
-                    "Submit"
-                  ) : (
-                    "Next"
-                  )}
+                  Previous
                 </button>
-              </div>
-            </form>
-          )}
-        </dialog>
-      </div>
-    </>
+              )}
+            </div>
+          </form>
+        )}
+      </dialog>
+    </div>
   );
 };
 

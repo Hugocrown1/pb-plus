@@ -200,7 +200,7 @@ const Header = () => {
   return (
     <header className={`${headerTheme}`}>
       <div
-        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
+        className={`bg-[var(--color-primary)] max-h-[60px] fixed mb-12 overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
       >
         <div className=" relative flex h-[60px] w-full  min-[1054px]:w-[1000px] min-[1255px]:w-[1200px] justify-between px-[15px] mx-auto">
           <div className="flex gap-2">

@@ -62,6 +62,7 @@ const GridGallery = () => {
         ))}
       </div>
       <div
+        onClick={handleCloseGallery}
         className={`fixed flex items-start inset-0  bg-zinc-950/80 py-14 transition-transform z-40 w-full ${
           !galleryOpen && "invisible"
         } `}

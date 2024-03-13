@@ -60,6 +60,10 @@
   }
 }
 
+html {
+  scroll-padding-top: 80px;
+}
+
 /* .fade-in {
   animation: fadeInDown ease 2s;
  
