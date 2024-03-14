@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 
@@ -10,21 +10,26 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    const { ok, error } = await signIn("credentials", {
-      email,
-      password,
-      redirect: false,
-    });
-    setLoading(false);
-    if (ok) {
-      router.push("/");
-    } else {
-      setError(error);
-    }
+    try {
+      const url = searchParams.get("callbackURL") ?? "/account";
+      setLoading(true);
+      const { ok, error } = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      setLoading(false);
+
+      if (ok) {
+        router.push(url);
+      } else {
+        setError(error);
+      }
+    } catch (error) {}
   };
 
   return (

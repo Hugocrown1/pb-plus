@@ -50,6 +50,10 @@ export const authOptions = {
         token.id = user.id;
         token.role = user.role;
         token.phone = user.phone;
+        if (!user.role) {
+          await connectDB();
+          await Users.findByIdAndUpdate(user.id, { role: "user" });
+        }
       }
       return token;
     },

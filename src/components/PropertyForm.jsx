@@ -5,10 +5,12 @@ import PropertyCard from "@/components/PropertyCard";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import axios from "axios";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { deleteImage } from "@/lib/deleteImage";
 import { ReactSortable } from "react-sortablejs";
+import { useSession } from "next-auth/react";
+import Spinner from "./Spinner";
 
 const PropertyForm = ({
   title: existingTitle,
@@ -34,6 +36,12 @@ const PropertyForm = ({
   });
 
   const router = useRouter();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/auth/login?callbackURL=/real-estate/new-property");
+    },
+  });
 
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
@@ -112,6 +120,10 @@ const PropertyForm = ({
   const updatePreviewImagesOrder = (images) => {
     setPreviewImages(images);
   };
+
+  if (status === "loading") {
+    return <Spinner />;
+  }
 
   return (
     <div className="flex flex-col xl:flex-row w-full h-full gap-10 mt-4 mb-12 pt-[50px]">
