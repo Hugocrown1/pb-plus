@@ -9,9 +9,6 @@ export async function GET(request, { params: { id } }) {
   try {
     await connectDB();
     const user = await Users.findById(id).populate("properties", {});
-
-    if(verifyUser(user._id)){}
-
     return NextResponse.json(user);
   } catch (error) {
     if (error instanceof Error)
