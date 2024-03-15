@@ -7,7 +7,7 @@ const page = async ({ params: { id } }) => {
   const propertyInfo = await getProperty(id);
   const session = await auth();
 
-  if (propertyInfo.user._id !== session.user.id) {
+  if (propertyInfo.user._id !== session?.user.id) {
     redirect("/real-estate/houses-&-properties");
   }
 
