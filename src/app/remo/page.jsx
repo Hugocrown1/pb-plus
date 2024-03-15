@@ -114,7 +114,7 @@ export default function Page() {
             icon={<IconBackhoe color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/remodeling"}
             title={"Remodeling"}
             icon={<IconPaint color="#941B0C" size={70} />}
           ></ServiceRemoCard>
@@ -124,27 +124,27 @@ export default function Page() {
             icon={<IconBolt color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/plumbing"}
             title={"Plumbing"}
             icon={<IconTool color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/project-management"}
             title={"Project Management"}
             icon={<IconClipboard color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/patio"}
             title={"Patio"}
             icon={<IconLeaf color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/concrete"}
             title={"Concrete"}
             icon={<IconGardenCart color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/air-conditioner"}
             title={"A/C"}
             icon={<IconWind color="#941B0C" size={70} />}
           ></ServiceRemoCard>
