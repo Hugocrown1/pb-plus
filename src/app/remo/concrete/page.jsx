@@ -18,7 +18,7 @@ const page = () => {
       </div>
 
       <div className="flex flex-row max-w-[1280px] pt-[30px] justify-center min-[1276px]:justify-between mx-auto min-[503px]:px-2">
-        <div className="w-[880px] flex flex-col">
+        <div className="w-full flex flex-col">
           <section
             id="managing-project"
             className="w-full bg-white px-4 py-6 rounded-lg my-4"
@@ -50,7 +50,7 @@ const page = () => {
             </p>
           </section>
         </div>
-        <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
+        {/* <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
           <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
             <h2 className="text-2xl font-medium">Do You Need a Quote?</h2>
             <div className="flex flex-col items-center justify-center">
@@ -68,7 +68,7 @@ const page = () => {
               </button>
             </div>
           </section>
-        </div>
+        </div> */}
       </div>
       <div className="sticky  bottom-0 left-0 right-0 bg-white text-white text-center p-2 items-center flex justify-center border-t-2 min-[1276px]:hidden">
         <button

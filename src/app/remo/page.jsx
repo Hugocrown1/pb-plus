@@ -37,7 +37,7 @@ const dataSlider = [
     title: "Let Us Take Care Of It",
     subtitle:
       "We handle a diverse range of projects, from commercial buildings to residential complexes, with a commitment to excellence in every detail.",
-    source: "/assets/house3.jpg",
+    source: "/assets/remo/patio.png",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -63,7 +63,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/assessment.webp"}
+              src={"/assets/remo/wiring.jpeg"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
@@ -72,7 +72,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/assessment1.webp"}
+              src={"/assets/remo/pex-plumbing.png"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
@@ -111,42 +111,42 @@ export default function Page() {
           <ServiceRemoCard
             href={"/remo/construction"}
             title={"Construction"}
-            icon={<IconBackhoe color="#941B0C" size={70} />}
+            image={"/assets/remo/homeconst.jpg"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/remodeling"}
             title={"Remodeling"}
-            icon={<IconPaint color="#941B0C" size={70} />}
+            image={"/assets/remo/wood.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/electrical"}
             title={"Electrical"}
-            icon={<IconBolt color="#941B0C" size={70} />}
+            image={"/assets/remo/generator.webp"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/plumbing"}
             title={"Plumbing"}
-            icon={<IconTool color="#941B0C" size={70} />}
+            image={"/assets/remo/plumbing.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/project-management"}
             title={"Project Management"}
-            icon={<IconClipboard color="#941B0C" size={70} />}
+            image={"/assets/remo/project-management.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/patio"}
             title={"Patio"}
-            icon={<IconLeaf color="#941B0C" size={70} />}
+            image={"/assets/remo/patio.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/concrete"}
             title={"Concrete"}
-            icon={<IconGardenCart color="#941B0C" size={70} />}
+            image={"/assets/remo/concrete.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/air-conditioner"}
             title={"A/C"}
-            icon={<IconWind color="#941B0C" size={70} />}
+            image={"/assets/remo/ac.png"}
           ></ServiceRemoCard>
         </div>
       </section>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import MultistepQuotation from "@/components/MultistepQuotation";
 import { IconPencil } from "@tabler/icons-react";
 import Link from "next/link";
+import { airConditionerServices } from "@/lib/airConditionerServices";
 
 const page = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ const page = () => {
       <MultistepQuotation
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        servicesData={airConditionerServices}
       />
       <div className=" z-10 flex items-center justify-center w-full py-4 mt-2 bg-white">
         <h1 className="text-4xl">Air Conditioner</h1>

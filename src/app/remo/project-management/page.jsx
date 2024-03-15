@@ -14,11 +14,11 @@ const page = () => {
         setIsMenuOpen={setIsMenuOpen}
       />
       <div className=" z-10 flex items-center justify-center w-full py-4 mt-2 bg-white">
-        <h1 className="text-4xl">Construction</h1>
+        <h1 className="text-4xl">Project management</h1>
       </div>
 
       <div className="flex flex-row max-w-[1280px] pt-[30px] justify-center min-[1276px]:justify-between mx-auto min-[503px]:px-2">
-        <div className="w-[880px] flex flex-col">
+        <div className="w-full flex flex-col">
           <section
             id="managing-project"
             className="w-full bg-white px-4 py-6 rounded-lg my-4"
@@ -47,25 +47,6 @@ const page = () => {
               provides information on every transaction involved in your
               project.
             </p>
-          </section>
-        </div>
-        <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
-          <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
-            <h2 className="text-2xl font-medium">Do You Need a Quote?</h2>
-            <div className="flex flex-col items-center justify-center">
-              <div className="p-4 rounded-full bg-red-800 text-white mb-1">
-                <IconPencil size={60} />
-              </div>
-              <p className="text-center">
-                It's easy and it only takes 5 minutes
-              </p>
-              <button
-                className="px-4 py-3 mt-4 rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center"
-                onClick={() => setIsMenuOpen(true)}
-              >
-                Free Quote
-              </button>
-            </div>
           </section>
         </div>
       </div>

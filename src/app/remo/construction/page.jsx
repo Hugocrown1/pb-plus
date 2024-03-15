@@ -4,6 +4,7 @@ import Image from "next/image";
 import MultistepQuotation from "@/components/MultistepQuotation";
 import { IconPencil } from "@tabler/icons-react";
 import Link from "next/link";
+import { constructionServices } from "@/lib/constructionServices";
 
 const page = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ const page = () => {
       <MultistepQuotation
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        servicesData={constructionServices}
       />
       <div className=" z-10 flex items-center justify-center w-full py-4 mt-2 bg-white">
         <h1 className="text-4xl">Construction</h1>

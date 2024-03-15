@@ -10,147 +10,7 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import SpinnerSmall from "./SpinnerSmall";
 
-const data = [
-  {
-    service: "DISTRIBUTION BOX INSTALATION",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240v", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "How many do you need",
-        options: [
-          { option: "1", custom: false },
-          { option: "2/3", custom: false },
-          { option: "4/5", custom: false },
-          { option: "More", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Is it any wiring pending in your home?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Do you need any breakers?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-    ],
-  },
-
-  {
-    service: "NEW HOME WIRING",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240V", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction Ft²/m²",
-        options: [
-          { option: "300-500 Ft² / 90-150 m²", custom: false },
-          { option: "500-700 Ft² / 150-210 m²", custom: false },
-          { option: "700-900 Ft² / 210-280m²", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Construction type?",
-        options: [
-          { option: "Concrete", custom: false },
-          { option: "Wood", custom: false },
-          { option: "Metal", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction location?",
-        type: "Open",
-      },
-    ],
-  },
-
-  {
-    service: "HOME IMPROVEMENT WIRING",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240V", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction Ft²/m²",
-        options: [
-          { option: "300-500 Ft² / 90-150 m²", custom: false },
-          { option: "500-700 Ft² / 150-210 m²", custom: false },
-          { option: "700-900 Ft² / 210-280m²", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Does the area have electrical outlets?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Do you require distribution box?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction type?",
-        options: [
-          { option: "Concrete", custom: false },
-          { option: "Wood", custom: false },
-          { option: "Metal", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Construction location?",
-        type: "Open",
-      },
-    ],
-  },
-];
-
-const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
+const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen, servicesData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
   // const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -206,7 +66,9 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
   const serviceQuestions =
     service === ""
       ? []
-      : data[data.findIndex((object) => object.service === service)].questions;
+      : servicesData[
+          servicesData.findIndex((object) => object.service === service)
+        ].questions;
 
   const serviceForms = serviceQuestions.map((question, index) => (
     <ServiceForm
@@ -228,7 +90,7 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
     goToStart,
   } = useMultistepForm([
     <ServiceSelection
-      data={data}
+      data={servicesData}
       service={service}
       updateService={setService}
     />,
@@ -281,7 +143,7 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
         !isMenuOpen && "invisible"
       } `}
     >
-      <dialog className="flex flex-col w-full min-[817px]:w-[800px] h-full items-center min-[1276px]:h-fit min-h-[400px] bg-white rounded-lg pb-[40px]">
+      <dialog className="flex flex-col w-full min-[817px]:w-[800px] h-full items-center min-[1276px]:h-fit min-h-[300px] bg-white rounded-lg pb-[40px]">
         <header className="w-full flex flex-col">
           <div className="w-full flex justify-end items-end py-2 px-3">
             <button className="text-gray" onClick={handleFormClose}>
