@@ -107,8 +107,7 @@ const ContactForm = () => {
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">Contact Us</p>
           <p className="text-[#5e5e5e]  text-sm xl:text-lg  mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            Feel free to reach out to us by filling out the contact form
           </p>
         </div>
         <div className="w-full">

@@ -1,6 +1,6 @@
 import React from "react";
-import { Roboto } from "next/font/google";
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+import { Libre_Baskerville, Roboto } from "next/font/google";
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 import Link from "next/link";
 import Image from "next/image";
 import PropertiesDisplay from "@/components/PropertiesDisplay";
@@ -13,9 +13,9 @@ const page = () => {
           The Best Houses & Properties Just For You
         </h1>
         <p className="text-[#5e5e5e] text-center font-medium text-base xl:text-lg xl:w-[900px]">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-          voluptate sequi asperiores nemo possimus quod et quis, rerum
-          reiciendis veritatis cum tempora
+          Houses & Properties Service is your premier destination for finding
+          the perfect home, investment property, or commercial space tailored to
+          your unique needs and aspirations.
         </p>
         <Link
           href={"#properties"}
@@ -23,9 +23,9 @@ const page = () => {
         >
           Pricing
         </Link>
-        <div className="grid grid-cols-4 w-full h-[350px] my-5">
-          <div className="flex items-end mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+        <div className="grid grid-cols-4 gap-1 min-[1149px]:gap-4 w-full aspect-[90/25] my-5">
+          <div className="flex items-end w-full ">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house.jpg"}
                 alt="real estate photo"
@@ -35,8 +35,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-start mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-start w-full ">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house2.webp"}
                 alt="real estate photo"
@@ -46,8 +46,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-end mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-end w-full">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house3.jpg"}
                 alt="real estate photo"
@@ -57,8 +57,8 @@ const page = () => {
               />
             </div>
           </div>
-          <div className="flex items-start mx-2 xl:mx-0">
-            <div className="relative w-[300px] h-[300px] rounded-3xl overflow-hidden">
+          <div className="flex items-start w-full">
+            <div className="relative aspect-square w-full rounded-3xl overflow-hidden">
               <Image
                 src={"/assets/house4.png"}
                 alt="real estate photo"
@@ -71,13 +71,13 @@ const page = () => {
         </div>
       </section>
       <section id="pricing" className=" bg-gray-200  ">
-        <div className="flex flex-col xl:flex-row py-[50px] justify-between xl:max-w-[1280px]  mx-auto px-2">
-          <div className="flex flex-col  text-left xl:w-[482px] xl:mx-0 mx-2">
-            <h2 className="font-bold xl:text-[48px] text-[35px] xl:text-left">
+        <div className="flex flex-col min-[1130px]:flex-row py-[50px] items-center gap-4 justify-center min-[1130px]:justify-between max-w-[1280px]  mx-auto px-2">
+          <div className="flex flex-col items-center min-[1130px]:items-start text-center min-[1130px]:text-left w-[100%] min-[1130px]:w-[482px]">
+            <h2 className="font-bold text-[32px] min-[1130px]:text-[48px] text-center min-[1130px]:text-left">
               Want To Sale Your House?
             </h2>
             <div className="bg-[#30725C] w-[100px] h-1 rounded-xl mb-3"></div>
-            <p className="xl:text-lg text-base text-justify mx-6 xl:mx-0">
+            <p className="xl:text-lg text-base mx-6 xl:mx-0">
               Leave it to us! We offer a dedicated space on our platform where
               potential buyers can discover and explore your home. By showcasing
               your property through our platform, we provide a convenient avenue
@@ -94,7 +94,7 @@ const page = () => {
               Advertise your property
             </Link>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2  xl:w-[600px] xl:h-[500px] h-[400px] gap-2 my-2">
+          <div className="grid grid-cols-2 grid-rows-2 w-[90%]  aspect-square min-[1130px]:w-[600px] min-[1130px]:h-[500px] gap-2">
             <div className="row-span-2 relative rounded-xl overflow-hidden shadow-md">
               <Image
                 src={"/assets/house.jpg"}
@@ -129,11 +129,13 @@ const page = () => {
         id="properties"
         className="flex flex-col items-center pt-12 mb-8 text-center container-xl"
       >
-        <h1 className="xl:text-[64px] text-[35px]">We Help You Make Better Deals</h1>
+        <h1 className="xl:text-[64px] text-[35px]">
+          We Help You Make Better Deals
+        </h1>
         <p className="text-[#5e5e5e] text-center font-medium  text-base xl:text-lg xl:w-[900px] mb-8">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi
-          voluptate sequi asperiores nemo possimus quod et quis, rerum
-          reiciendis veritatis cum tempora
+          Whether you're buying, selling, leasing, or investing, trust PB+ Real
+          Estate Houses & Properties Service to be your trusted partner every
+          step of the way. Welcome home to PB+.
         </p>
         <PropertiesDisplay />
       </section>

@@ -69,7 +69,7 @@ const PropertiesDisplay = () => {
           </label>
         ))}
       </div>
-      <div className=" w-full border-2 border-gray-300 rounded-lg p-4">
+      <div className=" w-full border-2 border-gray-300 rounded-lg min-[503px]:px-4 py-4">
         {isLoading && (
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-4">
             <PropertyLoader uniqueKey="1" />
@@ -81,7 +81,7 @@ const PropertiesDisplay = () => {
           </div>
         )}
         {filteredProperties?.length ? (
-          <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2">
+          <div className="grid lg:grid-cols-3 min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2">
             {filteredProperties?.map((property) => (
               <PropertyCard key={property._id} {...property} />
             ))}

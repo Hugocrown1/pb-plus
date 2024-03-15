@@ -40,12 +40,20 @@ export const authOptions = {
   callbacks: {
     async session({ session, token }) {
       session.user.id = token.id;
+      session.user.role = token.role;
+      session.user.phone = token.phone;
       return session;
     },
     async jwt({ token, account, user }) {
       if (account) {
         token.accessToken = account.access_token;
         token.id = user.id;
+        token.role = user.role;
+        token.phone = user.phone;
+        if (!user.role) {
+          await connectDB();
+          await Users.findByIdAndUpdate(user.id, { role: "user" });
+        }
       }
       return token;
     },
