@@ -10,13 +10,17 @@ import Link from "next/link";
 import React from "react";
 import { getProperty } from "@/lib/properties";
 import DeleteButton from "./DeleteButton";
+import { redirect } from "next/dist/server/api-utils";
 
 const page = async ({ params }) => {
-  //TODO: Manejo de propiedad no encontrada
   const { id } = params;
 
   const session = await auth();
   const propertyInfo = await getProperty(id);
+
+  if (!propertyInfo) {
+    redirect("/real-estate/houses-&-properties");
+  }
 
   return (
     <main className="container-2xl pt-[60px]">
