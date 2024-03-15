@@ -1,8 +1,9 @@
 import React from "react";
-import { Roboto } from "next/font/google";
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
+import { Libre_Baskerville, Roboto } from "next/font/google";
+const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 import Link from "next/link";
 import Image from "next/image";
+import ContactFormRealEstate from "@/components/ContactFormRealEstate";
 
 const page = () => {
   return (
@@ -17,12 +18,12 @@ const page = () => {
             className="object-cover object-center"
           />
         </div>
-        <div className="flex flex-row  w-full gap-12 mt-2">
-          <h1 className="text-[#0A100D] text-left text-[70px] leading-tight w-[50%]  ">
+        <div className="flex flex-col items-center min-[1130px]:flex-row  w-full min-[1130px]:gap-12 mt-2">
+          <h1 className="text-[#0A100D] text-center min-[1130px]:text-left text-[40px] min-[480px]:text-[70px] leading-tight w-full min-[1130px]:w-[50%]  ">
             Assessment Services
           </h1>
-          <div className="flex flex-col">
-            <p className="text-[#5e5e5e] text-left font-medium text-lg ">
+          <div className="flex flex-col items-center min-[1130px]:items-start ">
+            <p className="text-[#5e5e5e] text-center min-[1130px]:text-left font-medium text-lg ">
               Understanding the increase in value that your property experiences
               after improvements or over a few years following its purchase is
               essential if you are considering selling your land or house.
@@ -37,9 +38,9 @@ const page = () => {
         </div>
       </section>
       <section id="pricing" className=" bg-gray-200 ">
-        <div className="flex flex-row py-[50px] justify-between max-w-[1280px]  mx-auto px-2">
-          <div className="flex flex-col  text-left w-[482px]">
-            <h2 className="font-bold text-[48px] text-left">
+        <div className="flex flex-col min-[1130px]:flex-row py-[50px] items-center gap-4 justify-center min-[1130px]:justify-between max-w-[1280px]  mx-auto px-2">
+          <div className="flex flex-col items-center min-[1130px]:items-start text-center min-[1130px]:text-left w-[100%] min-[1130px]:w-[482px]">
+            <h2 className="font-bold text-[32px] min-[1130px]:text-[48px] text-center min-[1130px]:text-left">
               How Much Value Your Property Gained!
             </h2>
             <div className="bg-[#30725C] w-[100px] h-1 rounded-xl mb-3"></div>
@@ -52,7 +53,7 @@ const page = () => {
               real estate.
             </p>
           </div>
-          <div className="grid grid-cols-2 grid-rows-2  w-[600px] h-[500px] gap-2">
+          <div className="grid grid-cols-2 grid-rows-2 w-[90%]  aspect-square min-[1130px]:w-[600px] min-[1130px]:h-[500px] gap-2">
             <div className="row-span-2 relative rounded-xl overflow-hidden shadow-md">
               <Image
                 src={"/assets/assessment2.webp"}
@@ -83,6 +84,7 @@ const page = () => {
           </div>
         </div>
       </section>
+      <ContactFormRealEstate serviceName={"Assessment Services"}/>
     </main>
   );
 };
