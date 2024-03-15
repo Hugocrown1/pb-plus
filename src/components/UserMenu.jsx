@@ -68,9 +68,18 @@ const UserMenu = () => {
                   <IconUser /> <p>Account</p>
                 </Link>
               </li>
-
+              {session.user?.role === "admin" && (
+                <li onClick={() => setIsMenuOpen(false)}>
+                  <Link className="dropdown-item" href={"/dashboard"}>
+                    <IconUser /> <p>Dashboard</p>
+                  </Link>
+                </li>
+              )}
               <li onClick={() => setIsMenuOpen(false)}>
-                <button className="dropdown-item" onClick={() => signOut()}>
+                <button
+                  className="dropdown-item"
+                  onClick={() => signOut({ callbackUrl: "/" })}
+                >
                   <IconPower /> <p>Log out</p>
                 </button>
               </li>
