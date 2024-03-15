@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
-import { IconMenu2, IconPower, IconUser } from "@tabler/icons-react";
+import { IconMenu2, IconPower, IconUser, IconDashboard } from "@tabler/icons-react";
 import Spinner from "./Spinner";
 // import { useSessionStore } from "@/app/store";
 
@@ -70,9 +70,9 @@ const UserMenu = () => {
               </li>
               {session.user?.role === "admin" && (
                 <li onClick={() => setIsMenuOpen(false)}>
-                  <Link className="dropdown-item" href={"/dashboard"}>
-                    <IconUser /> <p>Dashboard</p>
-                  </Link>
+                  <a className="dropdown-item" href={"/dashboard"}>
+                    <IconDashboard /> <p>Dashboard</p>
+                  </a>
                 </li>
               )}
               <li onClick={() => setIsMenuOpen(false)}>
