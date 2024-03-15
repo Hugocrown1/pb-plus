@@ -6,6 +6,7 @@ import fs from "fs";
 import { PDFDocument, StandardFonts } from "pdf-lib";
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import nodemailer from "nodemailer";
+import path from "path";
 
 export async function GET() {
   try {
@@ -54,7 +55,7 @@ export async function POST(request) {
     const { width, height } = page.getSize();
 
     const logoImage = await pdfDoc.embedPng(
-      fs.readFileSync("public/assets/logomain.png")
+      fs.readFileSync(path.join(process.cwd(), "public/assets/logomain.png"))
     );
 
     page.drawImage(logoImage, {
