@@ -49,9 +49,9 @@ export default function Page() {
       <Slider dataSlider={dataSlider} />
       <section
         id="about"
-        className="flex flex-row mx-auto gap-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
+        className="flex flex-col items-center min-[855px]:justify-start min-[855px]:flex-row mx-auto gap-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
       >
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full aspect-square">
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[60%] min-[855px]:w-full aspect-square">
           <div className="relative col-span-2 rounded-xl overflow-hidden ">
             <Image
               src={"/assets/remo.jpg"}
@@ -102,12 +102,12 @@ export default function Page() {
         </div>
       </section>
       <section className="flex flex-col items-center mx-auto max-w-[1280px] min-[503px]:px-2 py-[50px]">
-        <h1 className="xl:text-[64px] text-[35px] text-left leading-tight">
+        <h1 className="xl:text-[64px] text-[35px] text-center leading-tight">
           We Offer Home Renovation Services
         </h1>
         <h2>Creating One-of-a-Kind Homes</h2>
         <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2"></div>
-        <div className="grid w-[90%] min-h-[550px] grid-cols-4 grid-rows-2 gap-2 mt-6">
+        <div className="grid w-[90%] min-h-[550px] grid-cols-1 min-[525px]:grid-cols-2 min-[1067px]:grid-cols-4 grid-rows-2 gap-2 mt-6">
           <ServiceRemoCard
             href={"/remo/construction"}
             title={"Construction"}

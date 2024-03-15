@@ -67,14 +67,14 @@ const page = () => {
           </section>
         </div> */}
       </div>
-      <div className="sticky  bottom-0 left-0 right-0 bg-white text-white text-center p-2 items-center flex justify-center border-t-2 min-[1276px]:hidden">
+      {/* <div className="sticky  bottom-0 left-0 right-0 bg-white text-white text-center p-2 items-center flex justify-center border-t-2 min-[1276px]:hidden">
         <button
           className="px-4 z-50 py-3 rounded-2xl font-medium text-lg max-w-[820px] w-full mx-4  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center"
           onClick={() => setIsMenuOpen(true)}
         >
           Ask for a quote
         </button>
-      </div>
+      </div> */}
     </main>
   );
 };
