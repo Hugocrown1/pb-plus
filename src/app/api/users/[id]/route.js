@@ -10,16 +10,16 @@ export async function GET(request, { params: { id } }) {
     await connectDB();
     const user = await Users.findById(id).populate("properties", {});
 
-    return NextResponse.json(
-      { message: "Usuario no autorizado" },
-      { status: 401 }
-    );
-    
+    if(verifyUser(user._id)){}
+
+    return NextResponse.json(user);
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json(error.message, { status: 500 });
   }
 }
+
+
 export async function PUT(request, { params: { id } }) {
   try {
     await connectDB();
