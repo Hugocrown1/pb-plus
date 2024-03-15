@@ -1,5 +1,6 @@
 import { bucketName, client } from "@/lib/aws";
 import { connectDB } from "@/lib/mongoose";
+import { verifyUser } from "@/lib/userAuth";
 import Properties from "@/models/properties";
 import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { NextResponse } from "next/server";
@@ -30,7 +31,7 @@ export async function PUT(request, { params: { id } }) {
         { message: "No se encontro la propiedad" },
         { status: 404 }
       );
-    if (verifyUser(property.user)) {
+    if (await verifyUser(property.user._id.toString())) {
       const newProperty = await Properties.findByIdAndUpdate(
         id,
         { ...data },
@@ -57,7 +58,7 @@ export async function DELETE(request, { params: { id } }) {
         { message: "No se encontro la propiedad" },
         { status: 404 }
       );
-    if (verifyUser(property.user)) {
+    if (await verifyUser(property.user._id.toString())) {
       const imageKeys = property.images.map((image) => ({
         Key: image.split("/").pop(),
       }));
