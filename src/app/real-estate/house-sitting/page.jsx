@@ -3,6 +3,7 @@ import { Libre_Baskerville, Roboto } from "next/font/google";
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 import Link from "next/link";
 import Image from "next/image";
+import ContactFormRealEstate from "@/components/ContactFormRealEstate";
 
 const page = () => {
   return (
@@ -84,6 +85,7 @@ const page = () => {
           </div>
         </div>
       </section>
+      <ContactFormRealEstate serviceName={"House Sitting"}/>
     </main>
   );
 };

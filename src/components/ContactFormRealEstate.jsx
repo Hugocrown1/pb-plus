@@ -1,17 +1,16 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useSession } from "next-auth/react";
 import { IconCheck, IconX } from "@tabler/icons-react";
+import { useSession } from "next-auth/react";
 
-const ContactForm = () => {
+const ContactFormRealEstate = ({ serviceName }) => {
   const { data: session } = useSession();
-  const [formData, setFormData] = useState({
+  const [userData, setUserData] = useState({
     userName: "",
     userEmail: "",
     userPhone: "",
     message: "",
-    serviceName: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
@@ -21,7 +20,7 @@ const ContactForm = () => {
 
   useEffect(() => {
     if (session) {
-      setFormData({
+      setUserData({
         userName: session.user.name || "",
         userEmail: session.user.email || "",
         userPhone: session.user.phone || "",
@@ -34,15 +33,15 @@ const ContactForm = () => {
 
     // Validación del teléfono
     if (name === "userPhone") {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setUserData((prev) => ({ ...prev, [name]: value }));
       setPhoneError(false); // Reiniciar el estado del error al escribir
     }
     // Validación del correo electrónico
     else if (name === "userEmail") {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setUserData((prev) => ({ ...prev, [name]: value }));
       setEmailError(false); // Reiniciar el estado del error al escribir
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      setUserData((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -57,7 +56,7 @@ const ContactForm = () => {
         setEmailError(true);
       }
     }
-    // Validación del teléfono
+    // Validación del teléfono (opcional)
     if (name === "userPhone") {
       if (value === "" || /^\d{10,}$/.test(value)) {
         setPhoneError(false);
@@ -72,26 +71,26 @@ const ContactForm = () => {
     setLoading(true);
     try {
       const currentDate = new Date().toISOString();
-      const formDataWithDate = { ...formData, date: currentDate };
-      await axios.post("/api/consultations", formDataWithDate);
-      setFormData({
+      const userDataWithDate = { ...userData, date: currentDate, serviceName };
+      await axios.post("/api/pricing", userDataWithDate);
+      console.log("Formulario enviado exitosamente");
+      setUserData({
         userName: "",
         userEmail: "",
         userPhone: "",
         message: "",
-        serviceName: "",
       });
       setError(false);
       setSuccess(true);
       setTimeout(() => {
         setSuccess(false);
-      }, 2000);
+      }, 2000); // Ocultar mensaje de éxito después de 2 segundos
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
       setError(true);
       setTimeout(() => {
         setError(false);
-      }, 2000);
+      }, 2000); // Ocultar mensaje de error después de 2 segundos
     } finally {
       setLoading(false);
     }
@@ -99,13 +98,14 @@ const ContactForm = () => {
 
   return (
     <section
-      id="contactus"
-      className="w-full flex flex-col justify-center p-4 bg-gray-200"
+      id="pricing"
+      className="w-full flex flex-col justify-center p-4 bg-[#f5f3f4]"
     >
-      <div className="w-full flex flex-col justify-center xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
+      <div className="w-full  flex flex-col justify-center xl:w-[1100px] xl:mx-auto xl:my-16 xl:flex-row">
         <div className="w-full text-start">
-          <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
-          <p className="text-xl xl:text-3xl pb-8 font-semibold">Contact Us</p>
+          <div className="w-[100px] h-1 bg-[#30725c] mb-4"></div>
+          <p className="text-xl xl:text-3xl pb-8 font-semibold">Pricing</p>
+
           <p className="text-[#5e5e5e]  text-sm xl:text-lg  mb-4">
             Feel free to reach out to us by filling out the contact form
           </p>
@@ -119,7 +119,7 @@ const ContactForm = () => {
               type="text"
               id="userName"
               name="userName"
-              value={formData.userName}
+              value={userData.userName}
               onChange={handleChange}
               required
               className="w-full p-2 border rounded-md"
@@ -135,7 +135,7 @@ const ContactForm = () => {
               type="email"
               id="userEmail"
               name="userEmail"
-              value={formData.userEmail}
+              value={userData.userEmail}
               onChange={handleChange}
               onBlur={handleBlur} // Activar la verificación de error al salir del campo
               required
@@ -157,7 +157,7 @@ const ContactForm = () => {
               type="tel"
               id="userPhone"
               name="userPhone"
-              value={formData.userPhone}
+              value={userData.userPhone}
               minLength={10}
               maxLength={20}
               onChange={handleChange}
@@ -177,37 +177,6 @@ const ContactForm = () => {
               <p className="text-red-500">Please a valid phone number</p>
             )}
 
-            <label
-              htmlFor="serviceName"
-              className="block text-gray-800 mt-4 mb-2"
-            >
-              Service:
-            </label>
-            <select
-              id="serviceName"
-              name="serviceName"
-              value={formData.serviceName}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border rounded-md"
-            >
-              <option value="" disabled>
-                Choose the service
-              </option>
-              <option value="Immigration Services">Immigration Services</option>
-              <option value="Property Regularization">
-                Property Regularization
-              </option>
-              <option value="Property Acquisition">Property Acquisition</option>
-              <option value="Court Representation">Court Representation</option>
-              <option value="Legal Consulting">Legal Consulting</option>
-              <option value="Formation Of Companies">
-                Formation Of Companies
-              </option>
-              <option value="Funeral Arrangements">Funeral Arrangements</option>
-              <option value="Other Legal Services">Other Legal Services</option>
-            </select>
-
             <label htmlFor="message" className="block text-gray-800 mt-4 mb-2">
               Message:
             </label>
@@ -215,7 +184,7 @@ const ContactForm = () => {
               id="message"
               name="message"
               rows="4"
-              value={formData.message}
+              value={userData.message}
               onChange={handleChange}
               required
               className="w-full p-2 border rounded-md"
@@ -234,7 +203,7 @@ const ContactForm = () => {
 
             <button
               type="submit"
-              className="my-1 px-4 py-2 rounded-[10px] font-medium text-lg w-[220px] text-[#FCFFFC] transition-colors bg-[#cba557] hover:bg-[#c29029] text-center relative"
+              className="my-1 px-4 py-2 rounded-[10px] font-medium text-lg w-[220px] text-[#FCFFFC] transition-colors bg-[#30725c] hover:bg-[#40997b] text-center relative"
               disabled={loading}
             >
               {loading && (
@@ -249,4 +218,4 @@ const ContactForm = () => {
   );
 };
 
-export default ContactForm;
+export default ContactFormRealEstate;
