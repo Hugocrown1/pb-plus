@@ -1,17 +1,19 @@
 "use client";
 import Link from "next/link";
-
+import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
 import { IconMenu2, IconPower, IconUser, IconDashboard } from "@tabler/icons-react";
 import Spinner from "./Spinner";
+
 // import { useSessionStore } from "@/app/store";
 
 const UserMenu = () => {
   // const setSession = useSessionStore((state) => state.setUserSession);
   // const userSession = useSessionStore((state) => state.userSession);
   const { data: session, status } = useSession();
-
+  const defaultImage = "/assets/defaultprofile.jpg";
+  const [userImage, setUserImage] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   let menuRef = useRef();
 
@@ -38,6 +40,22 @@ const UserMenu = () => {
   //   }
   // }, [session]);
 
+  
+
+  useEffect(() => {
+    const fetchUserImage = async () => {
+      if (session && session.user) {
+        try {
+          const response = await axios.get(`/api/users/${session.user.id}`);
+          setUserImage(response.data.image);
+        } catch (error) {
+          console.error("Error fetching user data:", error);
+        }
+      }
+    };
+    fetchUserImage(); 
+  }, [session, isMenuOpen]);
+
   return (
     <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">
       {status === "loading" ? (
@@ -49,7 +67,7 @@ const UserMenu = () => {
             className="menu-trigger"
           >
             <img
-              src={session.user?.image}
+              src={userImage}
               height={36}
               width={36}
               className="rounded-full"
