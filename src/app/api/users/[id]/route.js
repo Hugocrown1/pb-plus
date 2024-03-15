@@ -10,10 +10,6 @@ export async function GET(request, { params: { id } }) {
     await connectDB();
     const user = await Users.findById(id).populate("properties", {});
 
-    if(verifyUser(user._id)){
-      return NextResponse.json(user);
-    }
-
     return NextResponse.json(
       { message: "Usuario no autorizado" },
       { status: 401 }
