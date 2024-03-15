@@ -4,15 +4,15 @@ import Image from "next/image";
 import { IconX } from "@tabler/icons-react";
 
 const data = [
-  "/assets/gallery/puntabanda.jpg",
-  "/assets/gallery/puntabanda2.jpg",
-  "/assets/gallery/puntabanda3.jpg",
-  "/assets/gallery/puntabanda4.jpg",
-  "/assets/gallery/puntabanda5.jpg",
-  "/assets/gallery/puntabanda6.jpg",
-  "/assets/gallery/puntabanda7.webp",
-  "/assets/gallery/puntabanda8.jpg",
-  "/assets/gallery/puntabanda9.webp",
+  "/assets/gallery/puntabanda.jpeg",
+  "/assets/gallery/puntabanda2.jpeg",
+  "/assets/gallery/puntabanda3.jpeg",
+  "/assets/gallery/puntabanda4.jpeg",
+  "/assets/gallery/puntabanda5.jpeg",
+  "/assets/gallery/puntabanda6.jpeg",
+  "/assets/gallery/puntabanda7.jpeg",
+  "/assets/gallery/puntabanda8.jpeg",
+  "/assets/gallery/puntabanda9.jpeg",
 ];
 
 const GridGallery = () => {

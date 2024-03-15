@@ -10,150 +10,9 @@ import { useSession } from "next-auth/react";
 import axios from "axios";
 import SpinnerSmall from "./SpinnerSmall";
 
-const data = [
-  {
-    service: "DISTRIBUTION BOX INSTALATION",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240v", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "How many do you need",
-        options: [
-          { option: "1", custom: false },
-          { option: "2/3", custom: false },
-          { option: "4/5", custom: false },
-          { option: "More", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Is it any wiring pending in your home?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Do you need any breakers?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-    ],
-  },
-
-  {
-    service: "NEW HOME WIRING",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240V", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction Ft²/m²",
-        options: [
-          { option: "300-500 Ft² / 90-150 m²", custom: false },
-          { option: "500-700 Ft² / 150-210 m²", custom: false },
-          { option: "700-900 Ft² / 210-280m²", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Construction type?",
-        options: [
-          { option: "Concrete", custom: false },
-          { option: "Wood", custom: false },
-          { option: "Metal", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction location?",
-        type: "Open",
-      },
-    ],
-  },
-
-  {
-    service: "HOME IMPROVEMENT WIRING",
-    questions: [
-      {
-        question: "Home voltage",
-        options: [
-          { option: "120V", custom: false },
-          { option: "240V", custom: false },
-          { option: "Both", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction Ft²/m²",
-        options: [
-          { option: "300-500 Ft² / 90-150 m²", custom: false },
-          { option: "500-700 Ft² / 150-210 m²", custom: false },
-          { option: "700-900 Ft² / 210-280m²", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Does the area have electrical outlets?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Do you require distribution box?",
-        options: [
-          { option: "Yes", custom: false },
-          { option: "No", custom: false },
-        ],
-        type: "Radio",
-      },
-      {
-        question: "Construction type?",
-        options: [
-          { option: "Concrete", custom: false },
-          { option: "Wood", custom: false },
-          { option: "Metal", custom: false },
-          { option: "OTHER", custom: true },
-        ],
-        type: "Radio",
-      },
-
-      {
-        question: "Construction location?",
-        type: "Open",
-      },
-    ],
-  },
-];
-
-const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
+const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen, servicesData }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { data: session } = useSession();
-  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [service, setService] = useState("");
   const [extraInfo, setExtraInfo] = useState("");
   const [answers, setAnswers] = useState([]);
@@ -163,6 +22,7 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
     phone: session?.user.phone || "",
   });
   const [quoteFinished, setQuoteFinished] = useState(false);
+  const [confirmationModal, setConfirmationModal] = useState(false);
 
   useEffect(() => {
     setAnswers([]);
@@ -206,7 +66,9 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
   const serviceQuestions =
     service === ""
       ? []
-      : data[data.findIndex((object) => object.service === service)].questions;
+      : servicesData[
+          servicesData.findIndex((object) => object.service === service)
+        ].questions;
 
   const serviceForms = serviceQuestions.map((question, index) => (
     <ServiceForm
@@ -228,7 +90,7 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
     goToStart,
   } = useMultistepForm([
     <ServiceSelection
-      data={data}
+      data={servicesData}
       service={service}
       updateService={setService}
     />,
@@ -239,6 +101,7 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
 
   const handleFormClose = () => {
     goToStart();
+    setConfirmationModal(false);
     setIsLoading(false);
     setIsMenuOpen(false);
     setQuoteFinished(false);
@@ -276,94 +139,124 @@ const MultistepQuotation = ({ isMenuOpen, setIsMenuOpen }) => {
   };
 
   return (
-    <div
-      className={`fixed flex items-center inset-0  bg-zinc-950/30 transition-transform z-40 w-full ${
-        !isMenuOpen && "invisible"
-      } `}
-    >
-      <dialog className="flex flex-col w-full min-[817px]:w-[800px] h-full items-center min-[1276px]:h-fit min-h-[400px] bg-white rounded-lg pb-[40px]">
-        <header className="w-full flex flex-col">
-          <div className="w-full flex justify-end items-end py-2 px-3">
-            <button className="text-gray" onClick={handleFormClose}>
-              <IconX />
-            </button>
-          </div>
-        </header>
-        {quoteFinished ? (
-          <div className="flex flex-col items-center h-full justify-stretch px-2 mt-[40px]">
-            <IconCheck size={90} />
-            <h2>Thanks for your time</h2>
-            <p>We will contact as soon as posible!</p>
+    <>
+      <div
+        className={`fixed flex items-center inset-0  bg-zinc-950/30 transition-transform z-40 w-full ${
+          !isMenuOpen && "invisible"
+        } `}
+      >
+        <dialog className="flex flex-col w-full min-[817px]:w-[800px] h-full items-center min-[1276px]:h-fit min-h-[300px] bg-white rounded-lg pb-[40px]">
+          <header className="w-full flex flex-col">
+            <div className="w-full flex justify-end items-end py-2 px-3">
+              <button
+                className="text-gray"
+                onClick={() => setConfirmationModal(true)}
+              >
+                <IconX />
+              </button>
+            </div>
+          </header>
+          {quoteFinished ? (
+            <div className="flex flex-col items-center h-full justify-stretch px-2 mt-[40px]">
+              <IconCheck size={90} />
+              <h2>Thanks for your time</h2>
+              <p>We will contact as soon as posible!</p>
+              <button
+                className="px-4 py-3 mt-4 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                onClick={handleFormClose}
+              >
+                Dismiss
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <div className="flex  items-start w-[40%] mx-auto h-[15px] mb-4 rounded-full bg-gray-200">
+                <div
+                  style={{
+                    width:
+                      (
+                        (currentStepIndex / (steps.length - 1)) *
+                        100
+                      ).toFixed() + "%",
+                  }}
+                  className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full`}
+                ></div>
+              </div>
+              {currentStepIndex !== 0 && (
+                <p
+                  onClick={goToStart}
+                  className="text-center text-lg mx-auto w-fit text-blue-600 hover:text-blue-500 transition-colors mb-2 cursor-pointer"
+                >
+                  Return to services
+                </p>
+              )}
+              {step}
+              <div className="flex flex-col min-[1276px]:flex-row w-full justify-evenly mt-[30px] px-6">
+                {!isFirstStep && (
+                  <button
+                    disabled={isLoading}
+                    type="button"
+                    className="hidden min-[1276px]:flex justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                    onClick={back}
+                  >
+                    Previous
+                  </button>
+                )}
+                <button
+                  disabled={isLoading}
+                  type="submit"
+                  className="flex items-center justify-center px-4 py-3 my-2 rounded-2xl font-medium text-lg  w-full min-[1276px]:w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+                >
+                  {isLoading ? (
+                    <SpinnerSmall />
+                  ) : isLastStep && !isFirstStep ? (
+                    "Submit"
+                  ) : (
+                    "Next"
+                  )}
+                </button>
+                {!isFirstStep && (
+                  <button
+                    disabled={isLoading}
+                    type="button"
+                    className="flex min-[1276px]:hidden justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
+                    onClick={back}
+                  >
+                    Previous
+                  </button>
+                )}
+              </div>
+            </form>
+          )}
+        </dialog>
+      </div>
+
+      <div
+        className={`fixed flex items-center inset-0  bg-zinc-950/30 transition-transform z-40 w-full ${
+          !confirmationModal && "invisible"
+        } `}
+      >
+        <dialog className="flex flex-col justify-evenly w-full  max-w-[600px] items-center h-[300px] bg-white rounded-lg px-6 py-[30px]">
+          <h2 className="text-2xl font-semibold">
+            Are you sure you want to exit?
+          </h2>
+          <div className="w-full flex flex-col justify-center items-center">
             <button
-              className="px-4 py-3 mt-4 my-auto rounded-2xl font-medium text-lg w-[220px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+              className="flex  justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
               onClick={handleFormClose}
             >
-              Dismiss
+              Exit
+            </button>
+            <button
+              className="flex items-center justify-center px-1 py-3 my-2 rounded-2xl font-medium text-lg  w-full min-[1276px]:w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
+              onClick={() => setConfirmationModal(false)}
+            >
+              Continue requesting
             </button>
           </div>
-        ) : (
-          <form onSubmit={handleSubmit}>
-            <div className="flex  items-start w-[40%] mx-auto h-[15px] mb-4 rounded-full bg-gray-200">
-              <div
-                style={{
-                  width:
-                    ((currentStepIndex / (steps.length - 1)) * 100).toFixed() +
-                    "%",
-                }}
-                className={`bg-gradient-to-r from-[#f7ba2c] to-[#ea5459] h-full rounded-full transition-all`}
-              ></div>
-            </div>
-            {currentStepIndex !== 0 && (
-              <p
-                onClick={goToStart}
-                className="text-center text-lg mx-auto w-fit text-blue-600 hover:text-blue-500 transition-colors mb-2 cursor-pointer"
-              >
-                Return to services
-              </p>
-            )}
-
-            {step}
-            <div className="flex flex-col min-[1276px]:flex-row w-full justify-evenly mt-[30px] px-6">
-              {!isFirstStep && (
-                <button
-                  disabled={isLoading}
-                  type="button"
-                  className="hidden min-[1276px]:flex justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                  onClick={back}
-                >
-                  Previous
-                </button>
-              )}
-
-              <button
-                disabled={isLoading}
-                type="submit"
-                className="flex items-center justify-center px-4 py-3 my-2 rounded-2xl font-medium text-lg  w-full min-[1276px]:w-[220px] h-[56px]  text-black transition-colors  bg-[#F6AA1C] hover:bg-[#ca9c47]  text-center disabled:bg-gray-400"
-              >
-                {isLoading ? (
-                  <SpinnerSmall />
-                ) : isLastStep && !isFirstStep ? (
-                  "Submit"
-                ) : (
-                  "Next"
-                )}
-              </button>
-
-              {!isFirstStep && (
-                <button
-                  disabled={isLoading}
-                  type="button"
-                  className="flex min-[1276px]:hidden justify-center px-4 py-3 my-auto rounded-2xl font-medium text-lg w-full min-[1276px]:w-[220px]  text-black transition-colors  border-2 border-black hover:bg-[#e7e7e7c2]  text-center"
-                  onClick={back}
-                >
-                  Previous
-                </button>
-              )}
-            </div>
-          </form>
-        )}
-      </dialog>
-    </div>
+        </dialog>
+      </div>
+    </>
   );
 };
 

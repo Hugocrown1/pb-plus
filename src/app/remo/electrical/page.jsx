@@ -4,6 +4,7 @@ import Image from "next/image";
 import MultistepQuotation from "@/components/MultistepQuotation";
 import { IconPencil } from "@tabler/icons-react";
 import Link from "next/link";
+import { electricalServices } from "@/lib/electricalServices";
 
 const page = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,6 +13,7 @@ const page = () => {
       <MultistepQuotation
         isMenuOpen={isMenuOpen}
         setIsMenuOpen={setIsMenuOpen}
+        servicesData={electricalServices}
       />
       <div className=" z-10 flex items-center justify-center w-full py-4 mt-2 bg-white">
         <h1 className="text-4xl">Electrical Services</h1>
@@ -95,6 +97,87 @@ const page = () => {
               installations that will supply power to your entire home.
             </p>
           </section>
+          <section
+            id="electrical-audit"
+            className="w-full bg-white px-4 py-6 rounded-lg my-4"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className=" w-[10px] rounded-sm h-[50px] bg-[#941B0C] p-1"></div>
+              <h2 className="text-4xl text-left w-fit font-semibold">
+                Electrical audit
+              </h2>
+            </div>
+            <div className="w-full h-[422px] relative my-2 ">
+              <Image
+                src={"/assets/remo/electricalaudit.jpg"}
+                alt="cfe photo"
+                fill={true}
+                sizes="(min-width: 1120px) 1000px"
+                className="object-cover object-center"
+              />
+            </div>
+            <p className="text-left text-lg mt-4">
+              Why would I need an electrical audit? A good sign that you need an
+              electrical audit is when your power bill varies with a big
+              difference little by little. It can mean that you have an outlet
+              that is costing you a lot of money. Maybe other problems are
+              occurring in your wiring or electrical circuit that may be causing
+              issues.
+            </p>
+            <br />
+            <p className="text-left text-lg mb-4">
+              An audit will help you to find out what is going on in your home
+              electrical circuit and find the problem for good. These
+              malfunctions can also cause more damage to other home appliances
+              and cost you more money.
+            </p>
+          </section>
+          <section
+            id="substations"
+            className="w-full bg-white px-4 py-6 rounded-lg my-4"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className=" w-[10px] rounded-sm h-[50px] bg-[#941B0C] p-1"></div>
+              <h2 className="text-4xl text-left w-fit font-semibold">
+                Substations
+              </h2>
+            </div>
+            <div className="w-full h-[422px] relative my-2 ">
+              <Image
+                src={"/assets/remo/substations.webp"}
+                alt="cfe photo"
+                fill={true}
+                sizes="(min-width: 1120px) 1000px"
+                className="object-cover object-center"
+              />
+            </div>
+            <h3 className="text-xl font-semibold">
+              High tension voltage substations
+            </h3>
+            <p className="text-left text-lg mb-4">
+              PB Plus can provide you with a custom-made substation tailored to
+              the needs your project may have. It's common to have a substation
+              when you have a large property with high electricity consumption,
+              whether it's for a shop on your ranch or for your business. These
+              stations are for industrial projects.
+            </p>
+            <div className="w-full h-[422px] relative my-2 ">
+              <Image
+                src={"/assets/remo/mediumsubstation.jpg"}
+                alt="cfe photo"
+                fill={true}
+                sizes="(min-width: 1120px) 1000px"
+                className="object-cover object-center"
+              />
+            </div>
+            <h3 className="text-xl font-semibold">
+              Medium tension voltage substations.
+            </h3>
+            <p className="text-left text-lg mb-4">
+              A medium tension substation is more common in smaller projects,
+              ranches, or small businesses.
+            </p>
+          </section>
         </div>
         <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
           <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
@@ -143,6 +226,22 @@ const page = () => {
                   className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   Generator
+                </Link>
+              </li>
+              <li className="w-full">
+                <Link
+                  href={"#electrical-audit"}
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                >
+                  Electrical Audit
+                </Link>
+              </li>
+              <li className="w-full">
+                <Link
+                  href={"#substations"}
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                >
+                  Substations
                 </Link>
               </li>
             </ul>

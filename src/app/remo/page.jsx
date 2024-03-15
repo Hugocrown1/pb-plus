@@ -37,7 +37,7 @@ const dataSlider = [
     title: "Let Us Take Care Of It",
     subtitle:
       "We handle a diverse range of projects, from commercial buildings to residential complexes, with a commitment to excellence in every detail.",
-    source: "/assets/house3.jpg",
+    source: "/assets/remo/patio.png",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -49,9 +49,9 @@ export default function Page() {
       <Slider dataSlider={dataSlider} />
       <section
         id="about"
-        className="flex flex-row mx-auto gap-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
+        className="flex flex-col items-center min-[855px]:justify-start min-[855px]:flex-row mx-auto gap-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
       >
-        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-full aspect-square">
+        <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[60%] min-[855px]:w-full aspect-square">
           <div className="relative col-span-2 rounded-xl overflow-hidden ">
             <Image
               src={"/assets/remo.jpg"}
@@ -63,7 +63,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/assessment.webp"}
+              src={"/assets/remo/wiring.jpeg"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
@@ -72,7 +72,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/assessment1.webp"}
+              src={"/assets/remo/pex-plumbing.png"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
@@ -102,51 +102,51 @@ export default function Page() {
         </div>
       </section>
       <section className="flex flex-col items-center mx-auto max-w-[1280px] min-[503px]:px-2 py-[50px]">
-        <h1 className="xl:text-[64px] text-[35px] text-left leading-tight">
+        <h1 className="xl:text-[64px] text-[35px] text-center leading-tight">
           We Offer Home Renovation Services
         </h1>
         <h2>Creating One-of-a-Kind Homes</h2>
         <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2"></div>
-        <div className="grid w-[90%] min-h-[550px] grid-cols-4 grid-rows-2 gap-2 mt-6">
+        <div className="grid w-[90%] min-h-[550px] grid-cols-1 min-[525px]:grid-cols-2 min-[1067px]:grid-cols-4 grid-rows-2 gap-2 mt-6">
           <ServiceRemoCard
             href={"/remo/construction"}
             title={"Construction"}
-            icon={<IconBackhoe color="#941B0C" size={70} />}
+            image={"/assets/remo/homeconst.jpg"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/remodeling"}
             title={"Remodeling"}
-            icon={<IconPaint color="#941B0C" size={70} />}
+            image={"/assets/remo/wood.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/electrical"}
             title={"Electrical"}
-            icon={<IconBolt color="#941B0C" size={70} />}
+            image={"/assets/remo/generator.webp"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/plumbing"}
             title={"Plumbing"}
-            icon={<IconTool color="#941B0C" size={70} />}
+            image={"/assets/remo/plumbing.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/project-management"}
             title={"Project Management"}
-            icon={<IconClipboard color="#941B0C" size={70} />}
+            image={"/assets/remo/project-management.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/patio"}
             title={"Patio"}
-            icon={<IconLeaf color="#941B0C" size={70} />}
+            image={"/assets/remo/patio.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/concrete"}
             title={"Concrete"}
-            icon={<IconGardenCart color="#941B0C" size={70} />}
+            image={"/assets/remo/concrete.png"}
           ></ServiceRemoCard>
           <ServiceRemoCard
-            href={"#"}
+            href={"/remo/air-conditioner"}
             title={"A/C"}
-            icon={<IconWind color="#941B0C" size={70} />}
+            image={"/assets/remo/ac.png"}
           ></ServiceRemoCard>
         </div>
       </section>

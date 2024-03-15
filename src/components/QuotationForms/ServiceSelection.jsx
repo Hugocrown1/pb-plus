@@ -5,7 +5,7 @@ const ServiceSelection = ({ data, service, updateService }) => {
   return (
     <FormWrapper title={"Select a service"}>
       <ul>
-        {data.map((object, index) => (
+        {data?.map((object, index) => (
           <li key={object.service} className="mb-1">
             <label
               className="w-full gap-2 p-4 flex flex-row border-[1px] cursor-pointer rounded-md"
