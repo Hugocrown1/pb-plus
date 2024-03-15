@@ -16,6 +16,7 @@ import {
   IconSocial,
   IconUser,
   IconX,
+  IconDashboard
 } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Spinner from "./Spinner";
@@ -42,7 +43,7 @@ const routes = [
     icon: <IconScale />,
   },
   {
-    route: "/events",
+    route: "/community",
     name: "Community",
     icon: <IconSocial />,
   },
@@ -81,7 +82,7 @@ const Menu = () => {
         onClick={() => setIsMenuOpen(!isMenuOpen)}
       >
         <aside
-          className={`absolute px-4  py-2 flex flex-col w-[320px] bg-[#f5f3f4] h-full rounded-l-xl overflow-auto  shadow-xl ease-out transition-all ${
+          className={`absolute p-4 flex flex-col w-[250px] min-[320px]:w-[320px] bg-[#f5f3f4] h-full rounded-l-xl overflow-auto  shadow-xl ease-out transition-all ${
             !isMenuOpen && "translate-x-full"
           }`}
           onClick={(e) => e.stopPropagation()}
@@ -126,6 +127,13 @@ const Menu = () => {
                     <p>Account</p>
                   </Link>
                 </li>
+                {session.user?.role === "admin" && (
+                <li className="flex my-[2px]">
+                  <a className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors" href={"/dashboard"}>
+                    <IconDashboard /> <p>Dashboard</p>
+                  </a>
+                </li>
+              )}
                 <li className="flex my-[2px]">
                   <button
                     className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors"
@@ -176,6 +184,8 @@ const Header = () => {
       return "theme-real-estate";
     } else if (path.includes("legal")) {
       return "theme-legal";
+    } else if (path.includes("community")) {
+      return "theme-community";
     } else {
       return "";
     }
@@ -198,7 +208,7 @@ const Header = () => {
   return (
     <header className={`${headerTheme}`}>
       <div
-        className={`bg-[var(--color-primary)] max-h-[60px] fixed overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
+        className={`bg-[var(--color-primary)] max-h-[60px] fixed mb-12 overflow-x-clip z-20 w-full border-b-2 border-[var(--color-header-border)]`}
       >
         <div className=" relative flex h-[60px] w-full  min-[1054px]:w-[1000px] min-[1255px]:w-[1200px] justify-between px-[15px] mx-auto">
           <div className="flex gap-2">
