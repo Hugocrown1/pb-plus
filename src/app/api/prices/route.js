@@ -155,7 +155,7 @@ export async function POST(request) {
     });
 
     //Service questions and answers
-    var baseCoord = { x: 50, y: height - 390 };
+    let baseCoord = { x: 50, y: height - 390 };
     responses.map(({ question, answer }) => {
       page.drawText(`${question}`, {
         x: baseCoord.x,
