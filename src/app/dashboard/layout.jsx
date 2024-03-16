@@ -31,7 +31,7 @@ export default function Layout({ user, admin }) {
     <div className={isAdmin ? "flex" : ""}>
        {isAdmin && (
         <Sidebar>
-          <p className="text-gray-500 font bold my-2">MENU</p>
+          <p className="text-gray-500 font bold my-2 text-sm">MENU</p>
           <SidebarItem
             href={"/dashboard"}
             icon={<IconDashboard size={20} />}
@@ -42,19 +42,19 @@ export default function Layout({ user, admin }) {
             icon={<IconGraph size={20} />}
             text="Analytics"
           />
-          <p className="text-gray-500 font bold my-2">REMO</p>
+          <p className="text-gray-500 font bold my-2 text-sm">REMO</p>
           <SidebarItem
             href={"/dashboard/remo"}
             icon={<IconHomeCog size={20} />}
             text="Remo Quotes"
           />
-           <p className="text-gray-500 font bold my-2">LEGAL</p>
+           <p className="text-gray-500 font bold my-2 text-sm">LEGAL</p>
           <SidebarItem
             href={"/dashboard/forms"}
             icon={<IconGavel size={20} />}
             text="Legal Forms"
           />
-          <p className="text-gray-500 font bold my-2">EDITOR</p>
+          <p className="text-gray-500 font bold my-2 text-sm">EDITOR</p>
           <SidebarItem
             href={"/dashboard/users"}
             icon={<IconUserEdit size={20} />}
@@ -65,11 +65,7 @@ export default function Layout({ user, admin }) {
             icon={<IconHomeEdit size={20} />}
             text="Properties"
           />
-          <SidebarItem
-            href={"/dashboard/events"}
-            icon={<IconClockEdit size={20} />}
-            text="Events"
-          />
+          
           
          
         </Sidebar>
