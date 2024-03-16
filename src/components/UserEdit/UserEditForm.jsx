@@ -173,24 +173,7 @@ const UserEditForm = ({ userId, onClose }) => {
             />
           </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={userData.password || ""}
-              onChange={handleChange}
-              placeholder="******"
-              className="w-full px-3 py-2 border rounded-md border-gray-200 bg-gray-100 text-gray-900 "
-              required
-            />
-          </div>
+          
           <div>
             <label
               htmlFor="phone"
