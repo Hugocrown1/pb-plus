@@ -2,6 +2,7 @@ import CustomPage from "@/components/CustomPage";
 import ServiceRemoCard from "@/components/ServiceRemoCard";
 import Slider from "@/components/Slider/Slider";
 import {
+  IconAirConditioning,
   IconBackhoe,
   IconBolt,
   IconClipboard,
@@ -111,42 +112,42 @@ export default function Page() {
           <ServiceRemoCard
             href={"/remo/construction"}
             title={"Construction"}
-            image={"/assets/remo/homeconst.jpg"}
+            icon={<IconBackhoe color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/remodeling"}
             title={"Remodeling"}
-            image={"/assets/remo/wood.png"}
+            icon={<IconPaint color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/electrical"}
             title={"Electrical"}
-            image={"/assets/remo/generator.webp"}
+            icon={<IconBolt color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/plumbing"}
             title={"Plumbing"}
-            image={"/assets/remo/plumbing.png"}
+            icon={<IconTool color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/project-management"}
             title={"Project Management"}
-            image={"/assets/remo/project-management.png"}
+            icon={<IconClipboard color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/patio"}
             title={"Patio"}
-            image={"/assets/remo/patio.png"}
+            icon={<IconLeaf color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/concrete"}
             title={"Concrete"}
-            image={"/assets/remo/concrete.png"}
+            icon={<IconGardenCart color="#941B0C" size={70} />}
           ></ServiceRemoCard>
           <ServiceRemoCard
             href={"/remo/air-conditioner"}
             title={"A/C"}
-            image={"/assets/remo/ac.png"}
+            icon={<IconAirConditioning color="#941B0C" size={70} />}
           ></ServiceRemoCard>
         </div>
       </section>
