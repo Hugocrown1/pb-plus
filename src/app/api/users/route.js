@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     await connectDB();
-    if (isAdmin()) {
+    if (await isAdmin()) {
       const users = await Users.find();
       return NextResponse.json(users);
     }

@@ -31,7 +31,7 @@ export async function PUT(request, { params: { id } }) {
         { message: "No se encontro el evento" },
         { status: 404 }
       );
-    if (verifyUser(event.user)) {
+    if (await verifyUser(event.user._id.toString())) {
       const newEvent = await Events.findByIdAndUpdate(
         id,
         { ...data },
@@ -58,7 +58,7 @@ export async function DELETE(request, { params: { id } }) {
         { message: "No se encontro el evento" },
         { status: 404 }
       );
-    if (verifyUser(event.user)) {
+    if (await verifyUser(event.user._id.toString())) {
       const imageKeys = event.images.map((image) => ({
         Key: image.split("/").pop(),
       }));

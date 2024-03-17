@@ -1,8 +1,9 @@
-import users from "@/lib/users";
+"use client"
+import React, { useState } from "react";
 import PropertyCard from "./PropertyCard";
 
-const UserProperties = async ({ user }) => {
-  const { properties } = await users.getUser(user.id);
+const UserProperties = ({ data }) => {
+  const [properties, setProperties] = useState(data);
 
   return (
     <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-2 self-start">

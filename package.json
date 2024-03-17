@@ -24,6 +24,7 @@
     "react-content-loader": "^6.2.1",
     "react-dom": "^18",
     "react-sortablejs": "^6.1.4",
+    "recharts": "^2.12.2",
     "sortablejs": "^1.15.2",
     "zustand": "^4.4.7"
   },

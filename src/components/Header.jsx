@@ -16,6 +16,7 @@ import {
   IconSocial,
   IconUser,
   IconX,
+  IconDashboard
 } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Spinner from "./Spinner";
@@ -126,6 +127,13 @@ const Menu = () => {
                     <p>Account</p>
                   </Link>
                 </li>
+                {session.user?.role === "admin" && (
+                <li className="flex my-[2px]">
+                  <a className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors" href={"/dashboard"}>
+                    <IconDashboard /> <p>Dashboard</p>
+                  </a>
+                </li>
+              )}
                 <li className="flex my-[2px]">
                   <button
                     className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors"

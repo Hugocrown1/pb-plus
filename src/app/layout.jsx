@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/Header";
 import { Providers } from "./providers";
 import Footer from "@/components/Footer";
+import RouteTracker from "@/components/RouteTracker";
 
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
@@ -19,6 +20,7 @@ export default function RootLayout({ children }) {
           <Header />
           {children}
           <Footer />
+          <RouteTracker />
         </Providers>
       </body>
     </html>
