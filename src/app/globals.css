@@ -45,6 +45,15 @@
     --color-header-border: #aaaaaa49;
   }
 
+  .image-gallery {
+    max-height: 772px;
+    max-width: 916px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+
+
   .theme-community {
     --color-logo: #f5f3f4;
     --color-primary: #14213d;
