@@ -59,7 +59,7 @@ const page = () => {
           </section>
         </div>
         <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
-          <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
+          <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg  my-4">
             <h2 className="text-2xl font-medium">Do You Need a Quote?</h2>
             <div className="flex flex-col items-center justify-center">
               <div className="p-4 rounded-full bg-red-800 text-white mb-1">
@@ -76,7 +76,7 @@ const page = () => {
               </button>
             </div>
           </section>
-          <section className="flex flex-col items-start gap-6 w-full h-fit bg-white px-4 py-4 rounded-md">
+          <section className="flex flex-col items-start gap-6 w-full h-fit bg-white px-4 py-4 mb-4 rounded-md">
             <div className="flex flex-row items-center gap-2">
               <div className=" w-[8px] rounded-sm h-[35px] bg-[#941B0C] p-1"></div>
               <h2 className="text-2xl text-left font-medium">Other services</h2>

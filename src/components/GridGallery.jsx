@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { IconX } from "@tabler/icons-react";
+import ImageGallery from "react-image-gallery";
+import ReactImageGallery from "react-image-gallery";
 
+import "react-image-gallery/styles/css/image-gallery.css";
 const data = [
   "/assets/gallery/puntabanda.jpeg",
   "/assets/gallery/puntabanda2.jpeg",
@@ -15,9 +18,14 @@ const data = [
   "/assets/gallery/puntabanda9.jpeg",
 ];
 
+const images = data.map((image) => ({
+  original: image,
+  thumbnail: image,
+  originalClass: "image-gallery",
+}));
 const GridGallery = () => {
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const [exposedImage, setExposedImage] = useState("");
+  const [startIndex, setStartIndex] = useState();
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -33,22 +41,22 @@ const GridGallery = () => {
     };
   }, []);
 
-  const handleOpenGallery = (image) => {
+  const handleOpenGallery = () => {
     setGalleryOpen(true);
-    setExposedImage(image);
   };
 
   const handleCloseGallery = () => {
     setGalleryOpen(false);
-    setExposedImage("");
   };
   return (
     <>
       <div className="grid grid-cols-3 grid-rows-3 gap-4 w-full aspect-square">
-        {data.map((item) => (
+        {data.map((item, index) => (
           <div
             key={item}
-            onClick={() => handleOpenGallery(item)}
+            onClick={() => {
+              handleOpenGallery(item), setStartIndex(index);
+            }}
             className="w-full h-full relative cursor-pointer overflow-hidden"
           >
             <Image
@@ -63,8 +71,8 @@ const GridGallery = () => {
       </div>
       <div
         onClick={handleCloseGallery}
-        className={`fixed flex items-start inset-0  bg-zinc-950/80 py-14 transition-transform z-40 w-full ${
-          !galleryOpen && "invisible"
+        className={`fixed flex items-center inset-0  bg-zinc-950/80 transition-transform z-40  ${
+          !galleryOpen && "hidden"
         } `}
       >
         <div
@@ -73,14 +81,18 @@ const GridGallery = () => {
         >
           <IconX size={60} />
         </div>
-        <dialog className="relative flex max-w-[900px] max-h-[1000px] overflow-hidden">
-          <div className="w-full h-full">
-            <img
-              src={exposedImage}
-              alt="About PB Plus image"
-              className="object-cover object-center w-full h-full"
-            />
-          </div>
+        <dialog
+          className=" justify-center items-center h-[80%]  flex  bg-transparent"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <ReactImageGallery
+            items={images}
+            showPlayButton={false}
+            showFullscreenButton={false}
+            showThumbnails={false}
+            showBullets={true}
+            startIndex={startIndex}
+          />
         </dialog>
       </div>
     </>

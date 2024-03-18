@@ -1,8 +1,8 @@
-"use client"
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import { useSession } from 'next-auth/react';
-import axios from 'axios';
+"use client";
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
+import axios from "axios";
 
 function RouteTracker() {
   const pathname = usePathname();
@@ -13,11 +13,15 @@ function RouteTracker() {
     const fetchData = async () => {
       try {
         if (status === "authenticated") {
-          if (!pathname.startsWith('/dashboard')) {
+          if (!pathname.startsWith("/dashboard")) {
             const userAgent = navigator.userAgent;
             let currentDevice;
             // Detectar el tipo de dispositivo
-            if (/Android/i.test(userAgent) || /iPhone|iPad|iPod/i.test(userAgent) || /Windows Phone/i.test(userAgent)) {
+            if (
+              /Android/i.test(userAgent) ||
+              /iPhone|iPad|iPod/i.test(userAgent) ||
+              /Windows Phone/i.test(userAgent)
+            ) {
               currentDevice = "Mobile";
             } else if (/Tablet/i.test(userAgent) || /iPad/i.test(userAgent)) {
               currentDevice = "Tablet";
@@ -31,20 +35,27 @@ function RouteTracker() {
             const visitData = {
               page: pathname,
               device: currentDevice,
-              user: session?.user?.email, 
+              user: session?.user?.email,
               dateTime: currentDateTime,
             };
 
             // Hacer la solicitud POST a la API para guardar los datos usando Axios
             console.log(visitData);
-            
-            await axios.post('/api/visit', visitData);
+
+            await axios.post("/api/visit", visitData);
           }
-        } else if(status === "unauthenticated" && !pathname.startsWith('/dashboard')){
+        } else if (
+          status === "unauthenticated" &&
+          !pathname.startsWith("/dashboard")
+        ) {
           const userAgent = navigator.userAgent;
           let currentDevice;
           // Detectar el tipo de dispositivo
-          if (/Android/i.test(userAgent) || /iPhone|iPad|iPod/i.test(userAgent) || /Windows Phone/i.test(userAgent)) {
+          if (
+            /Android/i.test(userAgent) ||
+            /iPhone|iPad|iPod/i.test(userAgent) ||
+            /Windows Phone/i.test(userAgent)
+          ) {
             currentDevice = "Mobile";
           } else if (/Tablet/i.test(userAgent) || /iPad/i.test(userAgent)) {
             currentDevice = "Tablet";
@@ -63,12 +74,10 @@ function RouteTracker() {
           };
 
           // Hacer la solicitud POST a la API para guardar los datos usando Axios
-          console.log(visitData);
-          
-          await axios.post('/api/visit', visitData);
+          await axios.post("/api/visit", visitData);
         }
       } catch (error) {
-        console.error('Error al guardar la visita:', error);
+        console.error("Error al guardar la visita:", error);
       }
     };
 
