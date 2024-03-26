@@ -44,7 +44,7 @@ const page = () => {
             </div>
             <div className="w-full h-[422px] relative my-2 ">
               <Image
-                src={"/assets/remo/homeconst.jpg"}
+                src={"/assets/tweaks/construction.PNG"}
                 alt="cfe photo"
                 fill={true}
                 sizes="(min-width: 1120px) 1000px"

@@ -125,7 +125,7 @@ const page = () => {
             </div>
             <div className="w-full h-[422px] relative my-2 ">
               <Image
-                src={"/assets/remo/false-ceiling.jpg"}
+                src={"/assets/tweaks/false-ceiling.PNG"}
                 alt="service photo"
                 fill={true}
                 sizes="(min-width: 1120px) 1000px"
@@ -237,6 +237,39 @@ const page = () => {
               special occasion, custom-made plates offer endless possibilities.
             </p>
           </section>
+
+          <section
+            id="home-entertainment"
+            className="w-full bg-white px-4 py-6 rounded-lg mb-4"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className=" w-[10px] rounded-sm h-[50px] bg-[#941B0C] p-1"></div>
+              <h2 className="text-4xl text-left w-fit font-semibold">
+                Entertainment Home Center
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 grid-rows-2 w-full min-h-[422px] relative my-2 gap-2">
+              <img
+                src={"/assets/remo/decks.png"}
+                alt="service photo"
+                className="object-cover object-center row-span-2 h-full"
+              />
+              <img
+                src={"/assets/tweaks/entertainment.PNG"}
+                alt="service photo"
+                className="object-cover object-center w-full h-full"
+              />
+              <img
+                src={"/assets/tweaks/entertainment2.PNG"}
+                alt="service photo"
+                className="object-cover object-center w-full h-full"
+              />
+            </div>
+            <p className="text-left text-lg my-4">
+              We can show you the idea before we start the job with 3D drawings
+              and discuss the changes you would like to make along the way!
+            </p>
+          </section>
         </div>
         <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
           <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
@@ -324,6 +357,14 @@ const page = () => {
                   className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   Decks
+                </Link>
+              </li>
+              <li className="w-full">
+                <Link
+                  href={"#home-entertainment"}
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                >
+                  Entertainment Home Center
                 </Link>
               </li>
             </ul>
