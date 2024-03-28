@@ -20,7 +20,7 @@ const dataSlider = [
     title: "PB+ REMO",
     subtitle:
       "PB+ Remo Department specializes in overseeing and executing construction projects with precision and expertise.",
-    source: "/assets/remo.jpg",
+    source: "/assets/tweaks/remo1.PNG",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -29,7 +29,7 @@ const dataSlider = [
     title: "Remodelation Services Just For You",
     subtitle:
       "From the inception phase to the final delivery, our dedicated team ensures seamless coordination, timely execution, and adherence to the highest industry standards.",
-    source: "/assets/bannerrealestate.jpg",
+    source: "/assets/tweaks/remo2.PNG",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -38,7 +38,7 @@ const dataSlider = [
     title: "Let Us Take Care Of It",
     subtitle:
       "We handle a diverse range of projects, from commercial buildings to residential complexes, with a commitment to excellence in every detail.",
-    source: "/assets/remo/patio.png",
+    source: "/assets/tweaks/remo3.PNG",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -55,7 +55,7 @@ export default function Page() {
         <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[60%] min-[855px]:w-full aspect-square">
           <div className="relative col-span-2 rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/remo.jpg"}
+              src={"/assets/tweaks/remo4.PNG"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 1000px"
@@ -64,7 +64,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/remo/wiring.jpeg"}
+              src={"/assets/tweaks/remo5.PNG"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
@@ -73,7 +73,7 @@ export default function Page() {
           </div>
           <div className="relative rounded-xl overflow-hidden ">
             <Image
-              src={"/assets/remo/pex-plumbing.png"}
+              src={"/assets/tweaks/remo6.PNG"}
               alt="remo photo"
               fill={true}
               sizes="(min-width: 1120px) 800px"
