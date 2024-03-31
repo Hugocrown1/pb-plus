@@ -51,7 +51,7 @@ const EventsDisplay = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <div className="w-full h-[2px] bg-[#aaaaaa49] mb-4"></div>
+      {/* <div className="w-full h-[2px] bg-[#aaaaaa49] mb-4"></div>
       <div className="grid grid-cols-5 gap-2 self-center">
         <Link
           href={""}
@@ -72,9 +72,9 @@ const EventsDisplay = () => {
           Create an event
         </Link>
       </div>
-      <div className="w-full h-[2px] bg-[#aaaaaa49] my-4"></div>
+      <div className="w-full h-[2px] bg-[#aaaaaa49] my-4"></div> */}
 
-      <div className=" w-full min-[503px]:px-4 py-4">
+      <div className=" w-full min-[503px]:px-56">
         {isLoading && (
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-4">
             <PropertyLoader uniqueKey="1" />
@@ -85,29 +85,29 @@ const EventsDisplay = () => {
             <PropertyLoader uniqueKey="6" />
           </div>
         )}
-        <div className="ml-96">
+        {/* <div className="ml-96">
           <p className="text-xl">Today</p>
           <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
-        </div>
+        </div> */}
         {filteredEvents?.length ? (
-          <div className="grid lg:grid-cols-5  min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2 justify-items-center">
-            <IconChevronLeft
+          <div className="grid lg:grid-cols-3 min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2 justify-items-center">
+            {/* <IconChevronLeft
               size={150}
               color="#14213d"
               stroke={0.5}
               className="justify-self-end transition-colors hover:bg-[#fafafa] rounded-full active:bg-[#0077b6]"
               cursor={"pointer"}
-            />
+            /> */}
             {filteredEvents?.map((event) => (
               <EventCard key={event._id} {...event} />
             ))}
-            <IconChevronRight
+            {/* <IconChevronRight
               size={150}
               color="#14213d"
               stroke={0.5}
               className="justify-self-start transition-colors hover:bg-[#fafafa] rounded-full active:bg-[#0077b6]"
               cursor={"pointer"}
-            />
+            /> */}
           </div>
         ) : (
           !isLoading && (
@@ -117,7 +117,7 @@ const EventsDisplay = () => {
             </div>
           )
         )}
-        <div className="ml-96 mt-10">
+        {/* <div className="ml-96 mt-10">
           <p className="text-xl">This week</p>
           <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
         </div>
@@ -148,7 +148,7 @@ const EventsDisplay = () => {
               <p className="font-medium text-3xl">No results found</p>
             </div>
           )
-        )}
+        )} */}
       </div>
     </div>
   );
