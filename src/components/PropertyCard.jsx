@@ -39,7 +39,7 @@ const PropertyCard = ({
   //   setFavorited((prevFavorited) => !prevFavorited);
   // };
   return (
-    <article className={`property-card ${inter.className}`}>
+    <article className={`card ${inter.className}`}>
       {_id ? (
         <Link
           href={`/real-estate/houses-&-properties/${_id}`}

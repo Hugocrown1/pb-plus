@@ -52,8 +52,6 @@
     margin-left: auto;
   }
 
-
-
   .theme-community {
     --color-logo: #f5f3f4;
     --color-primary: #14213d;
@@ -101,6 +99,10 @@ html {
   @apply px-4 py-3 flex justify-center items-center rounded-lg font-semibold text-lg w-[190px] h-[52px] border-2 border-[#255748]   text-[#255748] transition-colors  bg-transparent hover:bg-[#f1f8f5]  text-center;
 }
 
+.events-button-outline {
+  @apply px-4 py-3 flex justify-center items-center rounded-lg font-semibold text-lg w-[190px] h-[52px] border-2 border-[#0077b6]   text-[#0077b6] transition-colors  bg-transparent hover:bg-[#f1f4f8]  text-center;
+}
+
 .primary-button {
   @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] flex items-center justify-center;
 }
@@ -115,7 +117,7 @@ html {
 
 .circle-shape {
   shape-outside: circle();
-  clip-path: circle()
+  clip-path: circle();
 }
 
 .navbar.absolute {
@@ -198,7 +200,7 @@ textarea {
   @apply flex items-center;
 }
 
-.property-card {
+.card {
   @apply flex flex-col bg-white w-full mx-auto  shadow-md rounded-lg overflow-hidden max-h-[414px] min-[305px]:aspect-[79/86];
 }
 
@@ -264,7 +266,7 @@ input:invalid[focused="true"] {
   border-radius: 7px;
   background: rgb(255, 255, 255);
   transition: 0.5s;
-  animation: loading_44 5s cubic-bezier(.4,1.01,1,1) infinite;
+  animation: loading_44 5s cubic-bezier(0.4, 1.01, 1, 1) infinite;
 }
 
 @keyframes loading_44 {
@@ -285,9 +287,9 @@ input:invalid[focused="true"] {
   width: 2.5em;
   transform-origin: center;
   animation: rotate4 2s linear infinite;
- }
- 
- .spinner-small-circle {
+}
+
+.spinner-small-circle {
   fill: none;
   stroke: rgb(0, 0, 0);
   stroke-width: 2;
@@ -295,30 +297,29 @@ input:invalid[focused="true"] {
   stroke-dashoffset: 0;
   stroke-linecap: round;
   animation: dash4 1.5s ease-in-out infinite;
- }
- 
- @keyframes rotate4 {
+}
+
+@keyframes rotate4 {
   100% {
-   transform: rotate(360deg);
+    transform: rotate(360deg);
   }
- }
- 
- @keyframes dash4 {
+}
+
+@keyframes dash4 {
   0% {
-   stroke-dasharray: 1, 200;
-   stroke-dashoffset: 0;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
   }
- 
+
   50% {
-   stroke-dasharray: 90, 200;
-   stroke-dashoffset: -35px;
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
   }
- 
+
   100% {
-   stroke-dashoffset: -125px;
+    stroke-dashoffset: -125px;
   }
- }
- 
+}
 
 .dropdown-menu {
   position: absolute;
