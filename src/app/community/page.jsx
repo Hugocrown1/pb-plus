@@ -1,7 +1,11 @@
-import { DemoCardsDisplay } from "@/components/DemoCardsDisplay";
 import Slider from "@/components/Slider/Slider";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+
+import dynamic from "next/dynamic";
+
+const DemoCardsDisplay = dynamic(() => import("@/components/DemoCardsDisplay"));
 
 const dataSlider = [
   {
@@ -43,11 +47,10 @@ export default function Page() {
           <figure className="relative w-[500px] h-[500px]  circle-shape bg-black mr-12 float-left">
             <Image
               loading="lazy"
-              src="/assets/events.jpg"
+              src="/assets/events.webp"
               alt="photo community"
-              layout="fill"
-              objectFit="cover"
-              className="circle-shape"
+              fill={true}
+              className="circle-shape object-cover"
             />
           </figure>
           <p className=" font-medium xl:text-lg texl-base max-w-[70ch] ml-80">
@@ -84,7 +87,7 @@ export default function Page() {
             >
               <span>See all</span>
               <svg
-                class="w-6 h-6 group-hover:translate-x-4 transition-all "
+                className="w-6 h-6 group-hover:translate-x-4 transition-all "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -94,15 +97,17 @@ export default function Page() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m9 5 7 7-7 7"
                 />
               </svg>
             </Link>
           </div>
-          <DemoCardsDisplay dataUrl={"/api/events"} />
+          <Suspense fallback={<p>Loading...</p>}>
+            <DemoCardsDisplay />
+          </Suspense>
         </div>
 
         <div className="flex flex-col mt-10 max-w-[1280px] mx-auto ">
@@ -114,7 +119,7 @@ export default function Page() {
             >
               <span>See all</span>
               <svg
-                class="w-6 h-6 group-hover:translate-x-4 transition-all "
+                className="w-6 h-6 group-hover:translate-x-4 transition-all "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -124,15 +129,17 @@ export default function Page() {
               >
                 <path
                   stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="m9 5 7 7-7 7"
                 />
               </svg>
             </Link>
           </div>
-          <DemoCardsDisplay dataUrl={"/api/events"} />
+          <Suspense fallback={<p>Loading</p>}>
+            <DemoCardsDisplay />
+          </Suspense>
         </div>
       </section>
     </main>
