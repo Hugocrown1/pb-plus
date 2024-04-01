@@ -36,6 +36,7 @@ const Slider = ({ dataSlider }) => {
           key={index}
         >
           <Image
+            priority
             alt={object.title}
             src={object.source}
             fill={true}
