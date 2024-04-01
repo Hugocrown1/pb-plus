@@ -1,8 +1,8 @@
-import axios from "axios";
 import EventCard from "./EventCard";
+import { getEvents } from "@/lib/events";
 
-export const DemoCardsDisplay = async ({ dataUrl }) => {
-  const { data } = await axios.get(process.env.URL + dataUrl);
+const DemoCardsDisplay = async () => {
+  const data = await getEvents();
 
   const items = data.slice(0, 3);
 
@@ -14,3 +14,5 @@ export const DemoCardsDisplay = async ({ dataUrl }) => {
     </div>
   );
 };
+
+export default DemoCardsDisplay;
