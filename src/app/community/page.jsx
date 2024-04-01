@@ -14,7 +14,7 @@ const dataSlider = [
     subtitle:
       "The PB+ Community initiative embodies our commitment to social responsibility, collaboration, and meaningful engagement. ",
 
-    source: "/assets/house.jpg",
+    source: "/assets/house.webp",
     linkTitle: "Take a look",
     href: "#",
   },
