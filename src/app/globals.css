@@ -113,6 +113,11 @@ html {
   @apply transition-all w-full
 } */
 
+.circle-shape {
+  shape-outside: circle();
+  clip-path: circle()
+}
+
 .navbar.absolute {
   @apply bg-[#941B0C];
 }
