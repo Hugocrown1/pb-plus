@@ -9,10 +9,8 @@ import {
   IconToolsKitchen,
   IconUserHeart,
 } from "@tabler/icons-react";
-import { Roboto } from "next/font/google";
 import Link from "next/link";
 
-const roboto = Roboto({ subsets: ["latin"], weight: "500" });
 const dataSlider = [
   {
     id: 1,
@@ -64,19 +62,26 @@ const dataSlider = [
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4]  xl:pt-[50px] ${roboto.className}`}>
+    <main className={`bg-[#f5f3f4]  xl:pt-[50px]`}>
       {/* <Slider dataSlider={dataSlider} /> */}
       <section
         id="services"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"
       >
         <h1 className="xl:text-[64px] text-[42px]">
-          Punta Banda Community Advertising
+          Punta Banda Community Events
         </h1>
         <p className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
           Let PB Plus Publish Your Events
         </p>
         <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
+
+        <Link
+          href={"/community/events/new-event"}
+          className="px-4 py-3 rounded-2xl font-medium text-lg w-[190px] transition-colors text-white bg-[#0077b6] hover:text-black border hover:border-black hover:bg-[#ffffff] text-center col-start-5"
+        >
+          Create an event
+        </Link>
 
         <EventsDisplay />
       </section>
