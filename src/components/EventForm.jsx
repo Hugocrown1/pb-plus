@@ -41,8 +41,6 @@ const EventForm = ({
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
 
-  console.log(values);
-
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
