@@ -257,7 +257,7 @@ const Page = () => {
                     .slice(0, 3)
                     .map((price, index) => (
                       <tr key={index}>
-                        <td className="xl:px-6 px-2 py-4 whitespace-nowrap">
+                        <td className="xl:px-6 px-2 py-4 whitespace-nowrap max-w-44 overflow-hidden xl:max-w-none">
                           <div className="flex items-center">
                             <div className="xl:ml-4">
                               <div className="text-sm text-gray-500 font-bold uppercase">
@@ -309,7 +309,7 @@ const Page = () => {
                     .slice(0, 3)
                     .map((consultation, index) => (
                       <tr key={index}>
-                        <td className="xl:px-6 px-2 py-4 whitespace-nowrap">
+                        <td className="xl:px-6 px-2 py-4 whitespace-nowrap max-w-44 overflow-hidden xl:max-w-none">
                           <div className="flex items-center">
                             <div className="xl:ml-4">
                               <div className="text-sm text-gray-500 font-bold uppercase">
