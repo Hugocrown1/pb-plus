@@ -197,23 +197,7 @@ const UserAdminForm = ({ userId, onClose }) => {
             </select>
           </div>
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={userData.password || ""}
-              onChange={handleChange}
-              placeholder="******"
-              className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-            />
-          </div>
+         
           <div>
             <label
               htmlFor="phone"
