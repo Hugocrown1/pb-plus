@@ -50,9 +50,8 @@ const UserMenu = () => {
 
   return (
     <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">
-      {status === "loading" ? (
-        <Spinner />
-      ) : session ? (
+      {status === "loading" && <Spinner />}
+      {status === "authenticated" && (
         <div className="menu-container" ref={menuRef}>
           <div
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -96,7 +95,8 @@ const UserMenu = () => {
             </ul>
           </div>
         </div>
-      ) : (
+      )}
+      {status === "unauthenticated" && (
         <div className="flex items-center gap-3">
           <Link
             href="/auth/signup"
