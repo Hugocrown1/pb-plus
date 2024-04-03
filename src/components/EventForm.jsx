@@ -213,6 +213,7 @@ const EventForm = ({
               label="Date"
               name="date"
               id="date"
+              min={existingDate ? existingDate : new Date().toLocaleString()}
               errorMessage="Please enter a valid date"
               placeholder={"Event date"}
               value={values.date}

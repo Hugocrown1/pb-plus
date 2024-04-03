@@ -76,10 +76,7 @@ export default function Page() {
         </p>
         <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
 
-        <Link
-          href={"/community/events/new-event"}
-          className="px-4 py-3 rounded-2xl font-medium text-lg w-[190px] transition-colors text-white bg-[#0077b6] hover:text-black border hover:border-black hover:bg-[#ffffff] text-center col-start-5"
-        >
+        <Link href={"/community/events/new-event"} className="events-button">
           Create an event
         </Link>
 
