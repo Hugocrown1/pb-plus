@@ -25,7 +25,7 @@ export default function Sidebar({ children }) {
       <SidebarContext.Provider value={{ expanded }}>
         <aside
           className={`fixed top-0 left-0 h-screen bg-white border-r shadow-sm z-50 mt-[60px] ${
-            expanded ? "w-60" : " w-20"
+            expanded ? "w-60" : " w-16 xl:w-20"
           } transition-all`}
         >
           <nav className="h-full flex flex-col">
@@ -49,7 +49,7 @@ export default function Sidebar({ children }) {
             {Object.entries(categorizedSidebarItems).map(
               ([category, items]) => (
                 <div key={category}>
-                  <h2 className="text-gray-500 px-4 mt-4 mb-2 text-xs uppercase font-semibold">
+                  <h2 className="text-gray-500 mt-4 mb-2 text-xs uppercase font-semibold">
                     {category}
                   </h2>
                   <ul>{items}</ul>
@@ -58,7 +58,7 @@ export default function Sidebar({ children }) {
             )}
           </nav>
         </aside>
-        <div className="ml-20"></div>
+        <div className="ml-16 xl:ml-20"></div>
         <div
           className="fixed top-0 left-0 w-full h-full bg-black opacity-25 z-40"
           onClick={() => setExpanded(false)}
