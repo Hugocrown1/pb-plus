@@ -11,6 +11,7 @@ import { ReactSortable } from "react-sortablejs";
 import { useSession } from "next-auth/react";
 import Spinner from "./Spinner";
 import EventCard from "./EventCard";
+import SpinnerSmall from "./SpinnerSmall";
 
 const EventForm = ({
   title: existingTitle,
@@ -40,12 +41,15 @@ const EventForm = ({
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const saveEvent = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const responseFiles = await axios.post("/api/files", formData);
     let eventImages = previewImages;
 
@@ -85,6 +89,8 @@ const EventForm = ({
       });
       router.push("/community/events/" + _id);
     }
+
+    setIsLoading(false);
   };
 
   const uploadPreviewImages = (e) => {
@@ -240,10 +246,11 @@ const EventForm = ({
                 Cancel
               </Link>
               <button
+                disabled={isLoading}
                 type="submit"
-                className="px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#0077b6] hover:bg-[#0076b6e1]  text-center"
+                className="flex items-center justify-center px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#0077b6] hover:bg-[#0076b6e1]  text-center disabled:bg-slate-500"
               >
-                Continue
+                {isLoading ? <SpinnerSmall /> : "Continue"}
               </button>
             </div>
           </form>
