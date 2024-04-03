@@ -30,45 +30,20 @@ export default function Layout({ user, admin }) {
   return (
     <div className={isAdmin ? "flex" : ""}>
        {isAdmin && (
-        <Sidebar>
-          <p className="text-gray-500 font bold my-2 text-xs">MENU</p>
-          <SidebarItem
-            href={"/dashboard"}
-            icon={<IconDashboard size={20} />}
-            text="Dashboard"
-          />
-          <SidebarItem
-            href={"/dashboard/analytics"}
-            icon={<IconGraph size={20} />}
-            text="Analytics"
-          />
-          <p className="text-gray-500 font bold my-2 text-xs">REMO</p>
-          <SidebarItem
-            href={"/dashboard/remo"}
-            icon={<IconHomeCog size={20} />}
-            text="Remo Quotes"
-          />
-           <p className="text-gray-500 font bold my-2 text-xs">LEGAL</p>
-          <SidebarItem
-            href={"/dashboard/forms"}
-            icon={<IconGavel size={20} />}
-            text="Legal Forms"
-          />
-          <p className="text-gray-500 font bold my-2 text-xs">EDITOR</p>
-          <SidebarItem
-            href={"/dashboard/users"}
-            icon={<IconUserEdit size={20} />}
-            text="Users"
-          />
-          <SidebarItem
-            href={"/dashboard/properties"}
-            icon={<IconHomeEdit size={20} />}
-            text="Properties"
-          />
-          
-          
-         
-        </Sidebar>
+       <Sidebar>
+        {/*Items menu*/}
+        <SidebarItem href="/dashboard" icon={<IconDashboard />} text="Dashboard" category="Menu" />
+        <SidebarItem href="/dashboard/analytics" icon={<IconGraph />} text="Analytics" category="Menu" />
+
+        {/* Items remo*/}
+        <SidebarItem href="/dashboard/remo" icon={<IconHomeCog />} text="Remo Quotes" category="Remo" />
+        {/* Items legal*/}
+        <SidebarItem href="/dashboard/forms" icon={<IconGavel />} text="Legal Forms" category="Legal" />
+
+        {/* Items editor */}
+        <SidebarItem href="/dashboard/users" icon={<IconUserEdit />} text="Users" category="Editor" />
+        <SidebarItem href="/dashboard/properties" icon={<IconHomeEdit />} text="Properties" category="Editor" />
+      </Sidebar>
       )}
       {isAdmin ? admin : user}
     </div>
