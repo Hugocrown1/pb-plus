@@ -6,7 +6,7 @@ const ServiceCard = ({ children, href, title }) => {
 
   return (
     <div
-      className={`group bg-[#FCFFFC]  text-center hover:bg-[#cba557] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-md rounded-md`}
+      className={`group bg-[#FCFFFC]  text-center hover:bg-[#cba557] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all shadow-md rounded-md border-2 border-gray-100`}
       
     >
       <Link href={href}>
