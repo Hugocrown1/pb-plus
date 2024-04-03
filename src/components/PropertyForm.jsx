@@ -11,6 +11,7 @@ import { deleteImage } from "@/lib/deleteImage";
 import { ReactSortable } from "react-sortablejs";
 import { useSession } from "next-auth/react";
 import Spinner from "./Spinner";
+import SpinnerSmall from "./SpinnerSmall";
 
 const PropertyForm = ({
   title: existingTitle,
@@ -46,12 +47,14 @@ const PropertyForm = ({
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const saveProperty = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const responseFiles = await axios.post("/api/files", formData);
     let propertyImages = previewImages;
 
@@ -91,6 +94,8 @@ const PropertyForm = ({
       });
       router.push("/real-estate/houses-&-properties/" + _id);
     }
+
+    setIsLoading(false);
   };
 
   const uploadPreviewImages = (e) => {
@@ -287,10 +292,11 @@ const PropertyForm = ({
                 Cancel
               </Link>
               <button
+                disabled={isLoading}
                 type="submit"
-                className="px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#40896f] hover:bg-[#30725c]  text-center"
+                className="px-4 py-3 mt-4 rounded-lg flex items-center justify-center font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#40896f] hover:bg-[#30725c]  text-center disabled:bg-slate-500"
               >
-                Continue
+                {isLoading ? <SpinnerSmall /> : "Continue"}
               </button>
             </div>
           </form>
