@@ -3,6 +3,7 @@ import { IconTrash } from "@tabler/icons-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
+import { toast } from "sonner";
 
 const DeleteButton = ({ id }) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
@@ -11,6 +12,7 @@ const DeleteButton = ({ id }) => {
   const deleteProperty = async () => {
     await axios.delete("/api/properties/" + id);
     router.push("/real-estate/houses-&-properties");
+    toast.success("Property deleted");
   };
 
   return (

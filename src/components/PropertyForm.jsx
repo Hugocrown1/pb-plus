@@ -12,6 +12,7 @@ import { ReactSortable } from "react-sortablejs";
 import { useSession } from "next-auth/react";
 import Spinner from "./Spinner";
 import SpinnerSmall from "./SpinnerSmall";
+import { toast } from "sonner";
 
 const PropertyForm = ({
   title: existingTitle,
@@ -86,6 +87,8 @@ const PropertyForm = ({
       });
 
       router.push("/real-estate");
+
+      toast.success("Property created successfully!");
     } else {
       await axios.put("/api/properties/" + _id, {
         ...values,
@@ -93,9 +96,8 @@ const PropertyForm = ({
         images: propertyImages,
       });
       router.push("/real-estate/houses-&-properties/" + _id);
+      toast.success("Property changes saved successfully!");
     }
-
-    setIsLoading(false);
   };
 
   const uploadPreviewImages = (e) => {
