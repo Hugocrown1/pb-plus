@@ -10,7 +10,7 @@ const ServiceCard = ({ children, href, title }) => {
       
     >
       <Link href={href}>
-        <div className="relative flex items-center justify-start text-xs">
+        <div className="relative flex items-center justify-start text-xs ">
           <div className="flex flex-col z-10 px-4 items-start justify-center">
             <p className="text-sm xl:text-lg group-hover:text-white py-4 text-gray-800">
               {title}
