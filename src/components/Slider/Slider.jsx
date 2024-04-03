@@ -35,15 +35,29 @@ const Slider = ({ dataSlider }) => {
           className={slideIndex === index + 1 ? "slide active-anim" : "slide"}
           key={index}
         >
-          <Image
-            alt={object.title}
-            src={object.source}
-            fill={true}
-            sizes="(min-width: 1120px) 1920px"
-            className={`object-cover object-center duration-[10000ms] ${
-              slideIndex === index + 1 ? "scale-110" : "scale-100"
-            }`}
-          />
+          {index === 0 ? (
+            <Image
+              priority
+              alt={object.title}
+              src={object.source}
+              fill={true}
+              sizes="(min-width: 1120px) 1920px"
+              className={`object-cover object-center duration-[10000ms] ${
+                slideIndex === index + 1 ? "scale-110" : "scale-100"
+              }`}
+            />
+          ) : (
+            <Image
+              loading="lazy"
+              alt={object.title}
+              src={object.source}
+              fill={true}
+              sizes="(min-width: 1120px) 1920px"
+              className={`object-cover object-center duration-[10000ms] ${
+                slideIndex === index + 1 ? "scale-110" : "scale-100"
+              }`}
+            />
+          )}
           <div className="absolute bg-black opacity-50 w-full h-full"></div>
 
           <div className="mx-auto flex flex-col text-left max-w-[1200px] px-[15px]">

@@ -1,39 +1,54 @@
 "use client";
 
-import { IconMapPin } from "@tabler/icons-react";
+import { IconBath, IconMapPin, IconUser } from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({ _id, coverImage, date, title, address }) => {
+const EventCard = ({
+  _id,
+  coverImage,
+  date,
+  title,
+  address,
+  category,
+  interestedUsers,
+}) => {
+  const dateFormatter = (dateString) => {
+    if (!dateString) return "00/00/00 at 00:00";
+    const formattedDate = `${date.split("T")[0]} at ${
+      date.split("T")[1].split(".")[0]
+    }`;
+    return formattedDate;
+  };
+
   return (
-    <article className={`property-card ${inter.className}`}>
+    <article className={`card ${inter.className}`}>
       {_id ? (
         <Link
           href={`/community/events/${_id}`}
           className="flex flex-col h-full"
         >
           <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
+            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
+              {category || "Category"}
+            </div>
             {coverImage && (
               <img
-                alt="property cover image"
+                alt="event cover image"
                 src={coverImage}
                 className="w-full h-full object-cover object-center"
               />
             )}
           </div>
           <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
-            <div className="flex flex-row items-center gap-1 bg-[#B9E7FE] rounded-lg p-2 w-fit">
-              <p className="text-left text-lg font-bold text-[#0077b6] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
-                {date.split("T")[0]} at {date.split("T")[1].split(".")[0]}
+            <div className="flex flex-row items-center gap-1 bg-[#B9E7FE] rounded-lg p-1 w-fit ">
+              <p className="text-left text-lg font-bold text-[#0077b6] max-w-[193pxs] overflow-hidden overflow-ellipsis mb-1">
+                {dateFormatter(date)}
               </p>
             </div>
-            <div className="flex flex-row items-center gap-1">
-              <p className="text-left text-2xl font-bold text-[#0077b6] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
-                {}
-              </p>
-            </div>
+
             <p className="text-left text-2xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
               {title || "Title"}
             </p>
@@ -44,13 +59,18 @@ const EventCard = ({ _id, coverImage, date, title, address }) => {
               </p>
             </div>
             <hr className="w-full mx-auto my-2" />
+            <div className="flex flex-wrap gap-2">
+              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+                <IconUser /> <p>{interestedUsers || 0} Interested users</p>
+              </div>
+            </div>
           </div>
         </Link>
       ) : (
         <>
           <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
             <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
-              {type || "Type"}
+              {category || "Category"}
             </div>
             {coverImage && (
               <img
@@ -61,6 +81,11 @@ const EventCard = ({ _id, coverImage, date, title, address }) => {
             )}
           </div>
           <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
+            <div className="flex flex-row items-center gap-1 bg-[#B9E7FE] rounded-lg p-1 w-fit ">
+              <p className="text-left text-lg font-bold text-[#0077b6] max-w-[193pxs] overflow-hidden overflow-ellipsis mb-1">
+                {dateFormatter(date)}
+              </p>
+            </div>
             <p className="text-left text-2xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
               {title || "Title"}
             </p>
@@ -71,6 +96,11 @@ const EventCard = ({ _id, coverImage, date, title, address }) => {
               </p>
             </div>
             <hr className="w-full mx-auto my-2" />
+            <div className="flex flex-wrap gap-2">
+              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+                <IconUser /> <p>{interestedUsers || 0} Interested users</p>
+              </div>
+            </div>
           </div>
         </>
       )}

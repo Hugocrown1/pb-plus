@@ -22,7 +22,7 @@ const dataSlider = [
     subtitle:
       "PB+ Real Estate Department is your gateway to unparalleled property solutions tailored to your needs and aspirations.",
 
-    source: "/assets/house.jpg",
+    source: "/assets/tweaks/real-estate1.PNG",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -31,7 +31,7 @@ const dataSlider = [
     title: "Houses & Properties",
     subtitle:
       "Houses & Properties Service is your premier destination for finding the perfect home, investment property, or commercial space tailored to your unique needs and aspirations.",
-    source: "/assets/house2.webp",
+    source: "/assets/tweaks/real-estate2.PNG",
     linkTitle: "Take a look",
     href: "#",
   },
@@ -40,7 +40,7 @@ const dataSlider = [
     title: "House Stitting",
     subtitle:
       "House Sitting Service offers you the peace of mind and assurance that your home is in good hands, whether you're away for a short trip or an extended vacation.",
-    source: "/assets/house3.jpg",
+    source: "/assets/tweaks/real-estate3.PNG",
     linkTitle: "Take a look",
     href: "#",
   },

@@ -28,7 +28,7 @@ export default function Home() {
           </DepartmentCard>
           <DepartmentCard
             title={"PB+ REAL ESTATE"}
-            src={"/assets/real_estate.jpg"}
+            src={"/assets/tweaks/real-estate.PNG"}
             href={"/real-estate"}
           >
             PB+ Real Estate Department is your gateway to unparalleled property
@@ -45,7 +45,7 @@ export default function Home() {
           </DepartmentCard>
           <DepartmentCard
             title={"PB+ COMMUNITY"}
-            src={"/assets/events.jpg"}
+            src={"/assets/tweaks/community.PNG"}
             href={"/community"}
           >
             PB+ Community initiative embodies our commitment to social

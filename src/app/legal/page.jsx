@@ -238,6 +238,7 @@ const Page = () => {
         </div>
 
        <div className="w-full xl:w-[60%] grid grid-cols-2 grid-rows-2 gap-1 xl:gap-2 h-full self-center m-2">
+
           <ServiceLegalCard
             href={"/legal/immigration-services"}
             title={"Immigration Services"}

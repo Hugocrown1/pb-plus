@@ -16,7 +16,7 @@ import {
   IconSocial,
   IconUser,
   IconX,
-  IconDashboard
+  IconDashboard,
 } from "@tabler/icons-react";
 import { signOut, useSession } from "next-auth/react";
 import Spinner from "./Spinner";
@@ -58,14 +58,6 @@ const Menu = () => {
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
-
-  // useEffect(() => {
-  //   document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
-
-  //   return () => {
-  //     document.body.style.overflow = "auto";
-  //   };
-  // }, [isMenuOpen]);
 
   return (
     <>
@@ -128,12 +120,15 @@ const Menu = () => {
                   </Link>
                 </li>
                 {session.user?.role === "admin" && (
-                <li className="flex my-[2px]">
-                  <a className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors" href={"/dashboard"}>
-                    <IconDashboard /> <p>Dashboard</p>
-                  </a>
-                </li>
-              )}
+                  <li className="flex my-[2px]">
+                    <a
+                      className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors"
+                      href={"/dashboard"}
+                    >
+                      <IconDashboard /> <p>Dashboard</p>
+                    </a>
+                  </li>
+                )}
                 <li className="flex my-[2px]">
                   <button
                     className="flex gap-2 w-full px-2 py-1 text-lg font-bold rounded-xl hover:bg-gray-500/30 transition-colors"
@@ -194,16 +189,6 @@ const Header = () => {
   useEffect(() => {
     setHeaderTheme(setHeaderStyle(pathname));
   }, [pathname]);
-
-  // const setFixed = () => {
-  //   if (window.scrollY >= 69) {
-  //     setFix(true);
-  //   } else {
-  //     setFix(false);
-  //   }
-  // };
-
-  // window.addEventListener("scroll", setFixed);
 
   return (
     <header className={`${headerTheme}`}>

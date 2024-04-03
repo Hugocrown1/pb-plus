@@ -2,7 +2,18 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import MultistepQuotation from "@/components/MultistepQuotation";
-import { IconPencil } from "@tabler/icons-react";
+import {
+  IconAirConditioning,
+  IconArrowRight,
+  IconBackhoe,
+  IconBolt,
+  IconClipboard,
+  IconGardenCart,
+  IconLeaf,
+  IconPaint,
+  IconPencil,
+  IconTool,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import { remodelingServices } from "@/lib/remodelingServices";
 
@@ -114,7 +125,7 @@ const page = () => {
             </div>
             <div className="w-full h-[422px] relative my-2 ">
               <Image
-                src={"/assets/remo/false-ceiling.jpg"}
+                src={"/assets/tweaks/false-ceiling.PNG"}
                 alt="service photo"
                 fill={true}
                 sizes="(min-width: 1120px) 1000px"
@@ -226,6 +237,39 @@ const page = () => {
               special occasion, custom-made plates offer endless possibilities.
             </p>
           </section>
+
+          <section
+            id="home-entertainment"
+            className="w-full bg-white px-4 py-6 rounded-lg mb-4"
+          >
+            <div className="flex flex-row items-center gap-2">
+              <div className=" w-[10px] rounded-sm h-[50px] bg-[#941B0C] p-1"></div>
+              <h2 className="text-4xl text-left w-fit font-semibold">
+                Entertainment Home Center
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 grid-rows-2 w-full min-h-[422px] relative my-2 gap-2">
+              <img
+                src={"/assets/remo/decks.png"}
+                alt="service photo"
+                className="object-cover object-center row-span-2 h-full"
+              />
+              <img
+                src={"/assets/tweaks/entertainment.PNG"}
+                alt="service photo"
+                className="object-cover object-center w-full h-full"
+              />
+              <img
+                src={"/assets/tweaks/entertainment2.PNG"}
+                alt="service photo"
+                className="object-cover object-center w-full h-full"
+              />
+            </div>
+            <p className="text-left text-lg my-4">
+              We can show you the idea before we start the job with 3D drawings
+              and discuss the changes you would like to make along the way!
+            </p>
+          </section>
         </div>
         <div className="w-[360px] hidden  min-[1276px]:flex flex-col ">
           <section className="flex flex-col items-center gap-6 w-full h-[300px] bg-white px-1 py-6 rounded-lg my-4">
@@ -313,6 +357,118 @@ const page = () => {
                   className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
                 >
                   Decks
+                </Link>
+              </li>
+              <li className="w-full">
+                <Link
+                  href={"#home-entertainment"}
+                  className="text-blue-600 transition-colors text-lg w-full rounded-lg flex hover:bg-gray-200 px-1"
+                >
+                  Entertainment Home Center
+                </Link>
+              </li>
+            </ul>
+          </section>
+          <section className="flex flex-col items-start gap-6 w-full h-fit bg-white px-4 py-4 my-4 rounded-md">
+            <div className="flex flex-row items-center gap-2">
+              <div className=" w-[8px] rounded-sm h-[35px] bg-[#941B0C] p-1"></div>
+              <h2 className="text-2xl text-left font-medium">Other services</h2>
+            </div>
+            <ul className="ml-2 w-full">
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/construction"}
+                  className="gap-2 items-center justify-between text-black  transition-colors text-lg w-full  flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconBackhoe size={35} color="#941B0C" />{" "}
+                    <span>Construction</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/remodeling"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconPaint size={35} color="#941B0C" />
+                    <span>Remodeling</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/electrical"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconBolt size={35} color="#941B0C" />
+                    <span>Electrical</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/plumbing"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconTool size={35} color="#941B0C" />
+                    <span>Plumbing</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/project-management"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconClipboard size={35} color="#941B0C" />
+                    <span>Project management</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/patio"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconLeaf size={35} color="#941B0C" />
+                    <span>Patio</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/concrete"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconGardenCart size={35} color="#941B0C" />
+                    <span>Concrete</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
+                </Link>
+              </li>
+              <li className="w-full border-b-[1px]">
+                <Link
+                  href={"/remo/air-conditioner"}
+                  className="gap-2 items-center justify-between text-black transition-colors text-lg w-full flex hover:bg-gray-200 py-2 px-1"
+                >
+                  <div className="flex items-center gap-4 flex-row">
+                    <IconAirConditioning size={35} color="#941B0C" />
+                    <span>A/C</span>
+                  </div>
+                  <IconArrowRight size={35} color="gray" />
                 </Link>
               </li>
             </ul>

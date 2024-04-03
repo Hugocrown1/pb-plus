@@ -162,20 +162,24 @@ export async function POST(request) {
         x: baseCoord.x,
         y: baseCoord.y,
         size: 16,
+        maxWidth: width / 2 - 50,
       });
       page.drawText(`${answer}`, {
         x: baseCoord.x + 270,
         y: baseCoord.y,
         size: 16,
+        maxWidth: width / 2 - 50,
       });
-      baseCoord.y -= 30;
+      baseCoord.y -= 50;
     });
 
+    baseCoord.y -= 30;
     //Aditional information
     page.drawText(`Additional information: ${extraInfo || "None"}`, {
       x: 50,
-      y: height - 770,
+      y: baseCoord.y,
       size: 12,
+      maxWidth: width - 100,
     });
 
     const pdfBytes = await pdfDoc.save();
@@ -205,7 +209,7 @@ export async function POST(request) {
       },
     });
 
-    transporter.sendMail({
+    await transporter.sendMail({
       from: process.env.GMAIL_USERNAME,
       to: ["al19760611@ite.edu.mx", userEmail], // TODO: add email to receive all price PDFs
       subject: `Nueva cotización de ${userName}`,
