@@ -145,6 +145,7 @@ const PropertyForm = ({
               label="Property title"
               name="title"
               id="title"
+              maxLength="100"
               placeholder={"Title"}
               value={values.title}
               onChange={onChange}
