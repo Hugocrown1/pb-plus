@@ -31,10 +31,10 @@ export default function Sidebar({ children }) {
         >
           <nav className="h-full flex flex-col">
             <div className="p-4 pb-2 flex justify-between items-center">
-              <img
-                src={"/assets/logomain.png"}
-                className={`overflow-hidden transition-all ${
-                  expanded ? "w-32" : "w-0"
+               <img
+                src={"/assets/footerlogo.png"}
+                className={`overflow-hidden transition-all  ${
+                  expanded ? "w-40" : "w-0"
                 }`}
               />
 
