@@ -12,6 +12,7 @@ import { useSession } from "next-auth/react";
 import Spinner from "./Spinner";
 import EventCard from "./EventCard";
 import SpinnerSmall from "./SpinnerSmall";
+import { toast } from "sonner";
 
 const EventForm = ({
   title: existingTitle,
@@ -81,6 +82,7 @@ const EventForm = ({
       });
 
       router.push("/community/events");
+      toast.success("Event created successfully!");
     } else {
       await axios.put("/api/events/" + _id, {
         ...values,
@@ -88,9 +90,8 @@ const EventForm = ({
         images: eventImages,
       });
       router.push("/community/events/" + _id);
+      toast.success("Event changes saved successfully!");
     }
-
-    setIsLoading(false);
   };
 
   const uploadPreviewImages = (e) => {
@@ -138,6 +139,7 @@ const EventForm = ({
               label="Event title"
               name="title"
               id="title"
+              maxLength="100"
               placeholder={"Title"}
               value={values.title}
               onChange={onChange}
