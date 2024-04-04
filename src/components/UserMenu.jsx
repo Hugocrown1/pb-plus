@@ -87,9 +87,9 @@ const UserMenu = () => {
               </li>
               {session.user?.role === "admin" && (
                 <li onClick={() => setIsMenuOpen(false)}>
-                  <a className="dropdown-item" href={"/dashboard"}>
+                  <Link className="dropdown-item" href={"/dashboard"}>
                     <IconDashboard /> <p>Dashboard</p>
-                  </a>
+                  </Link>
                 </li>
               )}
               <li onClick={() => setIsMenuOpen(false)}>
