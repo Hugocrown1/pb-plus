@@ -73,7 +73,6 @@ const ContactFormRealEstate = ({ serviceName }) => {
       const currentDate = new Date().toISOString();
       const userDataWithDate = { ...userData, date: currentDate, serviceName };
       await axios.post("/api/pricing", userDataWithDate);
-      console.log("Formulario enviado exitosamente");
       setUserData({
         userName: "",
         userEmail: "",

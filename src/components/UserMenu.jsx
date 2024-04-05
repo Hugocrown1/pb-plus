@@ -3,14 +3,15 @@ import Link from "next/link";
 import axios from "axios";
 import { signOut, useSession } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
-import { IconMenu2, IconPower, IconUser, IconDashboard } from "@tabler/icons-react";
+import {
+  IconMenu2,
+  IconPower,
+  IconUser,
+  IconDashboard,
+} from "@tabler/icons-react";
 import Spinner from "./Spinner";
 
-// import { useSessionStore } from "@/app/store";
-
 const UserMenu = () => {
-  // const setSession = useSessionStore((state) => state.setUserSession);
-  // const userSession = useSessionStore((state) => state.userSession);
   const { data: session, status } = useSession();
   const defaultImage = "/assets/defaultprofile.jpg";
   const [userImage, setUserImage] = useState(null);
@@ -33,15 +34,6 @@ const UserMenu = () => {
     };
   });
 
-  // useEffect(() => {
-  //   if (session && userSession !== session.user) {
-  //     setSession(session.user);
-  //     console.log("session update");
-  //   }
-  // }, [session]);
-
-  
-
   useEffect(() => {
     const fetchUserImage = async () => {
       if (session && session.user) {
@@ -53,7 +45,7 @@ const UserMenu = () => {
         }
       }
     };
-    fetchUserImage(); 
+    fetchUserImage();
   }, [session, isMenuOpen]);
 
   return (
@@ -87,9 +79,9 @@ const UserMenu = () => {
               </li>
               {session.user?.role === "admin" && (
                 <li onClick={() => setIsMenuOpen(false)}>
-                  <a className="dropdown-item" href={"/dashboard"}>
+                  <Link className="dropdown-item" href={"/dashboard"}>
                     <IconDashboard /> <p>Dashboard</p>
-                  </a>
+                  </Link>
                 </li>
               )}
               <li onClick={() => setIsMenuOpen(false)}>

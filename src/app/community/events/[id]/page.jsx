@@ -6,6 +6,7 @@ import Image from "next/image";
 import { IconPencil, IconPhoneFilled } from "@tabler/icons-react";
 import BackButton from "./BackButton";
 import Link from "next/link";
+import dateFormatter from "@/lib/dateFormatter";
 
 const EventPage = async ({ params: { id } }) => {
   const session = await auth();
@@ -63,9 +64,7 @@ const EventPage = async ({ params: { id } }) => {
                 </div>
                 <div className="flex flex-col">
                   <p className="font-bold opacity-50 text-center">DATE</p>
-                  <p>{`${eventInfo.date.split("T")[0]} at ${
-                    eventInfo.date.split("T")[1].split(".")[0]
-                  }`}</p>
+                  <p>{dateFormatter(eventInfo.date)}</p>
                 </div>
               </div>
             </section>
