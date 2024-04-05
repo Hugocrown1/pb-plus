@@ -1,21 +1,13 @@
 "use client";
 
-import { IconBath, IconMapPin, IconUser } from "@tabler/icons-react";
+import { IconMapPin } from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import dateFormatter from "@/lib/dateFormatter";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({
-  _id,
-  coverImage,
-  date,
-  title,
-  address,
-  category,
-  interestedUsers,
-}) => {
+const EventCard = ({ _id, coverImage, date, title, address, category }) => {
   return (
     <article className={`card ${inter.className}`}>
       <Link

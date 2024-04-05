@@ -8,7 +8,6 @@ const schema = new mongoose.Schema({
   category: String,
   address: String,
   description: String,
-  interestedUsers: { type: Number, default: 0 },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",

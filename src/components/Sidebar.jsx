@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 import React from "react";
 import { Roboto } from "next/font/google";
+import Link from "next/link";
 
 const roboto = Roboto({ subsets: ["latin"], weight: "400" });
 
@@ -30,10 +31,10 @@ export default function Sidebar({ children }) {
         >
           <nav className="h-full flex flex-col">
             <div className="p-4 pb-2 flex justify-between items-center">
-              <img
-                src={"/assets/footer/footerlogo.png"}
-                className={`overflow-hidden transition-all ${
-                  expanded ? "w-32" : "w-0"
+               <img
+                src={"/assets/footerlogo.png"}
+                className={`overflow-hidden transition-all  ${
+                  expanded ? "w-40" : "w-0"
                 }`}
               />
 
@@ -105,7 +106,7 @@ export function SidebarItem({ href, icon, text, active, alert, category }) {
   const { expanded } = useContext(SidebarContext);
 
   return (
-    <a href={href}>
+    <Link href={href}>
       <li
         className={`relative flex items-center py-2 my-1 font-medium rounded-md cursor-pointer transition-colors group justify-center ${
           active
@@ -137,6 +138,6 @@ export function SidebarItem({ href, icon, text, active, alert, category }) {
           </div>
         )}
       </li>
-    </a>
+    </Link>
   );
 }
