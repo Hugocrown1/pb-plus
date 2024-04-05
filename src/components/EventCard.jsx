@@ -1,20 +1,12 @@
 "use client";
 
-import { IconBath, IconMapPin, IconUser } from "@tabler/icons-react";
+import { IconMapPin } from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({
-  _id,
-  coverImage,
-  date,
-  title,
-  address,
-  category,
-  interestedUsers,
-}) => {
+const EventCard = ({ _id, coverImage, date, title, address, category }) => {
   const dateFormatter = (dateString) => {
     if (!dateString) return "00/00/00 at 00:00";
     const formattedDate = `${date.split("T")[0]} at ${
@@ -59,11 +51,6 @@ const EventCard = ({
               </p>
             </div>
             <hr className="w-full mx-auto my-2" />
-            <div className="flex flex-wrap gap-2">
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconUser /> <p>{interestedUsers || 0} Interested users</p>
-              </div>
-            </div>
           </div>
         </Link>
       ) : (
@@ -96,11 +83,6 @@ const EventCard = ({
               </p>
             </div>
             <hr className="w-full mx-auto my-2" />
-            <div className="flex flex-wrap gap-2">
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconUser /> <p>{interestedUsers || 0} Interested users</p>
-              </div>
-            </div>
           </div>
         </>
       )}

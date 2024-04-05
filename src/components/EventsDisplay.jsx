@@ -2,11 +2,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import PropertyLoader from "./PropertyLoader";
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconFileSad,
-} from "@tabler/icons-react";
+import { IconFileSad } from "@tabler/icons-react";
 import EventCard from "./EventCard";
 import Link from "next/link";
 
@@ -74,7 +70,7 @@ const EventsDisplay = () => {
       </div>
       <div className="w-full h-[2px] bg-[#aaaaaa49] my-4"></div> */}
 
-      <div className=" w-full min-[503px]:px-56">
+      <div className=" w-full">
         {isLoading && (
           <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-4">
             <PropertyLoader uniqueKey="1" />

@@ -1,11 +1,7 @@
 import Slider from "@/components/Slider/Slider";
 import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
-
-import dynamic from "next/dynamic";
-
-const DemoCardsDisplay = dynamic(() => import("@/components/DemoCardsDisplay"));
+import { IconCalendarStats, IconToolsKitchen } from "@tabler/icons-react";
+import ServiceCommunityCard from "@/components/ServiceCommunityCard";
 
 const dataSlider = [
   {
@@ -76,70 +72,19 @@ export default function Page() {
           </p>
         </div>
       </section>
+      <section className="flex justify-center mt-10">
+        <div className="grid grid-cols-2 gap-3 xl:w-[1100px] xl:h-[550px] w-full h-full min-[400px]:px-4 xl:px-0">
+          <ServiceCommunityCard
+            href={"/community/events"}
+            title={"Events"}
+            icon={<IconCalendarStats size={70} color="#0077b6" />}
+          ></ServiceCommunityCard>
 
-      <section>
-        <div className="flex flex-col mt-20 max-w-[1280px] mx-auto ">
-          <div className="flex flex-row items-center justify-between">
-            <h1 className="flex-1 text-start">Punta Banda Restaurants</h1>
-            <Link
-              className="flex flex-row items-center text-[18px] text-black group"
-              href={"/community/advertising"}
-            >
-              <span>See all</span>
-              <svg
-                className="w-6 h-6 group-hover:translate-x-4 transition-all "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m9 5 7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
-          <Suspense fallback={<p>Loading...</p>}>
-            <DemoCardsDisplay />
-          </Suspense>
-        </div>
-
-        <div className="flex flex-col mt-10 max-w-[1280px] mx-auto ">
-          <div className="flex flex-row items-center justify-between">
-            <h1 className="flex-1 text-start">Punta Banda Events</h1>
-            <Link
-              className="flex flex-row items-center text-[18px] text-black group"
-              href={"/community/events"}
-            >
-              <span>See all</span>
-              <svg
-                className="w-6 h-6 group-hover:translate-x-4 transition-all "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m9 5 7 7-7 7"
-                />
-              </svg>
-            </Link>
-          </div>
-          <Suspense fallback={<p>Loading</p>}>
-            <DemoCardsDisplay />
-          </Suspense>
+          <ServiceCommunityCard
+            href={"/community/advertising"}
+            title={"Advertising"}
+            icon={<IconToolsKitchen size={70} color="#0077b6" />}
+          ></ServiceCommunityCard>
         </div>
       </section>
     </main>
