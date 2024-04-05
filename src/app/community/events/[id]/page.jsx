@@ -6,7 +6,6 @@ import Image from "next/image";
 import { IconPencil, IconPhoneFilled } from "@tabler/icons-react";
 import BackButton from "./BackButton";
 import Link from "next/link";
-import InterestedButton from "./InterestedButton";
 import dateFormatter from "@/lib/dateFormatter";
 
 const EventPage = async ({ params: { id } }) => {
@@ -52,14 +51,8 @@ const EventPage = async ({ params: { id } }) => {
                     <DeleteButton id={id} />
                   </div>
                 ) : (
-                  <InterestedButton />
+                  <></>
                 )}
-              </div>
-              <div className="flex flex-col ">
-                <p className="font-bold opacity-50">INTERESTED</p>
-                <p className="text-xl">
-                  {eventInfo.interestedUsers} interested users
-                </p>
               </div>
               <h2 className="text-start mt-2">Description</h2>
               <p className="min-h-10">{eventInfo.description}</p>
@@ -114,7 +107,3 @@ const EventPage = async ({ params: { id } }) => {
 };
 
 export default EventPage;
-
-// session?.user.id === eventInfo.user._id && (
-//<DeleteButton id={id} />
-// )

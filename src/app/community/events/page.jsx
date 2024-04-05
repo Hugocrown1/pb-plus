@@ -1,14 +1,4 @@
-import CustomPage from "@/components/CustomPage";
 import EventsDisplay from "@/components/EventsDisplay";
-import ServiceCard from "@/components/ServiceCard";
-import ServiceCommunityCard from "@/components/ServiceCommunityCard";
-import Slider from "@/components/Slider/Slider";
-import {
-  IconCalendarStats,
-  IconSparkles,
-  IconToolsKitchen,
-  IconUserHeart,
-} from "@tabler/icons-react";
 import Link from "next/link";
 
 const dataSlider = [
@@ -62,7 +52,7 @@ const dataSlider = [
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4]  xl:pt-[50px]`}>
+    <main className={`bg-[#f5f3f4]  xl:pt-[50px] container-xl`}>
       {/* <Slider dataSlider={dataSlider} /> */}
       <section
         id="services"
@@ -76,7 +66,10 @@ export default function Page() {
         </p>
         <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
 
-        <Link href={"/community/events/new-event"} className="events-button">
+        <Link
+          href={"/community/events/new-event"}
+          className="events-button self-end mb-4"
+        >
           Create an event
         </Link>
 

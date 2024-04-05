@@ -25,7 +25,7 @@ export async function PUT(request, { params: { id } }) {
   try {
     const data = await request.json();
     await connectDB();
-    const event = await Properties.findById(id);
+    const event = await Events.findById(id);
     if (!event)
       return NextResponse.json(
         { message: "No se encontro el evento" },
