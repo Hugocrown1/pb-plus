@@ -6,26 +6,16 @@ import ImageGallery from "react-image-gallery";
 import ReactImageGallery from "react-image-gallery";
 
 import "react-image-gallery/styles/css/image-gallery.css";
-const data = [
-  "/assets/gallery/puntabanda.jpeg",
-  "/assets/gallery/puntabanda2.jpeg",
-  "/assets/gallery/puntabanda3.jpeg",
-  "/assets/gallery/puntabanda4.jpeg",
-  "/assets/gallery/puntabanda5.jpeg",
-  "/assets/gallery/puntabanda6.jpeg",
-  "/assets/gallery/puntabanda7.jpeg",
-  "/assets/gallery/puntabanda8.jpeg",
-  "/assets/gallery/puntabanda9.jpeg",
-];
 
-const images = data.map((image) => ({
-  original: image,
-  thumbnail: image,
-  originalClass: "image-gallery",
-}));
-const GridGallery = () => {
+const GridGallery = ({ data }) => {
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [startIndex, setStartIndex] = useState();
+
+  const images = data.map((image) => ({
+    original: image,
+    thumbnail: image,
+    originalClass: "image-gallery",
+  }));
 
   useEffect(() => {
     const handleKeyDown = (event) => {
