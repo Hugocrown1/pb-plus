@@ -1,10 +1,6 @@
-import CustomPage from "@/components/CustomPage";
-import Link from "next/link";
 import { Libre_Baskerville, Roboto } from "next/font/google";
-import Image from "next/image";
 import {
   IconGraph,
-  IconHome,
   IconHomeCog,
   IconHomeDollar,
   IconHomeEco,

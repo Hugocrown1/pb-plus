@@ -223,7 +223,7 @@ const page = () => {
               <div className=" w-[10px] rounded-sm h-[50px] bg-[#941B0C] p-1"></div>
               <h2 className="text-4xl text-left w-fit font-semibold">Decks</h2>
             </div>
-            <div className="w-full min-h-[422px] relative my-2 ">
+            <div className="w-full h-[722px] relative my-2 ">
               <img
                 src={"/assets/remo/decks.png"}
                 alt="service photo"
@@ -248,11 +248,11 @@ const page = () => {
                 Entertainment Home Center
               </h2>
             </div>
-            <div className="grid grid-cols-2 grid-rows-2 w-full min-h-[422px] relative my-2 gap-2">
+            <div className="grid grid-cols-2 grid-rows-2 w-full h-[722px] relative my-2 gap-2">
               <img
-                src={"/assets/remo/decks.png"}
+                src={"/assets/remo-gallery/home-theater.webp"}
                 alt="service photo"
-                className="object-cover object-center row-span-2 h-full"
+                className="object-cover object-center col-span-2 w-full h-full  "
               />
               <img
                 src={"/assets/tweaks/entertainment.PNG"}
