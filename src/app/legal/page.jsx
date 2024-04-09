@@ -100,7 +100,7 @@ const Page = () => {
       <Slider dataSlider={dataSlider} />
 
       <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
-        <div className="w-full text-start xl:w-[50%]">
+        <div className="w-full text-start xl:w-[48%]">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">About Us</p>
           <p className="text-lg xl:text-xl pb-8">PB+ Legal Law Firm</p>
@@ -121,7 +121,7 @@ const Page = () => {
             📧 SCHELUDE A CONSULTATION
           </Link>
         </div>
-        <div className="xl:w-[50%] my-8 grid grid-cols-3 grid-rows-2 gap-2">
+        <div className="xl:w-[52%] my-8 grid grid-cols-3 grid-rows-2 gap-2">
           <div className="relative rounded-sm shadow-md  overflow-hidden">
             <Image
               
