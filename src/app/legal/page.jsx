@@ -100,7 +100,7 @@ const Page = () => {
       <Slider dataSlider={dataSlider} />
 
       <section className="w-full flex flex-col justify-center p-4 xl:flex-row xl:w-[1100px] xl:mx-auto xl:my-16">
-        <div className="w-full text-start xl:w-[50%]">
+        <div className="w-full text-start xl:w-[48%]">
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">About Us</p>
           <p className="text-lg xl:text-xl pb-8">PB+ Legal Law Firm</p>
@@ -121,14 +121,16 @@ const Page = () => {
             📧 SCHELUDE A CONSULTATION
           </Link>
         </div>
-        <div className="xl:w-[50%] my-8 grid grid-cols-3 grid-rows-2 gap-2">
+        <div className="xl:w-[52%] my-8 grid grid-cols-3 grid-rows-2 gap-2">
           <div className="relative rounded-sm shadow-md  overflow-hidden">
             <Image
+              
               src="/assets/legal/lawyer-arturo-jr.webp"
+              fill
               alt="photo"
-              layout="fill"
-              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
+
             <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
               <p className="text-white text-center text-xs xl:text-sm p-2">
                 Lic. Arturo Rivera JR
@@ -138,9 +140,9 @@ const Page = () => {
           <div className="relative rounded-sm shadow-md  overflow-hidden">
             <Image
               src="/assets/legal/lawyer-arturo.webp"
+              fill
               alt="photo"
-              layout="fill"
-              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
               <p className="text-white text-center text-xs xl:text-sm p-2">
@@ -151,31 +153,36 @@ const Page = () => {
           <div className="relative rounded-sm shadow-md  overflow-hidden">
             <Image
               src="/assets/legal/lawyer-tatiana.webp"
+              fill
               alt="photo"
-              layout="fill"
-              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
-              <p className="text-white text-center text-xs xl:text-sm p-2">Lic. Tatiana G. Fischer</p>
+              <p className="text-white text-center text-xs xl:text-sm p-2">
+                Lic. Tatiana G. Fischer
+              </p>
             </div>
           </div>
-          <div className="relative rounded-sm shadow-md  overflow-hidden bg-gray-300">
-            {/* <Image
-              src="/assets/lawyer3.jpeg"
+          <div className="relative rounded-sm shadow-md  overflow-hidden ">
+            <Image
+              
+              src="/assets/legal/lawyer-platero.webp"
+              fill
               alt="photo"
-              layout="fill"
-              objectFit="cover"
-            /> */}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
             <div className="absolute bottom-0 w-full bg-black bg-opacity-50">
-              <p className="text-white text-center text-xs xl:text-sm p-2">Lic. Platero</p>
+              <p className="text-white text-center text-xs xl:text-sm p-2">
+                Lic. Platero
+              </p>
             </div>
           </div>
           <div className="relative w-full h-0 pb-[50%] lg:w-200 lg:h-32 col-span-2">
             <Image
               src="/assets/legal/legal-poder-judicial.webp"
+              fill
               alt="photo"
-              layout="fill"
-              objectFit="cover"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
         </div>
