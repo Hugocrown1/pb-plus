@@ -1,402 +1,411 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { IconX, IconPhotoEdit } from "@tabler/icons-react";
+"use client";
+import FormInput from "@/components/FormInput";
 import PropertyCard from "@/components/PropertyCard";
+import { IconUpload, IconX } from "@tabler/icons-react";
+import axios from "axios";
+import React, { useState } from "react";
+import { deleteImage } from "@/lib/deleteImage";
 import { ReactSortable } from "react-sortablejs";
+import { toast } from "sonner";
 
-const PropertyAdminForm = ({ propertyId, onClose }) => {
-  const [propertyData, setPropertyData] = useState({});
-  const [error, setError] = useState(null);
-  const [image, setImage] = useState(null);
+
+const PropertyAdminForm = ({
+  title: existingTitle,
+  type: existingType,
+  bedrooms: existingBedrooms,
+  bathrooms: existingBathrooms,
+  zone: existingZone,
+  address: existingAddress,
+  description: existingDescription,
+  price: existingPrice,
+  images: existingImages,
+  _id,
+  onClose,
+}) => {
+  const [values, setValues] = useState({
+    title: existingTitle || "",
+    type: existingType || "",
+    bedrooms: existingBedrooms || "",
+    bathrooms: existingBathrooms || "",
+    zone: existingZone || "",
+    address: existingAddress || "",
+    description: existingDescription || "",
+    price: existingPrice || "",
+  });
+
+  const [previewImages, setPreviewImages] = useState(existingImages || []);
+  const [formData, setFormData] = useState(new FormData());
+  const [deletedImages, setDeletedImages] = useState([]);
+
   const [showUpdateConfirmation, setShowUpdateConfirmation] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-  const [previewImage, setPreviewImage] = useState(null);
-  
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`/api/properties/${propertyId}`);
-        const property = response.data;
-        setPropertyData(property);
-      } catch (error) {
-        setError("Failed to fetch property data");
-      }
-    };
-
-    fetchData();
-  }, [propertyId]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setPropertyData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+  const onChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-    const previewImageUrl = URL.createObjectURL(file); // Obtener la URL de previsualización de la nueva imagen
-    setPreviewImage(previewImageUrl); // Actualizar el estado de la previsualización con la nueva URL
-  };
+  const saveProperty = async () => {
+    const responseFiles = await axios.post("/api/files", formData);
+    let propertyImages = previewImages;
 
-  const handleUpdate = async () => {
-    try {
-      let updatedPropertyData = { ...propertyData };
-      if (image) {
-        const imageUrl = await uploadImage(image);
-        updatedPropertyData.coverImage = imageUrl;
-      }
+    for (const imageObject of responseFiles.data) {
+      const imageIndex = propertyImages.findIndex(
+        (imageUrl) => imageUrl.toString() === imageObject.originalUrl
+      );
 
-      await axios.put(`/api/properties/${propertyId}`, updatedPropertyData);
-      onClose();
-    } catch (error) {
-      setError("Failed to update property");
+      propertyImages[imageIndex] = imageObject.linkAws;
     }
-  };
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete(`/api/properties/${propertyId}`);
-      onClose();
-    } catch (error) {
-      setError("Failed to delete property");
+    if (deletedImages.length > 0) {
+      for (const imageLink of deletedImages) {
+        try {
+          if (imageLink.includes("pb-plus.s3")) {
+            await deleteImage(imageLink);
+          }
+        } catch (error) {
+          console.error(`error deleting image ${imageLink}:`, error);
+        }
+      }
     }
-  };
 
-  const uploadImage = async (file) => {
-    try {
-      const formData = new FormData();
-      formData.append("image", file);
+    if (!_id) {
+      await axios.post("/api/properties", {
+        ...values,
 
-      const response = await axios.post("/api/files", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        images: propertyImages,
       });
 
-      return response.data[0].linkAws;
-    } catch (error) {
-      console.error("Error uploading image:", error);
-      return null;
+      onClose();
+      toast.success("Property updated successfully!");
+    } else {
+      await axios.put("/api/properties/" + _id, {
+        ...values,
+        coverImage: propertyImages[0],
+        images: propertyImages,
+      });
+      onClose();
+      toast.success("Property updated successfully!");
     }
+  };
+
+  const deleteProperty = async () => {
+    await axios.delete("/api/properties/" + _id);
+    onClose();
+    toast.info("Property deleted successfully!");
+  };
+
+
+  const uploadPreviewImages = (e) => {
+    const files = e.target?.files;
+
+    if (files?.length > 0) {
+      const url = URL.createObjectURL(files[0]);
+      for (const file of files) {
+        formData.append(url, file);
+      }
+
+      setPreviewImages(previewImages.concat(url));
+    }
+  };
+
+  const handleRemoveImage = (imageUrl) => {
+    if (imageUrl.includes("blob")) {
+      formData.delete(imageUrl);
+    }
+
+    setDeletedImages(deletedImages.concat(imageUrl));
+    setPreviewImages((prevImages) =>
+      prevImages.filter((image) => image !== imageUrl)
+    );
+  };
+
+  const updatePreviewImagesOrder = (images) => {
+    setPreviewImages(images);
   };
 
   const handleUpdateConfirmation = () => {
-    handleUpdate();
-    setShowUpdateConfirmation(false);
-                  setShowDeleteConfirmation(false);
-  };
-
-  const handleDeleteConfirmation = () => {
-    handleDelete();
+    saveProperty();
     setShowUpdateConfirmation(false);
     setShowDeleteConfirmation(false);
   };
 
-  
+  const handleDeleteConfirmation = () => {
+    deleteProperty();
+    setShowUpdateConfirmation(false);
+    setShowDeleteConfirmation(false);
+  };
 
   return (
-    <div className="fixed top-0 left-0 z-50 w-full h-full bg-gray-800 bg-opacity-50 flex justify-center items-center">
-      <div className="flex flex-col relative w-[1100px] bg-white">
-        <button
-          onClick={onClose}
-          className="absolute top-0 right-0 text-gray-800 hover:bg-gray-200 hover:text-gray-800 rounded-full p-1 items-end"
+    <div className="fixed top-0 left-0 z-50 w-full h-full  flex justify-center items-center">
+      <div
+        className="fixed top-0 left-0 w-full h-full bg-black opacity-25 z-40"
+        onClick={onClose}
+      ></div>
+      <div className="bg-white p-4 rounded-md shadow-lg w-full max-w-screen-md mx-4 z-50">
+        <div className="flex justify-between">
+          <p className="text-xl font-semibold">
+            {_id ? "Edit property" : "New property"}
+          </p>
+          <button
+            onClick={onClose}
+            className="text-gray-500 font-bold bg-gray-200 hover:text-black rounded-md"
+          >
+            <IconX size={30}></IconX>
+          </button>
+        </div>
+        <div className="border-t border-gray-300 pt-4 my-2"></div>
+        <section
+          className="xl:flex xl:gap-2"
+          style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}
         >
-          <IconX></IconX>
-        </button>
-        <div className="flex">
-          <div className="bg-white p-6 w-[60%] flex flex-col items-end">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setShowUpdateConfirmation(true);
-              }}
-              className="space-y-1"
-            >
-              <input type="hidden" name="id" value={propertyId} />
-              <div className="flex justify-center items-center space-x-4 mb-4">
-                <div className="relative inline-block">
-                  <img
-                    src={
-                      previewImage
-                        ? previewImage
-                        : propertyData.coverImage
-                        ? propertyData.coverImage
-                        : "https://www.freevector.com/uploads/vector/preview/17867/FreeVector-House-Vector.jpg"
-                    }
-                    alt="Property"
-                    className="h-44 w-44 rounded-md"
-                    onClick={() => document.getElementById("image").click()}
-                    title="Edit"
-                  />
-                  <div
-                    onClick={() => document.getElementById("image").click()}
-                    className="absolute inset-0 flex items-center justify-center w-full h-full opacity-0 hover:opacity-50 bg-black text-white rounded-md cursor-pointer"
-                  >
-                    <span className="text-lg font-bold">
-                      <IconPhotoEdit size={60} />
-                    </span>
-                  </div>
-                </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setShowUpdateConfirmation(true);
+            }}
+            className="xl:w-2/3"
+          >
+            <h3>Basic information</h3>
+            <FormInput
+              label="Property title"
+              name="title"
+              id="title"
+              placeholder={"Title"}
+              value={values.title}
+              onChange={onChange}
+              errorMessage="Please provide a title"
+            />
+            <label htmlFor="photos">Photos</label>
+            <div className="flex flex-wrap">
+              <ReactSortable
+                list={previewImages}
+                className="flex flex-wrap"
+                setList={updatePreviewImagesOrder}
+              >
+                {!!previewImages?.length &&
+                  previewImages.map((link) => (
+                    <div
+                      key={link}
+                      className={`flex relative h-20 w-20 rounded-md m-1 shadow-lg justify-end bg-transparent items-start overflow-hidden`}
+                    >
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(link)}
+                        className="absolute p-1 rounded-full bg-black/80 hover:bg-black transition-colors text-white z-10 translate-y-1 -translate-x-1"
+                      >
+                        <IconX size={20} />
+                      </button>
+                      <img
+                        src={link}
+                        alt="Property photo"
+                        className="h-full w-full object-cover object-center"
+                      />
+                    </div>
+                  ))}
+              </ReactSortable>
+              <label
+                htmlFor="photos"
+                className="flex flex-col items-center m-1 justify-center w-20 h-20 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
+              >
+                <IconUpload size={22} />
+                Cargar
                 <input
+                  id="photos"
                   type="file"
-                  accept="image/*"
-                  id="image"
-                  style={{ display: "none" }}
-                  onChange={handleImageChange}
+                  accept="image/png, image/jpeg"
+                  className="hidden"
+                  onChange={uploadPreviewImages}
                 />
-              </div>
-              <div>
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  name="title"
-                  id="title"
-                  value={propertyData.title || ""}
-                  onChange={handleChange}
-                  placeholder="Title"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                />
-              </div>
+              </label>
+            </div>
 
-              <div>
-                <label
-                  htmlFor="type"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Type
-                </label>
-                <select
-                  name="type"
-                  id="role"
-                  value={propertyData.type || ""}
-                  onChange={handleChange}
-                  className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                >
-                  <option value="" disabled hidden>
-                    Choose a type
-                  </option>
-                  <option value="Rental">Rental</option>
-                  <option value="Selling">Selling</option>
-                </select>
-              </div>
+            <div className="form-input">
+              <label htmlFor="type">Rental or selling</label>
+              <select
+                name="type"
+                id="type"
+                defaultValue={existingType || ""}
+                onChange={onChange}
+                required
+              >
+                <option disabled value={""}>
+                  Choose a type
+                </option>
+                <option value={"Rental"}>Rental</option>
+                <option value={"Selling"}>Selling</option>
+              </select>
+            </div>
+            <hr className="stroke-slate-600 my-2" />
+            <h3>Property details</h3>
+            <div className="flex gap-2">
+              <FormInput
+                type="number"
+                label="Bedrooms"
+                name="bedrooms"
+                id="bedrooms"
+                placeholder={"Number of bedrooms"}
+                errorMessage="Please enter a valid number"
+                pattern="^[0-9]{1-6}"
+                value={values.bedrooms}
+                onChange={onChange}
+              />
 
-              <div>
-                <label
-                  htmlFor="bedrooms"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Bedrooms
-                </label>
-                <input
-                  type="number"
-                  name="bedrooms"
-                  id="bedrooms"
-                  value={propertyData.bedrooms || ""}
-                  onChange={handleChange}
-                  placeholder="Number of bedrooms"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="bathrooms"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Bathrooms
-                </label>
-                <input
-                  type="text"
-                  name="bathrooms"
-                  id="bathrooms"
-                  value={propertyData.bathrooms || ""}
-                  onChange={handleChange}
-                  placeholder="Number of bathrooms"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-
-              <div>
-                <label
-                  htmlFor="zone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Zone
-                </label>
+              <FormInput
+                type="number"
+                label="Bathrooms"
+                name="bathrooms"
+                id="bathrooms"
+                errorMessage="Please enter a valid number"
+                placeholder={"Number of bathrooms"}
+                value={values.bathrooms}
+                onChange={onChange}
+              />
+            </div>
+            <div className="flex gap-2">
+              <div className="form-input w-1/3">
+                <label htmlFor="zone">Zone</label>
                 <select
                   name="zone"
                   id="zone"
-                  value={propertyData.zone || ""}
-                  onChange={handleChange}
-                  className="mt-1 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                  defaultValue={existingZone || ""}
+                  onChange={onChange}
                   required
                 >
-                  <option value="" disabled hidden>
+                  <option disabled value={""}>
                     Choose the zone of the property
                   </option>
-                  <option value="The Ejido">The Ejido</option>
-                  <option value="Bufadora">Bufadora</option>
-                  <option value="The Spit">The Spit</option>
-                  <option value="Maneadero">Maneadero</option>
+                  <option value={"The Ejido"}>The Ejido</option>
+                  <option value={"Bufadora"}>Bufadora</option>
+                  <option value={"The Spit"}>The Spit</option>
+                  <option value={"Maneadero"}>Maneadero</option>
                 </select>
               </div>
-
-              <div>
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Address
-                </label>
-                <input
-                  type="text"
+              <div className="w-2/3">
+                <FormInput
+                  label="Address"
                   name="address"
                   id="address"
-                  value={propertyData.address || ""}
-                  onChange={handleChange}
-                  placeholder="Property address"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
+                  placeholder={"Property address"}
+                  value={values.address}
+                  onChange={onChange}
+                  errorMessage="Please provide an address"
                 />
               </div>
+            </div>
+            <div className="form-input">
+              <label htmlFor="description">Description</label>
+              <textarea
+                id="description"
+                name="description"
+                placeholder="Property description"
+                value={values.description}
+                onChange={onChange}
+              ></textarea>
+            </div>
 
-              <div>
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Description
-                </label>
-                <input
-                  type="text"
-                  name="description"
-                  id="description"
-                  value={propertyData.description || ""}
-                  onChange={handleChange}
-                  placeholder="Property description"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                />
-              </div>
+            <FormInput
+              type="number"
+              label="Price"
+              name="price"
+              id="price"
+              errorMessage="Please enter a valid number"
+              placeholder={"Price"}
+              value={values.price}
+              onChange={onChange}
+            />
+            <div className="flex justify-between gap-2 py-4">
+              <button
+                type="submit"
+                className="bg-[#3e8acc] hover:bg-blue-800 text-white hover:text-white px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  setShowDeleteConfirmation(true);
+                }}
+                className="bg-[#f6f8fa] hover:bg-[#e00202] text-[#e00202] hover:text-white px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Delete
+              </button>
+            </div>
+          </form>
 
-              <div>
-                <label
-                  htmlFor="price"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Price
-                </label>
-                <input
-                  type="text"
-                  name="price"
-                  id="price"
-                  value={propertyData.price || ""}
-                  onChange={handleChange}
-                  placeholder="Price"
-                  className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-700"
-                >
-                  Update
-                </button>
-                <button
-                  onClick={() => {
-                    setShowDeleteConfirmation(true);
-                  }}
-                  className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-200"
-                >
-                  Delete
-                </button>
-              </div>
-            </form>
-
-            {error && <p>{error}</p>}
+          <div className="">
+            <h3>Preview</h3>
+            <div className="h-fit border-2 border-gray-100 rounded-md">
+              <PropertyCard {...values} coverImage={previewImages[0]} />
+            </div>
           </div>
-          {/* Update Confirmation Modal */}
-          {showUpdateConfirmation && (
-            <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-              <div className="bg-white p-6 rounded-md shadow-lg">
-                <p>Are you sure you want to update?</p>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={() => {
-                      setShowUpdateConfirmation(false);
-                  setShowDeleteConfirmation(false);
-                    }}
-                    className="bg-gray-200 text-gray-600 px-4 py-2 mr-2 rounded-md"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleUpdateConfirmation}
-                    className="bg-red-400 text-white px-4 py-2 rounded-md"
-                  >
-                    Confirm
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Delete Confirmation Modal */}
-          {showDeleteConfirmation && (
-            <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center">
-              <div className="bg-white p-6 rounded-md shadow-lg">
-                <p>Are you sure you want to delete?</p>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={() => {
-                      setShowUpdateConfirmation(false);
-                  setShowDeleteConfirmation(false);
-                    }}
-                    className="bg-gray-200 text-gray-600 px-4 py-2 mr-2 rounded-md"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleDeleteConfirmation}
-                    className="bg-red-400 text-white px-4 py-2 rounded-md"
-                  >
-                    Confirm
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Preview */}
-          <section className="xl:w-[40%] w-full flex flex-col p-4">
-            <h1 className="text-left text-[26px]">Preview</h1>
-            <div className=" xl:h-full w-1/2 xl:w-full xl:self-center">
-              <PropertyCard
-                {...propertyData}
-                coverImage={
-                  previewImage ? previewImage : propertyData.coverImage
-                }
-              />
-            </div>
-          </section>
-        </div>
+        </section>
       </div>
+      {/* Update Confirmation Modal */}
+      {showUpdateConfirmation && (
+        <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-lg">
+            <p className="w-full border-b-2 mb-8 text-sm font-semibold">
+              Update Property
+            </p>
+            <p className="font-semibold text-lg">
+              Are you sure you want to update?
+            </p>
+            <p className="text-sm">
+              This action will make changes to the user's data.
+            </p>
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={handleUpdateConfirmation}
+                className="bg-[#3e8acc] hover:bg-blue-800 text-white hover:text-white px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Update
+              </button>
+              <button
+                onClick={() => {
+                  setShowUpdateConfirmation(false);
+                  setShowDeleteConfirmation(false);
+                }}
+                className="bg-[#f6f8fa] hover:bg-gray-200 text-gray-800 hover:text-gray-900 px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirmation && (
+        <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-md shadow-lg">
+            <p className="w-full border-b-2 mb-8 text-sm font-semibold">
+              Delete Property
+            </p>
+            <p className="font-semibold text-lg">
+              Are you sure you want to delete?
+            </p>
+            <p className="text-sm">
+              This action is permanent and cannot be undone.
+            </p>
+            <div className="flex gap-2 mt-4">
+              <button
+                onClick={handleDeleteConfirmation}
+                className="bg-[#e00202] hover:bg-red-800 text-white hover:text-white px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => {
+                  setShowUpdateConfirmation(false);
+                  setShowDeleteConfirmation(false);
+                }}
+                className="bg-[#f6f8fa] hover:bg-gray-200 text-gray-800 hover:text-gray-900 px-4 py-2 rounded-md w-1/2 border border-gray-300 transition-colors duration-300 ease-in-out"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
