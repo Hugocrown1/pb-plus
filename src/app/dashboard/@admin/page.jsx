@@ -147,7 +147,7 @@ const Page = () => {
     return isLoading ? (
       <LoadingScreen />
     ) : (
-      <main className="flex w-full overflow-hidden">
+      <main className="flex w-full overflow-hidden bg-white min-h-screen">
         <div class="grid xl:grid-cols-6 grid-cols-3 grid-rows-4 xl:gap-4 gap-2  w-full mt-[70px] mb-[60px] xl:mb-[0px] xl:p-4 p-2">
           <div class="col-span-1 row-span-1 bg-[#fafafa] shadow-md xl:p-8 p-2 flex flex-col items-start justify-center  border border-gray-200 rounded-xl">
             <IconEye className="xl:w-12 xl:h-12 w-10 h-10 bg-[#f3f2f2] rounded-md text-[#8c2828]" />
@@ -219,14 +219,14 @@ const Page = () => {
           </div>
 
           <div class="col-span-3 row-span-3 bg-[#fafafa] shadow-md xl:p-4 flex flex-col  justify-center  border border-gray-200 rounded-xl">
-            <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4">
+            <p class="xl:text-xl text-lg text-gray-800 font-bold xl:p-8 p-4">
               Daily Traffic
             </p>
             <Chart data={views} numDays={7}></Chart>
           </div>
           <div class="col-span-3 row-span-3 bg-[#fafafa] shadow-md xl:p-4 flex flex-col   border border-gray-200 rounded-xl">
             <div className="w-full xl:h-1/2">
-              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4">Recent Quotes</p>
+              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">Recent Quotes</p>
               <table className="min-w-full divide-y divide-gray-200 overflow-x-scroll">
                 <thead className="bg-gray-50">
                   <tr>
@@ -278,7 +278,7 @@ const Page = () => {
               </table>
             </div>
             <div className="w-full xl:h-1/2 h-full">
-              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4">Recent Consultations</p>
+              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">Recent Consultations</p>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 ">
                   <tr>
