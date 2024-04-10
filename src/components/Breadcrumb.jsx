@@ -1,6 +1,17 @@
+"use client"
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import {
+    IconDashboard,
+    IconGraph,
+    IconHomeCog,
+    IconGavel,
+    IconUserEdit,
+    IconHomeEdit,
+    IconPhotoEdit,
+    IconHomeQuestion
+  } from "@tabler/icons-react";
 
 const Breadcrumb = () => {
     const [breadcrumbs, setBreadcrumbs] = useState([]);
@@ -8,13 +19,14 @@ const Breadcrumb = () => {
 
     useEffect(() => {
         const breadcrumbData = [
-            { label: 'Dashboard', path: '/dashboard' },
-            { label: 'Analytics', path: '/dashboard/analytics' },
-            { label: 'Remo', path: '/dashboard/remo' },
-            { label: 'Forms', path: '/dashboard/forms' },
-            { label: 'Users', path: '/dashboard/users' },
-            { label: 'Properties', path: '/dashboard/properties' },
-            { label: 'Events', path: '/dashboard/events' }
+            { label: 'Dashboard', path: '/dashboard', icon : <IconDashboard/> },
+            { label: 'Analytics', path: '/dashboard/analytics', icon : <IconGraph/> },
+            { label: 'Remo', path: '/dashboard/remo', icon : <IconHomeCog/> },
+            { label: 'Legal Forms', path: '/dashboard/forms' , icon : <IconGavel/>},
+            { label: 'Services Forms', path: '/dashboard/realestate' , icon : <IconHomeQuestion/>},
+            { label: 'Users', path: '/dashboard/users' , icon : <IconUserEdit/>},
+            { label: 'Properties', path: '/dashboard/properties',icon : <IconHomeEdit/> },
+            { label: 'Events', path: '/dashboard/events' , icon : <IconPhotoEdit/>}
         ];
         
         const currentBreadcrumbs = breadcrumbData.filter(item => pathname.startsWith(item.path));
@@ -22,8 +34,8 @@ const Breadcrumb = () => {
     }, [pathname]);
 
     return (
-        <section className='bg-gray-100 py-4'>
-            <nav aria-label='breadcrumb' className='container mx-auto'>
+        <section className='bg-gray-100 py-2 px-2 xl:px-4 rounded-md border-2 border-gray-200 w-full'>
+            <nav aria-label='breadcrumb'>
                 <ol className='flex space-x-4'>
                     {
                         breadcrumbs.map((breadcrumb, index) => (
@@ -35,9 +47,9 @@ const Breadcrumb = () => {
                                 )}
                                 {
                                     index === breadcrumbs.length - 1 ? (
-                                        <span className='font-medium'>{breadcrumb.label}</span>
+                                        <span className=' text-gray-500 flex'>{breadcrumb.icon} {breadcrumb.label}</span>
                                     ) : (
-                                        <a href={breadcrumb.path} className='text-blue-500 hover:underline'>{breadcrumb.label}</a>
+                                        <Link href={breadcrumb.path} className='text-blue-500 hover:underline flex '>{breadcrumb.icon}{breadcrumb.label}</Link>
                                     )
                                 }
                             </li>

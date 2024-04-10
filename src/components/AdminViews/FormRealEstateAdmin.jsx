@@ -1,27 +1,28 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   IconX,
   IconTrash,
   IconBrandWhatsapp,
   IconMail,
-  IconFileDownload, IconFile,
-  IconUser,IconMessage, IconMessages,IconReportSearch
+  IconMessage,
+  IconUser,
+  IconMessages,
 } from "@tabler/icons-react";
-import axios from "axios";
 import { toast } from "sonner";
 
-const RemoInfoWindow = ({ remoId, onClose }) => {
-  const [remoData, setRemoData] = useState(remoId);
+const FormAdminView = ({ formId, onClose }) => {
+  const [formData, setFormData] = useState(formId);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
 
-  if (!remoData) {
+  if (!formData) {
     return <div>Loading...</div>;
   }
 
   const handleWhatsAppClick = () => {
-    const phoneNumber = "+" + remoData.userPhone;
+    const phoneNumber = "+" + formData.userPhone;
 
-    const message = `Hola, estoy en contacto contigo a través de PB Plus. Para tu consulta sobre ${remoData.serviceName}.`;
+    const message = `Hola, estoy en contacto contigo a través de PB Plus. Para tu consulta sobre ${formData.serviceName}.`;
 
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       message
@@ -31,9 +32,9 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
   };
 
   const handleEmailClick = () => {
-    const email = remoData.userEmail;
+    const email = formData.userEmail;
 
-    const subject = "PB Plus:" + remoData.serviceName;
+    const subject = "PB Plus:" + formData.serviceName;
 
     const body = "Hola, estoy en contacto contigo a través de PB Plus.";
 
@@ -44,18 +45,18 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
     window.open(mailtoURL, "_blank");
   };
 
-  const handleDelete = async (remoId) => {
+  const handleDelete = async (formId) => {
     try {
-      await axios.delete(`/api/prices/${remoId}`);
+      await axios.delete(`/api/pricing/${formId}`);
       onClose();
-      toast.info("Remo deleted successfully!");
+      toast.info("Form deleted successfully!");
     } catch (error) {
-      console.error("Failed to delete remo:", error);
+      console.error("Failed to delete form:", error);
     }
   };
 
   const handleDeleteConfirmation = () => {
-    handleDelete(remoData._id);
+    handleDelete(formData._id);
     setShowDeleteConfirmation(false);
   };
 
@@ -65,9 +66,9 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
         className="fixed top-0 left-0 w-full h-full bg-black opacity-25 z-40"
         onClick={onClose}
       ></div>
-      <div className="bg-white p-4 rounded-md shadow-lg w-full max-w-screen-md mx-4 z-50">
+      <div className="bg-white p-4 rounded-md shadow-lg w-full xl:w-[25%] max-w-screen-md mx-4 z-50">
         <div className="flex justify-between">
-          <p className="text-xl font-semibold">{remoData.serviceName}</p>
+          <p className="text-xl font-semibold">{formData.serviceName}</p>
           <button
             onClick={onClose}
             className="text-gray-500 font-bold bg-gray-200 hover:text-black rounded-md"
@@ -77,67 +78,28 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
         </div>
         <div className="border-t border-gray-300 pt-4 my-2"></div>
         <div style={{ maxHeight: "calc(100vh - 200px)", overflowY: "auto" }}>
-          <p className="text-lg font-semibold mb-2 flex gap-1 text-gray-800">
+          <p className="text-base font-semibold mb-2 flex gap-1 text-gray-800">
             <IconUser />
             Client Info
           </p>
           <div className="border  border-gray-200 rounded-md px-2 mb-4">
-          <p className="mb-2">{remoData.userName}</p>
-          <p className="mb-2">{remoData.userPhone}</p>
-          <p className="mb-2">{remoData.userEmail}</p>
-          <p className="mb-2">
-             {new Date(remoData.date).toLocaleString()}
-          </p>
-
-
+            <p className="mb-2"> {formData.userName}</p>
+            <p className="mb-2"> {formData.userPhone}</p>
+            <p className="mb-2"> {formData.userEmail}</p>
+            <p className="mb-2">{new Date(formData.date).toLocaleString()}</p>
           </div>
-         
-
-          
-          <p className="text-lg font-semibold mb-2 flex gap-1 text-gray-800">
-            <IconReportSearch /> Responses
+          <p className="text-base font-semibold mb-2 flex gap-1 text-gray-800">
+            <IconMessage /> Message
           </p>
-          <ul className="list-disc px-8 mb-4 border rounded-md">
-            {remoData.responses.map((response) => (
-              <li key={response._id}>
-                <strong>{response.question}:</strong> {response.answer}
-              </li>
-            ))}
-          </ul>
-
-          {remoData.extraInfo && (
-            <div className="border-t border-gray-300 pt-4">
-              <h3 className="text-lg font-semibold mb-2">Extra Info:</h3>
-              <p className="mb-2">
-                Additional information: {remoData.extraInfo}
-              </p>
-            </div>
-          )}
-
-          {remoData.pdfFile && (
-            <div>
-              <p className="text-base font-semibold mb-2 flex">
-                <IconFile></IconFile>
-                PDF File:
-                
-              </p>
-              <a
-                  href={remoData.pdfFile}
-                  className=" font-normal text-blue-500 hover:underline flex bg-blue-100 w-fit rounded-md p-1 hover:bg-blue-500 hover:text-white"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <IconFileDownload />
-                  Download
-                </a>
-            </div>
-          )}
+          <p className="mb-2 flex  border border-gray-200 rounded-md px-2">
+            {formData.message}
+          </p>
 
           <div className=" pt-4">
-          <p className="text-base font-semibold mb-2 flex text-gray-800">
+            <h3 className="text-base font-semibold mb-2 flex text-gray-800">
               <IconMessages />
               Contact Client
-            </p>
+            </h3>
             <div className="flex space-x-4 mb-2">
               <button
                 onClick={handleWhatsAppClick}
@@ -168,13 +130,12 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
           </button>
         </div>
       </div>
-
       {/* Delete Confirmation Modal */}
       {showDeleteConfirmation && (
         <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
             <p className="w-full border-b-2 mb-8 text-sm font-semibold">
-              Delete Remo Quote
+              Delete {formData.serviceName} Form
             </p>
             <p className="font-semibold text-lg">
               Are you sure you want to delete?
@@ -205,4 +166,4 @@ const RemoInfoWindow = ({ remoId, onClose }) => {
   );
 };
 
-export default RemoInfoWindow;
+export default FormAdminView;

@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import { IconCheck, IconX } from "@tabler/icons-react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 
 const ContactForm = () => {
   const { data: session } = useSession();
@@ -30,19 +33,27 @@ const ContactForm = () => {
   }, [session]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    // Validación del teléfono
-    if (name === "userPhone") {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-      setPhoneError(false); // Reiniciar el estado del error al escribir
-    }
-    // Validación del correo electrónico
-    else if (name === "userEmail") {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-      setEmailError(false); // Reiniciar el estado del error al escribir
+    if (typeof e === "string") {
+      // If e is a string, it's coming from PhoneInput
+      setFormData((prevData) => ({
+        ...prevData,
+        userPhone: e, // Set the phone number directly
+      }));
     } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
+      const { name, value } = e.target;
+
+      // Validación del teléfono
+      if (name === "userPhone") {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setPhoneError(false); // Reiniciar el estado del error al escribir
+      }
+      // Validación del correo electrónico
+      else if (name === "userEmail") {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+        setEmailError(false); // Reiniciar el estado del error al escribir
+      } else {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      }
     }
   };
 
@@ -57,7 +68,7 @@ const ContactForm = () => {
         setEmailError(true);
       }
     }
-    // Validación del teléfono
+    // Validación del teléfono (opcional)
     if (name === "userPhone") {
       if (value === "" || /^\d{10,}$/.test(value)) {
         setPhoneError(false);
@@ -67,13 +78,13 @@ const ContactForm = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setLoading(true);
     try {
       const currentDate = new Date().toISOString();
       const formDataWithDate = { ...formData, date: currentDate };
       await axios.post("/api/consultations", formDataWithDate);
+      toast.success("Consultation submitted!");
       setFormData({
         userName: "",
         userEmail: "",
@@ -88,6 +99,7 @@ const ContactForm = () => {
       }, 2000);
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
+      toast.error("Consultation failed!");
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -95,6 +107,13 @@ const ContactForm = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const validatePhone = (phone) => {
+    if (phone.match(/^1\d{10}$/) || phone.match(/^52\d{10}$/)) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -107,11 +126,23 @@ const ContactForm = () => {
           <div className="w-[100px] h-1 bg-[#cba557] mb-4"></div>
           <p className="text-xl xl:text-3xl pb-8 font-semibold">Contact Us</p>
           <p className="text-[#5e5e5e]  text-sm xl:text-lg  mb-4">
-            Feel free to reach out to us by filling out the contact form
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </div>
         <div className="w-full">
-          <form onSubmit={handleSubmit} className="rounded-md">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (!validatePhone(formData.userPhone)) {
+                toast.error("Invalid phone number");
+
+                return;
+              }
+              handleSubmit();
+            }}
+            className="rounded-md"
+          >
             <label htmlFor="userName" className="block text-gray-800 mb-2">
               Name:
             </label>
@@ -123,6 +154,7 @@ const ContactForm = () => {
               onChange={handleChange}
               required
               className="w-full p-2 border rounded-md"
+              placeholder="Enter your name"
             />
 
             <label
@@ -142,6 +174,7 @@ const ContactForm = () => {
               className={`w-full p-2 border rounded-md ${
                 emailError ? "border-red-500" : ""
               }`}
+              placeholder="Enter your email"
             />
             {emailError && (
               <p className="text-red-500">Please provide your email</p>
@@ -153,29 +186,24 @@ const ContactForm = () => {
             >
               Phone:
             </label>
-            <input
-              type="tel"
-              id="userPhone"
-              name="userPhone"
-              value={formData.userPhone}
-              minLength={10}
-              maxLength={20}
-              onChange={handleChange}
-              onKeyPress={(e) => {
-                // Verificar si la tecla presionada es un número o un carácter especial
-                const isNumber = /^[0-9\b]+$/.test(e.key);
-                if (!isNumber) {
-                  e.preventDefault(); // Prevenir la entrada del carácter si no es un número
-                }
+            <PhoneInput
+              inputProps={{
+                name: "userPhone",
+                required: true,
+                autoFocus: true,
               }}
-              onBlur={handleBlur} // Activar la verificación de error al salir del campo
-              className={`w-full p-2 border rounded-md ${
-                phoneError ? "border-red-500" : ""
-              }`}
+              country={"mx"}
+              onlyCountries={["mx", "us"]}
+              value={formData.userPhone}
+              onChange={handleChange}
+              placeholder="+52 123 456 78 90"
+              inputStyle={{
+                width: "100%",
+                height: "42px",
+                fontSize: "18px",
+                fontFamily: "normal",
+              }}
             />
-            {phoneError && (
-              <p className="text-red-500">Please a valid phone number</p>
-            )}
 
             <label
               htmlFor="serviceName"
@@ -214,23 +242,13 @@ const ContactForm = () => {
             <textarea
               id="message"
               name="message"
+              placeholder="Enter your message"
               rows="4"
               value={formData.message}
               onChange={handleChange}
               required
               className="w-full p-2 border rounded-md"
             ></textarea>
-
-            {error && (
-              <p className="flex bg-red-200 p-1 my-2 rounded-md">
-                An error occurred! <IconX color="red" />
-              </p>
-            )}
-            {success && (
-              <p className="flex bg-green-200 p-1 my-2 rounded-md">
-                Successfully sent! <IconCheck color="green" />
-              </p>
-            )}
 
             <button
               type="submit"

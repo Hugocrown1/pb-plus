@@ -1,41 +1,46 @@
 "use client";
+
 import FormInput from "@/components/FormInput";
-import PropertyCard from "@/components/PropertyCard";
 import { IconUpload, IconX } from "@tabler/icons-react";
 import axios from "axios";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 import React, { useState } from "react";
 import { deleteImage } from "@/lib/deleteImage";
 import { ReactSortable } from "react-sortablejs";
+import { useSession } from "next-auth/react";
+import EventCard from "../EventCard";
 import { toast } from "sonner";
 
-
-const PropertyAdminForm = ({
+const EventAdminView = ({
   title: existingTitle,
-  type: existingType,
-  bedrooms: existingBedrooms,
-  bathrooms: existingBathrooms,
-  zone: existingZone,
+  category: existingCategory,
   address: existingAddress,
   description: existingDescription,
-  price: existingPrice,
   images: existingImages,
+  date: existingDate,
   _id,
   onClose,
 }) => {
   const [values, setValues] = useState({
     title: existingTitle || "",
-    type: existingType || "",
-    bedrooms: existingBedrooms || "",
-    bathrooms: existingBathrooms || "",
-    zone: existingZone || "",
+    category: existingCategory || "",
     address: existingAddress || "",
     description: existingDescription || "",
-    price: existingPrice || "",
+    date: existingDate || "",
+  });
+
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      redirect("/auth/login?callbackURL=/real-estate/new-event");
+    },
   });
 
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [showUpdateConfirmation, setShowUpdateConfirmation] = useState(false);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
@@ -43,17 +48,18 @@ const PropertyAdminForm = ({
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  const saveEvent = async (e) => {
+    setIsLoading(true);
 
-  const saveProperty = async () => {
     const responseFiles = await axios.post("/api/files", formData);
-    let propertyImages = previewImages;
+    let eventImages = previewImages;
 
     for (const imageObject of responseFiles.data) {
-      const imageIndex = propertyImages.findIndex(
+      const imageIndex = eventImages.findIndex(
         (imageUrl) => imageUrl.toString() === imageObject.originalUrl
       );
 
-      propertyImages[imageIndex] = imageObject.linkAws;
+      eventImages[imageIndex] = imageObject.linkAws;
     }
 
     if (deletedImages.length > 0) {
@@ -69,31 +75,30 @@ const PropertyAdminForm = ({
     }
 
     if (!_id) {
-      await axios.post("/api/properties", {
+      await axios.post("/api/events", {
         ...values,
 
-        images: propertyImages,
+        images: eventImages,
       });
 
       onClose();
-      toast.success("Property updated successfully!");
+      toast.success("Event created successfully!");
     } else {
-      await axios.put("/api/properties/" + _id, {
+      await axios.put("/api/events/" + _id, {
         ...values,
-        coverImage: propertyImages[0],
-        images: propertyImages,
+        coverImage: eventImages[0],
+        images: eventImages,
       });
       onClose();
-      toast.success("Property updated successfully!");
+      toast.success("Event changes saved successfully!");
     }
   };
 
-  const deleteProperty = async () => {
-    await axios.delete("/api/properties/" + _id);
+  const deleteEvent = async () => {
+    await axios.delete("/api/events/" + _id);
     onClose();
-    toast.info("Property deleted successfully!");
+    toast.info("Event deleted successfully!");
   };
-
 
   const uploadPreviewImages = (e) => {
     const files = e.target?.files;
@@ -123,17 +128,31 @@ const PropertyAdminForm = ({
     setPreviewImages(images);
   };
 
+  if (status === "loading") {
+    return <div>loading</div>;
+  }
+
   const handleUpdateConfirmation = () => {
-    saveProperty();
+    saveEvent();
     setShowUpdateConfirmation(false);
     setShowDeleteConfirmation(false);
   };
 
   const handleDeleteConfirmation = () => {
-    deleteProperty();
+    deleteEvent();
     setShowUpdateConfirmation(false);
     setShowDeleteConfirmation(false);
   };
+
+  function formatDate(date) {
+    if (!(date instanceof Date)) return '';
+    const year = date.getFullYear();
+    const month = `${date.getMonth() + 1}`.padStart(2, '0');
+    const day = `${date.getDate()}`.padStart(2, '0');
+    const hours = `${date.getHours()}`.padStart(2, '0');
+    const minutes = `${date.getMinutes()}`.padStart(2, '0');
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
+  }
 
   return (
     <div className="fixed top-0 left-0 z-50 w-full h-full  flex justify-center items-center">
@@ -163,13 +182,14 @@ const PropertyAdminForm = ({
               e.preventDefault();
               setShowUpdateConfirmation(true);
             }}
-            className="xl:w-2/3"
+            className="xl:w-[60%]"
           >
             <h3>Basic information</h3>
             <FormInput
-              label="Property title"
+              label="Event title"
               name="title"
               id="title"
+              maxLength="100"
               placeholder={"Title"}
               value={values.title}
               onChange={onChange}
@@ -186,7 +206,7 @@ const PropertyAdminForm = ({
                   previewImages.map((link) => (
                     <div
                       key={link}
-                      className={`flex relative h-20 w-20 rounded-md m-1 shadow-lg justify-end bg-transparent items-start overflow-hidden`}
+                      className={`flex relative h-32 w-32 rounded-md m-1 shadow-lg justify-end bg-transparent items-start overflow-hidden`}
                     >
                       <button
                         type="button"
@@ -197,7 +217,7 @@ const PropertyAdminForm = ({
                       </button>
                       <img
                         src={link}
-                        alt="Property photo"
+                        alt="Event photo"
                         className="h-full w-full object-cover object-center"
                       />
                     </div>
@@ -205,7 +225,7 @@ const PropertyAdminForm = ({
               </ReactSortable>
               <label
                 htmlFor="photos"
-                className="flex flex-col items-center m-1 justify-center w-20 h-20 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
+                className="flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
               >
                 <IconUpload size={22} />
                 Cargar
@@ -220,99 +240,60 @@ const PropertyAdminForm = ({
             </div>
 
             <div className="form-input">
-              <label htmlFor="type">Rental or selling</label>
+              <label htmlFor="type">Event category</label>
               <select
-                name="type"
-                id="type"
-                defaultValue={existingType || ""}
+                name="category"
+                id="category"
+                defaultValue={existingCategory || ""}
                 onChange={onChange}
                 required
               >
                 <option disabled value={""}>
-                  Choose a type
+                  Choose a category
                 </option>
-                <option value={"Rental"}>Rental</option>
-                <option value={"Selling"}>Selling</option>
+                <option value={"Sale"}>Sale</option>
+                <option value={"Party"}>Party</option>
+                <option value={"Meeting"}>Meeting</option>
+                <option value={"Other"}>Other</option>
               </select>
             </div>
-            <hr className="stroke-slate-600 my-2" />
-            <h3>Property details</h3>
-            <div className="flex gap-2">
-              <FormInput
-                type="number"
-                label="Bedrooms"
-                name="bedrooms"
-                id="bedrooms"
-                placeholder={"Number of bedrooms"}
-                errorMessage="Please enter a valid number"
-                pattern="^[0-9]{1-6}"
-                value={values.bedrooms}
-                onChange={onChange}
-              />
+            <hr className="stroke-slate-600 my-4" />
+            <h3>Event details</h3>
 
-              <FormInput
-                type="number"
-                label="Bathrooms"
-                name="bathrooms"
-                id="bathrooms"
-                errorMessage="Please enter a valid number"
-                placeholder={"Number of bathrooms"}
-                value={values.bathrooms}
-                onChange={onChange}
-              />
-            </div>
-            <div className="flex gap-2">
-              <div className="form-input w-1/3">
-                <label htmlFor="zone">Zone</label>
-                <select
-                  name="zone"
-                  id="zone"
-                  defaultValue={existingZone || ""}
-                  onChange={onChange}
-                  required
-                >
-                  <option disabled value={""}>
-                    Choose the zone of the property
-                  </option>
-                  <option value={"The Ejido"}>The Ejido</option>
-                  <option value={"Bufadora"}>Bufadora</option>
-                  <option value={"The Spit"}>The Spit</option>
-                  <option value={"Maneadero"}>Maneadero</option>
-                </select>
-              </div>
-              <div className="w-2/3">
-                <FormInput
-                  label="Address"
-                  name="address"
-                  id="address"
-                  placeholder={"Property address"}
-                  value={values.address}
-                  onChange={onChange}
-                  errorMessage="Please provide an address"
-                />
-              </div>
-            </div>
+            <p>{values.date}</p>
+            <FormInput
+    type="datetime-local"
+    label="Date"
+    name="date"
+    id="date"
+    min={existingDate ? formatDate(existingDate) : new Date().toISOString().slice(0, 16)}
+    errorMessage="Please enter a valid date"
+    placeholder={"Event date"}
+    value={values.date ? values.date.slice(0, 16) : ''}
+    onChange={onChange}
+/>
+
+
+
+            <FormInput
+              label="Address"
+              name="address"
+              id="address"
+              placeholder={"Event address"}
+              value={values.address}
+              onChange={onChange}
+              errorMessage="Please provide an address"
+            />
             <div className="form-input">
               <label htmlFor="description">Description</label>
               <textarea
                 id="description"
                 name="description"
-                placeholder="Property description"
+                placeholder="Event description"
                 value={values.description}
                 onChange={onChange}
               ></textarea>
             </div>
-
-            <FormInput
-              type="number"
-              label="Price"
-              name="price"
-              id="price"
-              errorMessage="Please enter a valid number"
-              placeholder={"Price"}
-              value={values.price}
-              onChange={onChange}
-            />
             <div className="flex justify-between gap-2 py-4">
               <button
                 type="submit"
@@ -331,10 +312,10 @@ const PropertyAdminForm = ({
             </div>
           </form>
 
-          <div className="">
+          <div className="xl:w-[40%]">
             <h3>Preview</h3>
             <div className="h-fit border-2 border-gray-100 rounded-md">
-              <PropertyCard {...values} coverImage={previewImages[0]} />
+              <EventCard {...values} coverImage={previewImages[0]} />
             </div>
           </div>
         </section>
@@ -344,7 +325,7 @@ const PropertyAdminForm = ({
         <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
             <p className="w-full border-b-2 mb-8 text-sm font-semibold">
-              Update Property
+              Update Event
             </p>
             <p className="font-semibold text-lg">
               Are you sure you want to update?
@@ -378,7 +359,7 @@ const PropertyAdminForm = ({
         <div className="fixed top-0 left-0 z-50 w-full h-full flex justify-center items-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-md shadow-lg">
             <p className="w-full border-b-2 mb-8 text-sm font-semibold">
-              Delete Property
+              Delete Event
             </p>
             <p className="font-semibold text-lg">
               Are you sure you want to delete?
@@ -410,4 +391,4 @@ const PropertyAdminForm = ({
   );
 };
 
-export default PropertyAdminForm;
+export default EventAdminView;

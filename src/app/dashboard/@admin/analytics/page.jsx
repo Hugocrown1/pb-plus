@@ -166,9 +166,9 @@ const Page = () => {
   return isLoading ? (
     <LoadingScreen />
   ) : (
-    <main className=" flex w-full flex-col  overflow-hidden">
+    <main className=" flex w-full flex-col  overflow-hidden bg-white min-h-screen">
       <div className="flex items-center justify-between xl:p-4 p-2 mt-[70px]">
-        <p className="xl:text-2xl text-xl">{renderHeader()}</p>
+        <p className="xl:text-2xl text-xl font-bold">{renderHeader()}</p>
         <div className="flex">
           <select
             className="border border-gray-300 rounded-md p-2"
@@ -184,7 +184,7 @@ const Page = () => {
       <div className="grid grid-cols-4 grid-rows-5 xl:gap-4 gap-2  w-full  xl:p-4 p-2">
         {/* Chart Component */}
         <div className="h-full col-span-4 row-span-2 bg-[#fafafa]  flex flex-col items-start justify-center border border-gray-200 shadow-md rounded-xl">
-          <p className="text-xl text-gray-800 pt-8 pl-8">Visitors Analytics</p>
+          <p className="text-xl text-gray-800 pt-8 xl:pl-8 pl-4 pb-4 font-bold">Visitors Analytics</p>
           <Chart data={views} numDays={numDays}></Chart>
         </div>
         {/* Total Pageviews, Guest Visitors, User Visitors */}
@@ -213,23 +213,23 @@ const Page = () => {
         </div>
         {/* Top Content */}
         <div className="col-span-4 xl:col-span-2 row-span-2 bg-[#fafafa] flex flex-col items-start justify-start border border-gray-200 shadow-md rounded-xl">
-          <p className="text-xl text-gray-800 xl:pt-8 xl:pl-8 xl:pb-4 pt-4 pl-4 pb-2">Top Content</p>
+          <p className="text-xl text-gray-800 pt-8 xl:pl-8 pl-4 pb-4 font-bold">Top Content</p>
           <HorizontalBarChartCont data={topContent} dataKey={"page"} />
         </div>
 
         {/* Top Departments */}
         <div className="col-span-4 xl:col-span-2 row-span-2 bg-[#fafafa] flex flex-col items-start justify-start border border-gray-200 shadow-md rounded-xl">
-          <p className="text-xl text-gray-800 xl:pt-8 xl:pl-8 xl:pb-4 pt-4 pl-4 pb-2">
+          <p className="text-xl text-gray-800 pt-8 xl:pl-8 pl-4 pb-4 font-bold">
             Top Departments
           </p>
           <HorizontalBarChartDept data={topDepartments} dataKey={"department"} />
         </div>
       </div>
       {/* Pie Chart */}
-      <div className="flex xl:flex-row flex-col gap-3 px-4 pb-4 ">
+      <div className="flex xl:flex-row flex-col gap-3 px-2 xl:px-4 pb-4 ">
         {/* Visitors Analytics Pie Chart */}
         <div className="h-full w-full xl:w-2/5 bg-[#fafafa]  border border-gray-200 shadow-md rounded-xl">
-          <p className="text-xl text-gray-800 pt-8 pl-8 pb-4">Used Devices</p>
+          <p className="text-xl text-gray-800 pt-8 xl:pl-8 pl-4 pb-4 font-bold">Used Devices</p>
           <DevicePieChart numDays={numDays} />
           {/* Placeholder */}
           <div className="mx-8 flex flex-wrap items-center justify-center gap-y-3">
@@ -237,19 +237,19 @@ const Page = () => {
           </div>
         </div>
         {/* Top Users Visitors */}
-        <div className="h-full w-full xl:w-3/5 bg-[#fafafa] border border-gray-200 shadow-md rounded-xl">
-          <p className="text-xl text-gray-800 pt-8 pl-8 pb-4">
-            Top Users Pageviews
+        <div className="h-full w-full xl:w-3/5 bg-[#fafafa] border border-gray-200 shadow-md rounded-xl overflow-hidden">
+          <p className="text-xl text-gray-800 pt-8 xl:pl-8 pl-4 pb-4 font-bold">
+            Top Users Views
           </p>
-          <div className="">
+          <div className="xl:m-4">
             <table className="w-full border-collapse text-left">
               <thead>
                 <tr>
-                  <th className="px-4 py-2 bg-[#434343] text-white font-bold uppercase ">
+                  <th className="px-4 py-2 text-gray-500 font-bold uppercase text-xs xl:text-sm">
                     User
                   </th>
-                  <th className="px-4 py-2 bg-[#434343] text-white font-bold uppercase ">
-                    Pageviews
+                  <th className="px-4 py-2 text-gray-500  font-bold uppercase text-xs xl:text-sm">
+                  Views
                   </th>
                 </tr>
               </thead>
@@ -260,10 +260,10 @@ const Page = () => {
                   .map((user, index) => (
                     <tr
                       key={index}
-                      className={`${index % 2 === 0 ? "" : "bg-gray-200"}`}
+                      className=" border-y-2 border-gray-200"
                     >
-                      <td className="px-4 py-2 ">{user.user}</td>
-                      <td className="px-4 py-2 ">{user.visits}</td>
+                      <td className="px-4 py-2 text-xs xl:text-sm">{user.user}</td>
+                      <td className="px-4 py-2 text-xs xl:text-sm">{user.visits}</td>
                     </tr>
                   ))}
               </tbody>
