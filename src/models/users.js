@@ -15,8 +15,10 @@ const schema = new mongoose.Schema({
   ],
   emailVerified: { type: Boolean, default: false },
   date: Date,
-  resettoken: {type: String, required: false},
-  resettokenexpiry: {type: Date, required: false}
+  resettoken: { type: String, required: false },
+  resettokenexpiry: { type: Date, required: false },
+  stripe_customer_id: String,
+  api_key: String,
 });
 
 export default models?.Users || mongoose.model("Users", schema);
