@@ -13,6 +13,19 @@ import {
   IconWind,
 } from "@tabler/icons-react";
 import Image from "next/image";
+import GridGallery from "@/components/GridGallery";
+
+const data = [
+  "/assets/remo-gallery/remo.webp",
+  "/assets/remo-gallery/remo2.webp",
+  "/assets/remo-gallery/remo3.webp",
+  "/assets/remo-gallery/remo4.webp",
+  "/assets/remo-gallery/remo5.webp",
+  "/assets/remo-gallery/remo6.webp",
+  "/assets/remo-gallery/remo7.webp",
+  "/assets/remo-gallery/remo8.webp",
+  "/assets/remo-gallery/remo9.webp",
+];
 
 const dataSlider = [
   {
@@ -50,7 +63,7 @@ export default function Page() {
       <Slider dataSlider={dataSlider} />
       <section
         id="about"
-        className="flex flex-col items-center min-[855px]:justify-start min-[855px]:flex-row mx-auto gap-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
+        className="flex flex-col items-center min-[855px]:justify-start min-[855px]:flex-row mx-auto gap-x-8 max-w-[1280px] min-[503px]:px-2 pt-[50px]"
       >
         <div className="grid grid-cols-2 grid-rows-2 gap-4 w-[60%] min-[855px]:w-full aspect-square">
           <div className="relative col-span-2 rounded-xl overflow-hidden ">
@@ -100,6 +113,28 @@ export default function Page() {
             and transform ideas into reality with professionalism, integrity,
             and unparalleled expertise.
           </p>
+        </div>
+      </section>
+      <section
+        id="about"
+        className="flex flex-col items-center min-[1400px]:items-start justify-center min-[1400px]:flex-row max-w-[1280px] gap-x-8 py-12 px-2 min-[1449px]:px-0 mx-auto"
+      >
+        <div className="flex flex-col items-end w-full min-[1400px]:w-[50%]">
+          <h1 className="-mb-4 text-center min-[1400px]:text-right w-full">
+            Check Some of Our Work!
+          </h1>
+
+          <div className="h-[7px] w-[100px] min-[652px]:w-[166px] bg-[#941B0C] rounded-[8px] mt-2 mx-auto min-[1400px]:mx-0"></div>
+          <p className="text-[17px] my-6 text-center min-[1400px]:text-right text-pretty">
+            We are dedicated to providing unparalleled home remodeling services
+            designed specifically to enhance your living spaces. Our team is
+            committed to delivering exceptional craftsmanship and personalized
+            attention to ensure your vision is brought to life with the highest
+            quality and care.
+          </p>
+        </div>
+        <div className="relative w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] ">
+          <GridGallery data={data} />
         </div>
       </section>
       <section className="flex flex-col items-center mx-auto max-w-[1280px] min-[503px]:px-2 py-[50px]">

@@ -3,6 +3,18 @@ import GridGallery from "@/components/GridGallery";
 import HomeHero from "@/components/HomeHero";
 import Image from "next/image";
 
+const data = [
+  "/assets/gallery/puntabanda.jpeg",
+  "/assets/gallery/puntabanda2.jpeg",
+  "/assets/gallery/puntabanda3.jpeg",
+  "/assets/gallery/puntabanda4.jpeg",
+  "/assets/gallery/puntabanda5.jpeg",
+  "/assets/gallery/puntabanda6.jpeg",
+  "/assets/gallery/puntabanda7.jpeg",
+  "/assets/gallery/puntabanda8.jpeg",
+  "/assets/gallery/puntabanda9.jpeg",
+];
+
 export default function Home() {
   return (
     <main className="relative flex flex-col  min-h-screen items-center ">
@@ -58,7 +70,7 @@ export default function Home() {
         className="flex flex-col items-center min-[1400px]:items-start justify-center min-[1400px]:flex-row max-w-[1440px] gap-4 mb-40 px-2 min-[1449px]:px-0 "
       >
         <div className="relative w-full min-[652px]:w-[80%] min-[1400px]:w-[50%] ">
-          <GridGallery />
+          <GridGallery data={data} />
         </div>
         <div className="flex flex-col w-full min-[1400px]:w-[50%]">
           <h1 className="-mb-4 text-center min-[1400px]:text-left w-full">

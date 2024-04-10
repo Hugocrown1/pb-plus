@@ -1,11 +1,7 @@
 import Slider from "@/components/Slider/Slider";
 import Image from "next/image";
-import Link from "next/link";
-import { Suspense } from "react";
-
-import dynamic from "next/dynamic";
-
-const DemoCardsDisplay = dynamic(() => import("@/components/DemoCardsDisplay"));
+import { IconCalendarStats, IconToolsKitchen } from "@tabler/icons-react";
+import ServiceCommunityCard from "@/components/ServiceCommunityCard";
 
 const dataSlider = [
   {
@@ -37,11 +33,13 @@ export default function Page() {
         id="about"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"
       >
-        <h1 className="xl:text-[64px] text-[42px]">Punta Banda Community</h1>
-        <span className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
-          Let PB Plus Publish Your Events And Advertise Your Business
-        </span>
-        <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
+        <header className="flex flex-col items-center">
+          <h1 className="xl:text-[64px] text-[42px]">Punta Banda Community</h1>
+          <span className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
+            The space for the Punta Banda community
+          </span>
+          <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
+        </header>
 
         <div className="w-full h-fit items-center justify-center gap-x-4 max-w-[1280px] mx-auto mt-4 ">
           <figure className="relative w-[500px] h-[500px]  circle-shape bg-black mr-12 float-left">
@@ -76,70 +74,46 @@ export default function Page() {
           </p>
         </div>
       </section>
-
-      <section>
-        <div className="flex flex-col mt-20 max-w-[1280px] mx-auto ">
-          <div className="flex flex-row items-center justify-between">
-            <h1 className="flex-1 text-start">Punta Banda Restaurants</h1>
-            <Link
-              className="flex flex-row items-center text-[18px] text-black group"
-              href={"/community/advertising"}
-            >
-              <span>See all</span>
-              <svg
-                className="w-6 h-6 group-hover:translate-x-4 transition-all "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m9 5 7 7-7 7"
-                />
-              </svg>
-            </Link>
+      <section
+        id="services"
+        className="flex flex-col justify-center mt-10 max-w-[1280px] mx-auto mb-24"
+      >
+        <header className="flex flex-col items-center">
+          <h1 className="xl:text-[64px] text-[42px]">Our Community Services</h1>
+          <span className="text-[#5e5e5e] font-medium xl:text-lg texl-base xl:w-[820px] text-center mx-2">
+            Let PB Plus Publish Your Events And Advertise Your Business
+          </span>
+          <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
+        </header>
+        <div className="flex flex-row  justify-center gap-x-8 py-4 ">
+          <div className="flex flex-col w-full gap-y-4 text-[18px] text-pretty">
+            <p>
+              Promote your restaurant to a targeted audience of food enthusiasts
+              and locals. Showcase your unique menu, special offers, and dining
+              ambiance on our platform. Gain visibility and drive foot traffic
+              to your establishment with our effective restaurant advertising
+              solutions.
+            </p>
+            <p>
+              Planning an event in Punta Banda? Share it with the community
+              through PB Plus Community. Whether it's a music concert, art
+              exhibition, food festival, or charity event, we'll help you reach
+              a wider audience. Increase attendance and participation by
+              leveraging our event publication services.
+            </p>
           </div>
-          <Suspense fallback={<p>Loading...</p>}>
-            <DemoCardsDisplay />
-          </Suspense>
-        </div>
-
-        <div className="flex flex-col mt-10 max-w-[1280px] mx-auto ">
-          <div className="flex flex-row items-center justify-between">
-            <h1 className="flex-1 text-start">Punta Banda Events</h1>
-            <Link
-              className="flex flex-row items-center text-[18px] text-black group"
+          <div className="grid grid-cols-2 gap-3  w-full h-full min-[400px]:px-4 xl:px-0">
+            <ServiceCommunityCard
               href={"/community/events"}
-            >
-              <span>See all</span>
-              <svg
-                className="w-6 h-6 group-hover:translate-x-4 transition-all "
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m9 5 7 7-7 7"
-                />
-              </svg>
-            </Link>
+              title={"Events"}
+              icon={<IconCalendarStats size={70} color="#0077b6" />}
+            ></ServiceCommunityCard>
+            <ServiceCommunityCard
+              href={"/community/advertising"}
+              title={"Advertising"}
+              icon={<IconToolsKitchen size={70} color="#0077b6" />}
+            ></ServiceCommunityCard>
           </div>
-          <Suspense fallback={<p>Loading</p>}>
-            <DemoCardsDisplay />
-          </Suspense>
         </div>
       </section>
     </main>

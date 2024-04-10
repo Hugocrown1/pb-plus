@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import { Providers } from "./providers";
 import Footer from "@/components/Footer";
 import RouteTracker from "@/components/RouteTracker";
+import { Toaster } from "sonner";
 
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
           {children}
           <Footer />
           <RouteTracker />
+          <Toaster />
         </Providers>
       </body>
     </html>

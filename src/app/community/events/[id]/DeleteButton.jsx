@@ -9,17 +9,16 @@ const DeleteButton = ({ id }) => {
   const [confirmationModal, setConfirmationModal] = useState(false);
 
   const router = useRouter();
-  const deleteProperty = async () => {
-    await axios.delete("/api/properties/" + id);
-    router.push("/real-estate/houses-&-properties");
-    toast.success("Property deleted");
+  const deleteEvent = async () => {
+    await axios.delete("/api/events/" + id);
+    router.push("/community/events");
+    toast.success("Event deleted");
   };
-
   return (
     <>
       <button
         onClick={() => setConfirmationModal(true)}
-        className="real-estate-button-outline"
+        className="events-button-outline"
       >
         <IconTrash />
         <p>Delete</p>
@@ -35,15 +34,12 @@ const DeleteButton = ({ id }) => {
           </h2>
           <div className="w-full flex flex-col min-[505px]:flex-row gap-x-4 gap-y-2 justify-center items-center">
             <button
-              className="real-estate-button"
+              className="events-button"
               onClick={() => setConfirmationModal(false)}
             >
               Cancel
             </button>
-            <button
-              className="real-estate-button-outline"
-              onClick={deleteProperty}
-            >
+            <button className="events-button-outline" onClick={deleteEvent}>
               Delete property
             </button>
           </div>

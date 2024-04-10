@@ -39,9 +39,6 @@ function RouteTracker() {
               dateTime: currentDateTime,
             };
 
-            // Hacer la solicitud POST a la API para guardar los datos usando Axios
-            console.log(visitData);
-
             await axios.post("/api/visit", visitData);
           }
         } else if (

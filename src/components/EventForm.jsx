@@ -11,6 +11,8 @@ import { ReactSortable } from "react-sortablejs";
 import { useSession } from "next-auth/react";
 import Spinner from "./Spinner";
 import EventCard from "./EventCard";
+import SpinnerSmall from "./SpinnerSmall";
+import { toast } from "sonner";
 
 const EventForm = ({
   title: existingTitle,
@@ -40,12 +42,15 @@ const EventForm = ({
   const [previewImages, setPreviewImages] = useState(existingImages || []);
   const [formData, setFormData] = useState(new FormData());
   const [deletedImages, setDeletedImages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
   const saveEvent = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const responseFiles = await axios.post("/api/files", formData);
     let eventImages = previewImages;
 
@@ -77,6 +82,7 @@ const EventForm = ({
       });
 
       router.push("/community/events");
+      toast.success("Event created successfully!");
     } else {
       await axios.put("/api/events/" + _id, {
         ...values,
@@ -84,6 +90,7 @@ const EventForm = ({
         images: eventImages,
       });
       router.push("/community/events/" + _id);
+      toast.success("Event changes saved successfully!");
     }
   };
 
@@ -132,6 +139,7 @@ const EventForm = ({
               label="Event title"
               name="title"
               id="title"
+              maxLength="100"
               placeholder={"Title"}
               value={values.title}
               onChange={onChange}
@@ -207,6 +215,7 @@ const EventForm = ({
               label="Date"
               name="date"
               id="date"
+              min={existingDate ? existingDate : new Date().toLocaleString()}
               errorMessage="Please enter a valid date"
               placeholder={"Event date"}
               value={values.date}
@@ -240,10 +249,11 @@ const EventForm = ({
                 Cancel
               </Link>
               <button
+                disabled={isLoading}
                 type="submit"
-                className="px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#0077b6] hover:bg-[#0076b6e1]  text-center"
+                className="flex items-center justify-center px-4 py-3 mt-4 rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors  bg-[#0077b6] hover:bg-[#0076b6e1]  text-center disabled:bg-slate-500"
               >
-                Continue
+                {isLoading ? <SpinnerSmall /> : "Continue"}
               </button>
             </div>
           </form>
