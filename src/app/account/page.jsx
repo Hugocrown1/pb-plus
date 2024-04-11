@@ -45,7 +45,8 @@ const Page = async () => {
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
-      <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
+      test
+      {/* <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
         <section className="flex flex-row gap-4 ">
           <Image
             src={user?.image || defaultImage}
@@ -101,7 +102,7 @@ const Page = async () => {
         <section className="flex flex-col gap-4 mx-auto">
           <p className="text-left text-gray-700">No events published yet</p>
         </section>
-      </div>
+      </div> */}
     </main>
   );
 };
