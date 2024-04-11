@@ -26,7 +26,7 @@ const getUser = async (id) => {
 };
 
 const Page = async () => {
-  await createCustomerIfNull();
+  // await createCustomerIfNull();
   const session = await auth();
 
   const defaultImage = "/assets/defaultprofile.jpg";
@@ -35,13 +35,13 @@ const Page = async () => {
 
   //TODO: Generar link al momento de necesitarlo
 
-  const manageLink = await generateCustomerPortalLink(
-    "" + user?.stripe_customer_id
-  );
+  // const manageLink = await generateCustomerPortalLink(
+  //   "" + user?.stripe_customer_id
+  // );
 
-  const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
+  // const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
 
-  const hasSub = await hasSubscription();
+  // const hasSub = await hasSubscription();
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
