@@ -7,55 +7,89 @@ import { connectDB } from "@/lib/mongoose";
 import UserEditForm from "@/components/UserEdit/UserEditForm";
 
 import { Stripe } from "stripe";
-import { createCustomerIfNull, generateCustomerPortalLink } from "@/lib/stripe";
+import {
+  createCheckoutLink,
+  createCustomerIfNull,
+  generateCustomerPortalLink,
+  hasSubscription,
+} from "@/lib/stripe";
+import { IconCoffee, IconCrown } from "@tabler/icons-react";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const getUser = async (id) => {
   await connectDB();
-  const response = await Users.findById(id).populate("properties", {});
+  const user = await Users.findById(id).lean().populate("properties", {});
+  user._id = user._id.toString();
 
-  return response.toJSON();
+  return user;
 };
 
 const Page = async () => {
+  await createCustomerIfNull();
   const session = await auth();
 
   const defaultImage = "/assets/defaultprofile.jpg";
 
-  const user = await getUser(session?.user?.id);
+  const user = await getUser(session.user.id);
 
-  // await createCustomerIfNull();
+  const manageLink = await generateCustomerPortalLink(
+    "" + user?.stripe_customer_id
+  );
 
-  // const manage = await generateCustomerPortalLink(""+ )
+  const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
+
+  const hasSub = await hasSubscription();
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
       <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
         <section className="flex flex-row gap-4 ">
           <Image
-            src={user.image || defaultImage}
+            src={user?.image || defaultImage}
             width={225}
             height={225}
             className="rounded-xl aspect-square border-4 border-gray-200"
             alt="Imagen de usuario"
           />
           <div className="flex flex-col self-center">
-            <h2 className="text-2xl text-left capitalize">{user.name}</h2>
+            <h2 className="text-2xl text-left capitalize">{user?.name}</h2>
+
+            {hasSub ? (
+              <span className="flex items-center gap-x-2 text-sm  py-1 px-3 bg-[#fdb833] text-black rounded-full w-fit">
+                <IconCrown size={16} /> Premium
+              </span>
+            ) : (
+              <div className="flex flex-col min-[520px]:flex-row items-center ">
+                <span className="flex items-center gap-x-2 text-sm  py-1 px-3 bg-black text-white rounded-full w-fit">
+                  <IconCoffee size={16} /> Free plan
+                </span>
+                <a className="text-sm px-3 hover:underline" href={checkout}>
+                  Upgrade plan
+                </a>
+              </div>
+            )}
+
             <div className="flex gap-1"></div>
           </div>
         </section>
-        <div className="flex  sm:justify-start justify-evenly">
+        <div className="flex  sm:justify-start justify-evenly gap-x-1">
+          <a
+            href={manageLink}
+            className="primary-button hover:bg-gray-500/10 transition-colors"
+          >
+            Manage bill info
+          </a>
           <UserEditForm />
           <SignOutButton />
         </div>
         <h2 className="text-left text-2xl">Published properties</h2>
         <section className="flex flex-col rounded-md mx-auto">
-          {!user.properties ? (
+          {!user?.properties ? (
             <p className="text-left text-gray-700">
               No properties published yet
             </p>
           ) : (
-            <UserProperties data={user?.properties} />
+            <UserProperties properties={user?.properties} />
           )}
         </section>
         <h2 className="text-left text-2xl">Events</h2>

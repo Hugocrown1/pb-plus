@@ -1,10 +1,11 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { auth, authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 
 export const verifyUser = async (id) => {
   const session = await getServerSession(authOptions);
 
-  if (session === null) return false;
+  if (!session) return false;
+
   return id === session.user.id || session.user.role === "admin";
 };
 

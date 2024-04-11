@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-// import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 import { Stripe } from "stripe";
 import { connectDB } from "./mongoose";
@@ -7,6 +7,7 @@ import { randomUUID } from "crypto";
 
 import Users from "@/models/users";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const URL = process.env.URL;
 
 export async function hasSubscription() {
   await connectDB();
@@ -20,7 +21,9 @@ export async function hasSubscription() {
       customer: user?.stripe_customer_id,
     });
 
-    return subscriptions.data.length > 0;
+    console.log(subscriptions.data);
+
+    return subscriptions.data[0].status === "active";
   }
 
   return false;
@@ -30,7 +33,7 @@ export async function generateCustomerPortalLink(customerId) {
   try {
     const portalSession = await stripe.billingPortal.sessions.create({
       customer: customerId,
-      return_url: process.env.URL + "/account",
+      return_url: URL + "/account",
     });
 
     return portalSession.url;
@@ -38,6 +41,24 @@ export async function generateCustomerPortalLink(customerId) {
     console.error(error);
     return undefined;
   }
+}
+
+export async function createCheckoutLink(customer) {
+  const checkout = await stripe.checkout.sessions.create({
+    mode: "subscription",
+    payment_method_types: ["card"],
+    customer: customer,
+    line_items: [
+      {
+        price: "price_1P3SgB13yf7FOQ66KPGiHWL7",
+        quantity: 1,
+      },
+    ],
+    success_url: URL + "/account",
+    cancel_url: URL + "/account",
+  });
+
+  return checkout.url;
 }
 
 export async function loadPrices() {
@@ -54,10 +75,9 @@ export async function createCustomerIfNull() {
     const user = await Users.findOne({ email: session.user.email });
 
     if (!user?.api_key) {
-      await Users.findByIdAndUpdate(
-        { id: user._id },
-        { api_key: "secret_" + randomUUID() }
-      );
+      await Users.findByIdAndUpdate(user._id.toString(), {
+        api_key: "secret_" + randomUUID(),
+      });
 
       // await prisma.user.update({
       //   where: {
@@ -73,10 +93,9 @@ export async function createCustomerIfNull() {
         email: user?.email,
       });
 
-      await Users.findByIdAndUpdate(
-        { id: user._id },
-        { stripe_customer_id: customer.id }
-      );
+      await Users.findByIdAndUpdate(user._id.toString(), {
+        stripe_customer_id: customer.id,
+      });
 
       // await prisma.user.update({
       //   where: {
@@ -89,8 +108,6 @@ export async function createCustomerIfNull() {
     }
 
     const customers = await stripe.customers.list();
-    console.log(customers);
-
     const user2 = await Users.findOne({ email: session.user.email });
     return user2?.stripe_customer_id;
   }

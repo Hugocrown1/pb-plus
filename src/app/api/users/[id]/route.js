@@ -8,22 +8,25 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params: { id } }) {
   try {
     await connectDB();
+
+    const isAuthorized = await verifyUser(id);
+
+    if (!isAuthorized) {
+      return NextResponse.json(
+        { message: "Usuario no autorizado" },
+        { status: 401 }
+      );
+    }
+
     const user = await Users.findById(id).populate("properties", {});
     if (!user) {
-      return NextResponse.json("Usuario no encontrado.", {
-        status: 404,
-      });
+      return NextResponse.json("Usuario no encontrado.", { status: 404 });
     }
-    if (await verifyUser(id)) {
-      return NextResponse.json(user);
-    }
-    return NextResponse.json(
-      { message: "Usuario no autorizado" },
-      { status: 401 }
-    );
+
+    return NextResponse.json(user);
   } catch (error) {
-    if (error instanceof Error)
-      return NextResponse.json(error.message, { status: 500 });
+    console.error("Error al procesar la solicitud:", error);
+    return NextResponse.json(error.message, { status: 500 });
   }
 }
 
