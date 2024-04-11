@@ -21,7 +21,9 @@ export async function hasSubscription() {
       customer: user?.stripe_customer_id,
     });
 
-    return subscriptions.data.length > 0 && subscriptions.data[0].status === "active";
+    console.log(subscriptions.data);
+
+    return subscriptions.data[0].status === "active";
   }
 
   return false;
@@ -76,6 +78,15 @@ export async function createCustomerIfNull() {
       await Users.findByIdAndUpdate(user._id.toString(), {
         api_key: "secret_" + randomUUID(),
       });
+
+      // await prisma.user.update({
+      //   where: {
+      //     id: user?.id,
+      //   },
+      //   data: {
+      //     api_key: "secret_" + randomUUID(),
+      //   },
+      // });
     }
     if (!user?.stripe_customer_id) {
       const customer = await stripe.customers.create({
@@ -85,8 +96,18 @@ export async function createCustomerIfNull() {
       await Users.findByIdAndUpdate(user._id.toString(), {
         stripe_customer_id: customer.id,
       });
+
+      // await prisma.user.update({
+      //   where: {
+      //     id: user?.id,
+      //   },
+      //   data: {
+      //     stripe_customer_id: customer.id,
+      //   },
+      // });
     }
 
+    const customers = await stripe.customers.list();
     const user2 = await Users.findOne({ email: session.user.email });
     return user2?.stripe_customer_id;
   }
