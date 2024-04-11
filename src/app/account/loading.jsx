@@ -1,12 +1,11 @@
 import Spinner from "@/components/Spinner";
 import React from "react";
+import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
 const loading = () => {
   return (
-    <main className="bg-[#f5f3f4] min-h-[800px] flex items-center justify-center ">
-      <div className="w-[400px] my-12 h-[400px]">
-        <Spinner />
-      </div>
+    <main className="h-screen">
+      <LoadingScreen />
     </main>
   );
 };

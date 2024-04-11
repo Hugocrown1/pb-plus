@@ -29,6 +29,7 @@
     "recharts": "^2.12.2",
     "sonner": "^1.4.41",
     "sortablejs": "^1.15.2",
+    "stripe": "^14.24.0",
     "zustand": "^4.4.7"
   },
   "devDependencies": {

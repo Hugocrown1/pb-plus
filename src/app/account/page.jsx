@@ -1,98 +1,102 @@
-"use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import UserProperties from "@/components/UserProperties";
 import SignOutButton from "./SignOutButton";
 import Image from "next/image";
-import { useSession } from "next-auth/react";
+import { auth } from "../api/auth/[...nextauth]/route";
+import Users from "@/models/users";
+import { connectDB } from "@/lib/mongoose";
 import UserEditForm from "@/components/UserEdit/UserEditForm";
-import EditButton from "./EditButton";
-import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
-const Page = () => {
-  const { data: session, status } = useSession();
+import { Stripe } from "stripe";
+import {
+  createCheckoutLink,
+  createCustomerIfNull,
+  generateCustomerPortalLink,
+  hasSubscription,
+} from "@/lib/stripe";
+import { IconCoffee, IconCrown } from "@tabler/icons-react";
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+const getUser = async (id) => {
+  await connectDB();
+  const user = await Users.findById(id).lean().populate("properties", {});
+  user._id = user._id.toString();
+
+  return user;
+};
+
+const Page = async () => {
+  await createCustomerIfNull();
+  const session = await auth();
+
   const defaultImage = "/assets/defaultprofile.jpg";
-  const [loading, setLoading] = useState(true);
-  const [showEditForm, setShowEditForm] = useState(false);
-  const [selectedUserId, setSelectedUserId] = useState(null);
-  const [userProperties, setUserProperties] = useState(null);
-  const [userName, setUserName] = useState(null);
-  const [userImage, setUserImage] = useState(null);
 
-  useEffect(() => {
-    if (session && session.user) {
-      axios
-        .get(`/api/users/${session.user.id}`)
-        .then((response) => {
-          setUserImage(response.data.image);
-          setUserName(response.data.name.toLowerCase());
-          setUserProperties(response.data.properties);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.error("Error fetching user data:", error);
-          setLoading(false);
-        });
-    }
-  }, [session, showEditForm]);
+  const user = await getUser(session.user.id);
 
-  const openEditForm = (userId) => {
-    setSelectedUserId(userId);
-    setShowEditForm(true);
-  };
+  const manageLink = await generateCustomerPortalLink(
+    "" + user?.stripe_customer_id
+  );
 
-  const closeEditForm = () => {
-    setShowEditForm(false);
-  };
+  const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
 
-  if (loading) {
-    return (
-      <div className="h-screen">
-        <LoadingScreen />
-      </div>
-    );
-  }
+  const hasSub = await hasSubscription();
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
       <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
         <section className="flex flex-row gap-4 ">
           <Image
-            src={userImage || defaultImage}
+            src={user?.image || defaultImage}
             width={225}
             height={225}
             className="rounded-xl aspect-square border-4 border-gray-200"
             alt="Imagen de usuario"
           />
           <div className="flex flex-col self-center">
-            <h2 className="text-2xl text-left capitalize">{userName}</h2>
+            <h2 className="text-2xl text-left capitalize">{user?.name}</h2>
+
+            {hasSub ? (
+              <span className="flex items-center gap-x-2 text-sm  py-1 px-3 bg-[#fdb833] text-black rounded-full w-fit">
+                <IconCrown size={16} /> Premium
+              </span>
+            ) : (
+              <div className="flex flex-col min-[520px]:flex-row items-center ">
+                <span className="flex items-center gap-x-2 text-sm  py-1 px-3 bg-black text-white rounded-full w-fit">
+                  <IconCoffee size={16} /> Free plan
+                </span>
+                <a className="text-sm px-3 hover:underline" href={checkout}>
+                  Upgrade plan
+                </a>
+              </div>
+            )}
+
             <div className="flex gap-1"></div>
           </div>
         </section>
-        <div className="flex  sm:justify-start justify-evenly">
-          <EditButton onClick={() => openEditForm(session?.user?.id)} />
+        <div className="flex  sm:justify-start justify-evenly gap-x-1">
+          <a
+            href={manageLink}
+            className="primary-button hover:bg-gray-500/10 transition-colors"
+          >
+            Manage bill info
+          </a>
+          <UserEditForm />
           <SignOutButton />
         </div>
-
         <h2 className="text-left text-2xl">Published properties</h2>
         <section className="flex flex-col rounded-md mx-auto">
-          {userProperties && userProperties.length === 0 ? (
+          {!user?.properties ? (
             <p className="text-left text-gray-700">
               No properties published yet
             </p>
           ) : (
-            <UserProperties data={userProperties} />
+            <UserProperties properties={user?.properties} />
           )}
         </section>
-
         <h2 className="text-left text-2xl">Events</h2>
         <section className="flex flex-col gap-4 mx-auto">
           <p className="text-left text-gray-700">No events published yet</p>
         </section>
       </div>
-      {showEditForm && (
-        <UserEditForm userId={selectedUserId} onClose={closeEditForm} />
-      )}
     </main>
   );
 };
