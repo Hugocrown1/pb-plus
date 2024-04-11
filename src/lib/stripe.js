@@ -21,6 +21,10 @@ export async function hasSubscription() {
       customer: user?.stripe_customer_id,
     });
 
+    if (subscriptions.data.length === 0) {
+      return false;
+    }
+
     return subscriptions.data[0].status === "active";
   }
 
@@ -68,6 +72,7 @@ export async function loadPrices() {
 
 export async function createCustomerIfNull() {
   const session = await getServerSession(authOptions);
+  console.log(session);
 
   if (session) {
     const user = await Users.findOne({ email: session.user.email });

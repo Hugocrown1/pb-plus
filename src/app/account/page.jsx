@@ -14,7 +14,7 @@ import {
   hasSubscription,
 } from "@/lib/stripe";
 import { IconCoffee, IconCrown } from "@tabler/icons-react";
-// export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import { Suspense } from "react";
 
 const getUser = async (id) => {
@@ -26,6 +26,7 @@ const getUser = async (id) => {
 };
 
 const Page = async () => {
+  console.log("Account");
   await createCustomerIfNull();
   const session = await auth();
 
@@ -35,18 +36,17 @@ const Page = async () => {
 
   //TODO: Generar link al momento de necesitarlo
 
-  // const manageLink = await generateCustomerPortalLink(
-  //   "" + user?.stripe_customer_id
-  // );
+  const manageLink = await generateCustomerPortalLink(
+    "" + user?.stripe_customer_id
+  );
 
-  // const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
+  const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
 
-  // const hasSub = await hasSubscription();
+  const hasSub = await hasSubscription();
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
-      test
-      {/* <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
+      <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
         <section className="flex flex-row gap-4 ">
           <Image
             src={user?.image || defaultImage}
@@ -102,7 +102,7 @@ const Page = async () => {
         <section className="flex flex-col gap-4 mx-auto">
           <p className="text-left text-gray-700">No events published yet</p>
         </section>
-      </div> */}
+      </div>
     </main>
   );
 };
