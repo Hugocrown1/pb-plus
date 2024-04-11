@@ -73,7 +73,6 @@ export async function loadPrices() {
 export async function createCustomerIfNull() {
   await connectDB();
   const session = await getServerSession(authOptions);
-  console.log(session);
 
   if (session) {
     const user = await Users.findOne({ email: session.user.email });

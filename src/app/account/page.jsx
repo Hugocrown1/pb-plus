@@ -26,7 +26,6 @@ const getUser = async (id) => {
 };
 
 const Page = async () => {
-  console.log("Account");
   await createCustomerIfNull();
   const session = await auth();
 
