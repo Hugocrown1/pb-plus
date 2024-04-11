@@ -23,7 +23,7 @@ export async function hasSubscription() {
 
     console.log(subscriptions.data);
 
-    return subscriptions.data[0].status === "active";
+    return subscriptions.data.length > 0 && subscriptions.data[0].status === "active";
   }
 
   return false;
