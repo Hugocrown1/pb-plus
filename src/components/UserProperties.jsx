@@ -1,6 +1,6 @@
 import PropertyCard from "./PropertyCard";
 
-const UserProperties = ({ properties }) => {
+const UserProperties = async ({ properties }) => {
   return (
     <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-2 self-start">
       {properties.map((property) => {
