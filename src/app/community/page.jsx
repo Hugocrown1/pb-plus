@@ -85,7 +85,7 @@ export default function Page() {
           </span>
           <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
         </header>
-        <div className="flex flex-row  justify-center gap-x-8 py-4 ">
+        <div className="flex flex-row  justify-center gap-x-8 py-4 text-right">
           <div className="flex flex-col w-full gap-y-4 text-[18px] text-pretty">
             <p>
               Promote your restaurant to a targeted audience of food enthusiasts

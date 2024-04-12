@@ -15,6 +15,7 @@ import {
 } from "@/lib/stripe";
 import { IconCoffee, IconCrown } from "@tabler/icons-react";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+import { Suspense } from "react";
 
 const getUser = async (id) => {
   await connectDB();
@@ -31,6 +32,8 @@ const Page = async () => {
   const defaultImage = "/assets/defaultprofile.jpg";
 
   const user = await getUser(session.user.id);
+
+  //TODO: Generar link al momento de necesitarlo
 
   const manageLink = await generateCustomerPortalLink(
     "" + user?.stripe_customer_id
@@ -89,7 +92,9 @@ const Page = async () => {
               No properties published yet
             </p>
           ) : (
-            <UserProperties properties={user?.properties} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <UserProperties properties={user?.properties} />
+            </Suspense>
           )}
         </section>
         <h2 className="text-left text-2xl">Events</h2>
