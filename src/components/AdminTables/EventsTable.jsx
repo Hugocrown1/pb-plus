@@ -1,27 +1,28 @@
-"use client";
 import React, { useState } from "react";
 import {
-  IconEye,
+  IconEdit,
+  IconExternalLink,
   IconSearch,
   IconFileExport,
 } from "@tabler/icons-react";
-import FormAdminView from "../AdminViews/FormAdminView";
+import Image from "next/image";
+import EventAdminView from "../AdminViews/EventAdminView";
 
-const FormsTable = ({ formData, loading, setFetchTrigger }) => {
+const EventsTable = ({ events, loading, setFetchTrigger }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
-  const [showRemoView, setShowDemoView] = useState();
-  const [selectedFormId, setSelectedFormId] = useState(null);
+  const [showEditForm, setShowEditForm] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState(null);
 
-  const openEditForm = (formId) => {
-    setSelectedFormId(formId);
-    setShowDemoView(true);
+  const openEditForm = (event) => {
+    setSelectedEventId(event);
+    setShowEditForm(true);
   };
 
   const closeEditForm = () => {
-    setShowDemoView(false);
+    setShowEditForm(false);
     setFetchTrigger(true);
   };
 
@@ -39,8 +40,8 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
     }
   };
 
-  const filteredForms = formData.filter((user) =>
-    Object.values(user).some(
+  const filteredEvents = events.filter((event) =>
+    Object.values(event).some(
       (value) =>
         value !== null &&
         value !== undefined &&
@@ -48,8 +49,8 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
     )
   );
 
-  const sortedRemos = sortBy
-    ? filteredForms.sort((a, b) => {
+  const sortedEvents = sortBy
+    ? filteredEvents.sort((a, b) => {
         const aValue = a[sortBy];
         const bValue = b[sortBy];
 
@@ -61,49 +62,44 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
         }
         return 0;
       })
-    : filteredForms;
+    : filteredEvents;
 
-  const pageSize = 9;
-  const totalPages = Math.ceil(sortedRemos.length / pageSize);
+  const pageSize = 6;
+  const totalPages = Math.ceil(sortedEvents.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
-  const paginatedRemos = sortedRemos.slice(startIndex, startIndex + pageSize);
+  const paginatedEvents = sortedEvents.slice(startIndex, startIndex + pageSize);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  };
-
   const exportToCSV = () => {
     const csvHeaders = [
       "ID",
-      "Service Name",
-      "Name",
-      "Phone",
-      "Email",
+      "Title",
+      "Category",
       "Date",
-      "Message",
+      "Address",
+      "Description",
+      "Interested Users",
+      "User",
+      "Cover Image",
+      "Images",
     ];
 
-    const csvData = formData.map((form) => {
-      const formattedDate = new Date(form.date).toLocaleDateString();
-      const formattedTime = new Date(form.date).toLocaleTimeString();
-      const cleanedMessage = form.message.replace(/[^\w\s]/g, "");
+    const csvData = events.map((event) => {
+      const formattedDate = new Date(event.date).toLocaleDateString();
       return [
-        form._id,
-        form.serviceName,
-        form.userName,
-        form.userPhone,
-        form.userEmail,
-        `${formattedDate} ${formattedTime}`,
-        `${cleanedMessage}`,
+        event._id,
+        event.title,
+        event.category,
+        formattedDate,
+        event.address,
+        event.description,
+        event.interestedUsers,
+        event.user,
+        event.coverImage,
+        event.images.join(","),
       ];
     });
 
@@ -116,13 +112,13 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "legal_form_data.csv");
+    link.setAttribute("download", "event_data.csv");
     document.body.appendChild(link);
     link.click();
   };
 
   return (
-    <div className="">
+    <div>
       {loading ? (
         <div className="flex flex-col gap-4 m-2">
         {/* Skeleton for buttons */}
@@ -132,20 +128,22 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
         </div>
 
         {/* Skeleton for cards */}
-        <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
-          {[1, 2, 3].map((_, index) => (
+        <div className="grid xl:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
+          {[1, 2, 3, 4].map((_, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse h-[200px]"
+              className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse xl:h-[200px]"
             >
-              <div className="flex">
-                <div className="mx-4 my-2 w-full space-y-2">
-                  <div className="h-4 bg-gray-200 rounded"></div>
+              <div className="flex flex-col xl:flex-row">
+                <div className="h-52 xl:h-full xl:w-1/3 w-full bg-gray-200 rounded"></div>
+                <div className="mx-4 my-2 w-full xl:space-y-2 space-y-1">
+                  
                   <div className="h-4 bg-gray-200 rounded w-4/5 my-2"></div>
                   <div className="h-4 bg-gray-200 rounded w-3/5"></div>
                   <div className="h-4 bg-gray-200 rounded w-4/6"></div>
                   <div className="h-4 bg-gray-200 rounded w-4/6"></div>
                   <div className="flex gap-4 justify-center xl:justify-end">
+                    <div className="h-8 bg-gray-200 rounded w-16"></div>
                     <div className="h-8 bg-gray-200 rounded w-16"></div>
                   </div>
                 </div>
@@ -155,8 +153,8 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
         </div>
       </div>
       ) : (
-        <section className="self-center flex flex-col  justify-start h-full  xl:overflow-hidden">
-          <div className="flex p-2 gap-2  relative justify-between">
+        <section className="self-center flex flex-col justify-start h-full">
+          <div className="flex p-2 gap-2 relative justify-between">
             <input
               type="text"
               placeholder="Search"
@@ -170,51 +168,74 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
             <button
               className="bg-blue-500 hover:bg-blue-300 hover:text-white text-white font-bold py-2 px-4 rounded flex items-center justify-center xl:w-44 w-1/2"
               onClick={exportToCSV}
-              disabled={paginatedRemos.length === 0}
+              disabled={paginatedEvents.length === 0}
             >
               Export
               <IconFileExport className="ml-2" />
             </button>
           </div>
-          {paginatedRemos.length === 0 ? (
+          {paginatedEvents.length === 0 ? (
             <p className="text-gray-600 text-base mx-2 my-4">
-              No forms to display
+              No events to display
             </p>
           ) : (
-            <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4 m-2">
-              {paginatedRemos.map((form, index) => (
+            <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 mx-2">
+              {paginatedEvents.map((event, index) => (
                 <div
-                  key={form._id}
+                  key={event._id}
                   className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative h-full"
                 >
-                  <div className="flex">
-                    <div className="mx-4 my-2">
-                      <h3 className="text-base xl:text-xl font-semibold mb-2 text-[#8c2828] h-12">
-                        {form.serviceName}
+                  <div className="xl:flex">
+                    <div>
+                      <Image
+                        src={event.coverImage}
+                        alt={event.title}
+                        width={250}
+                        height={250}
+                        className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md"
+                      />
+                    </div>
+                    <div className="mx-4 grid grid-cols-2 xl:block">
+                      <h3 className="text-base xl:text-xl font-semibold text-[#8c2828]">
+                        {event.title}
                       </h3>
-
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {form.userName}
+                        {event.category}
                       </p>
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {form.userEmail}
+                        {event.address}
                       </p>
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {form.userPhone}
+                        {event.description}
                       </p>
-
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {formatDate(form.date)}
+                        {event.userName}
+                      </p>
+                      <p className="text-gray-600 text-sm xl:text-base">
+                        {new Date(event.date).toLocaleDateString()}
                       </p>
                     </div>
                   </div>
-
-                  <div className="xl:absolute xl:bottom-2 xl:right-2 flex flex-row justify-center space-x-2">
+                  <div className="absolute top-2 right-2 flex-row space-x-2 hidden xl:flex">
+                    <p className="text-[#8c2828] text-[15px] xl:text-[25px]">
+                      {event.category}
+                    </p>
+                  </div>
+                  <div className="xl:absolute bottom-2 right-2 flex xl:flex-col xl:space-y-1 xl:space-x-0 space-x-2 flex-row justify-center">
                     <button
-                      className="bg-[#cffaea] hover:bg-green-300 hover:text-white text-green-600 font-bold xl:px-4 xl:py-2 px-2 py-1 rounded flex items-center"
-                      onClick={() => openEditForm(form)}
+                      className="bg-[#cffaea] hover:bg-green-300 hover:text-white text-green-600 font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
+                      onClick={() => openEditForm({ ...event })}
                     >
-                      <IconEye className="mr-2" />
+                      <IconEdit className="xl:mr-2" />
+                      Edit
+                    </button>
+                    <button
+                      className="bg-[#f6eeee] hover:bg-rose-300 hover:text-white text-[#8c2828] font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
+                      onClick={() =>
+                        window.open(`/community/events/${event._id}`, "_blank")
+                      }
+                    >
+                      <IconExternalLink className="xl:mr-2" />
                       View
                     </button>
                   </div>
@@ -224,7 +245,6 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
           )}
         </section>
       )}
-
       {totalPages > 1 && (
         <div className="px-2 pt-8 pb-2 flex items-center justify-center xl:justify-start">
           <button
@@ -247,11 +267,11 @@ const FormsTable = ({ formData, loading, setFetchTrigger }) => {
         </div>
       )}
 
-      {showRemoView && (
-        <FormAdminView formId={selectedFormId} onClose={closeEditForm} />
+      {showEditForm && (
+        <EventAdminView {...selectedEventId} onClose={closeEditForm} />
       )}
     </div>
   );
 };
 
-export default FormsTable;
+export default EventsTable;

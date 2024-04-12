@@ -6,6 +6,8 @@ import Breadcrumb from "@/components/Breadcrumb";
 
 const Page = () => {
   const [properties, setProperties] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [fetchTrigger, setFetchTrigger] = useState(false);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -26,24 +28,32 @@ const Page = () => {
           }
         );
 
-        setProperties(propertiesWithUserData);
+        setProperties(propertiesWithUserData.reverse());
+        setLoading(false);
+        setFetchTrigger(false);
       } catch (error) {
         console.error("Error fetching data:", error);
+        setLoading(false);
+        setFetchTrigger(false);
       }
     };
 
     fetchProperties();
-  }, []);
+  }, [fetchTrigger]);
 
   return (
-    <main className="flex w-full">
-    <div className=" w-full pt-[60px] m-4">
-      <div className="w-full  h-20 bg-white shadow-md border border-gray-200 flex justify-start items-center px-4 rounded-xl mb-4">
-      <Breadcrumb />
-      </div>
+    <main className="flex w-full bg-white min-h-screen">
+      <div className="w-full pt-[60px]">
+        <div className="w-full h-16   border-b-4 border-gray-200 flex justify-start items-center xl:p-6 px-4">
+          <Breadcrumb />
+        </div>
 
-      <div className="border border-gray-200 shadow-md bg-white rounded-xl py-2">
-          <PropertiesTable properties={properties} />
+        <div className="xl:p-4 px-2">
+          <PropertiesTable
+            properties={properties}
+            loading={loading}
+            setFetchTrigger={setFetchTrigger}
+          />
         </div>
       </div>
     </main>

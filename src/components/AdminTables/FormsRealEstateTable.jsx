@@ -2,22 +2,21 @@
 import React, { useState } from "react";
 import {
   IconEye,
-  IconFile,
-  IconFileExport,
   IconSearch,
+  IconFileExport
 } from "@tabler/icons-react";
-import RemoAdminView from "../AdminViews/RemoAdminView";
+import FormAdminView from "../AdminViews/FormRealEstateAdmin";
 
-const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
+const FormsTable = ({ formData, loading, setFetchTrigger }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [showRemoView, setShowDemoView] = useState();
-  const [selectedRemoId, setSelectedRemoId] = useState(null);
+  const [selectedFormId, setSelectedFormId] = useState(null);
 
-  const openEditForm = (remoId) => {
-    setSelectedRemoId(remoId);
+  const openEditForm = (formId) => {
+    setSelectedFormId(formId);
     setShowDemoView(true);
   };
 
@@ -40,7 +39,7 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
     }
   };
 
-  const filteredRemos = remoData.filter((user) =>
+  const filteredForms = formData.filter((user) =>
     Object.values(user).some(
       (value) =>
         value !== null &&
@@ -50,7 +49,7 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
   );
 
   const sortedRemos = sortBy
-    ? filteredRemos.sort((a, b) => {
+    ? filteredForms.sort((a, b) => {
         const aValue = a[sortBy];
         const bValue = b[sortBy];
 
@@ -62,7 +61,7 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
         }
         return 0;
       })
-    : filteredRemos;
+    : filteredForms;
 
   const pageSize = 9;
   const totalPages = Math.ceil(sortedRemos.length / pageSize);
@@ -71,10 +70,6 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
-  };
-
-  const openPdf = (pdfLink) => {
-    window.open(pdfLink, "_blank");
   };
 
   const formatDate = (dateString) => {
@@ -89,25 +84,26 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
   const exportToCSV = () => {
     const csvHeaders = [
       "ID",
-      "User Name",
-      "User Email",
-      "User Phone",
       "Service Name",
+      "Name",
+      "Phone",
+      "Email",
       "Date",
-      "PDF File",
+      "Message",
     ];
 
-    const csvData = remoData.map((remo) => {
-      const formattedDate = new Date(remo.date).toLocaleDateString();
-      const formattedTime = new Date(remo.date).toLocaleTimeString();
+    const csvData = formData.map((form) => {
+      const formattedDate = new Date(form.date).toLocaleDateString();
+      const formattedTime = new Date(form.date).toLocaleTimeString();
+      const cleanedMessage = form.message.replace(/[^\w\s]/g, "");
       return [
-        remo._id,
-        remo.userName,
-        remo.userEmail,
-        remo.userPhone,
-        remo.serviceName,
+        form._id,
+        form.serviceName,
+        form.userName,
+        form.userPhone,
+        form.userEmail,
         `${formattedDate} ${formattedTime}`,
-        remo.pdfFile,
+        `${cleanedMessage}`,
       ];
     });
 
@@ -120,48 +116,47 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "remo_data.csv");
+    link.setAttribute("download", "legal_form_data.csv");
     document.body.appendChild(link);
     link.click();
   };
 
   return (
-    <div>
+    <div className="">
       {loading ? (
         <div className="flex flex-col gap-4 m-2">
-          {/* Skeleton for buttons */}
-          <div className="animate-pulse flex justify-between gap-4">
-            <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
-            <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
-          </div>
+        {/* Skeleton for buttons */}
+        <div className="animate-pulse flex justify-between gap-4">
+          <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
+          <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
+        </div>
 
-          {/* Skeleton for cards */}
-          <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
-            {[1, 2, 3].map((_, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse h-[200px]"
-              >
-                <div className="flex">
-                  <div className="mx-4 my-2 w-full space-y-2">
-                    <div className="h-4 bg-gray-200 rounded"></div>
-                    <div className="h-4 bg-gray-200 rounded w-4/5 my-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/5"></div>
-                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
-                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
-                    <div className="flex gap-4 justify-center">
-                      <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                      <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                    </div>
+        {/* Skeleton for cards */}
+        <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4">
+          {[1, 2, 3].map((_, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse h-[200px]"
+            >
+              <div className="flex">
+                <div className="mx-4 my-2 w-full space-y-2">
+                  <div className="h-4 bg-gray-200 rounded"></div>
+                  <div className="h-4 bg-gray-200 rounded w-4/5 my-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-3/5"></div>
+                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                  <div className="flex gap-4 justify-center xl:justify-end">
+                    <div className="h-8 bg-gray-200 rounded w-16"></div>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
+      </div>
       ) : (
         <section className="self-center flex flex-col  justify-start h-full  xl:overflow-hidden">
-          <div className="flex p-2 gap-2 relative justify-between">
+          <div className="flex p-2 gap-2  relative justify-between">
             <input
               type="text"
               placeholder="Search"
@@ -183,52 +178,45 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
           </div>
           {paginatedRemos.length === 0 ? (
             <p className="text-gray-600 text-base mx-2 my-4">
-              No quotes to display
+              No forms to display
             </p>
           ) : (
             <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 gap-4 m-2">
-              {paginatedRemos.map((remo, index) => (
+              {paginatedRemos.map((form, index) => (
                 <div
-                  key={remo._id}
+                  key={form._id}
                   className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative h-full"
                 >
                   <div className="flex">
                     <div className="mx-4 my-2">
                       <h3 className="text-base xl:text-xl font-semibold mb-2 text-[#8c2828] h-12">
-                        {remo.serviceName}
+                        {form.serviceName}
                       </h3>
 
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {" "}
-                        {remo.userName}
+                        {form.userName}
                       </p>
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {remo.userEmail}
+                        {form.userEmail}
                       </p>
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {remo.userPhone}
+                        {form.userPhone}
                       </p>
 
                       <p className="text-gray-600 text-sm xl:text-base">
-                        {formatDate(remo.date)}
+                        {formatDate(form.date)}
                       </p>
                     </div>
+                    
                   </div>
 
                   <div className="xl:absolute xl:bottom-2 xl:right-2 flex flex-row justify-center space-x-2">
                     <button
                       className="bg-[#cffaea] hover:bg-green-300 hover:text-white text-green-600 font-bold xl:px-4 xl:py-2 px-2 py-1 rounded flex items-center"
-                      onClick={() => openEditForm(remo)}
+                      onClick={() => openEditForm(form)}
                     >
                       <IconEye className="mr-2" />
                       View
-                    </button>
-                    <button
-                      className="bg-[#f6eeee] hover:bg-rose-300 hover:text-white text-[#8c2828] font-bold xl:px-4 xl:py-2 px-2 py-1 rounded flex items-center"
-                      onClick={() => openPdf(remo.pdfFile)}
-                    >
-                      <IconFile className="mr-2" />
-                      PDF
                     </button>
                   </div>
                 </div>
@@ -237,6 +225,7 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
           )}
         </section>
       )}
+
       {totalPages > 1 && (
         <div className="px-2 pt-8 pb-2 flex items-center justify-center xl:justify-start">
           <button
@@ -260,10 +249,10 @@ const RemoTable = ({ remoData, loading, setFetchTrigger }) => {
       )}
 
       {showRemoView && (
-        <RemoAdminView remoId={selectedRemoId} onClose={closeEditForm} />
+        <FormAdminView formId={selectedFormId} onClose={closeEditForm} />
       )}
     </div>
   );
 };
 
-export default RemoTable;
+export default FormsTable;

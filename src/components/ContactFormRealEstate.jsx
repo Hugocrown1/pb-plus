@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { toast } from "sonner";
 
 const ContactFormRealEstate = ({ serviceName }) => {
   const { data: session } = useSession();
@@ -29,6 +32,13 @@ const ContactFormRealEstate = ({ serviceName }) => {
   }, [session]);
 
   const handleChange = (e) => {
+    if (typeof e === "string") {
+      // If e is a string, it's coming from PhoneInput
+      setUserData((prevData) => ({
+        ...prevData,
+        userPhone: e, // Set the phone number directly
+      }));
+    } else {
     const { name, value } = e.target;
 
     // Validación del teléfono
@@ -42,7 +52,7 @@ const ContactFormRealEstate = ({ serviceName }) => {
       setEmailError(false); // Reiniciar el estado del error al escribir
     } else {
       setUserData((prev) => ({ ...prev, [name]: value }));
-    }
+    }}
   };
 
   const handleBlur = (e) => {
@@ -67,12 +77,13 @@ const ContactFormRealEstate = ({ serviceName }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    
     setLoading(true);
     try {
       const currentDate = new Date().toISOString();
       const userDataWithDate = { ...userData, date: currentDate, serviceName };
       await axios.post("/api/pricing", userDataWithDate);
+      toast.success("Consultation submitted!");
       setUserData({
         userName: "",
         userEmail: "",
@@ -86,6 +97,7 @@ const ContactFormRealEstate = ({ serviceName }) => {
       }, 2000); // Ocultar mensaje de éxito después de 2 segundos
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
+      toast.error("Consultation failed!");
       setError(true);
       setTimeout(() => {
         setError(false);
@@ -93,6 +105,13 @@ const ContactFormRealEstate = ({ serviceName }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const validatePhone = (phone) => {
+    if (phone.match(/^1\d{10}$/) || phone.match(/^52\d{10}$/)) {
+      return true;
+    }
+    return false;
   };
 
   return (
@@ -110,7 +129,15 @@ const ContactFormRealEstate = ({ serviceName }) => {
           </p>
         </div>
         <div className="w-full">
-          <form onSubmit={handleSubmit} className="rounded-md">
+          <form onSubmit={(e) => {
+              e.preventDefault();
+              if (!validatePhone(userData.userPhone)) {
+                toast.error("Invalid phone number");
+
+                return;
+              }
+              handleSubmit();
+            }} className="rounded-md">
             <label htmlFor="userName" className="block text-gray-800 mb-2">
               Name:
             </label>
@@ -152,29 +179,24 @@ const ContactFormRealEstate = ({ serviceName }) => {
             >
               Phone:
             </label>
-            <input
-              type="tel"
-              id="userPhone"
-              name="userPhone"
-              value={userData.userPhone}
-              minLength={10}
-              maxLength={20}
-              onChange={handleChange}
-              onKeyPress={(e) => {
-                // Verificar si la tecla presionada es un número o un carácter especial
-                const isNumber = /^[0-9\b]+$/.test(e.key);
-                if (!isNumber) {
-                  e.preventDefault(); // Prevenir la entrada del carácter si no es un número
-                }
+            <PhoneInput
+              inputProps={{
+                name: "userPhone",
+                required: true,
+                autoFocus: true,
               }}
-              onBlur={handleBlur} // Activar la verificación de error al salir del campo
-              className={`w-full p-2 border rounded-md ${
-                phoneError ? "border-red-500" : ""
-              }`}
+              country={"mx"}
+              onlyCountries={["mx", "us"]}
+              value={userData.userPhone}
+              onChange={handleChange}
+              placeholder="+52 123 456 78 90"
+              inputStyle={{
+                width: "100%",
+                height: "42px",
+                fontSize: "18px",
+                fontFamily: "normal",
+              }}
             />
-            {phoneError && (
-              <p className="text-red-500">Please a valid phone number</p>
-            )}
 
             <label htmlFor="message" className="block text-gray-800 mt-4 mb-2">
               Message:
@@ -189,16 +211,7 @@ const ContactFormRealEstate = ({ serviceName }) => {
               className="w-full p-2 border rounded-md"
             ></textarea>
 
-            {error && (
-              <p className="flex bg-red-200 p-1 my-2 rounded-md">
-                An error occurred! <IconX color="red" />
-              </p>
-            )}
-            {success && (
-              <p className="flex bg-green-200 p-1 my-2 rounded-md">
-                Successfully sent! <IconCheck color="green" />
-              </p>
-            )}
+            
 
             <button
               type="submit"

@@ -1,6 +1,6 @@
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
 import { usePathname } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import React from "react";
 import { Roboto } from "next/font/google";
 import Link from "next/link";
@@ -14,6 +14,16 @@ export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(false);
   const showSidebar = pathname.includes("/dashboard");
 
+  // Actualizar el estado 'expanded' en función del tamaño de la pantalla
+  useEffect(() => {
+    const handleResize = () => {
+      setExpanded(window.innerWidth >= 768); // Cambia a true si el ancho de la ventana es mayor o igual a 768px
+    };
+    handleResize(); // Llamar una vez al principio para establecer el valor inicial
+    window.addEventListener("resize", handleResize); // Escuchar cambios en el tamaño de la ventana
+    return () => window.removeEventListener("resize", handleResize); // Limpiar el listener al desmontar el componente
+  }, []);
+
   if (!showSidebar) {
     return null;
   }
@@ -22,49 +32,58 @@ export default function Sidebar({ children }) {
   const categorizedSidebarItems = categorizeSidebarItems(children);
 
   return (
-    <div className={` `}>
+    <div>
       <SidebarContext.Provider value={{ expanded }}>
-        <aside
-          className={`fixed top-0 left-0 h-screen bg-white border-r shadow-sm z-50 mt-[60px] ${
-            expanded ? "w-60" : " w-16 xl:w-20"
-          } transition-all`}
-        >
-          <nav className="h-full flex flex-col">
-            <div className="p-4 pb-2 flex justify-between items-center">
-               <img
-                src={"/assets/footerlogo.png"}
-                className={`overflow-hidden transition-all  ${
-                  expanded ? "w-40" : "w-0"
-                }`}
-              />
+        <div className="flex bg-green-500 pt-[60px]">
+          <div
+            className={` transition-all ease-in-out duration-300 ${
+              expanded ? "w-[250px]" : "w-16"
+            }`}
+          ></div>
+          <aside
+            className={`fixed bg-white h-screen shadow-sm border-r-4 z-50 border-gray-200  transition-all ease-in-out duration-300 ${
+              expanded ? "w-[250px]" : "w-16"
+            }`}
+          >
+            <nav className="h-full flex flex-col">
+              <div className="p-2 xl:p-4 pb-2 flex justify-between items-center">
+                <img
+                  src={"/assets/footerlogo.png"}
+                  className={`overflow-hidden transition-all ${
+                    expanded ? "w-40" : "w-0"
+                  }`}
+                />
 
-              <button
-                onClick={() => setExpanded((curr) => !curr)}
-                className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100"
-              >
-                {expanded ? <IconArrowLeft /> : <IconArrowRight />}
-              </button>
-            </div>
+                <button
+                  onClick={() => setExpanded((curr) => !curr)}
+                  className="p-2 rounded-lg bg-gray-50 hover:bg-gray-100"
+                >
+                  {expanded ? <IconArrowLeft /> : <IconArrowRight />}
+                </button>
+              </div>
 
-            {/* Renderizar los items del sidebar categorizados */}
-            {Object.entries(categorizedSidebarItems).map(
-              ([category, items]) => (
-                <div key={category}>
-                  <h2 className="text-gray-500 mt-4 mb-2 text-xs uppercase font-semibold">
-                    {category}
-                  </h2>
-                  <ul>{items}</ul>
-                </div>
-              )
-            )}
-          </nav>
-        </aside>
-        <div className="ml-16 xl:ml-20"></div>
-        <div
-          className="fixed top-0 left-0 w-full h-full bg-black opacity-25 z-40"
-          onClick={() => setExpanded(false)}
-          style={{ display: expanded ? "block" : "none" }}
-        ></div>
+              {/* Renderizar los items del sidebar categorizados */}
+              {Object.entries(categorizedSidebarItems).map(
+                ([category, items]) => (
+                  <div key={category}>
+                    <h2 className="text-gray-500 xl:mt-4 xl:mb-2 text-xs uppercase font-semibold">
+                      {category}
+                    </h2>
+                    <ul>{items}</ul>
+                  </div>
+                )
+              )}
+            </nav>
+          </aside>
+
+          {window.innerWidth < 768 && (
+            <div
+              className="fixed top-0 left-0 w-full h-full bg-black opacity-25 z-40"
+              onClick={() => setExpanded(false)}
+              style={{ display: expanded ? "block" : "none" }}
+            ></div>
+          )}
+        </div>
       </SidebarContext.Provider>
     </div>
   );
@@ -74,8 +93,7 @@ export default function Sidebar({ children }) {
 function categorizeSidebarItems(items) {
   const categorizedItems = {
     Menu: [],
-    Remo: [],
-    Legal: [],
+    Forms: [],
     Editor: [],
   };
 
@@ -85,11 +103,9 @@ function categorizeSidebarItems(items) {
       case "Menu":
         categorizedItems["Menu"].push(item);
         break;
-      case "Remo":
-        categorizedItems["Remo"].push(item);
-        break;
-      case "Legal":
-        categorizedItems["Legal"].push(item);
+
+      case "Forms":
+        categorizedItems["Forms"].push(item);
         break;
       case "Editor":
         categorizedItems["Editor"].push(item);
@@ -98,7 +114,6 @@ function categorizeSidebarItems(items) {
         break;
     }
   });
-
   return categorizedItems;
 }
 
@@ -110,7 +125,7 @@ export function SidebarItem({ href, icon, text, active, alert, category }) {
       <li
         className={`relative flex items-center py-2 my-1 font-medium rounded-md cursor-pointer transition-colors group justify-center ${
           active
-            ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
+            ? "bg-indigo-100 text-indigo-800 m-2"
             : "hover:bg-indigo-100 text-gray-600 m-2"
         }`}
       >

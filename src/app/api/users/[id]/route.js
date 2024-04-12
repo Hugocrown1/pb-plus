@@ -44,11 +44,11 @@ export async function PUT(request, { params: { id } }) {
     }
 
     if (await verifyUser(id)) {
-      // Si se proporciona una nueva contraseña, cifrarla
-      let updatedPassword = existingUser.password;
-      if (password) {
-        updatedPassword = await bcrypt.hash(password, 10);
-      }
+      // // Si se proporciona una nueva contraseña, cifrarla
+      // let updatedPassword = existingUser.password;
+      // if (password) {
+      //  updatedPassword = await bcrypt.hash(password, 10);
+      // }
 
       // Actualizar los campos proporcionados
       existingUser.name = name || existingUser.name;
@@ -56,7 +56,7 @@ export async function PUT(request, { params: { id } }) {
       existingUser.email = email || existingUser.email;
       existingUser.image = image || existingUser.image;
       existingUser.role = role || existingUser.role;
-      existingUser.password = updatedPassword;
+      // existingUser.password = updatedPassword;
 
       // Guardar los cambios en la base de datos
       await existingUser.save();
