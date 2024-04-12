@@ -3,10 +3,11 @@ import mongoose, { models } from "mongoose";
 const schema = new mongoose.Schema({
   coverImage: String,
   images: [String],
-  title: String,
+  name: String,
+  sectionTitle: String,
   information: [String],
   calendar: [[String]],
-  socialMedia: [String],
+  socialMedia: { Facebook: String, Instagram: String, Twitter: String },
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Users",
