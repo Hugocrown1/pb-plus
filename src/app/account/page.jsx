@@ -10,12 +10,12 @@ import { Stripe } from "stripe";
 import {
   createCheckoutLink,
   createCustomerIfNull,
-  generateCustomerPortalLink,
   hasSubscription,
 } from "@/lib/stripe";
 import { IconCoffee, IconCrown } from "@tabler/icons-react";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import { Suspense } from "react";
+import ManageBillButton from "./ManageBillButton";
 
 const getUser = async (id) => {
   await connectDB();
@@ -32,12 +32,6 @@ const Page = async () => {
   const defaultImage = "/assets/defaultprofile.jpg";
 
   const user = await getUser(session.user.id);
-
-  //TODO: Generar link al momento de necesitarlo
-
-  const manageLink = await generateCustomerPortalLink(
-    "" + user?.stripe_customer_id
-  );
 
   const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
 
@@ -76,12 +70,7 @@ const Page = async () => {
           </div>
         </section>
         <div className="flex  sm:justify-start justify-evenly gap-x-1">
-          <a
-            href={manageLink}
-            className="primary-button hover:bg-gray-500/10 transition-colors"
-          >
-            Manage bill info
-          </a>
+          <ManageBillButton customerId={user?.stripe_customer_id} />
           <UserEditForm />
           <SignOutButton />
         </div>
