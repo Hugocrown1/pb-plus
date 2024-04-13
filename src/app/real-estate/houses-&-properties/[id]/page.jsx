@@ -126,7 +126,7 @@ const page = async ({ params }) => {
                 </p>
                 <p className="text-base text-[#656b69]">Member</p>
                 <div className="flex flex-row items-center justify-center gap-1 w-full border-[1px] border-[#255748] text-[#255748] hover:bg-[#ddeee5] rounded-xl py-2 px-4 mt-2">
-                  <IconPhoneFilled /> <p>000 000 0000</p>
+                  <IconPhoneFilled /> <p>{propertyInfo.user.phone}</p>
                 </div>
               </div>
             </div>
