@@ -9,7 +9,12 @@ import Users from "@/models/users";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 const URL = process.env.URL;
 
-export async function hasSubscription() {
+export async function getSubscriptionStatus() {
+  await connectDB();
+  const session = await getServerSession(authOptions);
+}
+
+export async function getSubscription() {
   await connectDB();
 
   const session = await getServerSession(authOptions);
@@ -22,13 +27,18 @@ export async function hasSubscription() {
     });
 
     if (subscriptions.data.length === 0) {
-      return false;
+      return null;
     }
 
-    return subscriptions.data.length > 0 && subscriptions.data[0].status === "active";
+    if (
+      subscriptions.data[0].status === "active" ||
+      subscriptions.data[0].status === "past_due"
+    ) {
+      return subscriptions.data[0];
+    }
   }
 
-  return false;
+  return null;
 }
 
 export async function generateCustomerPortalLink(customerId) {

@@ -10,12 +10,13 @@ import { Stripe } from "stripe";
 import {
   createCheckoutLink,
   createCustomerIfNull,
-  hasSubscription,
+  getSubscription,
 } from "@/lib/stripe";
 import { IconCoffee, IconCrown } from "@tabler/icons-react";
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import { Suspense } from "react";
 import ManageBillButton from "./ManageBillButton";
+import SubscriptionNotification from "@/components/SubscriptionNotification";
 
 const getUser = async (id) => {
   await connectDB();
@@ -35,11 +36,12 @@ const Page = async () => {
 
   const checkout = await createCheckoutLink("" + user?.stripe_customer_id);
 
-  const hasSub = await hasSubscription();
+  const subscription = await getSubscription();
 
   return (
     <main className="relative bg-[#f5f3f4] pt-[60px] min-h-[800px]">
-      <div className="container-xl mb-16 gap-6 bg-white p-8 h-full border border-gray-200">
+      <div className="container-xl mb-16 gap-6 bg-white py-8 px-2  h-full border border-gray-200">
+        <SubscriptionNotification status={subscription?.status} />
         <section className="flex flex-row gap-4 ">
           <Image
             src={user?.image || defaultImage}
@@ -51,7 +53,7 @@ const Page = async () => {
           <div className="flex flex-col self-center">
             <h2 className="text-2xl text-left capitalize">{user?.name}</h2>
 
-            {hasSub ? (
+            {subscription ? (
               <span className="flex items-center gap-x-2 text-sm  py-1 px-3 bg-[#fdb833] text-black rounded-full w-fit">
                 <IconCrown size={16} /> Premium
               </span>
@@ -69,7 +71,7 @@ const Page = async () => {
             <div className="flex gap-1"></div>
           </div>
         </section>
-        <div className="flex  sm:justify-start justify-evenly gap-x-1">
+        <div className="flex flex-col min-[445px]:flex-row sm:justify-start justify-evenly gap-x-1">
           <ManageBillButton customerId={user?.stripe_customer_id} />
           <UserEditForm />
           <SignOutButton />
