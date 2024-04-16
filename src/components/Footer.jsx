@@ -151,7 +151,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/events">
+                <Link href="/community">
                   <p className="hover:text-[#cba557]">Community</p>
                 </Link>
               </li>
@@ -163,7 +163,7 @@ const Footer = () => {
             </h3>
             <ul className="space-y-1">
               <li>
-                <Link href="/remo">
+                <Link href="/remo/construction">
                   <p className="hover:text-[#cba557]">Home Remodelation</p>
                 </Link>
               </li>
@@ -180,7 +180,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/legal#learnmore">
+                <Link href="/legal/legal-consulting">
                   <p className="hover:text-[#cba557]">
                     Legal Counseling & Representation
                   </p>
