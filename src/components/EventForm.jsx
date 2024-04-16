@@ -35,7 +35,7 @@ const EventForm = ({
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
-      redirect("/auth/login?callbackURL=/real-estate/new-event");
+      redirect("/auth/login?callbackURL=/community/events/new-event");
     },
   });
 

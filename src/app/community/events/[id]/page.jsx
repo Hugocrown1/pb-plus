@@ -43,7 +43,7 @@ const EventPage = async ({ params: { id } }) => {
                   <div className="flex flex-row gap-2">
                     <Link
                       href={`/community/events/edit-event/${eventInfo._id}`}
-                      className="events-button"
+                      className="community-button"
                     >
                       <IconPencil />
                       <p>Edit</p>

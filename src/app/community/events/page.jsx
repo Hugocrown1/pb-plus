@@ -1,59 +1,9 @@
 import EventsDisplay from "@/components/EventsDisplay";
 import Link from "next/link";
 
-const dataSlider = [
-  {
-    id: 1,
-    title: "PB+ COMMUNITY",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-
-    source: "/assets/house.jpg",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 2,
-    title: "Houses & Properties",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/house2.webp",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 3,
-    title: "House Stitting",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/house3.jpg",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 4,
-    title: "Assesment Services",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/house4.png",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-  {
-    id: 5,
-    title: "House Keeping",
-    subtitle:
-      " Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum non deserunt recusandae quis animi natus dicta quod amet deleniti ut velit, consequatur iusto nostrum incidunt molestias consequunt",
-    source: "/assets/housekeeping.jpg",
-    linkTitle: "Take a look",
-    href: "#",
-  },
-];
-
 export default function Page() {
   return (
     <main className={`bg-[#f5f3f4]  xl:pt-[50px] container-xl`}>
-      {/* <Slider dataSlider={dataSlider} /> */}
       <section
         id="services"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"
@@ -68,7 +18,7 @@ export default function Page() {
 
         <Link
           href={"/community/events/new-event"}
-          className="events-button self-end mb-4"
+          className="community-button self-end mb-4"
         >
           Create an event
         </Link>
