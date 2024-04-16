@@ -1,11 +1,17 @@
 import mongoose, { models } from "mongoose";
 
 const schema = new mongoose.Schema({
-  coverImage: String,
-  images: [String],
+  images: {
+    Cover: String,
+    AboutUs: String,
+    MeetUs1: String,
+    MeetUs2: String,
+    MeetUs3: String,
+    CustomSection: String,
+  },
   name: String,
   sectionTitle: String,
-  information: [String],
+  information: { AboutUs: String, CustomSection: String },
   calendar: [[String]],
   socialMedia: { Facebook: String, Instagram: String, Twitter: String },
   user: {
@@ -15,4 +21,4 @@ const schema = new mongoose.Schema({
   },
 });
 
-export default models?.Events || mongoose.model("Events", schema);
+export default models?.Restaurants || mongoose.model("Restaurants", schema);
