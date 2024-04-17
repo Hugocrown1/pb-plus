@@ -10,9 +10,9 @@ const DeleteButton = ({ id }) => {
 
   const router = useRouter();
   const deleteEvent = async () => {
-    await axios.delete("/api/events/" + id);
-    router.push("/community/events");
-    toast.success("Event deleted");
+    await axios.delete("/api/restaurants/" + id);
+    router.push("/community/advertising");
+    toast.success("Restaurant deleted");
   };
   return (
     <>
@@ -30,17 +30,17 @@ const DeleteButton = ({ id }) => {
       >
         <dialog className="flex flex-col justify-evenly w-full  max-w-[600px] items-center h-[300px] bg-white rounded-lg px-6 py-[30px]">
           <h2 className="text-2xl font-semibold">
-            Are you sure you want to delete this event?
+            Are you sure you want to delete this restaurant?
           </h2>
           <div className="w-full flex flex-col min-[505px]:flex-row gap-x-4 gap-y-2 justify-center items-center">
             <button
-              className="events-button"
+              className="community-button"
               onClick={() => setConfirmationModal(false)}
             >
               Cancel
             </button>
-            <button className="events-button-outline" onClick={deleteEvent}>
-              Delete event
+            <button className="community-button-outline" onClick={deleteEvent}>
+              Delete restaurant
             </button>
           </div>
         </dialog>

@@ -81,11 +81,11 @@ html {
   @apply px-4 py-3 flex justify-center items-center rounded-lg font-semibold text-lg w-[190px] h-[52px] border-2 border-[#255748]   text-[#255748] transition-colors  bg-transparent hover:bg-[#f1f8f5]  text-center;
 }
 
-.events-button {
+.community-button {
   @apply px-4 py-3 flex justify-center items-center rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors h-[52px] bg-[#0077b6] hover:bg-[#0076b6e7]  text-center;
 }
 
-.events-button-outline {
+.community-button-outline {
   @apply px-4 py-3 flex justify-center items-center rounded-lg font-semibold text-lg w-[190px] h-[52px] border-2 border-[#0077b6]   text-[#0077b6] transition-colors  bg-transparent hover:bg-[#f1f4f8]  text-center;
 }
 

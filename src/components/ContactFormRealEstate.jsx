@@ -183,7 +183,6 @@ const ContactFormRealEstate = ({ serviceName }) => {
               inputProps={{
                 name: "userPhone",
                 required: true,
-                autoFocus: true,
               }}
               country={"mx"}
               onlyCountries={["mx", "us"]}
