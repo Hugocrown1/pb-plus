@@ -71,25 +71,7 @@ html {
   scroll-padding-top: 80px;
 }
 
-/* .fade-in {
-  animation: fadeInDown ease 2s;
- 
-  
 
-  animation-iteration-count: 1;
-  animation-fill-mode: forwards;
-}
-
-@keyframes fadeInDown {
-  0% {
-     opacity: 0;
-     transform: translateY(-40px);
-  }
-  100% {
-     opacity: 1;
-     transform: translateY(0);
-  }
-}  */
 
 .real-estate-button {
   @apply px-4 py-3 flex justify-center items-center rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors h-[52px] bg-[#40896f] hover:bg-[#30725c]  text-center;
@@ -100,7 +82,7 @@ html {
 }
 
 .community-button {
-  @apply px-4 py-3 flex justify-center items-center rounded-lg font-medium text-lg w-[190px]   text-[#FCFFFC] transition-colors h-[52px] bg-[#0077b6] hover:bg-[#0076b6e7]  text-center;
+  @apply px-4 py-3 flex justify-center items-center rounded-lg font-medium text-lg min-w-[190px]   text-[#FCFFFC] transition-colors h-[52px] bg-[#0077b6] hover:bg-[#0076b6e7]  text-center;
 }
 
 .community-button-outline {
@@ -108,16 +90,13 @@ html {
 }
 
 .primary-button {
-  @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] flex items-center justify-center;
+  @apply px-6 py-2 rounded-[10px] border-2 font-semibold text-base min-w-[140px] h-14 flex items-center justify-center;
 }
 
 .error-message {
   @apply text-sm text-red-700;
 }
 
-/* .navbar{
-  @apply transition-all w-full
-} */
 
 .circle-shape {
   shape-outside: circle();
