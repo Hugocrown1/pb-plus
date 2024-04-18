@@ -1,10 +1,9 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import PropertyLoader from "./PropertyLoader";
 import { IconFileSad } from "@tabler/icons-react";
 import EventCard from "./EventCard";
-import Link from "next/link";
+import CardsLoader from "./CardsLoader";
 
 const EventsDisplay = () => {
   // TODO: Refactorizar a server component
@@ -71,16 +70,7 @@ const EventsDisplay = () => {
       <div className="w-full h-[2px] bg-[#aaaaaa49] my-4"></div> */}
 
       <div className=" w-full">
-        {isLoading && (
-          <div className="grid xl:grid-cols-3 lg:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-4">
-            <PropertyLoader uniqueKey="1" />
-            <PropertyLoader uniqueKey="2" />
-            <PropertyLoader uniqueKey="3" />
-            <PropertyLoader uniqueKey="4" />
-            <PropertyLoader uniqueKey="5" />
-            <PropertyLoader uniqueKey="6" />
-          </div>
-        )}
+        {isLoading && <CardsLoader />}
         {/* <div className="ml-96">
           <p className="text-xl">Today</p>
           <div className="w-[100px] h-1 bg-[#0077b6] mb-4"></div>
