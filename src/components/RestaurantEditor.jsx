@@ -193,7 +193,7 @@ const RestaurantEditor = ({
                 id="coverImage"
                 name="Cover"
                 type="file"
-                accept="image/png, image/jpeg"
+                accept="image/png, image/jpeg, image/webp"
                 className="hidden"
                 onChange={uploadPreviewImage}
               />
