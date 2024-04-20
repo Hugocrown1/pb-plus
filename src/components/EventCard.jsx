@@ -22,6 +22,8 @@ const EventCard = ({
     (id) => id.toString() === userSession?.id
   );
 
+  const isUserEventOwner = userSession?.id === user?.toString();
+
   return (
     <article className={`card ${inter.className}`}>
       <Link
@@ -54,11 +56,16 @@ const EventCard = ({
               {address || "Address"}
             </p>
           </div>
-          {userSession?.id !== user.toString() && (
-            <InterestedUserButton
-              eventId={_id.toString()}
-              isUserInterested={isUserInterested}
-            />
+
+          {_id && (
+            <div className=" h-10 w-full ">
+              {!isUserEventOwner && (
+                <InterestedUserButton
+                  eventId={_id.toString()}
+                  isUserInterested={isUserInterested}
+                />
+              )}
+            </div>
           )}
         </div>
       </Link>
