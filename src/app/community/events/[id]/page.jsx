@@ -1,5 +1,4 @@
 import { getEvent } from "@/lib/events";
-
 import DeleteButton from "./DeleteButton";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import Image from "next/image";
@@ -13,10 +12,9 @@ const EventPage = async ({ params: { id } }) => {
   const eventInfo = await getEvent(id);
 
   return (
-    <main className={`bg-[#f5f3f4]  xl:pt-[50px] `}>
-      <div className="w-full bg-white h-[70px] flex flex-row items-center">
+    <main className={`bg-[#f5f3f4]  pt-[60px] `}>
+      <div className="w-full  mt-4 xl:flex  hidden">
         <BackButton />
-        <p>Back</p>
       </div>
       <div className="container-2xl">
         <div className="flex flex-col w-full">
@@ -33,28 +31,30 @@ const EventPage = async ({ params: { id } }) => {
               />
             </div>
           </section>
-          <div className="h-fit grid grid-cols-3 my-[10px] gap-2">
-            <section className="bg-white p-[20px] col-span-2 shadow-lg">
-              <div className="flex flex-row w-full ">
-                <h2 className="text-start flex-1 font-bold">
-                  {eventInfo.title}
-                </h2>
-                {session?.user.id === eventInfo.user._id ? (
-                  <div className="flex flex-row gap-2">
-                    <Link
-                      href={`/community/events/edit-event/${eventInfo._id}`}
-                      className="community-button"
-                    >
-                      <IconPencil />
-                      <p>Edit</p>
-                    </Link>
-                    <DeleteButton id={id} />
-                  </div>
-                ) : (
-                  <></>
-                )}
+          <div className="h-fit lg:grid grid-cols-3 my-[10px] gap-2 flex flex-col">
+            <section className="bg-white p-[20px] col-span-2 shadow-lg lg:order-first order-last">
+              <div className="flex xl:flex-row w-full flex-col justify-between">
+                <h1 className="text-left md:-my-1 md:text-[40px] text-[32px] xl:order-first order-last">
+                  {eventInfo?.title}
+                </h1>
+                <div className="xl:order-last order-first">
+                  {session?.user.id === eventInfo.user._id ? (
+                    <div className="flex xl:flex items-center gap-2 justify-between">
+                      <Link
+                        href={`/community/events/edit-event/${eventInfo._id}`}
+                        className="community-button"
+                      >
+                        <IconPencil />
+                        <p>Edit</p>
+                      </Link>
+                      <DeleteButton id={id} />
+                    </div>
+                  ) : (
+                    <></>
+                  )}
+                </div>
               </div>
-              <h2 className="text-start mt-2">Description</h2>
+              <h3 className="md:text-[32px] text-2xl">Description</h3>
               <p className="min-h-10">{eventInfo.description}</p>
               <hr className="w-full my-2" />
               <div className="flex items-center mt-7 ">
@@ -68,19 +68,20 @@ const EventPage = async ({ params: { id } }) => {
                 </div>
               </div>
             </section>
-            <section className="bg-white p-[20px] flex flex-col shadow-lg h-fit">
-              <h2 className="text-start">Host info</h2>
-              <div className="flex flex-row items-center gap-6 w-full my-auto mt-2">
+            <section className="md:flex flex-col bg-white items-start px-4 py-2 shadow-lg xl:h-[175px] md:w-[480px] rounded-sm">
+              <p className="text-[#656b69] text-lg">Host info</p>
+
+              <div className="flex flex-row items-center gap-6 w-full my-auto">
                 <img
                   src={eventInfo.user.image}
-                  alt="host photo"
-                  className="object-cover object-center w-[70px] aspect-square rounded-full"
+                  alt="seller photo"
+                  className="object-cover object-center xl:w-[100px] w-[70px] aspect-square rounded-full"
                 />
 
                 <div className="flex flex-col w-full text-left">
                   <p className="text-xl font-semibold">{eventInfo.user.name}</p>
                   <p className="text-base text-[#656b69]">Member</p>
-                  <div className="flex flex-row items-center justify-center gap-1 w-full border-[1px] border-[#255748] text-[#255748] hover:bg-[#ddeee5] rounded-xl px-4 py-1">
+                  <div className="flex flex-row items-center justify-center gap-1 w-full border-[1px] border-[#255748] text-[#255748] hover:bg-[#ddeee5] rounded-xl py-2 px-4 mt-2">
                     <IconPhoneFilled /> <p>{eventInfo.user.phone}</p>
                   </div>
                 </div>
@@ -88,8 +89,8 @@ const EventPage = async ({ params: { id } }) => {
             </section>
           </div>
           <section className="w-full mb-10">
-            <h2 className="text-start">Gallery</h2>
-            <div className="grid grid-flow-row grid-cols-4 gap-2 w-full self-center">
+            <h2 className="text-left md:text-[32px] text-2xl">Gallery</h2>
+            <div className="grid grid-flow-row xl:grid-cols-4 grid-cols-2 gap-2 w-full self-center mt-2">
               {eventInfo.images.map((image, index) => (
                 <img
                   key={index}
