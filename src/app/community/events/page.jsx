@@ -1,5 +1,7 @@
+import CardsLoader from "@/components/CardsLoader";
 import EventsDisplay from "@/components/EventsDisplay";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default function Page() {
   return (
@@ -23,7 +25,9 @@ export default function Page() {
           Create an event
         </Link>
 
-        <EventsDisplay />
+        <Suspense fallback={<CardsLoader />}>
+          <EventsDisplay />
+        </Suspense>
       </section>
     </main>
   );
