@@ -12,7 +12,7 @@ const RestaurantCard = ({ _id, name, images }) => {
         href={_id ? `/community/advertising/${_id}` : "#"}
         className="flex flex-col h-full"
       >
-        <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
+        <div className="relative max-h-[600px] aspect-[458/299] bg-gray-300 overflow-hidden">
           {Cover && (
             <img
               alt="event cover image"
@@ -21,7 +21,7 @@ const RestaurantCard = ({ _id, name, images }) => {
             />
           )}
         </div>
-        <div className="flex flex-col px-4 py-3 h-[42%] ">
+        <div className="flex flex-col px-4 pt-3 pb-12 h-full ">
           <div className="flex flex-row w-full gap-x-2 items-center">
             <img
               alt="event cover image"

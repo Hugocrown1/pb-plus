@@ -5,8 +5,6 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 const InterestedUserButton = ({ eventId, isUserInterested }) => {
-  //TODO: Arreglar proporciones de cartas, manejo de usuarios sin logearse
-
   const [interested, setInterested] = useState(isUserInterested);
 
   const handleInterestedUser = async (e, eventId) => {
@@ -33,11 +31,13 @@ const InterestedUserButton = ({ eventId, isUserInterested }) => {
   return (
     <button
       onClick={(e) => handleInterestedUser(e, eventId)}
-      className={` flex z-50 w-full max-h-24  items-center justify-center gap-x-2 ${
+      className={` flex w-full max-h-24  items-center justify-center gap-x-2 ${
         interested
           ? "bg-[#0077b6] text-[#B9E7FE]"
           : "bg-[#B9E7FE] text-[#0077b6]"
-      } font-semibold mt-1  py-2 rounded-lg hover:opacity-80 transition-all duration-300 ease-in-out`}
+      } font-semibold mt-1  py-2 rounded-lg 
+         hover:opacity-80
+       transition-all duration-300 ease-in-out "`}
     >
       {interested ? <IconHeartFilled /> : <IconHeart />}{" "}
       {interested ? "You're interested" : "I'm interested"}

@@ -40,92 +40,49 @@ const PropertyCard = ({
   // };
   return (
     <article className={`card ${inter.className}`}>
-      {_id ? (
-        <Link
-          href={`/real-estate/houses-&-properties/${_id}`}
-          className="flex flex-col h-full"
-        >
-          <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
-            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
-              {type || "Type"}
-            </div>
-            {coverImage && (
-              <img
-                alt="property cover image"
-                src={coverImage}
-                className="w-full h-full object-cover object-center"
-              />
-            )}
+      <Link
+        href={_id ? `/real-estate/houses-&-properties/${_id}` : "#"}
+        className="flex flex-col h-full"
+      >
+        <div className="relative max-h-[600px] aspect-[458/299] bg-gray-300 overflow-hidden">
+          <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
+            {type || "Type"}
           </div>
-          <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
-            <div className="flex flex-row items-center gap-1">
-              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
-                ${numberFormatter(price)}
-              </p>
-              {type === "Rental" && <p className="text-[#707070]">/month</p>}
-            </div>
-            <p className="text-left text-2xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
-              {title || "Title"}
+          {coverImage && (
+            <img
+              alt="property cover image"
+              src={coverImage}
+              className="w-full h-full object-cover object-center"
+            />
+          )}
+        </div>
+        <div className="flex flex-col px-4 py-3 min-h-[30%] ">
+          <div className="flex flex-row items-center gap-1">
+            <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
+              ${numberFormatter(price)}
             </p>
-            <div className="flex flex-row items-center text-[#707070] text-nowrap ">
-              <IconMapPin min={22} />
-              <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
-                {address || "Address"}
-              </p>
-            </div>
-            <hr className="w-full mx-auto my-2" />
-            <div className="flex flex-wrap gap-2">
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconBath /> <p>{bathrooms} Baths</p>
-              </div>
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconBed /> <p>{bedrooms} Beds</p>
-              </div>
-            </div>
+            {type === "Rental" && <p className="text-[#707070]">/month</p>}
           </div>
-        </Link>
-      ) : (
-        <>
-          <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
-            <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
-              {type || "Type"}
-            </div>
-            {coverImage && (
-              <img
-                alt="property cover image"
-                src={coverImage}
-                className="w-full h-full object-cover object-center"
-              />
-            )}
-          </div>
-          <div className="flex flex-col px-4 py-1 my-auto min-h-[30%]">
-            <div className="flex flex-row items-center gap-1">
-              <p className="text-left text-2xl font-bold text-[#30725C] max-w-[193pxs] overflow-hidden overflow-ellipsis -mb-1">
-                ${numberFormatter(price)}
-              </p>
-              {type === "Rental" && <p className="text-[#707070]">/month</p>}
-            </div>
-            <p className="text-left text-2xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
-              {title || "Title"}
+          <p className="text-left text-2xl font-bold text-nowrap overflow-ellipsis overflow-hidden">
+            {title || "Title"}
+          </p>
+          <div className="flex flex-row items-center text-[#707070] text-nowrap ">
+            <IconMapPin min={22} />
+            <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
+              {address || "Address"}
             </p>
-            <div className="flex flex-row items-center text-[#707070] text-nowrap ">
-              <IconMapPin min={22} />
-              <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
-                {address || "Address"}
-              </p>
+          </div>
+          <hr className="w-full mx-auto my-2" />
+          <div className="flex flex-wrap gap-2">
+            <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+              <IconBath /> <p>{bathrooms} Baths</p>
             </div>
-            <hr className="w-full mx-auto my-2" />
-            <div className="flex flex-row gap-2">
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconBath /> <p>{bathrooms} Baths</p>
-              </div>
-              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
-                <IconBed /> <p>{bedrooms} Beds</p>
-              </div>
+            <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+              <IconBed /> <p>{bedrooms} Beds</p>
             </div>
           </div>
-        </>
-      )}
+        </div>
+      </Link>
     </article>
   );
 };
