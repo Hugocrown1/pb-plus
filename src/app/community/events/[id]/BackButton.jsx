@@ -8,10 +8,10 @@ const BackButton = () => {
   const router = useRouter();
   return (
     <button
-      className="rounded-full border border-[#B6B6B6] items-center justify-center w-[30px] h-[30px] ml-[20px] mr-[5px]"
+      className="flex rounded-md border border-[#B6B6B6] items-center justify-center w-[100px] h-[40px] ml-[20px] mr-[5px] bg-white hover:bg-[#f4f4f5]"
       onClick={() => router.push("/community/events")}
     >
-      <IconChevronLeft />
+      <IconChevronLeft /> Back
     </button>
   );
 };

@@ -68,8 +68,8 @@ export default function Page() {
           <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
         </header>
 
-        <div className="w-full h-fit items-center justify-center gap-x-4 max-w-[1280px] mx-auto mt-4 ">
-          <figure className="relative w-[500px] h-[500px]  circle-shape bg-black mr-12 float-left">
+        <div className="w-full h-fit items-center justify-center gap-x-4 max-w-[1280px] mx-auto mt-4 px-4">
+          <figure className="relative w-[210px] h-[210px] xl:w-[500px] xl:h-[500px]  circle-shape bg-black xl:mr-12 m-4 float-left ">
             <Image
               loading="lazy"
               src="/assets/events.webp"
@@ -78,20 +78,22 @@ export default function Page() {
               className="circle-shape object-cover"
             />
           </figure>
-          <p className=" font-medium xl:text-lg texl-base max-w-[70ch] ml-80">
+          <p className=" font-medium xl:text-lg text-sm max-w-[70ch] xl:ml-80">
             Welcome to PB Plus Community, your go-to resource for staying
             connected and informed about events and restaurants in the lively
             Punta Banda neighborhood! At PB Plus Community, our mission is to
             foster a strong sense of belonging and engagement among residents
             and visitors alike by keeping you up-to-date with the latest
-            happenings and dining options in Punta Banda. Through our
-            user-friendly platform, you'll have easy access to a diverse array
+            happenings and dining options in Punta Banda. 
+          </p>
+          <p className="font-medium xl:text-lg text-sm max-w-[70ch] xl:ml-80 hidden xl:block">
+          Through our user-friendly platform, you'll have easy access to a diverse array
             of upcoming events, ranging from local gatherings to cultural
             festivals and beyond. Whether you're a seasoned local or a newcomer
             to the area, PB Plus Community ensures that you're always in the
             know about the best things to do in Punta Banda.
           </p>
-          <p className=" font-medium xl:text-lg texl-base max-w-[70ch] mt-4 ml-80">
+          <p className="font-medium xl:text-lg text-sm max-w-[70ch] mt-4 xl:ml-80">
             Feeling hungry? Let PB Plus Community guide you to the perfect
             dining experience! Explore a curated selection of restaurants
             offering delectable dishes that cater to every taste and preference.
@@ -103,7 +105,7 @@ export default function Page() {
       </section>
       <section
         id="services"
-        className="flex flex-col justify-center mt-10 max-w-[1280px] mx-auto mb-24"
+        className="flex flex-col justify-center mt-10 xl:max-w-[1280px] mx-auto mb-24 px-4"
       >
         <header className="flex flex-col items-center">
           <h1 className="xl:text-[64px] text-[42px]">Our Community Services</h1>
@@ -112,16 +114,16 @@ export default function Page() {
           </span>
           <div className="w-[100px] h-1 bg-[#0077b6] my-4"></div>
         </header>
-        <div className="flex flex-row  justify-center gap-x-8 py-4 text-right">
+        <div className="flex xl:flex-row flex-col  justify-center gap-x-8 py-4 xl:text-right">
           <div className="flex flex-col w-full gap-y-4 text-[18px] text-pretty">
-            <p>
+            <p className="xl:text-lg text-sm pb-2">
               Promote your restaurant to a targeted audience of food enthusiasts
               and locals. Showcase your unique menu, special offers, and dining
               ambiance on our platform. Gain visibility and drive foot traffic
               to your establishment with our effective restaurant advertising
               solutions.
             </p>
-            <p>
+            <p className="xl:text-lg text-sm pb-2">
               Planning an event in Punta Banda? Share it with the community
               through PB Plus Community. Whether it's a music concert, art
               exhibition, food festival, or charity event, we'll help you reach
@@ -129,7 +131,7 @@ export default function Page() {
               leveraging our event publication services.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-3  w-full h-full min-[400px]:px-4 xl:px-0">
+          <div className="grid grid-cols-2 gap-3  w-full h-full min-[400px]:px-4 xl:px-0 ">
             <ServiceCommunityCard
               href={"/community/events"}
               title={"Events"}
