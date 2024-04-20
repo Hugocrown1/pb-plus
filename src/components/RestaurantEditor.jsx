@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FormInput from "./FormInput";
-import { IconUpload } from "@tabler/icons-react";
+import { IconUpload, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import { deleteImage } from "@/lib/deleteImage";
 import { redirect, useRouter } from "next/navigation";
@@ -12,10 +12,14 @@ import Spinner from "./Spinner";
 import SpinnerSmall from "./SpinnerSmall";
 import axios from "axios";
 import { toast } from "sonner";
+import FormFileInput from "./FormFileInput";
+import { ReactSortable } from "react-sortablejs";
 
 const RestaurantEditor = ({
   images: existingImages,
   name: existingName,
+  address: existingAddress,
+  category: existingCategory,
   sectionTitle: existingSectionTitle,
   information: existingInformation,
   calendar: existingCalendar,
@@ -24,6 +28,8 @@ const RestaurantEditor = ({
 }) => {
   const [values, setValues] = useState({
     name: existingName || "",
+    address: existingAddress || "",
+    category: existingCategory || "",
     sectionTitle: existingSectionTitle || "",
     information: existingInformation || {
       AboutUs: "",
@@ -47,12 +53,14 @@ const RestaurantEditor = ({
 
   const [previewImages, setPreviewImages] = useState(
     existingImages || {
+      Profile: "",
       Cover: "",
       AboutUs: "",
       MeetUs1: "",
       MeetUs2: "",
       MeetUs3: "",
       CustomSection: "",
+      Gallery: [],
     }
   );
   const [uploadedImages, setUploadedImages] = useState([]);
@@ -81,21 +89,31 @@ const RestaurantEditor = ({
           prevUploadedImages.concat([[url, files[0]]])
         );
       }
-      const newPreviewImages = {
-        ...previewImages,
-        [name]: url,
-      };
-      const prevURL = previewImages[name];
-      setPreviewImages(newPreviewImages);
-      const deleteImage = Object.values(newPreviewImages).includes(prevURL);
-      if (!deleteImage && !deletedImages.includes(prevURL)) {
-        setDeletedImages(deletedImages.concat(prevURL));
-        if (prevURL.includes("blob")) {
-          setUploadedImages((prevUploadedImages) =>
-            prevUploadedImages.filter(([key, value]) => key !== prevURL)
-          );
+      let newPreviewImages;
+      if (name === "Gallery") {
+        newPreviewImages = {
+          ...previewImages,
+          Gallery: previewImages.Gallery.concat(url),
+        };
+      } else {
+        newPreviewImages = {
+          ...previewImages,
+          [name]: url,
+        };
+        const prevURL = previewImages[name];
+        const deleteImage = Object.values(newPreviewImages)
+          .flat()
+          .includes(prevURL);
+        if (!deleteImage && !deletedImages.includes(prevURL)) {
+          setDeletedImages(deletedImages.concat(prevURL));
+          if (prevURL.includes("blob")) {
+            setUploadedImages((prevUploadedImages) =>
+              prevUploadedImages.filter(([key, value]) => key !== prevURL)
+            );
+          }
         }
       }
+      setPreviewImages(newPreviewImages);
     }
   };
 
@@ -106,6 +124,26 @@ const RestaurantEditor = ({
       ...values,
       information: { ...values.information, [name]: value },
     });
+  };
+
+  const updatePreviewImagesOrder = (images) => {
+    setPreviewImages((prevImages) => ({ ...prevImages, Gallery: images }));
+  };
+
+  const handleRemoveImage = (imageUrl) => {
+    const deleteImage = Object.values(previewImages).flat().includes(imageUrl);
+    if (!deleteImage && !deletedImages.includes(imageUrl)) {
+      setDeletedImages(deletedImages.concat(imageUrl));
+      if (prevURL.includes("blob")) {
+        setUploadedImages((prevUploadedImages) =>
+          prevUploadedImages.filter(([key, value]) => key !== imageUrl)
+        );
+      }
+    }
+    setPreviewImages((prevImages) => ({
+      ...prevImages,
+      Gallery: prevImages.Gallery.filter((image) => image !== imageUrl),
+    }));
   };
 
   const saveRestaurant = async (e) => {
@@ -175,14 +213,20 @@ const RestaurantEditor = ({
           />
         )}
         <div className=" absolute h-full w-full flex justify-center items-center">
-          <div className="flex flex-col items-center justify-center gap-5">
-            <FormInput
-              name="name"
-              id="name"
-              placeholder={"Restaurant Name"}
-              value={values.name}
-              onChange={onChange}
-            />
+          <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col">
+              <FormInput
+                name="name"
+                id="name"
+                maxLength={30}
+                placeholder={"Restaurant Name"}
+                value={values.name}
+                onChange={onChange}
+              />
+              <span className="text-end">
+                {values.name.length}/{30}
+              </span>
+            </div>
             <label
               htmlFor="coverImage"
               className="flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#E7E1E4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
@@ -193,7 +237,7 @@ const RestaurantEditor = ({
                 id="coverImage"
                 name="Cover"
                 type="file"
-                accept="image/png, image/jpeg"
+                accept="image/png, image/jpeg, image/webp"
                 className="hidden"
                 onChange={uploadPreviewImage}
               />
@@ -214,48 +258,32 @@ const RestaurantEditor = ({
       </section>
       <section className="w-full h-[550px] bg-[#E7E1E4]">
         <div className=" flex container-xl h-full justify-center">
-          <div className="flex flex-row gap-10">
-            <div className="flex flex-col max-w-[560px] min-w-[560px] justify-center">
+          <div className="grid grid-cols-2 gap-7">
+            <div className="flex flex-col justify-center">
               <h2 className="text-start font-bold">About Us</h2>
               <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
               <textarea
                 name="AboutUs"
                 id="aboutUs"
+                maxLength={400}
                 placeholder={"About Us Information"}
-                className="min-h-[300px] form-input mt-1"
+                className="flex-1 form-input mt-1"
                 value={values.information.AboutUs}
                 onChange={uploadInformation}
               />
+              <span className="text-end">
+                {values.information.AboutUs.length}/{400}
+              </span>
             </div>
-            <div className="w-[630px] h-[360px] relative rounded-md overflow-hidden bg-[#f5f3f4]">
-              {previewImages.AboutUs && (
-                <Image
-                  priority
-                  alt={"about us image"}
-                  src={previewImages.AboutUs}
-                  fill={true}
-                  sizes="630px"
-                  className={`object-cover object-center`}
-                />
-              )}
-
-              <div className="w-full h-full flex justify-center items-center">
-                <label
-                  htmlFor="aboutUsImage"
-                  className="absolute flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#E7E1E4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Upload
-                  <input
-                    id="aboutUsImage"
-                    name="AboutUs"
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    className="hidden"
-                    onChange={uploadPreviewImage}
-                  />
-                </label>
-              </div>
+            <div className=" h-[360px] relative rounded-md overflow-hidden bg-[#f5f3f4]">
+              <FormFileInput
+                alt={"about us image"}
+                id={"aboutUsImage"}
+                inputColor={"#E7E1E4"}
+                name={"AboutUs"}
+                onChange={uploadPreviewImage}
+                url={previewImages.AboutUs}
+              />
             </div>
           </div>
         </div>
@@ -266,129 +294,52 @@ const RestaurantEditor = ({
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
           <div className="h-[800px] w-full grid grid-cols-2 grid-rows-2 gap-x-7 gap-y-4 mt-5 ">
             <div className="relative rounded-md overflow-hidden row-span-2  bg-[#E7E1E4]">
-              {previewImages.MeetUs1 && (
-                <Image
-                  priority
-                  alt={"meet us image 1"}
-                  src={previewImages.MeetUs1}
-                  fill={true}
-                  className={`object-cover object-center`}
-                />
-              )}
-
-              <div className="w-full h-full flex justify-center items-center ">
-                <label
-                  htmlFor="meetUsImage1"
-                  className="absolute flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Upload
-                  <input
-                    id="meetUsImage1"
-                    name="MeetUs1"
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    className="hidden"
-                    onChange={uploadPreviewImage}
-                  />
-                </label>
-              </div>
+              <FormFileInput
+                alt={"meet us image 1"}
+                id={"meetUsImage1"}
+                inputColor={"#f5f3f4"}
+                name={"MeetUs1"}
+                onChange={uploadPreviewImage}
+                url={previewImages.MeetUs1}
+              />
             </div>
             <div className="relative rounded-md overflow-hidden  bg-[#E7E1E4]">
-              {previewImages.MeetUs2 && (
-                <Image
-                  priority
-                  alt={"meet us image 2"}
-                  src={previewImages.MeetUs2}
-                  fill={true}
-                  className={`object-cover object-center`}
-                />
-              )}
-
-              <div className="w-full h-full flex justify-center items-center">
-                <label
-                  htmlFor="meetUsImage2"
-                  className="absolute flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Upload
-                  <input
-                    id="meetUsImage2"
-                    name="MeetUs2"
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    className="hidden"
-                    onChange={uploadPreviewImage}
-                  />
-                </label>
-              </div>
+              <FormFileInput
+                alt={"meet us image 2"}
+                id={"meetUsImage2"}
+                inputColor={"#f5f3f4"}
+                name={"MeetUs2"}
+                onChange={uploadPreviewImage}
+                url={previewImages.MeetUs2}
+              />
             </div>
             <div className="relative rounded-md overflow-hidden h-[300px]  bg-[#E7E1E4]">
-              {previewImages.MeetUs3 && (
-                <Image
-                  priority
-                  alt={"meet us image 3"}
-                  src={previewImages.MeetUs3}
-                  fill={true}
-                  className={`object-cover object-center`}
-                />
-              )}
-
-              <div className="w-full h-full flex justify-center items-center">
-                <label
-                  htmlFor="meetUsImage3"
-                  className="absolute flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Upload
-                  <input
-                    id="meetUsImage3"
-                    name="MeetUs3"
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    className="hidden"
-                    onChange={uploadPreviewImage}
-                  />
-                </label>
-              </div>
+              <FormFileInput
+                alt={"meet us image 3"}
+                id={"meetUsImage3"}
+                inputColor={"#f5f3f4"}
+                name={"MeetUs3"}
+                onChange={uploadPreviewImage}
+                url={previewImages.MeetUs3}
+              />
             </div>
           </div>
         </div>
       </section>
       <section className="w-full h-[730px] bg-[#E7E1E4]">
         <div className=" flex container-xl h-full justify-center">
-          <div className="flex flex-row gap-10 items-start">
-            <div className="w-[630px] h-[630px] relative rounded-md overflow-hidden  bg-[#f5f3f4]">
-              {previewImages.CustomSection && (
-                <Image
-                  priority
-                  alt={"custom section image"}
-                  src={previewImages.CustomSection}
-                  fill={true}
-                  sizes="630px"
-                  className={`object-cover object-center`}
-                />
-              )}
-
-              <div className="w-full h-full flex justify-center items-center">
-                <label
-                  htmlFor="customSectionImage"
-                  className="absolute flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#E7E1E4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
-                >
-                  <IconUpload size={22} />
-                  Upload
-                  <input
-                    id="customSectionImage"
-                    name="CustomSection"
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    className="hidden"
-                    onChange={uploadPreviewImage}
-                  />
-                </label>
-              </div>
+          <div className="grid grid-cols-2 gap-7">
+            <div className=" h-[630px] relative rounded-md overflow-hidden  bg-[#f5f3f4]">
+              <FormFileInput
+                alt={"custom section image"}
+                id={"customSectionImage"}
+                inputColor={"#E7E1E4"}
+                name={"CustomSection"}
+                onChange={uploadPreviewImage}
+                url={previewImages.CustomSection}
+              />
             </div>
-            <div className="flex flex-col max-w-[560px] justify-center">
+            <div className="flex flex-col justify-center">
               <FormInput
                 name="sectionTitle"
                 id="sectionTitle"
@@ -396,17 +347,87 @@ const RestaurantEditor = ({
                 value={values.sectionTitle}
                 onChange={onChange}
               />
-              <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
+
+              <div className="flex">
+                <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
+                <span className="text-end flex-1">
+                  {values.sectionTitle.length}/{30}
+                </span>
+              </div>
               <textarea
                 name="CustomSection"
                 id="customSection"
+                maxLength={400}
                 placeholder={"Custom Section Information"}
-                className="min-h-[300px] form-input mt-1 min-w-[560px]"
+                className="flex-1 form-input mt-1"
                 value={values.information.CustomSection}
                 onChange={uploadInformation}
               />
+              <span className="text-end">
+                {values.information.CustomSection.length}/{400}
+              </span>
             </div>
           </div>
+        </div>
+      </section>
+      <section className="w-full h-[900px] relative">
+        <label
+          htmlFor="gallery"
+          className="absolute right-0 mt-5 mr-24 flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#E7E1E4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
+        >
+          <IconUpload size={22} />
+          Upload
+          <span className="text-end">
+            {previewImages.Gallery.length}/{9}
+          </span>
+          <input
+            disabled={previewImages.Gallery.length >= 9}
+            id="gallery"
+            name="Gallery"
+            type="file"
+            accept="image/png, image/jpeg, image/webp"
+            className="hidden"
+            onChange={uploadPreviewImage}
+          />
+        </label>
+        <div className="container-xl flex items-center h-full">
+          <div className="flex flex-col justify-center items-center mt-10">
+            <h2 className="text-start font-bold">Gallery</h2>
+            <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
+          </div>
+          {!!previewImages.Gallery?.length && (
+            <ReactSortable
+              list={previewImages.Gallery}
+              className="grid grid-cols-3 gap-[20px] justify-items-center mt-5 w-7/12"
+              setList={updatePreviewImagesOrder}
+            >
+              {previewImages.Gallery.map((link, index) => (
+                <div
+                  key={"Gallery image" + index}
+                  className={`flex relative aspect-square rounded-md shadow-lg justify-end bg-transparent items-start overflow-hidden`}
+                >
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveImage(link)}
+                    className="absolute p-1 rounded-full bg-black/80 hover:bg-black transition-colors text-white z-10 translate-y-1 -translate-x-1"
+                  >
+                    <IconX size={20} />
+                  </button>
+                  <img
+                    src={link}
+                    alt="Restaurant gallery photo"
+                    className="h-full w-full object-cover object-center"
+                  />
+                </div>
+              ))}
+            </ReactSortable>
+          )}
+        </div>
+      </section>
+      <section className="w-full h-[850px] bg-[#E7E1E4]">
+        <div className="container-xl flex items-center h-full p-10">
+          <h2 className="text-start font-bold">Weekly Calendar</h2>
+          <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
         </div>
       </section>
       <section className="w-full h-[660px]">

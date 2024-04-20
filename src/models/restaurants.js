@@ -2,14 +2,18 @@ import mongoose, { models } from "mongoose";
 
 const schema = new mongoose.Schema({
   images: {
+    Profile: String,
     Cover: String,
     AboutUs: String,
     MeetUs1: String,
     MeetUs2: String,
     MeetUs3: String,
     CustomSection: String,
+    Gallery: [String],
   },
   name: String,
+  address: String,
+  category: String,
   sectionTitle: String,
   information: { AboutUs: String, CustomSection: String },
   calendar: [[String]],
