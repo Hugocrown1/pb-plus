@@ -184,7 +184,7 @@ textarea {
 }
 
 .card {
-  @apply flex flex-col bg-white max-w-[600px] w-full mx-auto  shadow-md rounded-lg overflow-hidden  min-[305px]:aspect-[79/75];
+  @apply flex flex-col bg-white min-h-[435px] max-w-[600px] w-full mx-auto  shadow-md rounded-lg overflow-hidden  ;
 }
 
 .error-message {

@@ -1,23 +1,34 @@
-"use client";
-
 import { IconMapPin } from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import dateFormatter from "@/lib/dateFormatter";
+import InterestedUserButton from "./InterestedUserButton";
+import mongoose from "mongoose";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({ _id, coverImage, date, title, address, category }) => {
+const EventCard = ({
+  _id,
+  coverImage,
+  date,
+  title,
+  address,
+  category,
+  user,
+  userSession,
+  interested,
+}) => {
+  const isUserInterested = interested?.some(
+    (id) => id.toString() === userSession?.id
+  );
+
   return (
     <article className={`card ${inter.className}`}>
       <Link
         href={_id ? `/community/events/${_id}` : "#"}
-        className="flex flex-col h-full"
+        className="flex flex-col h-full "
       >
-        <div className="relative h-[58%] aspect-[458/299] bg-gray-300">
-          <div className="absolute bg-black/70 px-2 py-1 z-10 rounded-md font-semibold text-white translate-x-[15%] translate-y-[30%]">
-            {category || "Category"}
-          </div>
+        <div className="relative max-h-[600px] aspect-[458/299] bg-gray-300 overflow-hidden">
           {coverImage && (
             <img
               alt="event cover image"
@@ -26,22 +37,29 @@ const EventCard = ({ _id, coverImage, date, title, address, category }) => {
             />
           )}
         </div>
-        <div className="flex flex-col px-4 py-3 h-[42%] ">
-          <div className="flex flex-row items-start justify-start gap-1 bg-[#B9E7FE] rounded-3xl px-4 w-fit ">
-            <p className="text-left text-lg font-bold text-[#0077b6]  overflow-hidden overflow-ellipsis ">
-              {dateFormatter(date)}
-            </p>
-          </div>
+        <div className="flex flex-col px-4 py-3 h-full ">
+          <span className="flex  items-start justify-start gap-1 font-semibold bg-[#e6e6e685] text-[#656b69] rounded-full px-4 w-fit ">
+            {dateFormatter(date)}
+          </span>
 
-          <p className="text-left text-2xl font-bold overflow-ellipsis overflow-hidden break-words ">
+          <span className="text-left text-2xl font-bold overflow-ellipsis overflow-hidden break-words ">
             {title || "Title"}
-          </p>
+          </span>
+          <span className="text-left text-[14px] font-bold text-[#575757]   -mt-1">
+            {category || "Category"}
+          </span>
           <div className="flex flex-row items-center text-[#707070] text-nowrap ">
             <IconMapPin min={22} />
             <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
               {address || "Address"}
             </p>
           </div>
+          {userSession?.id !== user.toString() && (
+            <InterestedUserButton
+              eventId={_id.toString()}
+              isUserInterested={isUserInterested}
+            />
+          )}
         </div>
       </Link>
     </article>

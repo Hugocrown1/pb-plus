@@ -13,6 +13,11 @@ const schema = new mongoose.Schema({
     ref: "Users",
     required: true,
   },
+  interested: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Users" }],
+    default: [],
+    required: true,
+  },
 });
 
 export default models?.Events || mongoose.model("Events", schema);

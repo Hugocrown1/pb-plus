@@ -10,18 +10,45 @@ const dataSlider = [
     subtitle:
       "The PB+ Community initiative embodies our commitment to social responsibility, collaboration, and meaningful engagement. ",
 
-    source: "/assets/house.webp",
+    source: "/assets/community/slider1.png",
     linkTitle: "Take a look",
-    href: "#",
+    href: "/community/events",
   },
   {
     id: 2,
     title: "Advertise Your Event",
     subtitle:
       "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
-    source: "/assets/house2.webp",
+    source: "/assets/community/slider2.png",
     linkTitle: "Take a look",
-    href: "#",
+    href: "/community/advertising",
+  },
+  {
+    id: 3,
+    title: "Advertise Your Event",
+    subtitle:
+      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+    source: "/assets/community/slider3.png",
+    linkTitle: "Take a look",
+    href: "/community/advertising",
+  },
+  {
+    id: 4,
+    title: "Advertise Your Event",
+    subtitle:
+      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+    source: "/assets/community/slider4.JPG",
+    linkTitle: "Take a look",
+    href: "/community/advertising",
+  },
+  {
+    id: 5,
+    title: "Advertise Your Event",
+    subtitle:
+      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+    source: "/assets/community/slider5.png",
+    linkTitle: "Take a look",
+    href: "/community/advertising",
   },
 ];
 

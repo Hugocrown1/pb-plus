@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import axios from "axios";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import React, { useEffect, useRef, useState } from "react";
 import {
   IconMenu2,
@@ -9,10 +9,8 @@ import {
   IconUser,
   IconDashboard,
 } from "@tabler/icons-react";
-import Spinner from "./Spinner";
 
-const UserMenu = () => {
-  const { data: session, status } = useSession();
+const UserMenu = ({ session }) => {
   const defaultImage = "/assets/defaultprofile.jpg";
   const [userImage, setUserImage] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -50,8 +48,7 @@ const UserMenu = () => {
 
   return (
     <div className="relative flex pl-5 pb-1 pt-1 z-10 gap-4">
-      {status === "loading" && <Spinner />}
-      {status === "authenticated" && (
+      {session && (
         <div className="menu-container" ref={menuRef}>
           <div
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -96,7 +93,7 @@ const UserMenu = () => {
           </div>
         </div>
       )}
-      {status === "unauthenticated" && (
+      {!session && (
         <div className="flex items-center gap-3">
           <Link
             href="/auth/signup"

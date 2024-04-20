@@ -34,6 +34,7 @@ export async function POST(request) {
     } = await request.json();
 
     const user = await Users.findOne({ email: session.user.email });
+
     if (!user)
       return NextResponse.json(
         { message: "No se encontro el usuario" },
