@@ -57,13 +57,12 @@ const EventCard = ({
             </p>
           </div>
 
-          {!_id && (
+          {_id && (
             <div className=" h-10 w-full ">
               {!isUserEventOwner && (
                 <InterestedUserButton
                   eventId={_id.toString()}
                   isUserInterested={isUserInterested}
-                  isUserEventOwner={isUserEventOwner}
                 />
               )}
             </div>
