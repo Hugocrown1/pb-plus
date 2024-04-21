@@ -137,6 +137,20 @@ const Page = async ({ params: { id } }) => {
         <div className="container-xl flex items-center h-full p-10">
           <h2 className="text-start font-bold">Weekly Calendar</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
+          <div className="grid grid-cols-7 w-full flex-1 justify-evenly mt-5 bg-[#f5f3f4] rounded-md overflow-hidden shadow-md p-2">
+            {Object.entries(restaurantInfo.calendar).map(([day, items]) => (
+              <div className="flex flex-col flex-1 items-center w-full px-5 ">
+                <div className="flex w-full justify-center items-center ">
+                  <h3 className="text-xl">{day}</h3>
+                </div>
+                <ul className="flex-1 mt-5 w-full text-justify list-disc">
+                  {items.map((item) => (
+                    <li className="justify-center my-2 break-all">{item}</li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className="w-full h-[660px]">
