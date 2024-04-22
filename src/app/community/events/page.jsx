@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 export default function Page() {
   return (
-    <main className={`bg-[#f5f3f4]  xl:pt-[50px] container-xl`}>
+    <main className={`bg-[#f5f3f4]  pt-[60px] container-xl`}>
       <section
         id="services"
         className="flex flex-col w-full pt-[25px] mb-8 items-center"
@@ -20,14 +20,16 @@ export default function Page() {
 
         <Link
           href={"/community/events/new-event"}
-          className="community-button self-end mb-4"
+          className="community-button self-end mb-4 mr-2"
         >
           Create an event
         </Link>
 
-        <Suspense fallback={<CardsLoader />}>
-          <EventsDisplay />
-        </Suspense>
+        <div className="border-2 border-gray-300 mx-2 rounded-xl p-2">
+          <Suspense fallback={<CardsLoader />}>
+            <EventsDisplay />
+          </Suspense>
+        </div>
       </section>
     </main>
   );
