@@ -1,10 +1,10 @@
 "use client";
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 
-const InterestedUserButton = ({ eventId, isUserInterested }) => {
+const InterestedUserButton = ({ eventId, userSession, isUserInterested }) => {
   const [interested, setInterested] = useState(isUserInterested);
 
   const handleInterestedUser = async (e, eventId) => {
@@ -35,7 +35,7 @@ const InterestedUserButton = ({ eventId, isUserInterested }) => {
         interested
           ? "bg-[#0077b6] text-[#B9E7FE]"
           : "bg-[#B9E7FE] text-[#0077b6]"
-      } font-semibold mt-1  py-2 rounded-lg 
+      } font-semibold  py-2 rounded-lg 
          hover:opacity-80
        transition-all duration-300 ease-in-out "`}
     >

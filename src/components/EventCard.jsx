@@ -50,7 +50,7 @@ const EventCard = ({
           <span className="text-left text-[14px] font-bold text-[#575757]   -mt-1">
             {category || "Category"}
           </span>
-          <div className="flex flex-row items-center text-[#707070] text-nowrap ">
+          <div className="flex flex-row items-center text-[#707070] text-nowrap mb-1 ">
             <IconMapPin min={22} />
             <p className="mt-[2px] text-nowrap overflow-ellipsis overflow-hidden max-w-[203px]">
               {address || "Address"}
@@ -63,6 +63,7 @@ const EventCard = ({
                 <InterestedUserButton
                   eventId={_id.toString()}
                   isUserInterested={isUserInterested}
+                  userSession={userSession}
                 />
               )}
             </div>

@@ -1,9 +1,11 @@
+import { auth } from "@/app/api/auth/[...nextauth]/route";
 import CardsLoader from "@/components/CardsLoader";
 import EventsDisplay from "@/components/EventsDisplay";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
+  const { user } = await auth();
   return (
     <main className={`bg-[#f5f3f4]  pt-[60px] container-xl`}>
       <section
@@ -26,9 +28,7 @@ export default function Page() {
         </Link>
 
         <div className="border-2 border-gray-300 mx-2 rounded-xl p-2">
-          <Suspense fallback={<CardsLoader />}>
-            <EventsDisplay />
-          </Suspense>
+          <EventsDisplay user={user} />
         </div>
       </section>
     </main>

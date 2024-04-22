@@ -1,28 +1,36 @@
+"use client";
 import EventCard from "./EventCard";
-import { connectDB } from "@/lib/mongoose";
-import Events from "@/models/events";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
 
-const getEvents = async () => {
-  await connectDB();
-  const response = await Events.find().lean();
+import { useEffect, useState } from "react";
+import axios from "axios";
+import CardsLoader from "./CardsLoader";
 
-  return response;
-};
+// const getEvents = () => {
+//   await connectDB();
+//   const response = await Events.find().lean();
 
-const EventsDisplay = async () => {
-  // TODO: Refactorizar a server component
+//   return response;
+// };
 
-  const events = await getEvents();
+const EventsDisplay = ({ user }) => {
+  // const events = await getEvents();
+  const [events, setEvents] = useState(null);
 
-  const { user } = await auth();
+  useEffect(() => {
+    axios.get("/api/events").then((res) => {
+      setEvents(res.data);
+    });
+  }, []);
 
   return (
-    <div className="grid lg:grid-cols-3 min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2 justify-items-center">
-      {events?.map((event) => (
-        <EventCard key={event._id} userSession={user} {...event} />
-      ))}
-    </div>
+    <>
+      {!events && <CardsLoader />}
+      <div className="grid lg:grid-cols-3 min-[677px]:grid-cols-2 grid-cols-1 items-center xl:gap-4 gap-2 justify-items-center">
+        {events?.map((event) => (
+          <EventCard key={event._id} userSession={user} {...event} />
+        ))}
+      </div>
+    </>
   );
 };
 
