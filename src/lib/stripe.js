@@ -80,6 +80,29 @@ export async function loadPrices() {
   return prices.data;
 }
 
+export async function getAllCustomers() {
+  const customers = await stripe.customers.list();
+  return customers.data;
+}
+
+export async function getAllPayouts() {
+  const payouts = await stripe.payouts.list();
+  console.log(payouts.data);
+  return payouts.data;
+}
+
+export async function getAllEvents() {
+  const events = await stripe.events.list();
+  console.log(events.data)
+  return events.data;
+}
+
+export async function getAllSubscriptions() {
+  const subscriptions = await stripe.subscriptions.list();
+  return subscriptions.data;
+}
+
+
 export async function createCustomerIfNull() {
   await connectDB();
   const session = await getServerSession(authOptions);
