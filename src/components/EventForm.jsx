@@ -262,7 +262,7 @@ const EventForm = ({
       <section className="xl:w-[30%] w-full flex flex-col items-center xl:items-start ">
         <h1 className=" text-center xl:text-left text-[42px]">Preview</h1>
         <div className=" xl:h-full xl:w-full xl:self-center mx-auto  ">
-          <EventCard {...values} coverImage={previewImages[0]} />
+          <EventCard event={{ ...values, coverImage: previewImages[0] }} />
         </div>
       </section>
     </div>
