@@ -1,5 +1,3 @@
-"use client";
-
 import DeleteButton from "@/app/community/advertising/[id]/DeleteButton";
 import Image from "next/image";
 import { IconPencil, IconPhoneFilled } from "@tabler/icons-react";
@@ -7,30 +5,10 @@ import BackButton from "@/app/community/events/[id]/BackButton";
 import Link from "next/link";
 import dateFormatter from "@/lib/dateFormatter";
 import InterestedUserButton from "@/components/InterestedUserButton";
-import { useEffect, useState } from "react";
-import LoadingScreen from "./AdminViews/Loading";
-import axios from "axios";
 
-const EventPage = ({ id, session }) => {
-  //   const session = await auth();
-  //   const eventInfo = await getEvent(id);
-
-  const [isUserInterested, setIsUserInterested] = useState();
-  const [eventInfo, setEventInfo] = useState(null);
-
-  useEffect(() => {
-    axios.get(`/api/events/${id}`).then((res) => {
-      setIsUserInterested(res.data.interested?.includes(session?.user.id));
-      setEventInfo(res.data);
-    });
-  }, []);
-
-  if (!eventInfo)
-    return (
-      <main className="h-[800px] flex items-center">
-        <LoadingScreen />
-      </main>
-    );
+const EventPage = async ({ params: { id } }) => {
+  const session = await auth();
+  const eventInfo = await getEvent(id);
 
   return (
     <main className={`bg-[#f5f3f4]  pt-[60px] `}>
@@ -45,8 +23,9 @@ const EventPage = ({ id, session }) => {
             >
               <div className="bg-white rounded-lg p-1 absolute w-52 z-10">
                 <InterestedUserButton
-                  eventId={id}
+                  eventId={eventInfo._id}
                   isUserInterested={isUserInterested}
+                  userSession={session?.user}
                 />
               </div>
               <Image

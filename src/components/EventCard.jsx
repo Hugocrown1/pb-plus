@@ -7,20 +7,8 @@ import mongoose from "mongoose";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({
-  _id,
-  coverImage,
-  date,
-  title,
-  address,
-  category,
-  user,
-  userSession,
-  interested,
-}) => {
-  const isUserInterested = interested?.some(
-    (id) => id.toString() === userSession?.id
-  );
+const EventCard = ({ userSession, event }) => {
+  const { _id, coverImage, date, title, address, category, user } = event;
 
   const isUserEventOwner = userSession?.id === user?.toString();
 
@@ -60,11 +48,7 @@ const EventCard = ({
           {_id && (
             <div className=" h-10 w-full ">
               {!isUserEventOwner && (
-                <InterestedUserButton
-                  eventId={_id.toString()}
-                  isUserInterested={isUserInterested}
-                  userSession={userSession}
-                />
+                <InterestedUserButton event={event} userSession={userSession} />
               )}
             </div>
           )}
