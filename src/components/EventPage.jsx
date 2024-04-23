@@ -1,14 +1,10 @@
-import DeleteButton from "./DeleteButton";
-import BackButton from "./BackButton";
-
+import DeleteButton from "@/app/community/advertising/[id]/DeleteButton";
 import Image from "next/image";
 import { IconPencil, IconPhoneFilled } from "@tabler/icons-react";
+import BackButton from "@/app/community/events/[id]/BackButton";
 import Link from "next/link";
 import dateFormatter from "@/lib/dateFormatter";
 import InterestedUserButton from "@/components/InterestedUserButton";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
-import { getEvent } from "@/lib/events";
-import NoUserModal from "@/components/NoUserModal";
 
 const EventPage = async ({ params: { id } }) => {
   const session = await auth();
@@ -27,7 +23,8 @@ const EventPage = async ({ params: { id } }) => {
             >
               <div className="bg-white rounded-lg p-1 absolute w-52 z-10">
                 <InterestedUserButton
-                  event={eventInfo}
+                  eventId={eventInfo._id}
+                  isUserInterested={isUserInterested}
                   userSession={session?.user}
                 />
               </div>
@@ -118,7 +115,6 @@ const EventPage = async ({ params: { id } }) => {
           </section>
         </div>
       </div>
-      <NoUserModal />
     </main>
   );
 };

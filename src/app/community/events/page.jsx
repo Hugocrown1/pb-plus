@@ -1,9 +1,10 @@
 import CardsLoader from "@/components/CardsLoader";
 import EventsDisplay from "@/components/EventsDisplay";
+import NoUserModal from "@/components/NoUserModal";
 import Link from "next/link";
 import { Suspense } from "react";
 
-export default function Page() {
+export default async function Page() {
   return (
     <main className={`bg-[#f5f3f4]  pt-[60px] container-xl`}>
       <section
@@ -31,6 +32,7 @@ export default function Page() {
           </Suspense>
         </div>
       </section>
+      <NoUserModal />
     </main>
   );
 }

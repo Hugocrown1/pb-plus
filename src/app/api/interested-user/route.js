@@ -15,6 +15,12 @@ export async function POST(request) {
     if (!event) {
       return NextResponse.json({ message: "Event not found" }, { status: 404 });
     }
+    if (event.interested.includes(user.id)) {
+      return NextResponse.json(
+        { message: "User already interested" },
+        { status: 400 }
+      );
+    }
 
     event.interested = event.interested.concat(user.id);
     await event.save();
