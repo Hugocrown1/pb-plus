@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const EventCard = ({ userSession, event }) => {
+const EventCard = ({ userSession, event = {} }) => {
   const { _id, coverImage, date, title, address, category, user } = event;
 
   const isUserEventOwner = userSession?.id === user?.toString();
