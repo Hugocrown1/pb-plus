@@ -72,7 +72,7 @@ const page = () => {
 
             // Filter today's events
             const todayEventsCount = eventsRes.data.filter((event) => {
-              const eventDate = new Date(event.date);
+              const eventDate = new Date(event.publishDate);
               return eventDate >= today;
             }).length;
             setTodayEvents(todayEventsCount);
