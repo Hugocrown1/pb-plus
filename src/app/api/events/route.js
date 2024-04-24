@@ -36,6 +36,7 @@ export async function POST(request) {
       category,
       coverImage: images[0],
       user: user._id,
+      publishDate: new Date(),
     });
 
     user.events = user.events.concat(event._id);
