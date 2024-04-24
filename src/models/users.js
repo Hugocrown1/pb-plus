@@ -13,6 +13,12 @@ const schema = new mongoose.Schema({
       ref: "Properties",
     },
   ],
+  events: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Events",
+    },
+  ],
   emailVerified: { type: Boolean, default: false },
   date: Date,
   resettoken: { type: String, required: false },
