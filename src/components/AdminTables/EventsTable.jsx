@@ -121,37 +121,36 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
     <div>
       {loading ? (
         <div className="flex flex-col gap-4 m-2">
-        {/* Skeleton for buttons */}
-        <div className="animate-pulse flex justify-between gap-4">
-          <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
-          <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
-        </div>
+          {/* Skeleton for buttons */}
+          <div className="animate-pulse flex justify-between gap-4">
+            <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
+            <div className="bg-gray-200 xl:w-56 w-1/2 h-10 rounded-md"></div>
+          </div>
 
-        {/* Skeleton for cards */}
-        <div className="grid xl:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
-          {[1, 2, 3, 4].map((_, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse xl:h-[200px]"
-            >
-              <div className="flex flex-col xl:flex-row">
-                <div className="h-52 xl:h-full xl:w-1/3 w-full bg-gray-200 rounded"></div>
-                <div className="mx-4 my-2 w-full xl:space-y-2 space-y-1">
-                  
-                  <div className="h-4 bg-gray-200 rounded w-4/5 my-2"></div>
-                  <div className="h-4 bg-gray-200 rounded w-3/5"></div>
-                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
-                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
-                  <div className="flex gap-4 justify-center xl:justify-end">
-                    <div className="h-8 bg-gray-200 rounded w-16"></div>
-                    <div className="h-8 bg-gray-200 rounded w-16"></div>
+          {/* Skeleton for cards */}
+          <div className="grid xl:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
+            {[1, 2, 3, 4].map((_, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative animate-pulse xl:h-[200px]"
+              >
+                <div className="flex flex-col xl:flex-row">
+                  <div className="h-52 xl:h-full xl:w-1/3 w-full bg-gray-200 rounded"></div>
+                  <div className="mx-4 my-2 w-full xl:space-y-2 space-y-1">
+                    <div className="h-4 bg-gray-200 rounded w-4/5 my-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-3/5"></div>
+                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                    <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+                    <div className="flex gap-4 justify-center xl:justify-end">
+                      <div className="h-8 bg-gray-200 rounded w-16"></div>
+                      <div className="h-8 bg-gray-200 rounded w-16"></div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
       ) : (
         <section className="self-center flex flex-col justify-start h-full">
           <div className="flex p-2 gap-2 relative justify-between">
@@ -214,6 +213,21 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
                       <p className="text-gray-600 text-sm xl:text-base">
                         {new Date(event.date).toLocaleDateString()}
                       </p>
+
+                      {event.interested.length > 0 ? (
+                        <select className="text-gray-600 text-sm xl:text-base border-none -ml-2 min-w-fit">
+                          <option >{event.interested.length} Interested</option>
+                          {event.interested.map((interest, index) => (
+                            <option disabled key={index} value={interest}>
+                              {interest}
+                            </option>
+                          ))}
+                        </select>
+                      ) : (
+                        <p className="text-gray-600 text-sm xl:text-base">
+                          {event.interested.length} Interested
+                        </p>
+                      )}
                     </div>
                   </div>
                   <div className="absolute top-2 right-2 flex-row space-x-2 hidden xl:flex">

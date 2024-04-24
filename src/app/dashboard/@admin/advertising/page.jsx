@@ -91,10 +91,11 @@ const page = () => {
         const usersData = usersResponse.data;
 
         const adsWithUserData = adsResponse.data.map(
-          (event) => {
-            const user = usersData.find((user) => user._id === event.user);
+          (ad) => {
+            const user = usersData.find((user) => user._id === ad.user);
             const userName = user ? user.name : null;
-            return { ...event, userName };
+
+            return { ...ad, userName };
           }
         );
 

@@ -38,6 +38,10 @@ export async function POST(request) {
       user: user._id,
     });
 
+    user.events = user.events.concat(event._id);
+
+    await user.save();
+
     return NextResponse.json(event);
   } catch (error) {
     if (error instanceof Error)

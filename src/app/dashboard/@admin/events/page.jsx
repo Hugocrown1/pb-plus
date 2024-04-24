@@ -25,23 +25,29 @@ const page = () => {
   // }, [fetchTrigger]);
 
   useEffect(() => {
-    const fetchevents = async () => {
+    const fetchEvents = async () => {
       try {
         const [eventsResponse, usersResponse] = await Promise.all([
           axios.get("/api/events"),
           axios.get("/api/users"),
         ]);
-
+  
+        const eventsData = eventsResponse.data;
         const usersData = usersResponse.data;
 
-        const eventsWithUserData = eventsResponse.data.map(
-          (event) => {
-            const user = usersData.find((user) => user._id === event.user);
-            const userName = user ? user.name : null;
-            return { ...event, userName };
-          }
-        );
+        const eventsWithUserData = eventsData.map(event => {
+          // Mapear los IDs de usuarios en la propiedad interested a nombres de usuario
+          const interestedUsers = event.interested.map(userId => {
+            const user = usersData.find(user => user._id === userId);
+            return user ? user.name : null;
+          });
 
+          const user = usersData.find((user) => user._id === event.user);
+          const userName = user ? user.name : null;
+  
+          return { ...event, interested: interestedUsers, userName };
+        });
+  
         setEvents(eventsWithUserData);
         setLoading(false);
         setFetchTrigger(false);
@@ -51,9 +57,10 @@ const page = () => {
         setFetchTrigger(false);
       }
     };
-
-    fetchevents();
+  
+    fetchEvents();
   }, [fetchTrigger]);
+  
 
   return (
     <main className="flex w-full bg-white min-h-screen">
