@@ -33,7 +33,7 @@ const dataSlider = [
   },
   {
     id: 3,
-    title: "House Stitting",
+    title: "House Sitting",
     subtitle:
       "House Sitting Service offers you the peace of mind and assurance that your home is in good hands, whether you're away for a short trip or an extended vacation.",
     source: "/assets/tweaks/real-estate3.PNG",
@@ -42,7 +42,7 @@ const dataSlider = [
   },
   {
     id: 4,
-    title: "Assesment Services",
+    title: "Assessment Services",
     subtitle:
       "Understanding the value appreciation of your property after improvements or over time is crucial for making informed decisions, especially if you're considering selling your land or house. ",
     source: "/assets/house4.png",

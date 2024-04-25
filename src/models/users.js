@@ -7,6 +7,12 @@ const schema = new mongoose.Schema({
   phone: { type: String, default: "000-000-0000" },
   image: String,
   role: { type: String, default: "user" },
+  advertisements: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Restaurants",
+    },
+  ],
   properties: [
     {
       type: mongoose.Schema.Types.ObjectId,

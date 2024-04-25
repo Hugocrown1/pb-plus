@@ -14,6 +14,32 @@ export async function getSubscriptionStatus() {
   const session = await getServerSession(authOptions);
 }
 
+export async function getUserSubscription(userId) {
+  await connectDB();
+  const user = await Users.findById(userId);
+
+  if (!user) {
+    return null;
+  }
+
+  const subscriptions = await stripe.subscriptions.list({
+    customer: user?.stripe_customer_id,
+  });
+
+  if (subscriptions.data.length === 0) {
+    return null;
+  }
+
+  if (
+    subscriptions.data[0].status === "active" ||
+    subscriptions.data[0].status === "past_due"
+  ) {
+    return subscriptions.data[0];
+  }
+
+  return null;
+}
+
 export async function getSubscription() {
   await connectDB();
 
@@ -93,7 +119,7 @@ export async function getAllPayouts() {
 
 export async function getAllEvents() {
   const events = await stripe.events.list();
-  console.log(events.data)
+  console.log(events.data);
   return events.data;
 }
 
@@ -101,7 +127,6 @@ export async function getAllSubscriptions() {
   const subscriptions = await stripe.subscriptions.list();
   return subscriptions.data;
 }
-
 
 export async function createCustomerIfNull() {
   await connectDB();

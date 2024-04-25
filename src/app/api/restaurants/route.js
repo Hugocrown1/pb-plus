@@ -35,6 +35,10 @@ export async function POST(request) {
       user: user._id,
     });
 
+    user.advertisements = user.advertisements.concat(restaurant._id);
+
+    await user.save();
+
     return NextResponse.json(restaurant);
   } catch (error) {
     if (error instanceof Error)

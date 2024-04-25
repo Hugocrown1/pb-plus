@@ -479,8 +479,8 @@ const RestaurantEditor = ({
                   </div>
                 </div>
                 <ul className="flex-1 mt-5 w-full text-justify list-disc">
-                  {items.map((item) => (
-                    <li className="my-2 break-all flex gap-2">
+                  {items.map((item, index) => (
+                    <li key={index} className="my-2 break-all flex gap-2">
                       <button
                         type="button"
                         className=" w-5 h-5 flex items-center rounded-full bg-white"
