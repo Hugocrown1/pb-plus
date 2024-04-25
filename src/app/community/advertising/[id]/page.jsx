@@ -4,10 +4,19 @@ import DeleteButton from "./DeleteButton";
 import { getRestaurant } from "@/lib/restaurants";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import GridGallery from "@/components/GridGallery";
+import { getUserSubscription } from "@/lib/stripe";
+
+import { redirect } from "next/navigation";
 
 const Page = async ({ params: { id } }) => {
   const session = await auth();
   const restaurantInfo = await getRestaurant(id);
+
+  const ownerSubscription = await getUserSubscription(restaurantInfo.user._id);
+
+  if (!ownerSubscription) {
+    redirect("/community/advertising");
+  }
 
   if (!restaurantInfo) {
     redirect("/community/advertising");
