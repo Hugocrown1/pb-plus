@@ -18,14 +18,18 @@ export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 import { Suspense } from "react";
 import ManageBillButton from "./ManageBillButton";
 import SubscriptionNotification from "@/components/SubscriptionNotification";
+import UserAdvertisements from "@/components/UserAdvertisements";
 
 const getUser = async (id) => {
   await connectDB();
   const user = await Users.findById(id)
     .lean()
     .populate("properties")
-    .populate("events");
+    .populate("events")
+    .populate("advertisements");
   user._id = user._id.toString();
+
+  console.log(user);
 
   return user;
 };
@@ -111,13 +115,13 @@ const Page = async () => {
           Published advertisements
         </h2>
         <section className="flex flex-col items-start justify-start rounded-md">
-          {!user?.events?.length > 0 ? (
+          {!user?.advertisements?.length > 0 ? (
             <p className="text-left text-gray-700 ml-4 italic">
               No advertisements published yet
             </p>
           ) : (
             <Suspense fallback={<div>Loading...</div>}>
-              <UserEvents events={user?.events} />
+              <UserAdvertisements advertisements={user.advertisements} />
             </Suspense>
           )}
         </section>
