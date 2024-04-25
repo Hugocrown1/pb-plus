@@ -7,7 +7,7 @@ const UserEvents = async ({ events }) => {
     <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-1 gap-2 self-start">
       {events.map((event) => {
         const formattedevent = {
-          ...event,
+          event,
           _id: event._id.toString(),
           user: event.user.toString(),
         };
