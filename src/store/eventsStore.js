@@ -11,4 +11,5 @@ export const useEventsStore = create((set) => ({
     const eventsList = await getAllEvents();
     set((state) => ({ events: eventsList }));
   },
+
 }));
