@@ -1,11 +1,14 @@
-import { getEvent } from "@/lib/events";
 import DeleteButton from "./DeleteButton";
-import { auth } from "@/app/api/auth/[...nextauth]/route";
+import BackButton from "./BackButton";
+
 import Image from "next/image";
 import { IconPencil, IconPhoneFilled } from "@tabler/icons-react";
-import BackButton from "./BackButton";
 import Link from "next/link";
 import dateFormatter from "@/lib/dateFormatter";
+import InterestedUserButton from "@/components/InterestedUserButton";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import { getEvent } from "@/lib/events";
+import NoUserModal from "@/components/NoUserModal";
 
 const EventPage = async ({ params: { id } }) => {
   const session = await auth();
@@ -20,8 +23,14 @@ const EventPage = async ({ params: { id } }) => {
         <div className="flex flex-col w-full">
           <section className="relative  w-full md:h-[515px] h-[350px] my-4">
             <div
-              className={`relative w-full h-full rounded-lg overflow-hidden`}
+              className={`flex items-end justify-end relative w-full h-full rounded-lg overflow-hidden p-2`}
             >
+              <div className="bg-white rounded-lg p-1 absolute w-52 z-10">
+                <InterestedUserButton
+                  event={eventInfo}
+                  userSession={session?.user}
+                />
+              </div>
               <Image
                 src={eventInfo.coverImage}
                 alt="property photo"
@@ -66,6 +75,12 @@ const EventPage = async ({ params: { id } }) => {
                   <p className="font-bold opacity-50 text-center">DATE</p>
                   <p>{dateFormatter(eventInfo.date)}</p>
                 </div>
+                <div className="flex flex-col text-center ml-2">
+                  <p className="font-bold opacity-50 text-center">
+                    INTERESTED USERS
+                  </p>
+                  <p>{eventInfo.interested.length}</p>
+                </div>
               </div>
             </section>
             <section className="md:flex flex-col bg-white items-start px-4 py-2 shadow-lg xl:h-[175px] md:w-[480px] rounded-sm">
@@ -103,6 +118,7 @@ const EventPage = async ({ params: { id } }) => {
           </section>
         </div>
       </div>
+      <NoUserModal />
     </main>
   );
 };
