@@ -13,7 +13,7 @@ import {
 import { useSession } from "next-auth/react";
 import LoadingScreen from "@/components/LoadingScreen/LoadingScreen";
 
-const Page = () => {
+const page = () => {
   const { data: session, status } = useSession();
   const isAdmin = session?.user?.role == "admin";
 
@@ -72,7 +72,7 @@ const Page = () => {
 
             // Filter today's events
             const todayEventsCount = eventsRes.data.filter((event) => {
-              const eventDate = new Date(event.date);
+              const eventDate = new Date(event.publishDate);
               return eventDate >= today;
             }).length;
             setTodayEvents(todayEventsCount);
@@ -226,7 +226,9 @@ const Page = () => {
           </div>
           <div class="col-span-3 row-span-3 bg-[#fafafa] shadow-md xl:p-4 flex flex-col   border border-gray-200 rounded-xl">
             <div className="w-full xl:h-1/2">
-              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">Recent Quotes</p>
+              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">
+                Recent Quotes
+              </p>
               <table className="min-w-full divide-y divide-gray-200 overflow-x-scroll">
                 <thead className="bg-gray-50">
                   <tr>
@@ -278,7 +280,9 @@ const Page = () => {
               </table>
             </div>
             <div className="w-full xl:h-1/2 h-full">
-              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">Recent Consultations</p>
+              <p class="xl:text-xl text-lg text-gray-800 xl:p-8 p-4 font-bold">
+                Recent Consultations
+              </p>
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50 ">
                   <tr>
@@ -338,4 +342,4 @@ const Page = () => {
   return null;
 };
 
-export default Page;
+export default page;

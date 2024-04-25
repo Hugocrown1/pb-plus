@@ -8,7 +8,8 @@ import {
   IconUserEdit,
   IconHomeEdit,
   IconPhotoEdit,
-  IconHomeQuestion
+  IconHomeQuestion,
+  IconAd,
 } from "@tabler/icons-react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -100,12 +101,19 @@ export default function Layout({ user, admin }) {
             category="Editor"
             active={pathname === "/dashboard/properties"}
           />
-           <SidebarItem
+          <SidebarItem
             href="/dashboard/events"
             icon={<IconPhotoEdit />}
             text="Events"
             category="Editor"
             active={pathname === "/dashboard/events"}
+          />
+          <SidebarItem
+            href="/dashboard/advertising"
+            icon={<IconAd />}
+            text="Advertising"
+            category="Editor"
+            active={pathname === "/dashboard/advertising"}
           />
         </Sidebar>
       )}

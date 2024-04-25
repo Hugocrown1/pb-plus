@@ -13,12 +13,12 @@ const EventCard = ({ userSession, event = {} }) => {
   const isUserEventOwner = userSession?.id === user?.toString();
 
   return (
-    <article className={`card ${inter.className}`}>
+    <article className={`card ${inter.className} `}>
       <Link
         href={_id ? `/community/events/${_id}` : "#"}
         className="flex flex-col h-full "
       >
-        <div className="relative max-h-[600px] aspect-[458/299] bg-gray-300 overflow-hidden">
+        <div className="relative max-h-[600px] xl:h-full aspect-[458/299] bg-gray-300 overflow-hidden">
           {coverImage && (
             <img
               alt="event cover image"

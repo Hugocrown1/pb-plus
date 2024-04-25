@@ -16,7 +16,15 @@ const schema = new mongoose.Schema({
   category: String,
   sectionTitle: String,
   information: { AboutUs: String, CustomSection: String },
-  calendar: [[String]],
+  calendar: {
+    Monday: [String],
+    Tuesday: [String],
+    Wednesday: [String],
+    Thursday: [String],
+    Friday: [String],
+    Saturday: [String],
+    Sunday: [String],
+  },
   socialMedia: { Facebook: String, Instagram: String, Twitter: String },
   user: {
     type: mongoose.Schema.Types.ObjectId,
