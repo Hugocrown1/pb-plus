@@ -17,7 +17,7 @@ const getUser = async (id) => {
 const page = async () => {
   const session = await auth();
   if (!session) {
-    redirect("/login");
+    redirect("/auth/login");
   }
 
   const user = await getUser(session.user.id);
