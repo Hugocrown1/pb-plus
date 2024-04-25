@@ -25,12 +25,6 @@ const EventPage = async ({ params: { id } }) => {
             <div
               className={`flex items-end justify-end relative w-full h-full rounded-lg overflow-hidden p-2`}
             >
-              <div className="bg-white rounded-lg p-1 absolute w-52 z-10">
-                <InterestedUserButton
-                  event={eventInfo}
-                  userSession={session?.user}
-                />
-              </div>
               <Image
                 src={eventInfo.coverImage}
                 alt="property photo"
@@ -59,7 +53,12 @@ const EventPage = async ({ params: { id } }) => {
                       <DeleteButton id={id} />
                     </div>
                   ) : (
-                    <></>
+                    <div className="flex w-56">
+                      <InterestedUserButton
+                        event={eventInfo}
+                        userSession={session?.user}
+                      />
+                    </div>
                   )}
                 </div>
               </div>
