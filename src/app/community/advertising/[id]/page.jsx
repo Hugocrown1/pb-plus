@@ -14,12 +14,15 @@ const Page = async ({ params: { id } }) => {
 
   const ownerSubscription = await getUserSubscription(restaurantInfo.user._id);
 
-  if (!ownerSubscription) {
-    redirect("/community/advertising");
-  }
-
-  if (!restaurantInfo) {
-    redirect("/community/advertising");
+  if (
+    session.user.role !== "admin" &&
+    session.user.id !== restaurantInfo.user._id
+  ) {
+    if (!ownerSubscription || !restaurantInfo) {
+      setTimeout(() => {
+        router.push("/community/advertising");
+      }, 10000);
+    }
   }
   return (
     <main>
