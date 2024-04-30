@@ -19,6 +19,7 @@ import { Suspense } from "react";
 import ManageBillButton from "./ManageBillButton";
 import SubscriptionNotification from "@/components/SubscriptionNotification";
 import UserAdvertisements from "@/components/UserAdvertisements";
+import Restaurants from "@/models/restaurants";
 
 const getUser = async (id) => {
   await connectDB();
@@ -26,10 +27,8 @@ const getUser = async (id) => {
     .lean()
     .populate("properties")
     .populate("events")
-    .populate("advertisements");
+    .populate({ path: "advertisements", model: Restaurants });
   user._id = user._id.toString();
-
-  console.log(user);
 
   return user;
 };

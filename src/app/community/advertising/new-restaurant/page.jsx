@@ -22,13 +22,21 @@ const page = async () => {
 
   const user = await getUser(session.user.id);
 
-  if (user.advertisements?.length > 0) {
-    return redirect("/community/advertising/" + user.advertisements[0]);
+  if (user.role === "admin") {
+    return (
+      <main>
+        <RestaurantEditor />
+      </main>
+    );
   }
 
   const subscription = await getSubscription();
   if (!subscription) {
     return <NoSubscriptionPage />;
+  }
+
+  if (user.advertisements?.length > 0) {
+    return redirect("/community/advertising/" + user.advertisements[0]);
   }
   return (
     <main>

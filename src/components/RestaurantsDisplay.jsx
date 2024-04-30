@@ -17,6 +17,7 @@ export default async function RestaurantsDisplay() {
 
   const restaurantsWithActiveSubscriptions = restaurants.reduce(
     (acc, restaurant) => {
+      if (restaurant.user.role === "admin") return acc.concat(restaurant);
       const subscription = subscriptions.find(
         (subscription) =>
           subscription.customer === restaurant.user.stripe_customer_id
