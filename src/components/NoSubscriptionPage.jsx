@@ -20,13 +20,13 @@ const NoSubscriptionPage = () => {
           alt="Logo Punta Banda Plus"
         />
         <h1 className="text-4xl">
-          Para crear un restaurante debes tener una suscripción activa
+          To create an advertisement you must have an active subscription
         </h1>
-        <p className="text-xl mt-4">Serás rederigido automaticamente</p>
+        <p className="text-xl mt-4">You will be redirected automatically</p>
         <div className="flex flex-row text-lg gap-x-2">
-          De no ser asi
+          If not,
           <Link href={"/account"} className=" underline">
-            haz click aqui
+            click here
           </Link>
         </div>
       </section>
