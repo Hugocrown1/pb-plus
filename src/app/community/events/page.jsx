@@ -26,7 +26,7 @@ export default async function Page() {
           Create an event
         </Link>
 
-        <div className="border-2 border-gray-300 mx-2 rounded-xl p-2">
+        <div className="border-2 border-gray-300 mx-2 rounded-xl p-2 w-full">
           <Suspense fallback={<CardsLoader />}>
             <EventsDisplay />
           </Suspense>
