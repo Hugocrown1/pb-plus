@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const RestaurantCard = ({ _id, name, images }) => {
-  const { Cover } = images;
+const RestaurantCard = ({ _id, name, category, address, images }) => {
+  const { Cover, Profile } = images;
   return (
     <article className={`card ${inter.className}`}>
       <Link
@@ -15,7 +15,7 @@ const RestaurantCard = ({ _id, name, images }) => {
         <div className="relative max-h-[600px] aspect-[458/299] bg-gray-300 overflow-hidden">
           {Cover && (
             <img
-              alt="event cover image"
+              alt="restaurant cover image"
               src={Cover}
               className="w-full h-full object-cover object-center"
             />
@@ -24,8 +24,8 @@ const RestaurantCard = ({ _id, name, images }) => {
         <div className="flex flex-col px-4 pt-3 pb-12 h-full ">
           <div className="flex flex-row w-full gap-x-2 items-center">
             <img
-              alt="event cover image"
-              src={Cover}
+              alt="restaurant profile image"
+              src={Profile}
               className="w-20 h-20 object-cover object-center rounded-full aspect-[1/1] bg-gray-300"
             />
 
@@ -34,12 +34,12 @@ const RestaurantCard = ({ _id, name, images }) => {
                 {name || "Title"}
               </span>
               <span className="text-left text-[14px] font-bold text-[#575757]  ml-1 -mt-1">
-                Restaurant
+                {category || "Category"}
               </span>
               <div className="flex flex-row items-center text-[#707070] text-nowrap gap-x-1">
                 <IconMapPin size={22} />
                 <span className=" text-nowrap overflow-ellipsis overflow-hidden max-w-[203px] ">
-                  1,000 meters away
+                  {address}
                 </span>
               </div>
             </div>
