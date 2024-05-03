@@ -23,7 +23,8 @@ const Page = async ({ params: { id } }) => {
     (session &&
       session.user.role !== "admin" &&
       session.user.id !== restaurantInfo.user._id &&
-      !ownerSubscription)
+      !ownerSubscription &&
+      restaurantInfo.user.role !== "admin")
   ) {
     redirect("/community/advertising");
   }
