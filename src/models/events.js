@@ -18,6 +18,7 @@ const schema = new mongoose.Schema({
     default: [],
     required: true,
   },
+  publishDate: Date,
 });
 
 export default models?.Events || mongoose.model("Events", schema);

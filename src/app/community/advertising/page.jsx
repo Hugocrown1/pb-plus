@@ -26,10 +26,10 @@ export default function Page() {
           Advertise your business
         </Link>
 
-        <div className="border-2 border-gray-300 mx-2 rounded-xl p-2">
-        <Suspense fallback={<CardsLoader />}>
-          <RestaurantsDisplay />
-        </Suspense>
+        <div className="border-2 border-gray-300 mx-2 rounded-xl p-2 w-full">
+          <Suspense fallback={<CardsLoader />}>
+            <RestaurantsDisplay />
+          </Suspense>
         </div>
       </section>
     </main>

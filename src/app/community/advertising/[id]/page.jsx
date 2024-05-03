@@ -4,8 +4,14 @@ import DeleteButton from "./DeleteButton";
 import { getRestaurant } from "@/lib/restaurants";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import GridGallery from "@/components/GridGallery";
+
 import { IconMapPin, IconPencil, IconPinFilled } from "@tabler/icons-react";
 import BackButton from "./BackButton";
+
+import { getUserSubscription } from "@/lib/stripe";
+
+import { redirect } from "next/navigation";
+
 
 const Page = async ({ params: { id } }) => {
   const session = await auth();
@@ -14,6 +20,20 @@ const Page = async ({ params: { id } }) => {
   if (!restaurantInfo) {
     redirect("/community/advertising");
   }
+
+  const ownerSubscription = await getUserSubscription(restaurantInfo.user._id);
+
+  if (
+    (!session && !ownerSubscription && restaurantInfo.user.role !== "admin") ||
+    (session &&
+      session.user.role !== "admin" &&
+      session.user.id !== restaurantInfo.user._id &&
+      !ownerSubscription &&
+      restaurantInfo.user.role !== "admin")
+  ) {
+    redirect("/community/advertising");
+  }
+
   return (
     <main>
       <section className="relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md">

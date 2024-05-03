@@ -1,6 +1,43 @@
+import NoSubscriptionPage from "@/components/NoSubscriptionPage";
 import RestaurantEditor from "@/components/RestaurantEditor";
+import { getSubscription } from "@/lib/stripe";
+import { auth } from "@/app/api/auth/[...nextauth]/route";
+import Users from "@/models/users";
+import { connectDB } from "@/lib/mongoose";
+import { redirect } from "next/navigation";
 
-const page = () => {
+const getUser = async (id) => {
+  await connectDB();
+  const user = await Users.findById(id).lean();
+  user._id = user._id.toString();
+
+  return user;
+};
+
+const page = async () => {
+  const session = await auth();
+  if (!session) {
+    redirect("/auth/login");
+  }
+
+  const user = await getUser(session.user.id);
+
+  if (user.role === "admin") {
+    return (
+      <main>
+        <RestaurantEditor />
+      </main>
+    );
+  }
+
+  const subscription = await getSubscription();
+  if (!subscription) {
+    return <NoSubscriptionPage />;
+  }
+
+  if (user.advertisements?.length > 0) {
+    return redirect("/community/advertising/" + user.advertisements[0]);
+  }
   return (
     <main>
       <RestaurantEditor />

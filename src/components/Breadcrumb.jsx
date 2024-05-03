@@ -10,7 +10,8 @@ import {
     IconUserEdit,
     IconHomeEdit,
     IconPhotoEdit,
-    IconHomeQuestion
+    IconHomeQuestion,
+    IconAd
   } from "@tabler/icons-react";
 
 const Breadcrumb = () => {
@@ -26,7 +27,8 @@ const Breadcrumb = () => {
             { label: 'Services Forms', path: '/dashboard/realestate' , icon : <IconHomeQuestion/>},
             { label: 'Users', path: '/dashboard/users' , icon : <IconUserEdit/>},
             { label: 'Properties', path: '/dashboard/properties',icon : <IconHomeEdit/> },
-            { label: 'Events', path: '/dashboard/events' , icon : <IconPhotoEdit/>}
+            { label: 'Events', path: '/dashboard/events' , icon : <IconPhotoEdit/>},
+            { label: 'Advertising', path: '/dashboard/advertising' , icon : <IconAd/>}
         ];
         
         const currentBreadcrumbs = breadcrumbData.filter(item => pathname.startsWith(item.path));
