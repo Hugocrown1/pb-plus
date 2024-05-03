@@ -59,9 +59,26 @@ export async function DELETE(request, { params: { id } }) {
         { status: 404 }
       );
     if (await verifyUser(restaurant.user._id.toString())) {
-      const imageKeys = restaurant.images.map((image) => ({
-        Key: image.split("/").pop(),
-      }));
+      const imageKeys = Object.keys(restaurant.images).reduce((acc, key) => {
+        if (!restaurant.images[key]) return acc;
+        if (key === "Gallery") {
+          acc.push(
+            ...restaurant.images[key].map((image) => ({
+              Key: image.split("/").pop(),
+            }))
+          );
+        } else {
+          acc.push({
+            Key: restaurant.images[key].split("/").pop(),
+          });
+        }
+
+        return acc;
+      }, []);
+
+      // const imageKeys = restaurant.images.map((image) => ({
+      //   Key: image.split("/").pop(),
+      // }));
       await client.send(
         new DeleteObjectsCommand({
           Bucket: bucketName,
