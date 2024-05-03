@@ -12,18 +12,22 @@ const Page = async ({ params: { id } }) => {
   const session = await auth();
   const restaurantInfo = await getRestaurant(id);
 
+  if (!restaurantInfo) {
+    redirect("/community/advertising");
+  }
+
   const ownerSubscription = await getUserSubscription(restaurantInfo.user._id);
 
   if (
-    session.user.role !== "admin" &&
-    session.user.id !== restaurantInfo.user._id
+    (!session && !ownerSubscription && restaurantInfo.user.role !== "admin") ||
+    (session &&
+      session.user.role !== "admin" &&
+      session.user.id !== restaurantInfo.user._id &&
+      !ownerSubscription)
   ) {
-    if (!ownerSubscription || !restaurantInfo) {
-      setTimeout(() => {
-        router.push("/community/advertising");
-      }, 10000);
-    }
+    redirect("/community/advertising");
   }
+
   return (
     <main>
       <section className="relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md">
