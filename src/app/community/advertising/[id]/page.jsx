@@ -12,7 +12,6 @@ import { getUserSubscription } from "@/lib/stripe";
 
 import { redirect } from "next/navigation";
 
-
 const Page = async ({ params: { id } }) => {
   const session = await auth();
   const restaurantInfo = await getRestaurant(id);
@@ -75,7 +74,7 @@ const Page = async ({ params: { id } }) => {
               <IconPencil />
               <p>Edit</p>
             </Link>
-            <DeleteButton />
+            <DeleteButton id={restaurantInfo._id} />
           </div>
         )}
         <div className=" flex flex-row gap-2 justify-center items-center absolute left-0 bottom-0 m-5 text-white text-2xl">
