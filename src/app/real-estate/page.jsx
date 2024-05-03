@@ -9,6 +9,11 @@ import {
 import ServiceCard from "@/components/ServiceCard";
 import Slider from "@/components/Slider/Slider";
 
+export const metadata = {
+  title: "PB+ Real Estate",
+  description: "PB+ Real Estate: Your gateway to unparalleled property solutions tailored to your needs and aspirations.",
+};
+
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
 const dataSlider = [

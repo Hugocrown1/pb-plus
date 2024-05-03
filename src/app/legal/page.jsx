@@ -8,6 +8,11 @@ import LegalCard from "@/components/LegalCard";
 import ServiceLegalCard from "@/components/ServiceLegalCard";
 import Slider from "@/components/Slider/Slider";
 
+export const metadata = {
+  title: "PB+ Legal",
+  description: "PB+ Legal: Your gateway to unparalleled legal solutions tailored to your needs and aspirations.",
+};
+
 const roboto = Libre_Baskerville({ subsets: ["latin"], weight: "400" });
 
 const Page = () => {

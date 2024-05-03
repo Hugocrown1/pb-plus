@@ -19,6 +19,11 @@ import { Suspense } from "react";
 import ManageBillButton from "./ManageBillButton";
 import SubscriptionNotification from "@/components/SubscriptionNotification";
 
+export const metadata = {
+  title: "PB+ Account",
+  description: "PB+ Account: Your account information.",
+};
+
 const getUser = async (id) => {
   await connectDB();
   const user = await Users.findById(id)

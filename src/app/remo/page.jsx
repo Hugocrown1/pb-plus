@@ -15,6 +15,11 @@ import {
 import Image from "next/image";
 import GridGallery from "@/components/GridGallery";
 
+export const metadata = {
+  title: "PB+ Remo",
+  description: "PB+ Remo: Premier remodeling service for your dream home. Craftsmanship, excellence, and satisfaction.",
+};
+
 const data = [
   "/assets/remo-gallery/remo.webp",
   "/assets/remo-gallery/remo2.webp",

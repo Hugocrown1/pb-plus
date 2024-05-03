@@ -3,6 +3,11 @@ import Image from "next/image";
 import { IconCalendarStats, IconToolsKitchen } from "@tabler/icons-react";
 import ServiceCommunityCard from "@/components/ServiceCommunityCard";
 
+export const metadata = {
+  title: "PB+ Community",
+  description: "PB+ Community: The space for the Punta Banda community.",
+};
+
 const dataSlider = [
   {
     id: 1,
