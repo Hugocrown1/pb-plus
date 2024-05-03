@@ -76,9 +76,6 @@ export async function DELETE(request, { params: { id } }) {
         return acc;
       }, []);
 
-      // const imageKeys = restaurant.images.map((image) => ({
-      //   Key: image.split("/").pop(),
-      // }));
       await client.send(
         new DeleteObjectsCommand({
           Bucket: bucketName,
