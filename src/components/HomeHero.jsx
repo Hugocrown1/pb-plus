@@ -3,7 +3,7 @@ import React from "react";
 
 const HomeHero = () => {
   return (
-    <section className="relative flex items-center justify-center h-[760px] bg-black/10 w-full px-4 ">
+    <section className="relative flex items-center justify-center h-[760px] bg-black/10 w-full px-4">
       <div className="flex flex-col gap-4 text-white text-center">
         <p className=" text-6xl min-[652px]:text-8xl font-bold mix-blend-difference">
           PB PLUS
@@ -28,11 +28,13 @@ const HomeHero = () => {
       </div>
 
       <video
-        src={"https://djeib179xst78.cloudfront.net/puntabanda"}
+        src={"/assets/homevideo.mp4"}
+        poster="/assets/homevideoframe.jpg"
         autoPlay
         muted
+        preload
         loop
-        className="absolute -z-10 object-cover h-full w-full bg-black"
+        className="absolute -z-10 object-cover h-full w-full "
       />
     </section>
   );
