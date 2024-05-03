@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import FormInput from "./FormInput";
-import { IconUpload, IconX } from "@tabler/icons-react";
+import { IconPlus, IconUpload, IconX } from "@tabler/icons-react";
 import Link from "next/link";
 import { deleteImage } from "@/lib/deleteImage";
 import { redirect, useRouter } from "next/navigation";
@@ -35,12 +35,30 @@ const RestaurantEditor = ({
       AboutUs: "",
       CustomSection: "",
     },
-    calendar: existingCalendar || [],
+    calendar: existingCalendar || {
+      Monday: [],
+      Tuesday: [],
+      Wednesday: [],
+      Thursday: [],
+      Friday: [],
+      Saturday: [],
+      Sunday: [],
+    },
     socialMedia: existingSocialMedia || {
       Facebook: "",
       Instagram: "",
       Twitter: "",
     },
+  });
+
+  const [weekValues, setWeekValues] = useState({
+    Monday: "",
+    Tuesday: "",
+    Wednesday: "",
+    Thursday: "",
+    Friday: "",
+    Saturday: "",
+    Sunday: "",
   });
 
   const router = useRouter();
@@ -428,6 +446,83 @@ const RestaurantEditor = ({
         <div className="container-xl flex items-center h-full p-10">
           <h2 className="text-start font-bold">Weekly Calendar</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
+          <div className="grid grid-cols-7 gap-2 w-full flex-1 justify-evenly mt-5 bg-[#f5f3f4] rounded-md overflow-hidden shadow-md p-2">
+            {Object.entries(values.calendar).map(([day, items]) => (
+              <div className="flex flex-col flex-1 items-center w-full px-5">
+                <div className=" flex flex-col w-full justify-center items-center ">
+                  <h3 className="text-xl">{day}</h3>
+                  <div className="flex flex-row justify-center items-center gap-2">
+                    <button
+                      disabled={values.calendar[day].length >= 4}
+                      type="button"
+                      className=" w-5 h-5 flex items-center rounded-full bg-white"
+                      onClick={() => {
+                        if (weekValues[day] === "") return;
+                        setValues((prevValues) => ({
+                          ...prevValues,
+                          calendar: {
+                            ...prevValues.calendar,
+                            [day]: prevValues.calendar[day].concat(
+                              weekValues[day]
+                            ),
+                          },
+                        }));
+                        setWeekValues((prevWeekValues) => ({
+                          ...prevWeekValues,
+                          [day]: "",
+                        }));
+                      }}
+                    >
+                      <IconPlus />
+                    </button>
+                    {values.calendar[day].length}/{4}
+                  </div>
+                </div>
+                <ul className="flex-1 mt-5 w-full text-justify list-disc">
+                  {items.map((item) => (
+                    <li className="my-2 break-all flex gap-2">
+                      <button
+                        type="button"
+                        className=" w-5 h-5 flex items-center rounded-full bg-white"
+                        onClick={() =>
+                          setValues((prevValues) => ({
+                            ...prevValues,
+                            calendar: {
+                              ...prevValues.calendar,
+                              [day]: prevValues.calendar[day].filter(
+                                (value) => value !== item
+                              ),
+                            },
+                          }))
+                        }
+                      >
+                        <IconX />
+                      </button>
+                      {item}
+                    </li>
+                  ))}
+                  <div className="mt-5">
+                    <textarea
+                      className="h-24"
+                      maxLength={100}
+                      id={day}
+                      type="text"
+                      value={weekValues[day]}
+                      onChange={(e) =>
+                        setWeekValues((prevWeekValues) => ({
+                          ...prevWeekValues,
+                          [day]: e.target.value,
+                        }))
+                      }
+                    />
+                  </div>
+                  <li className="w-full flex justify-end">
+                    {weekValues[day].length}/{100}
+                  </li>
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className="w-full h-[660px]">
