@@ -4,7 +4,6 @@
 
 
 // const Page = () => {
-//     const stripeClient = require("stripe")('sk_test_51P3SDY13yf7FOQ66PxKfK9aZQzaIBALGGIGIWRowreQrWS73pMtFbr95heW29mg3kqk0g42W1lhcoD9K7XiAhLu400MyPQdCVG');
 //     const [customerData, setCustomerData] = useState([]);
 
 //     useEffect(() => {
