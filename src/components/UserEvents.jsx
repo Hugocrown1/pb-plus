@@ -15,10 +15,10 @@ const UserEvents = async ({ events }) => {
         return (
           <div className="max-h-fit">
             <EventCard
-            key={formattedevent._id}
-            userSession={user}
-            {...formattedevent}
-          />
+              key={formattedevent._id}
+              userSession={user}
+              event={formattedevent}
+            />
           </div>
         );
       })}

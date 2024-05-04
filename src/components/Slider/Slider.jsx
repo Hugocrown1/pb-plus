@@ -58,7 +58,7 @@ const Slider = ({ dataSlider }) => {
               }`}
             />
           )}
-          <div className="absolute bg-black opacity-50 w-full h-full"></div>
+          <div className="absolute bg-black opacity-40 w-full h-full"></div>
 
           <div className="mx-auto flex flex-col text-left max-w-[1200px] px-[15px]">
             <div className="w-[80%] min-[1000px]:w-[50%] px-2">

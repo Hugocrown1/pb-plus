@@ -5,6 +5,13 @@ import { getRestaurant } from "@/lib/restaurants";
 import { auth } from "@/app/api/auth/[...nextauth]/route";
 import GridGallery from "@/components/GridGallery";
 
+import { IconMapPin, IconPencil, IconPinFilled } from "@tabler/icons-react";
+import BackButton from "./BackButton";
+
+import { getUserSubscription } from "@/lib/stripe";
+
+import { redirect } from "next/navigation";
+
 const Page = async ({ params: { id } }) => {
   const session = await auth();
   const restaurantInfo = await getRestaurant(id);
@@ -12,6 +19,20 @@ const Page = async ({ params: { id } }) => {
   if (!restaurantInfo) {
     redirect("/community/advertising");
   }
+
+  const ownerSubscription = await getUserSubscription(restaurantInfo.user._id);
+
+  if (
+    (!session && !ownerSubscription && restaurantInfo.user.role !== "admin") ||
+    (session &&
+      session.user.role !== "admin" &&
+      session.user.id !== restaurantInfo.user._id &&
+      !ownerSubscription &&
+      restaurantInfo.user.role !== "admin")
+  ) {
+    redirect("/community/advertising");
+  }
+
   return (
     <main>
       <section className="relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md">
@@ -25,7 +46,24 @@ const Page = async ({ params: { id } }) => {
         />
         <div className="absolute bg-black opacity-50 w-full h-full"></div>
         <div className=" absolute h-full w-full flex justify-center items-center">
-          <h1 className=" text-white ">{restaurantInfo.name}</h1>
+          <div className="w-full absolute mt-4 left-0 top-0 pt-[60px] xl:flex hidden">
+            <BackButton />
+          </div>
+          <div className="flex flex-row gap-10 justify-center items-center">
+            <div className="relative w-52 h-52 rounded-full overflow-hidden">
+              <Image
+                priority
+                alt={"profile image"}
+                src={restaurantInfo.images.Profile}
+                fill={true}
+                className={`object-cover object-center`}
+              />
+            </div>
+            <div className="flex flex-col justify-center items-center">
+              <h1 className=" text-white ">{restaurantInfo.name}</h1>
+              <h3 className="text-white text-2xl">{restaurantInfo.category}</h3>
+            </div>
+          </div>
         </div>
         {session?.user.id === restaurantInfo.user._id && (
           <div className="absolute right-0 m-2 p-2 rounded-md flex flex-row gap-2 bg-white">
@@ -33,11 +71,16 @@ const Page = async ({ params: { id } }) => {
               href={`/community/advertising/edit-restaurant/${restaurantInfo._id}`}
               className="community-button"
             >
-              <p>Edit Restaurant</p>
+              <IconPencil />
+              <p>Edit</p>
             </Link>
-            <DeleteButton />
+            <DeleteButton id={restaurantInfo._id} />
           </div>
         )}
+        <div className=" flex flex-row gap-2 justify-center items-center absolute left-0 bottom-0 m-5 text-white text-2xl">
+          <IconMapPin />
+          {restaurantInfo.address}
+        </div>
       </section>
       <section className="w-full h-[550px] bg-[#E7E1E4]">
         <div className=" flex container-xl h-full justify-center">
@@ -133,19 +176,31 @@ const Page = async ({ params: { id } }) => {
           </div>
         </div>
       </section>
-      <section className="w-full h-[850px] bg-[#E7E1E4]">
+      <section className="w-full bg-[#E7E1E4]">
         <div className="container-xl flex items-center h-full p-10">
           <h2 className="text-start font-bold">Weekly Calendar</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
-          <div className="grid grid-cols-7 w-full flex-1 justify-evenly mt-5 bg-[#f5f3f4] rounded-md overflow-hidden shadow-md p-2">
+          <div className="grid grid-cols-7 gap-[1px] w-full min-h-[650px] justify-evenly mt-5 bg-black/5 rounded-md overflow-hidden shadow-md">
             {Object.entries(restaurantInfo.calendar).map(([day, items]) => (
-              <div className="flex flex-col flex-1 items-center w-full px-5 ">
-                <div className="flex w-full justify-center items-center ">
-                  <h3 className="text-xl">{day}</h3>
+              <div
+                className="flex flex-col bg-[#f5f3f4] items-center w-full h-full"
+                key={day}
+              >
+                <div className="flex flex-col w-full justify-center items-center border-b-2 border-black/5 ">
+                  <h3 className="text-xl mt-2">{day}</h3>
                 </div>
-                <ul className="flex-1 mt-5 w-full text-justify list-disc">
-                  {items.map((item) => (
-                    <li className="justify-center my-2 break-all">{item}</li>
+                <ul className="flex-1 w-full text-justify list-none flex flex-col gap-[2px]">
+                  {items.map((item, itemIndex) => (
+                    <li
+                      className=" break-all p-5 bg-[#0077B6] text-white w-full relative text-center "
+                      key={itemIndex}
+                    >
+                      <p className="z-10">{item}</p>
+                      <IconPinFilled
+                        className="absolute left-0 top-0 opacity-25 z-0"
+                        size={50}
+                      />
+                    </li>
                   ))}
                 </ul>
               </div>
