@@ -66,7 +66,7 @@ const AdvertisingTable = ({ ads, loading, setFetchTrigger }) => {
       })
     : filteredads;
 
-  const pageSize = 6;
+  const pageSize = 9;
   const totalPages = Math.ceil(sortedads.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
   const paginatedads = sortedads.slice(startIndex, startIndex + pageSize);
@@ -166,21 +166,21 @@ const AdvertisingTable = ({ ads, loading, setFetchTrigger }) => {
             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-ads-none">
               <IconSearch className="text-gray-400" />
             </div>
-            <button
+            {/* <button
               className="bg-blue-500 hover:bg-blue-300 hover:text-white text-white font-bold py-2 px-4 rounded flex items-center justify-center xl:w-44 w-1/2"
               onClick={exportToCSV}
               disabled={paginatedads.length === 0}
             >
               Export
               <IconFileExport className="ml-2" />
-            </button>
+            </button> */}
           </div>
           {paginatedads.length === 0 ? (
             <p className="text-gray-600 text-base mx-2 my-4">
               No ads to display
             </p>
           ) : (
-            <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 mx-2">
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-2 mx-2">
               {paginatedads.map((ad, index) => (
                 <div
                   key={ad._id}
@@ -196,6 +196,14 @@ const AdvertisingTable = ({ ads, loading, setFetchTrigger }) => {
                           height={250}
                           className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md border-2 border-gray-200"
                         />
+                      ) : ad.images.Cover ? (
+                        <Image
+                          src={ad.images.Cover}
+                          alt={ad.name}
+                          width={250}
+                          height={250}
+                          className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md border-2 border-gray-200"
+                        />
                       ) : (
                         <Image
                           src={defaultImage}
@@ -206,37 +214,40 @@ const AdvertisingTable = ({ ads, loading, setFetchTrigger }) => {
                         />
                       )}
                     </div>
+
                     <div className="mx-4 grid grid-cols-2 xl:block">
                       <h3 className="text-base xl:text-xl font-semibold text-[#8c2828]">
                         {ad.name}
                       </h3>
 
-                      {ad.address && (
-                        <p className="text-gray-600 text-sm xl:text-base flex">
-                          <IconMapPin></IconMapPin>
-                          {ad.address}
-                        </p>
-                      )}
-
                       <p className="text-gray-600 text-sm xl:text-base flex">
                         <IconUser></IconUser>
                         {ad.userName}
                       </p>
+                      {ad.subscriptionInfo && ad.subscriptionInfo.length > 0 && (
+                      <p className="text-gray-600 text-sm xl:text-base flex max-w-64">
+                        The subscription is currently active. It will expire
+                        automatically on{" "}
+                        {ad.subscriptionInfo &&
+                          ad.subscriptionInfo.length > 0 &&
+                          new Date(
+                            ad.subscriptionInfo[0].currentPeriodEnd * 1000
+                          ).toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                          })}
+                      </p>)}
                     </div>
                   </div>
+                  
                   <div className="absolute top-2 right-2 flex-row space-x-2 hidden xl:flex">
-                    <p className="text-[#8c2828] text-[15px] xl:text-[25px]">
-                      {ad.category}
+                    <p className="text-green-800 bg-green-200 rounded-full text-[10px] xl:text-[20px] px-4">
+                      Active
                     </p>
                   </div>
+                  
                   <div className="xl:absolute bottom-2 right-2 flex xl:flex-col xl:space-y-1 xl:space-x-0 space-x-2 flex-row justify-center">
-                    <button
-                      className="bg-[#cffaea] hover:bg-green-300 hover:text-white text-green-600 font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
-                      onClick={() => openEditForm({ ...ad })}
-                    >
-                      <IconEdit className="xl:mr-2" />
-                      Edit
-                    </button>
                     <button
                       className="bg-[#f6eeee] hover:bg-rose-300 hover:text-white text-[#8c2828] font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
                       onClick={() =>
