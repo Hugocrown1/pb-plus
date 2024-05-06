@@ -28,7 +28,7 @@ const HomeHero = () => {
       </div>
 
       <video
-        src={"https://djeib179xst78.cloudfront.net/puntabanda"}
+        src={"https://d38rtnre2df8ox.cloudfront.net/puntabanda.mp4"}
         autoPlay
         muted
         loop
