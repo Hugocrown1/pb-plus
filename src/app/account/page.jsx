@@ -21,6 +21,11 @@ import SubscriptionNotification from "@/components/SubscriptionNotification";
 import UserAdvertisements from "@/components/UserAdvertisements";
 import Restaurants from "@/models/restaurants";
 
+export const metadata = {
+  title: "PB+ Account",
+  description: "PB+ Account: Your account information.",
+};
+
 const getUser = async (id) => {
   await connectDB();
   const user = await Users.findById(id)
