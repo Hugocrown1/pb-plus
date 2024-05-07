@@ -24,12 +24,12 @@ export async function POST(request) {
       const newFileName = `${timestamp}_${randomSuffix}.${fileExtension}`;
 
       const buffer = Buffer.from(await file.arrayBuffer());
+
       await client.send(
         new PutObjectCommand({
           Bucket: bucketName,
           Key: newFileName,
           Body: buffer,
-          ACL: "public-read",
           ContentType: file.type,
         })
       );

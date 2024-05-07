@@ -28,13 +28,11 @@ const HomeHero = () => {
       </div>
 
       <video
-        src={"/assets/homevideo.mp4"}
-        poster="/assets/homevideoframe.jpg"
+        src={"https://d38rtnre2df8ox.cloudfront.net/puntabanda.mp4"}
         autoPlay
         muted
-        preload
         loop
-        className="absolute -z-10 object-cover h-full w-full "
+        className="absolute -z-10 object-cover h-full w-full bg-black"
       />
     </section>
   );
