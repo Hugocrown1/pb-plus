@@ -180,13 +180,28 @@ const RestaurantEditor = ({
       return;
     }
     setIsLoading(true);
-    const formData = new FormData();
-    uploadedImages.map(([key, value]) => formData.append(key, value));
+    // const formData = new FormData();
+    let responseFiles = [];
+    uploadedImages.forEach((image) => {
+      let formData = new FormData();
+      formData.append("file", image);
 
-    const responseFiles = await axios.post("/api/files", formData);
+      axios
+        .post("/api/files", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          responseFiles = responseFiles.concat(response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
     let restaurantImages = previewImages;
 
-    for (const imageObject of responseFiles.data) {
+    for (const imageObject of responseFiles) {
       Object.entries(restaurantImages).map(([name, url]) => {
         if (url.toString() === imageObject.originalUrl) {
           restaurantImages[name] = imageObject.linkAws;

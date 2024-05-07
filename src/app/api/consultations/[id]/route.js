@@ -3,7 +3,7 @@ import Consultations from "@/models/consultations";
 
 import { NextResponse } from "next/server";
 
-export async function DELETE(request,{params: {id}}) {
+export async function DELETE(request, { params: { id } }) {
   try {
     await connectDB();
 
