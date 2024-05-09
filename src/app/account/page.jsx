@@ -88,7 +88,7 @@ const Page = async () => {
 
         <h2 className="text-left text-2xl font-bold">Published properties</h2>
         <section className="flex flex-col rounded-md ">
-          {!user?.properties.length > 0 ? (
+          {!user?.properties?.length > 0 ? (
             <p className="text-left text-gray-700 ml-4 italic">
               No properties published yet
             </p>

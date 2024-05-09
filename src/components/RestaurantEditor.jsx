@@ -184,7 +184,7 @@ const RestaurantEditor = ({
     let responseFiles = [];
     uploadedImages.forEach((image) => {
       let formData = new FormData();
-      formData.append("file", image);
+      formData.append("file", image[1]);
 
       axios
         .post("/api/files", formData, {
