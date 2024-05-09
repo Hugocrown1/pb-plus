@@ -81,6 +81,10 @@ const Footer = () => {
     return null;
   }
 
+  if (pathname.includes("/auth")) {
+    return null;
+  }
+
   return (
     <footer className=" divide-y xl:divide-y-0 bg-[#202225] text-gray-100">
       <div className="container-footer h-44 flex flex-col xl:flex-row justify-center relative">
