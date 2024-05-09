@@ -88,7 +88,7 @@ export async function createCheckoutLink(customer) {
     customer: customer,
     line_items: [
       {
-        price: "price_1P3SgB13yf7FOQ66KPGiHWL7",
+        price: "price_1PEN4fEwGwP4mUDDlJmwyUCr",
         quantity: 1,
       },
     ],
@@ -113,13 +113,11 @@ export async function getAllCustomers() {
 
 export async function getAllPayouts() {
   const payouts = await stripe.payouts.list();
-  console.log(payouts.data);
   return payouts.data;
 }
 
 export async function getAllEvents() {
   const events = await stripe.events.list();
-  console.log(events.data);
   return events.data;
 }
 
