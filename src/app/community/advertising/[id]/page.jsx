@@ -16,13 +16,12 @@ const Page = async ({ params: { id } }) => {
   }
   return (
     <main>
-      <section className="relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md">
+      <section className="relative flex items-end justify-center w-full xl:h-[710px] min-h-[710px] overflow-hidden shadow-md">
         <Image
           priority
           alt={"cover image"}
           src={restaurantInfo.images.Cover}
           fill={true}
-          sizes="(min-width: 1120px) 1920px"
           className={`object-cover object-center duration-[10000ms]}`}
         />
         <div className="absolute bg-black opacity-50 w-full h-full"></div>
@@ -30,7 +29,7 @@ const Page = async ({ params: { id } }) => {
           <div className="w-full absolute mt-4 left-0 top-0 pt-[60px] xl:flex hidden">
             <BackButton />
           </div>
-          <div className="flex flex-row gap-10 justify-center items-center">
+          <div className="flex xl:flex-row flex-col xl:gap-10 gap-2 justify-center items-center">
             <div className="relative w-52 h-52 rounded-full overflow-hidden">
               <Image
                 priority
@@ -40,14 +39,14 @@ const Page = async ({ params: { id } }) => {
                 className={`object-cover object-center`}
               />
             </div>
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col justify-center items-center xl:p-0 p-2">
               <h1 className=" text-white ">{restaurantInfo.name}</h1>
               <h3 className="text-white text-2xl">{restaurantInfo.category}</h3>
             </div>
           </div>
         </div>
         {session?.user.id === restaurantInfo.user._id && (
-          <div className="absolute right-0 m-2 p-2 rounded-md flex flex-row gap-2 bg-white">
+          <div className="absolute xl:right-0 xl:bottom-0 xl:m-2 m-20 p-2 rounded-md flex flex-row gap-2 bg-white">
             <Link
               href={`/community/advertising/edit-restaurant/${restaurantInfo._id}`}
               className="community-button"
@@ -58,28 +57,27 @@ const Page = async ({ params: { id } }) => {
             <DeleteButton />
           </div>
         )}
-        <div className=" flex flex-row gap-2 justify-center items-center absolute left-0 bottom-0 m-5 text-white text-2xl">
+        <div className="flex flex-row gap-2 justify-center items-center xl:absolute left-0 bottom-0 m-5 text-white text-2xl z-10">
           <IconMapPin />
           {restaurantInfo.address}
         </div>
       </section>
       <section className="w-full h-[550px] bg-[#E7E1E4]">
-        <div className=" flex container-xl h-full justify-center">
+        <div className="flex container-xl p-5 xl:p-0 h-full justify-center items-center">
           <div className="grid grid-cols-2 w-full gap-7">
-            <div className="flex flex-col min-w-[560px] justify-center">
+            <div className="flex flex-col justify-center">
               <h2 className="text-start font-bold">About Us</h2>
               <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
-              <p className="mt-2 text-justify max-h[550px] w-full ">
+              <p className="mt-2 text-justify max-h-[550px]">
                 {restaurantInfo.information.AboutUs}
               </p>
             </div>
-            <div className="h-[360px] relative rounded-md overflow-hidden">
+            <div className="xl:h-[360px] h-[200px] relative rounded-md overflow-hidden">
               <Image
                 priority
                 alt={"about us image"}
                 src={restaurantInfo.images.AboutUs}
                 fill={true}
-                sizes="630px"
                 className={`object-cover object-center`}
               />
             </div>
@@ -87,11 +85,11 @@ const Page = async ({ params: { id } }) => {
         </div>
       </section>
       <section className="w-full h-[960px]">
-        <div className="container-xl flex justify-center items-center h-full">
+        <div className="container-xl p-5 xl:p-0 flex justify-center items-center h-full">
           <h2 className="text-start font-bold">Meet Us</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
           <div className="h-[800px] w-full grid grid-cols-2 grid-rows-2 gap-x-7 gap-y-4 mt-5 ">
-            <div className="relative rounded-md overflow-hidden row-span-2">
+            <div className="relative rounded-md overflow-hidden xl:row-span-2 xl:col-span-1 col-span-2">
               <Image
                 priority
                 alt={"meet us image 1"}
@@ -122,9 +120,9 @@ const Page = async ({ params: { id } }) => {
         </div>
       </section>
       <section className="w-full h-[730px] bg-[#E7E1E4]">
-        <div className=" flex container-xl h-full justify-center">
+        <div className="flex container-xl p-5 xl:p-0 h-full justify-center">
           <div className="grid grid-cols-2 gap-7">
-            <div className=" h-[630px] relative rounded-md overflow-hidden">
+            <div className="xl:h-[630px] h-[200px] relative rounded-md overflow-hidden">
               <Image
                 priority
                 alt={"custom section image"}
@@ -146,13 +144,13 @@ const Page = async ({ params: { id } }) => {
           </div>
         </div>
       </section>
-      <section className="w-full h-[900px]">
+      <section className="w-full xl:h-[900px] h-[500px]">
         <div className="container-xl flex items-center h-full">
           <div className="flex flex-col justify-center items-center mt-10">
             <h2 className="text-start font-bold">Gallery</h2>
             <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
           </div>
-          <div className=" w-7/12">
+          <div className="relative xl:w-7/12 w-3/4 flex-1 my-5">
             <GridGallery data={restaurantInfo.images.Gallery} />
           </div>
         </div>
@@ -161,7 +159,7 @@ const Page = async ({ params: { id } }) => {
         <div className="container-xl flex items-center h-full p-10">
           <h2 className="text-start font-bold">Weekly Calendar</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
-          <div className="grid grid-cols-7 gap-[1px] w-full min-h-[650px] justify-evenly mt-5 bg-black/5 rounded-md overflow-hidden shadow-md">
+          <div className="grid xl:grid-cols-7 grid-cols-1 xl:grid-rows-1 grid-rows-7 gap-[1px] w-full min-h-[650px] justify-evenly mt-5 bg-black/5 rounded-md overflow-hidden shadow-md">
             {Object.entries(restaurantInfo.calendar).map(([day, items]) => (
               <div
                 className="flex flex-col bg-[#f5f3f4] items-center w-full h-full"
@@ -189,7 +187,7 @@ const Page = async ({ params: { id } }) => {
           </div>
         </div>
       </section>
-      <section className="w-full h-[660px]">
+      <section className="w-full xl:h-[660px] h-[300px]">
         <div className="container-xl flex flex-col items-center h-full">
           <h2 className="text-start font-bold mt-14">Our social media</h2>
           <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
@@ -198,7 +196,7 @@ const Page = async ({ params: { id } }) => {
               ([socialMediaName, socialMediaValue]) => (
                 <Link
                   href={socialMediaValue}
-                  className="w-[300px] aspect-square rounded-full bg-[#D9D9D9] flex items-center justify-center"
+                  className="xl:w-[300px] w-[100px] aspect-square rounded-full bg-[#D9D9D9] flex items-center justify-center"
                 >
                   <h2>{socialMediaName}</h2>
                 </Link>
