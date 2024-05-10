@@ -4,20 +4,22 @@ import {
   IconExternalLink,
   IconSearch,
   IconFileExport,
+  IconUser,
+  IconMapPin,
 } from "@tabler/icons-react";
 import Image from "next/image";
-import EventAdminView from "../AdminViews/EventAdminView";
 
-const EventsTable = ({ events, loading, setFetchTrigger }) => {
+const AdvertisingTable = ({ ads, loading, setFetchTrigger }) => {
+  const defaultImage = "/assets/defaultImage.jpg";
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState(null);
   const [sortOrder, setSortOrder] = useState("asc");
   const [showEditForm, setShowEditForm] = useState(false);
-  const [selectedEventId, setSelectedEventId] = useState(null);
+  const [selectedadId, setSelectedadId] = useState(null);
 
-  const openEditForm = (event) => {
-    setSelectedEventId(event);
+  const openEditForm = (ad) => {
+    setSelectedadId(ad);
     setShowEditForm(true);
   };
 
@@ -40,8 +42,8 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
     }
   };
 
-  const filteredEvents = events.filter((event) =>
-    Object.values(event).some(
+  const filteredads = ads.filter((ad) =>
+    Object.values(ad).some(
       (value) =>
         value !== null &&
         value !== undefined &&
@@ -49,8 +51,8 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
     )
   );
 
-  const sortedEvents = sortBy
-    ? filteredEvents.sort((a, b) => {
+  const sortedads = sortBy
+    ? filteredads.sort((a, b) => {
         const aValue = a[sortBy];
         const bValue = b[sortBy];
 
@@ -62,12 +64,12 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
         }
         return 0;
       })
-    : filteredEvents;
+    : filteredads;
 
   const pageSize = 6;
-  const totalPages = Math.ceil(sortedEvents.length / pageSize);
+  const totalPages = Math.ceil(sortedads.length / pageSize);
   const startIndex = (currentPage - 1) * pageSize;
-  const paginatedEvents = sortedEvents.slice(startIndex, startIndex + pageSize);
+  const paginatedads = sortedads.slice(startIndex, startIndex + pageSize);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -87,19 +89,19 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
       "Images",
     ];
 
-    const csvData = events.map((event) => {
-      const formattedDate = new Date(event.date).toLocaleDateString();
+    const csvData = ads.map((ad) => {
+      const formattedDate = new Date(ad.date).toLocaleDateString();
       return [
-        event._id,
-        event.title,
-        event.category,
+        ad._id,
+        ad.title,
+        ad.category,
         formattedDate,
-        event.address,
-        event.description,
-        event.interestedUsers,
-        event.user,
-        event.coverImage,
-        event.images.join(","),
+        ad.address,
+        ad.description,
+        ad.interestedUsers,
+        ad.user,
+        ad.coverImage,
+        ad.images.join(","),
       ];
     });
 
@@ -112,7 +114,7 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "event_data.csv");
+    link.setAttribute("download", "ad_data.csv");
     document.body.appendChild(link);
     link.click();
   };
@@ -161,84 +163,76 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
               value={searchTerm}
               onChange={handleChange}
             />
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-ads-none">
               <IconSearch className="text-gray-400" />
             </div>
             <button
               className="bg-blue-500 hover:bg-blue-300 hover:text-white text-white font-bold py-2 px-4 rounded flex items-center justify-center xl:w-44 w-1/2"
               onClick={exportToCSV}
-              disabled={paginatedEvents.length === 0}
+              disabled={paginatedads.length === 0}
             >
               Export
               <IconFileExport className="ml-2" />
             </button>
           </div>
-          {paginatedEvents.length === 0 ? (
+          {paginatedads.length === 0 ? (
             <p className="text-gray-600 text-base mx-2 my-4">
-              No events to display
+              No ads to display
             </p>
           ) : (
             <div className="grid grid-cols-1 xl:grid-cols-2 gap-2 mx-2">
-              {paginatedEvents.map((event, index) => (
+              {paginatedads.map((ad, index) => (
                 <div
-                  key={event._id}
+                  key={ad._id}
                   className="bg-white rounded-xl shadow-md p-4 transition duration-300 flex flex-col justify-between border border-gray-300 relative h-full"
                 >
                   <div className="xl:flex">
                     <div>
-                      <Image
-                        src={event.coverImage}
-                        alt={event.title}
-                        width={250}
-                        height={250}
-                        className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md"
-                      />
+                      {ad.images.Profile ? (
+                        <Image
+                          src={ad.images.Profile}
+                          alt={ad.name}
+                          width={250}
+                          height={250}
+                          className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md border-2 border-gray-200"
+                        />
+                      ) : (
+                        <Image
+                          src={defaultImage}
+                          alt={ad.name}
+                          width={250}
+                          height={250}
+                          className="xl:h-44 xl:w-44 w-full h-52 object-cover rounded-md border-2 border-gray-200"
+                        />
+                      )}
                     </div>
                     <div className="mx-4 grid grid-cols-2 xl:block">
                       <h3 className="text-base xl:text-xl font-semibold text-[#8c2828]">
-                        {event.title}
+                        {ad.name}
                       </h3>
-                      <p className="text-gray-600 text-sm xl:text-base">
-                        {event.category}
-                      </p>
-                      <p className="text-gray-600 text-sm xl:text-base">
-                        {event.address}
-                      </p>
-                      <p className="text-gray-600 text-sm xl:text-base">
-                        {event.description}
-                      </p>
-                      <p className="text-gray-600 text-sm xl:text-base">
-                        {event.userName}
-                      </p>
-                      <p className="text-gray-600 text-sm xl:text-base">
-                        {new Date(event.date).toLocaleDateString()}
-                      </p>
 
-                      {event.interested.length > 0 ? (
-                        <select className="text-gray-600 text-sm xl:text-base border-none -ml-2 min-w-fit">
-                          <option >{event.interested.length} Interested</option>
-                          {event.interested.map((interest, index) => (
-                            <option disabled key={index} value={interest}>
-                              {interest}
-                            </option>
-                          ))}
-                        </select>
-                      ) : (
-                        <p className="text-gray-600 text-sm xl:text-base">
-                          {event.interested.length} Interested
+                      {ad.address && (
+                        <p className="text-gray-600 text-sm xl:text-base flex">
+                          <IconMapPin></IconMapPin>
+                          {ad.address}
                         </p>
                       )}
+
+                      <p className="text-gray-600 text-sm xl:text-base flex">
+                        <IconUser></IconUser>
+                        {ad.userName}
+                      </p>
                     </div>
                   </div>
                   <div className="absolute top-2 right-2 flex-row space-x-2 hidden xl:flex">
                     <p className="text-[#8c2828] text-[15px] xl:text-[25px]">
-                      {event.category}
+                      {ad.category}
                     </p>
                   </div>
                   <div className="xl:absolute bottom-2 right-2 flex xl:flex-col xl:space-y-1 xl:space-x-0 space-x-2 flex-row justify-center">
                     <button
                       className="bg-[#cffaea] hover:bg-green-300 hover:text-white text-green-600 font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
-                      onClick={() => openEditForm({ ...event })}
+                      onClick={() => openEditForm({ ...ad })}
                     >
                       <IconEdit className="xl:mr-2" />
                       Edit
@@ -246,7 +240,10 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
                     <button
                       className="bg-[#f6eeee] hover:bg-rose-300 hover:text-white text-[#8c2828] font-bold  xl:py-2 px-4 py-2 rounded flex items-center"
                       onClick={() =>
-                        window.open(`/community/events/${event._id}`, "_blank")
+                        window.open(
+                          `/community/advertising/${ad._id}`,
+                          "_blank"
+                        )
                       }
                     >
                       <IconExternalLink className="xl:mr-2" />
@@ -282,10 +279,10 @@ const EventsTable = ({ events, loading, setFetchTrigger }) => {
       )}
 
       {showEditForm && (
-        <EventAdminView {...selectedEventId} onClose={closeEditForm} />
+        <adAdminView {...selectedadId} onClose={closeEditForm} />
       )}
     </div>
   );
 };
 
-export default EventsTable;
+export default AdvertisingTable;
