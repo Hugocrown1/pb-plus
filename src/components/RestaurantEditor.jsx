@@ -180,25 +180,22 @@ const RestaurantEditor = ({
       return;
     }
     setIsLoading(true);
-    // const formData = new FormData();
     let responseFiles = [];
-    uploadedImages.forEach((image) => {
+    let uploadPromises = uploadedImages.map((image) => {
       let formData = new FormData();
-      formData.append("file", image[1]);
+      formData.append(image[0], image[1]);
 
-      axios
-        .post("/api/files", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
+      return axios
+        .post("/api/files", formData)
         .then((response) => {
-          responseFiles = responseFiles.concat(response.data);
+          responseFiles.push(response.data[0]);
         })
         .catch((error) => {
           console.error(error);
         });
     });
+
+    await Promise.all(uploadPromises);
     let restaurantImages = previewImages;
 
     for (const imageObject of responseFiles) {
