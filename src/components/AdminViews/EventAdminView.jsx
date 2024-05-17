@@ -48,6 +48,7 @@ const EventAdminView = ({
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const saveEvent = async (e) => {
     setIsLoading(true);
 
@@ -315,7 +316,7 @@ const EventAdminView = ({
           <div className="xl:w-[40%]">
             <h3>Preview</h3>
             <div className="h-fit border-2 border-gray-100 rounded-md">
-              <EventCard {...values} coverImage={previewImages[0]} />
+              <EventCard event={{...values, coverImage: previewImages[0]}} />
             </div>
           </div>
         </section>
