@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "pb-plus.s3.amazonaws.com",
       },
+      {
+        protocol: "https",
+        hostname: "pb-plus-main.s3.amazonaws.com",
+      },
     ],
   },
 };

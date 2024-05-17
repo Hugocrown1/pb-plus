@@ -172,6 +172,8 @@ const RestaurantEditor = ({
     }));
   };
 
+  
+
   const saveRestaurant = async (e) => {
     e.preventDefault();
   
@@ -259,6 +261,9 @@ const RestaurantEditor = ({
   
     setIsLoading(false);
   };
+  
+
+
 
   if (status === "loading") {
     return <Spinner />;
@@ -277,21 +282,20 @@ const RestaurantEditor = ({
         _id={_id}
       />
       <form className="w-full h-full" onSubmit={saveRestaurant}>
-        <section className="relative flex items-end justify-center w-full h-[710px] overflow-hidden shadow-md">
+        <section className="relative flex items-end justify-center w-full xl:h-[710px] min-h-[710px] overflow-hidden shadow-md">
           {previewImages.Cover && (
             <Image
               priority
               alt={"cover image"}
               src={previewImages.Cover}
               fill={true}
-              sizes="(min-width: 1120px) 1920px"
               className={`object-cover object-center duration-[10000ms]}`}
             />
           )}
           <div className="absolute bg-black opacity-50 w-full h-full"></div>
           <div className=" absolute h-full w-full flex flex-col justify-center items-center">
             <div className="flex flex-col items-center justify-center">
-              <div className="flex flex-row gap-10 justify-center items-center">
+              <div className="flex xl:flex-row flex-col xl:gap-10 gap-2 justify-center items-center">
                 <div className="relative w-52 h-52 rounded-full overflow-hidden">
                   {previewImages.Profile && (
                     <Image
@@ -324,12 +328,8 @@ const RestaurantEditor = ({
                 />
               </label>
             </div>
-            <div className=" flex flex-row gap-2 justify-center items-center absolute left-0 bottom-0 m-5 text-white text-2xl">
-              <IconMapPin />
-              {values.address}
-            </div>
           </div>
-          <div className="absolute right-0 m-2 p-2 rounded-md flex flex-row gap-2 bg-white">
+          <div className="absolute xl:right-0 xl:bottom-0 xl:m-2 m-20 p-2 rounded-md flex flex-row gap-2 bg-white">
             <Link
               href={
                 _id ? "/community/advertising/" + _id : "/community/advertising"
@@ -353,10 +353,14 @@ const RestaurantEditor = ({
               {isLoading ? <SpinnerSmall /> : "Continue"}
             </button>
           </div>
+          <div className="flex flex-row gap-2 justify-center items-center xl:absolute left-0 bottom-0 m-5 text-white text-2xl z-10">
+            <IconMapPin />
+            {values.address}
+          </div>
         </section>
         <section className="w-full h-[550px] bg-[#E7E1E4]">
-          <div className=" flex container-xl h-full justify-center">
-            <div className="grid grid-cols-2 gap-7">
+          <div className="flex container-xl p-5 xl:p-0 h-full justify-center items-center">
+            <div className="grid grid-cols-2 w-full gap-7">
               <div className="flex flex-col justify-center">
                 <h2 className="text-start font-bold">About Us</h2>
                 <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
@@ -374,7 +378,7 @@ const RestaurantEditor = ({
                   {values.information.AboutUs.length}/{400}
                 </span>
               </div>
-              <div className=" h-[360px] relative rounded-md overflow-hidden bg-[#f5f3f4]">
+              <div className="xl:h-[360px] h-[200px] relative rounded-md overflow-hidden bg-[#f5f3f4]">
                 <FormFileInput
                   alt={"about us image"}
                   id={"aboutUsImage"}
@@ -388,11 +392,11 @@ const RestaurantEditor = ({
           </div>
         </section>
         <section className="w-full h-[960px]">
-          <div className="container-xl flex justify-center items-center h-full">
+          <div className="container-xl p-5 xl:p-0 flex justify-center items-center h-full">
             <h2 className="text-start font-bold">Meet Us</h2>
             <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
             <div className="h-[800px] w-full grid grid-cols-2 grid-rows-2 gap-x-7 gap-y-4 mt-5 ">
-              <div className="relative rounded-md overflow-hidden row-span-2  bg-[#E7E1E4]">
+              <div className="relative rounded-md overflow-hidden xl:row-span-2 xl:col-span-1 col-span-2  bg-[#E7E1E4]">
                 <FormFileInput
                   alt={"meet us image 1"}
                   id={"meetUsImage1"}
@@ -426,9 +430,9 @@ const RestaurantEditor = ({
           </div>
         </section>
         <section className="w-full h-[730px] bg-[#E7E1E4]">
-          <div className=" flex container-xl h-full justify-center">
+          <div className="flex container-xl p-5 xl:p-0 h-full justify-center">
             <div className="grid grid-cols-2 gap-7">
-              <div className=" h-[630px] relative rounded-md overflow-hidden  bg-[#f5f3f4]">
+              <div className="xl:h-[630px] h-[200px] relative rounded-md overflow-hidden  bg-[#f5f3f4]">
                 <FormFileInput
                   alt={"custom section image"}
                   id={"customSectionImage"}
@@ -469,7 +473,7 @@ const RestaurantEditor = ({
             </div>
           </div>
         </section>
-        <section className="w-full h-[900px] relative">
+        <section className="w-full xl:h-[900px] h-[500px]">
           <label
             htmlFor="gallery"
             className="absolute right-0 mt-5 mr-24 flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#E7E1E4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
@@ -497,7 +501,7 @@ const RestaurantEditor = ({
             {!!previewImages.Gallery?.length && (
               <ReactSortable
                 list={previewImages.Gallery}
-                className="grid grid-cols-3 gap-[20px] justify-items-center mt-5 w-7/12"
+                className="grid grid-cols-3 gap-[20px] justify-items-center xl:w-7/12 w-3/4 my-5"
                 setList={updatePreviewImagesOrder}
               >
                 {previewImages.Gallery.map((link, index) => (
@@ -527,7 +531,7 @@ const RestaurantEditor = ({
           <div className="container-xl flex items-center h-full p-10">
             <h2 className="text-start font-bold">Weekly Calendar</h2>
             <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
-            <div className="grid grid-cols-7 gap-[1px] w-full min-h-[650px] justify-evenly mt-5 bg-black/5 rounded-md overflow-hidden shadow-md">
+            <div className="grid xl:grid-cols-7 grid-cols-1 xl:grid-rows-1 grid-rows-7 gap-[1px] w-full min-h-[650px] justify-evenly mt-5 bg-black/5 rounded-md overflow-hidden shadow-md">
               {Object.entries(values.calendar).map(([day, items]) => (
                 <div
                   className="flex flex-col bg-[#f5f3f4] items-center w-full h-full"
@@ -617,7 +621,7 @@ const RestaurantEditor = ({
             </div>
           </div>
         </section>
-        <section className="w-full h-[660px]">
+        <section className="w-full xl:h-[660px] h-[300px]">
           <div className="container-xl flex flex-col items-center h-full">
             <h2 className="text-start font-bold mt-14">Our social media</h2>
             <div className="rounded-md h-[8px] bg-[#0077B6] w-[80px]"></div>
@@ -625,10 +629,10 @@ const RestaurantEditor = ({
               {Object.entries(values.socialMedia).map(
                 ([socialMediaName, socialMediaValue]) => (
                   <div
-                    className="w-[300px] aspect-square rounded-full bg-[#D9D9D9] flex items-center justify-center"
+                    className="xl:w-[300px] w-[100px] aspect-square rounded-full bg-[#D9D9D9] flex items-center justify-center"
                     key={socialMediaName}
                   >
-                    <h2>{socialMediaValue}</h2>
+                    <h2>{socialMediaName}</h2>
                   </div>
                 )
               )}

@@ -8,4 +8,4 @@ export const client = new S3Client({
   },
 });
 
-export const bucketName = "pb-plus";
+export const bucketName = "pb-plus-main";
