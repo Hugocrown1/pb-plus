@@ -28,6 +28,7 @@ const EventAdminView = ({
     address: existingAddress || "",
     description: existingDescription || "",
     date: existingDate || "",
+    coverImage: existingImages ? existingImages[0] : "",
   });
 
   const { status } = useSession({
@@ -48,6 +49,7 @@ const EventAdminView = ({
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
   const saveEvent = async (e) => {
     setIsLoading(true);
 
@@ -315,7 +317,7 @@ const EventAdminView = ({
           <div className="xl:w-[40%]">
             <h3>Preview</h3>
             <div className="h-fit border-2 border-gray-100 rounded-md">
-              <EventCard {...values} coverImage={previewImages[0]} />
+              <EventCard event={{...values, coverImage: previewImages[0]}} />
             </div>
           </div>
         </section>
