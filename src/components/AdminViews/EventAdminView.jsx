@@ -28,7 +28,6 @@ const EventAdminView = ({
     address: existingAddress || "",
     description: existingDescription || "",
     date: existingDate || "",
-    coverImage: existingImages ? existingImages[0] : "",
   });
 
   const { status } = useSession({
