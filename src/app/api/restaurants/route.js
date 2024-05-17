@@ -21,7 +21,9 @@ export async function POST(request) {
   try {
     await connectDB();
     const session = await getServerSession(authOptions);
-    const { images, name, sectionTitle, information, socialMedia } =
+    const { images, name, sectionTitle, information, socialMedia, calendar,
+      category,
+      address, } =
       await request.json();
 
     const user = await Users.findOne({ email: session.user.email });
@@ -32,6 +34,9 @@ export async function POST(request) {
       sectionTitle,
       information,
       socialMedia,
+      calendar,
+      category,
+      address,
       user: user._id,
     });
 
