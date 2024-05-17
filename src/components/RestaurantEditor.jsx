@@ -174,55 +174,90 @@ const RestaurantEditor = ({
 
   const saveRestaurant = async (e) => {
     e.preventDefault();
-
+  
     if (Object.values(previewImages).includes("")) {
       toast.error("Restaurant page information incomplete");
       return;
     }
+  
     setIsLoading(true);
-    const formData = new FormData();
-    uploadedImages.map(([key, value]) => formData.append(key, value));
-
-    const responseFiles = await axios.post("/api/files", formData);
-    let restaurantImages = previewImages;
-
-    for (const imageObject of responseFiles.data) {
-      Object.entries(restaurantImages).map(([name, url]) => {
-        if (url.toString() === imageObject.originalUrl) {
-          restaurantImages[name] = imageObject.linkAws;
+  
+    // Crear un mapeo entre la URL local (blob) y el link AWS
+    const urlToAwsMap = {};
+  
+    // Subir imágenes y construir el mapa URL original -> linkAws
+    const uploadPromises = uploadedImages.map(([originalUrl, file]) => {
+      const formData = new FormData();
+      formData.append('file', file);
+  
+      return axios
+        .post('/api/files', formData)
+        .then((response) => {
+          const uploadedFile = response.data[0];
+          urlToAwsMap[originalUrl] = uploadedFile.linkAws;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
+  
+    await Promise.all(uploadPromises);
+  
+    // Reemplazar URLs en previewImages con las URLs AWS correspondientes
+    let restaurantImages = { ...previewImages };
+  
+    // Asignar linkAws a todas las imágenes
+    Object.keys(restaurantImages).forEach((key) => {
+      if (key === 'Gallery') {
+        // Para imágenes de la galería
+        restaurantImages.Gallery = restaurantImages.Gallery.map((url) =>
+          urlToAwsMap[url] || url
+        );
+      } else {
+        // Para otras imágenes
+        if (urlToAwsMap[restaurantImages[key]]) {
+          restaurantImages[key] = urlToAwsMap[restaurantImages[key]];
         }
-      });
-    }
-
+      }
+    });
+  
+    // Eliminar imágenes si es necesario
     if (deletedImages.length > 0) {
       for (const imageLink of deletedImages) {
         try {
-          if (imageLink.includes("pb-plus.s3")) {
+          if (imageLink.includes('pb-plus.s3')) {
             await deleteImage(imageLink);
           }
         } catch (error) {
-          console.error(`error deleting image ${imageLink}:`, error);
+          console.error(`Error deleting image ${imageLink}:`, error);
         }
       }
     }
-
-    if (!_id) {
-      await axios.post("/api/restaurants", {
-        ...values,
-        images: restaurantImages,
-      });
-
-      router.push("/community/advertising");
-
-      toast.success("Restaurant created successfully!");
-    } else {
-      await axios.put("/api/restaurants/" + _id, {
-        ...values,
-        images: restaurantImages,
-      });
-      router.push("/community/advertising/" + _id);
-      toast.success("Restaurant changes saved successfully!");
+  
+    try {
+      if (!_id) {
+        await axios.post('/api/restaurants', {
+          ...values,
+          images: restaurantImages,
+        });
+  
+        router.push('/community/advertising');
+        toast.success('Restaurant created successfully!');
+      } else {
+        await axios.put(`/api/restaurants/${_id}`, {
+          ...values,
+          images: restaurantImages,
+        });
+  
+        router.push(`/community/advertising/${_id}`);
+        toast.success('Restaurant changes saved successfully!');
+      }
+    } catch (error) {
+      console.error('Error saving restaurant:', error);
+      toast.error('There was an error saving the restaurant. Please try again.');
     }
+  
+    setIsLoading(false);
   };
 
   if (status === "loading") {
