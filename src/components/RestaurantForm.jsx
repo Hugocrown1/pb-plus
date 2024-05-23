@@ -1,6 +1,7 @@
 "use client";
 
 import FormInput from "@/components/FormInput";
+import { useState } from "react";
 import Link from "next/link";
 import FormFileInput from "./FormFileInput";
 
@@ -14,6 +15,15 @@ const RestaurantForm = ({
   isFormOpen,
   _id,
 }) => {
+  const [activeSocialMedia, setActiveSocialMedia] = useState({});
+
+  const handleCheckboxChange = (socialMediaName) => {
+    setActiveSocialMedia((prev) => ({
+      ...prev,
+      [socialMediaName]: !prev[socialMediaName],
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setShowInitialForm(false);
@@ -92,23 +102,43 @@ const RestaurantForm = ({
                 <h3>Social medias</h3>
                 {Object.entries(values.socialMedia).map(
                   ([socialMediaName, socialMediaValue]) => (
-                    <FormInput
-                      key={socialMediaName}
-                      label={socialMediaName}
-                      name={socialMediaName}
-                      id={socialMediaName}
-                      placeholder={socialMediaName}
-                      value={socialMediaValue}
-                      onChange={(e) =>
-                        setValues({
-                          ...values,
-                          socialMedia: {
-                            ...values.socialMedia,
-                            [socialMediaName]: e.target.value,
-                          },
-                        })
-                      }
-                    />
+                    <div key={socialMediaName}>
+                      <label
+                        htmlFor={`${socialMediaName}-checkbox`}
+                        className="ml-2"
+                      >
+                        {socialMediaName}
+                      </label>
+                      <div className="flex">
+                        <input
+                          type="checkbox"
+                          id={`${socialMediaName}-checkbox`}
+                          checked={activeSocialMedia[socialMediaName] || false}
+                          className="mr-2 my-1 w-[10%] h-6"
+                          onChange={() => handleCheckboxChange(socialMediaName)}
+                        />
+                        <div className="w-full">
+                        <FormInput
+                          className="disabled:opacity-50"
+                          disabled={!activeSocialMedia[socialMediaName]}
+                          label=""
+                          name={socialMediaName}
+                          id={socialMediaName}
+                          placeholder={`${socialMediaName} URL`}
+                          value={socialMediaValue}
+                          onChange={(e) =>
+                            setValues({
+                              ...values,
+                              socialMedia: {
+                                ...values.socialMedia,
+                                [socialMediaName]: e.target.value,
+                              },
+                            })
+                          }
+                        />
+                        </div>
+                      </div>
+                    </div>
                   )
                 )}
               </div>
