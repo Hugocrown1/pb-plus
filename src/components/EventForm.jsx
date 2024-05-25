@@ -45,52 +45,89 @@ const EventForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    const value = e.target.value;
+    if ((/^\d+$/.test(value) || value === "") && e.target.type === "number") {
+      setValues({ ...values, [e.target.name]: value });
+    } else if (e.target.type !== "number") {
+      setValues({ ...values, [e.target.name]: value });
+    }
   };
   const saveEvent = async (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    const responseFiles = await axios.post("/api/files", formData);
-    let eventImages = previewImages;
+    try {
+      const formDataPromises = [];
+      const responseFiles = [];
 
-    for (const imageObject of responseFiles.data) {
-      const imageIndex = eventImages.findIndex(
-        (imageUrl) => imageUrl.toString() === imageObject.originalUrl
-      );
+      for (const [key, file] of formData.entries()) {
+        const newFormData = new FormData();
 
-      eventImages[imageIndex] = imageObject.linkAws;
-    }
+        newFormData.append(key, file);
 
-    if (deletedImages.length > 0) {
-      for (const imageLink of deletedImages) {
-        try {
-          if (imageLink.includes("pb-plus.s3")) {
-            await deleteImage(imageLink);
+        formDataPromises.push(
+          axios
+            .post("/api/files", newFormData)
+            .then((response) => {
+              responseFiles.push(response.data);
+            })
+            .catch((error) => {
+              console.error(error);
+              if (error.status === 413) {
+                toast.error(
+                  "One of the files is too large. Please upload a file smaller than 4.5 MB."
+                );
+              }
+              setIsLoading(false);
+            })
+        );
+      }
+
+      await Promise.all(formDataPromises);
+      let eventImages = previewImages;
+
+      for (const [imageObject] of responseFiles) {
+        const imageIndex = eventImages.findIndex(
+          (imageUrl) => imageUrl.toString() === imageObject.originalUrl
+        );
+
+        eventImages[imageIndex] = imageObject.linkAws;
+      }
+
+      if (deletedImages.length > 0) {
+        for (const imageLink of deletedImages) {
+          try {
+            if (imageLink.includes("pb-plus.s3")) {
+              await deleteImage(imageLink);
+            }
+          } catch (error) {
+            console.error(`error deleting image ${imageLink}:`, error);
           }
-        } catch (error) {
-          console.error(`error deleting image ${imageLink}:`, error);
         }
       }
-    }
 
-    if (!_id) {
-      await axios.post("/api/events", {
-        ...values,
+      if (!_id) {
+        await axios.post("/api/events", {
+          ...values,
 
-        images: eventImages,
-      });
+          images: eventImages,
+        });
 
-      router.push("/community/events");
-      toast.success("Event created successfully!");
-    } else {
-      await axios.put("/api/events/" + _id, {
-        ...values,
-        coverImage: eventImages[0],
-        images: eventImages,
-      });
-      router.push("/community/events/" + _id);
-      toast.success("Event changes saved successfully!");
+        router.push("/community/events");
+        toast.success("Event created successfully!");
+      } else {
+        await axios.put("/api/events/" + _id, {
+          ...values,
+          coverImage: eventImages[0],
+          images: eventImages,
+        });
+        router.push("/community/events/" + _id);
+        toast.success("Event changes saved successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again.");
+      setIsLoading(false);
     }
   };
 
@@ -188,6 +225,9 @@ const EventForm = ({
                 />
               </label>
             </div>
+            <span className="text-sm my-2 font-bold text-gray-500  flex">
+              Photos must be smaller than 4.5 MB
+            </span>
 
             <div className="form-input">
               <label htmlFor="type">Event category</label>
