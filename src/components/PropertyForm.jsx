@@ -126,7 +126,7 @@ const PropertyForm = ({
           images: propertyImages,
         });
 
-        router.push("/real-estate");
+        router.push("/real-estate/houses-&-properties");
 
         toast.success("Property created successfully!");
       } else {
