@@ -25,6 +25,7 @@ export async function POST(request) {
       images,
       bedrooms,
       bathrooms,
+      garages,
       type,
       title,
       price,

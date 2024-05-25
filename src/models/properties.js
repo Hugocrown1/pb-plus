@@ -8,6 +8,7 @@ const schema = new mongoose.Schema({
   price: Number,
   bathrooms: Number,
   bedrooms: Number,
+  garages: { type: Number, default: 0 },
   publishDate: Date,
   zone: String,
   address: String,

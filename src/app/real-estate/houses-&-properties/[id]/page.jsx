@@ -2,6 +2,7 @@ import { auth } from "@/app/api/auth/[...nextauth]/route";
 import {
   IconBath,
   IconBed,
+  IconCarGarage,
   IconPencil,
   IconPhoneFilled,
 } from "@tabler/icons-react";
@@ -103,6 +104,9 @@ const page = async ({ params }) => {
 
               <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
                 <IconBed /> <p>{propertyInfo.bedrooms} Beds</p>
+              </div>
+              <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+                <IconCarGarage /> <p>{propertyInfo.garages} Garages</p>
               </div>
             </div>
             <hr className="w-[90%] my-2" />
