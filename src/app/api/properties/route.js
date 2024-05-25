@@ -46,6 +46,7 @@ export async function POST(request) {
       images,
       bedrooms: parseFloat(bedrooms),
       bathrooms: parseFloat(bathrooms),
+      garages: parseFloat(garages),
       type,
       title,
       price: parseFloat(price),

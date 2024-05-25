@@ -135,6 +135,12 @@ const EventForm = ({
     const files = e.target?.files;
 
     if (files?.length > 0) {
+      if (files[0].size > 4500000) {
+        toast.error(
+          "The file is too large. Please upload a file smaller than 4.5 MB."
+        );
+        return;
+      }
       const url = URL.createObjectURL(files[0]);
       for (const file of files) {
         formData.append(url, file);
