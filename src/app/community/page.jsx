@@ -21,36 +21,36 @@ const dataSlider = [
   },
   {
     id: 2,
-    title: "Advertise Your Event",
+    title: "Make This Beautiful Place Your New Home",
     subtitle:
-      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+      "Punta banda community is a beautiful place to invest and enjoy the plans of achievement you have made in you life.",
     source: "/assets/community/slider2.png",
     linkTitle: "Take a look",
     href: "/community/advertising",
   },
   {
     id: 3,
-    title: "Advertise Your Event",
+    title: "Share Your Business With The Community",
     subtitle:
-      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+      "We provide a space for you to publish your business ideas, menu, schedule, and great deal you want the community to know.",
     source: "/assets/community/slider3.png",
     linkTitle: "Take a look",
     href: "/community/advertising",
   },
   {
     id: 4,
-    title: "Advertise Your Event",
+    title: "PB+ Will Be There For You!",
     subtitle:
-      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+      "We provide the services you need to just enjoy your life time; Legal service for any question you have about anything you need for you to have peace.",
     source: "/assets/community/slider4.JPG",
     linkTitle: "Take a look",
     href: "/community/advertising",
   },
   {
     id: 5,
-    title: "Advertise Your Event",
+    title: "This is Your Website",
     subtitle:
-      "PB+ Community offers a comprehensive platform to promote your upcoming events and activities to our vibrant community. ",
+      "You can ad anything you want the community to know, events, gatherings, sales, rentals, or a service you have to share.",
     source: "/assets/community/slider5.png",
     linkTitle: "Take a look",
     href: "/community/advertising",
@@ -89,14 +89,14 @@ export default function Page() {
             Punta Banda neighborhood! At PB Plus Community, our mission is to
             foster a strong sense of belonging and engagement among residents
             and visitors alike by keeping you up-to-date with the latest
-            happenings and dining options in Punta Banda. 
+            happenings and dining options in Punta Banda.
           </p>
           <p className="font-medium xl:text-lg text-sm max-w-[70ch] xl:ml-80 hidden xl:block">
-          Through our user-friendly platform, you'll have easy access to a diverse array
-            of upcoming events, ranging from local gatherings to cultural
-            festivals and beyond. Whether you're a seasoned local or a newcomer
-            to the area, PB Plus Community ensures that you're always in the
-            know about the best things to do in Punta Banda.
+            Through our user-friendly platform, you'll have easy access to a
+            diverse array of upcoming events, ranging from local gatherings to
+            cultural festivals and beyond. Whether you're a seasoned local or a
+            newcomer to the area, PB Plus Community ensures that you're always
+            in the know about the best things to do in Punta Banda.
           </p>
           <p className="font-medium xl:text-lg text-sm max-w-[70ch] mt-4 xl:ml-80">
             Feeling hungry? Let PB Plus Community guide you to the perfect

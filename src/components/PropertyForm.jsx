@@ -19,6 +19,7 @@ const PropertyForm = ({
   type: existingType,
   bedrooms: existingBedrooms,
   bathrooms: existingBathrooms,
+  garages: existingGarages,
   zone: existingZone,
   address: existingAddress,
   description: existingDescription,
@@ -31,6 +32,7 @@ const PropertyForm = ({
     type: existingType || "",
     bedrooms: existingBedrooms || "",
     bathrooms: existingBathrooms || "",
+    garages: existingGarages || "",
     zone: existingZone || "",
     address: existingAddress || "",
     description: existingDescription || "",
@@ -51,52 +53,95 @@ const PropertyForm = ({
   const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    const value = e.target.value;
+    if (
+      (/^\d+$/.test(value) || value === "") &&
+      e.target.type === "number" &&
+      ((value.length <= 3 && e.target.name !== "price" && value.length <= 12) ||
+        (e.target.name === "price" && value.length <= 12))
+    ) {
+      setValues({ ...values, [e.target.name]: value });
+    } else if (e.target.type !== "number") {
+      setValues({ ...values, [e.target.name]: value });
+    }
   };
   const saveProperty = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    const responseFiles = await axios.post("/api/files", formData);
-    let propertyImages = previewImages;
 
-    for (const imageObject of responseFiles.data) {
-      const imageIndex = propertyImages.findIndex(
-        (imageUrl) => imageUrl.toString() === imageObject.originalUrl
-      );
+    try {
+      const formDataPromises = [];
+      const responseFiles = [];
 
-      propertyImages[imageIndex] = imageObject.linkAws;
-    }
+      for (const [key, file] of formData.entries()) {
+        const newFormData = new FormData();
 
-    if (deletedImages.length > 0) {
-      for (const imageLink of deletedImages) {
-        try {
-          if (imageLink.includes("pb-plus.s3")) {
-            await deleteImage(imageLink);
+        newFormData.append(key, file);
+
+        formDataPromises.push(
+          axios
+            .post("/api/files", newFormData)
+            .then((response) => {
+              responseFiles.push(response.data);
+            })
+            .catch((error) => {
+              console.error(error);
+              if (error.status === 413) {
+                toast.error(
+                  "One of the files is too large. Please upload a file smaller than 4.5 MB."
+                );
+              }
+              setIsLoading(false);
+            })
+        );
+      }
+
+      await Promise.all(formDataPromises);
+      let propertyImages = previewImages;
+
+      for (const [imageObject] of responseFiles) {
+        const imageIndex = propertyImages.findIndex(
+          (imageUrl) => imageUrl.toString() === imageObject.originalUrl
+        );
+
+        propertyImages[imageIndex] = imageObject.linkAws;
+      }
+
+      if (deletedImages.length > 0) {
+        for (const imageLink of deletedImages) {
+          try {
+            if (imageLink.includes("pb-plus.s3")) {
+              await deleteImage(imageLink);
+            }
+          } catch (error) {
+            console.error(`error deleting image ${imageLink}:`, error);
           }
-        } catch (error) {
-          console.error(`error deleting image ${imageLink}:`, error);
         }
       }
-    }
 
-    if (!_id) {
-      await axios.post("/api/properties", {
-        ...values,
+      if (!_id) {
+        await axios.post("/api/properties", {
+          ...values,
 
-        images: propertyImages,
-      });
+          images: propertyImages,
+        });
 
-      router.push("/real-estate");
+        router.push("/real-estate/houses-&-properties");
 
-      toast.success("Property created successfully!");
-    } else {
-      await axios.put("/api/properties/" + _id, {
-        ...values,
-        coverImage: propertyImages[0],
-        images: propertyImages,
-      });
-      router.push("/real-estate/houses-&-properties/" + _id);
-      toast.success("Property changes saved successfully!");
+        toast.success("Property created successfully!");
+      } else {
+        await axios.put("/api/properties/" + _id, {
+          ...values,
+          coverImage: propertyImages[0],
+          images: propertyImages,
+        });
+        router.push("/real-estate/houses-&-properties/" + _id);
+        toast.success("Property changes saved successfully!");
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error("An error occurred. Please try again later.");
+      setIsLoading(false);
     }
   };
 
@@ -104,6 +149,12 @@ const PropertyForm = ({
     const files = e.target?.files;
 
     if (files?.length > 0) {
+      if (files[0].size > 4500000) {
+        toast.error(
+          "The file is too large. Please upload a file smaller than 4.5 MB."
+        );
+        return;
+      }
       const url = URL.createObjectURL(files[0]);
       for (const file of files) {
         formData.append(url, file);
@@ -184,7 +235,7 @@ const PropertyForm = ({
                 className="flex flex-col items-center m-1 justify-center w-32 h-32 bg-[#f5f3f4] rounded-md text-gray-500 hover:bg-gray-300 transition-colors text-lg cursor-pointer"
               >
                 <IconUpload size={22} />
-                Cargar
+                Load
                 <input
                   id="photos"
                   type="file"
@@ -194,6 +245,9 @@ const PropertyForm = ({
                 />
               </label>
             </div>
+            <span className="text-sm my-2 font-bold text-gray-500  flex">
+              Photos must be smaller than 4.5 MB
+            </span>
 
             <div className="form-input">
               <label htmlFor="type">Rental or selling</label>
@@ -220,6 +274,7 @@ const PropertyForm = ({
               id="bedrooms"
               placeholder={"Number of bedrooms"}
               errorMessage="Please enter a valid number"
+              maxLength="3"
               pattern="^[0-9]{1-6}"
               value={values.bedrooms}
               onChange={onChange}
@@ -233,6 +288,16 @@ const PropertyForm = ({
               errorMessage="Please enter a valid number"
               placeholder={"Number of bathrooms"}
               value={values.bathrooms}
+              onChange={onChange}
+            />
+            <FormInput
+              type="number"
+              label="Garages"
+              name="garages"
+              id="garages"
+              errorMessage="Please enter a valid number"
+              placeholder={"Number of garage spaces"}
+              value={values.garages}
               onChange={onChange}
             />
             <div className="form-input">

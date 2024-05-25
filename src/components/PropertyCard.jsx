@@ -1,6 +1,11 @@
 "use client";
 
-import { IconBath, IconBed, IconHeart, IconMapPin } from "@tabler/icons-react";
+import {
+  IconBath,
+  IconBed,
+  IconCarGarage,
+  IconMapPin,
+} from "@tabler/icons-react";
 import { Inter } from "next/font/google";
 
 import Image from "next/image";
@@ -18,9 +23,8 @@ const PropertyCard = ({
   coverImage,
   bathrooms,
   bedrooms,
+  garages,
 }) => {
-  // const [favorited, setFavorited] = useState(false);
-
   const numberFormatter = (numberString) => {
     const number = parseInt(numberString);
     if (isNaN(number)) {
@@ -32,12 +36,6 @@ const PropertyCard = ({
     return formattedNumber;
   };
 
-  // const handleCheckbox = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-
-  //   setFavorited((prevFavorited) => !prevFavorited);
-  // };
   return (
     <article className={`card ${inter.className}`}>
       <Link
@@ -79,6 +77,9 @@ const PropertyCard = ({
             </div>
             <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
               <IconBed /> <p>{bedrooms} Beds</p>
+            </div>
+            <div className="flex flex-row gap-1 items-center bg-[#e6e6e685] text-[#656b69] p-1 w-fit rounded-xl font-medium">
+              <IconCarGarage /> <p>{garages} Garages</p>
             </div>
           </div>
         </div>
