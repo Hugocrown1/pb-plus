@@ -24,7 +24,7 @@ export default async function RootLayout({ children }) {
           {children}
           <Footer />
           <RouteTracker />
-          <Toaster />
+          <Toaster richColors  />
         </Providers>
       </body>
     </html>
