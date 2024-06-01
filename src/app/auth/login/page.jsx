@@ -23,13 +23,15 @@ const LoginPage = () => {
         password,
         redirect: false,
       });
-      toast.success("Logged in successfully");
+      
 
       setLoading(false);
 
       if (ok) {
+        toast.success("Logged in successfully");
         router.push(url);
       } else {
+        toast.error(error);
         setError(error);
       }
     } catch (error) {}
