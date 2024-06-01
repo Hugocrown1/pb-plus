@@ -29,30 +29,37 @@ export async function PUT(request) {
 
     existingUser.resettoken = passwordResetToken;
     existingUser.resettokenexpiry = passwordResetExpires;
-    
 
     const resetUrl = `localhost:3000/auth/reset-password/${resetToken}`;
 
     let transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.GMAIL_USERNAME,
-          pass: process.env.GMAIL_PASSWORD,
-        },
-      });
-  
-      transporter.sendMail({
+      service: "gmail",
+      auth: {
+        user: process.env.GMAIL_USERNAME,
+        pass: process.env.GMAIL_PASSWORD,
+      },
+    });
+
+    try {
+      await transporter.sendMail({
         from: process.env.GMAIL_USERNAME,
         to: email,
         subject: `Password Reset: PBPlus`,
         html: '<p>Hemos recibido una solicitud para restablecer tu contraseña.</p><p>Por favor, haz clic en el siguiente enlace para crear una nueva contraseña:</p><a href="'+process.env.URL+'/auth/reset-password/' + resetToken + '" style="display: inline-block; background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px;">Restablecer Contraseña</a><p>Si no solicitaste un restablecimiento de contraseña, puedes ignorar este correo.</p>'
       });
-
-      await existingUser.save();
       
-    return NextResponse.json("Email sended", {status: 200});
+      await existingUser.save();
+
+      return NextResponse.json("Email enviado correctamente.", { status: 200 });
+    } catch (emailError) {
+      console.error("Error al enviar el correo:", emailError);
+      return NextResponse.json("Error al enviar el correo.", { status: 500 });
+    }
+
   } catch (error) {
-    if (error instanceof Error)
+    console.error("Error en el proceso:", error);
+    if (error instanceof Error) {
       return NextResponse.json(error.message, { status: 500 });
+    }
   }
 }
